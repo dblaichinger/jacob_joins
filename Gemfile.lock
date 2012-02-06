@@ -67,6 +67,7 @@ GEM
       factory_girl (~> 2.5.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
+    haml (3.1.4)
     highline (1.6.11)
     hike (1.2.1)
     i18n (0.6.0)
@@ -185,6 +186,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 3.2.1)
   factory_girl_rails
+  haml
   jquery-rails
   mongoid
   mongoid-rspec
