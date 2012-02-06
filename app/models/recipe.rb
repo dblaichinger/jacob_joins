@@ -8,4 +8,6 @@ class Recipe
 
   belongs_to :user
   has_and_belongs_to_many :ingredients
+
+  attr_accessible :name, :portion, :preparation, :duration
 end

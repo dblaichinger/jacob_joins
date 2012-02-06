@@ -48,5 +48,6 @@ group :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'mongoid-rspec', :require => false
+  gem 'mongoid-rspec'
+  gem "database_cleaner"
 end
