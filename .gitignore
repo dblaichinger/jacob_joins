@@ -17,4 +17,4 @@
 #Own config
 /config/mongoid.yml
 /config/initializers/secret_token.rb
-
+/.rvmrc
