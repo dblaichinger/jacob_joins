@@ -43,6 +43,7 @@ gem 'capistrano'
 group :development do
   gem 'ruby-debug19'
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :test do

@@ -1,4 +1,6 @@
 %h1 hallo
+= @recipe.inspect
+= @recipe.ingredients_with_quantities
 
 = form_for @recipe, :url => { :action => "create" } do |f|
   %p
@@ -7,6 +9,11 @@
   %p
     = f.label :portion, "Anzahl Portionen"
     = f.text_field :portion
+
+  %p
+    - 5.times do |i|
+      %p
+        = text_field_tag "recipe[ingredients][]"
   %p
     = f.label :preparation, "Zubereitung"
     = f.text_area :preparation
