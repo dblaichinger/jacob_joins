@@ -6,8 +6,8 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mongoid'
-# C extension to improve MongoDB performance
-gem 'bson_ext'
+gem 'bson_ext' # C extension to improve MongoDB performance
+gem 'mongoid_slug'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,6 +21,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'haml'
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -41,11 +42,13 @@ gem 'capistrano'
 
 group :development do
   gem 'ruby-debug19'
+  gem 'rspec-rails'
 end
 
 group :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'mongoid-rspec', :require => false
+  gem 'mongoid-rspec'
+  gem "database_cleaner"
 end
