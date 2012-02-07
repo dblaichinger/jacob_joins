@@ -16,4 +16,8 @@ class RecipesController < ApplicationController
       render new_recipe_path
     end
 	end
+
+  def show
+    @recipe = Recipe.find_by_slug params[:id]
+  end
 end

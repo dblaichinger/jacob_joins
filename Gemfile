@@ -6,8 +6,8 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mongoid'
-# C extension to improve MongoDB performance
-gem 'bson_ext'
+gem 'bson_ext' # C extension to improve MongoDB performance
+gem 'mongoid_slug'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,6 +42,7 @@ gem 'capistrano'
 
 group :development do
   gem 'ruby-debug19'
+  gem 'rspec-rails'
 end
 
 group :test do
