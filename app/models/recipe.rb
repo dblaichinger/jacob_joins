@@ -6,12 +6,15 @@ class Recipe
   field :portion, :type => Integer
   field :preparation, :type => String
   field :duration, :type => Integer
-  field :unique_name, :type => String
+  field :city, :type => String
+  field :country, :type => String
+  field :latitude, :type => Float
+  field :longitude, :type => Float
 
   belongs_to :user
   has_and_belongs_to_many :ingredients
 
-  attr_accessible :name, :portion, :preparation, :duration
+  attr_accessible :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
 
   slug :name
 end
