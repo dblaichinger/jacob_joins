@@ -2,10 +2,21 @@
 :javascript
   $(document).ready(function(){
     getGeoLocation();
+
+    //TODO: Vorschläge von Google API anzeigen, sonst reicht .change auch
+    $('#recipe_city').bind('keypress', function(){
+      var self = $(this);
+      clearTimeout(self.data('timeout'));
+      self.data('timeout', setTimeout(function(){
+        var city = $('#recipe_city').val();
+        var country = $('#recipe_country').val();
+        getLatLngFromAddress(city, country);
+      }, 500));
+    });
   });
   
-
 %h1 New_recipe
+
 
 = form_for @recipe, :url => { :action => "create" } do |f|
   %p
@@ -22,9 +33,24 @@
     = f.text_field :duration
   %p
     = f.label :country, "Land"
-    = f.text_field :country
+    - if @location.data['country_name'].empty?
+      = f.text_field :country
+    - else
+      = f.text_field :country, :value => @location.data['country_name']
+      
   %p
     = f.label :city, "Stadt"
-    = f.text_field :city
+    - if @location.data['city'].empty?
+      = f.text_field :city
+    - else
+      = f.text_field :city, :value => @location.data['city']
+      
+  .hidden
+    = f.hidden_field :longitude
+    = f.hidden_field :latitude
+
+  .error
+
   %p
     = f.submit "Speichern"
+

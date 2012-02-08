@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  include Geocoder::Model::Mongoid
 
   def index
     @recipes = Recipe.all
@@ -6,10 +7,14 @@ class RecipesController < ApplicationController
 
 	def new
 		@recipe = Recipe.new
+    
+    #Get location by IP-address
+    @location = request.location
 	end
 
 	def create
     @recipe = Recipe.new params[:recipe]
+    
     if @recipe.save
       redirect_to recipes_path
     else
