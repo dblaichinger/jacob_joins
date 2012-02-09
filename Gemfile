@@ -31,9 +31,6 @@ gem 'geocoder'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
 gem 'capistrano'
 
 # To use debugger
