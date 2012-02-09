@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new params[:recipe]
     
     if @recipe.save
-      redirect_to recipes_path
+      redirect_to new_recipe_user_path(@recipe.slug)
     else
       render new_recipe_path
     end

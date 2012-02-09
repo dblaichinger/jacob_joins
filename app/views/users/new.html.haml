@@ -1,0 +1,32 @@
+%h1 New_user
+
+
+= form_for @user, :url => { :action => "create" } do |f|
+  %p
+    = f.label :name, "Name"
+    = f.text_field :name
+  %p
+    = f.label :gender, "Gender"
+    = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']])
+  %p
+    = f.label :age, "Age"
+    = f.text_field :age
+  %p
+    = f.label :email, "Email"
+    = f.text_field :email
+  %p
+    = f.label :heard_from, "How did you hear from Jacob Joins?"
+    = f.radio_button :heard_from, "Internet"
+    = f.label :heard_from, "Internet"
+    = f.radio_button :heard_from, "Letter"
+    = f.label :heard_from, "Letter"
+    = f.radio_button :heard_from, "blabla"
+    = f.label :heard_from, "blabla"
+    = f.radio_button :heard_from, "blablabla"
+    = f.label :heard_from, "blablabla"
+
+  .error
+
+  %p
+    = f.submit "Speichern"
+
