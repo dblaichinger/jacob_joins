@@ -17,6 +17,11 @@ describe "RecipesController" do
         page.find('#recipe_longitude').set(test_recipe[:longitude])
         page.find('#recipe_latitude').set(test_recipe[:latitude])
 
+        fill_in "recipe_ingredients_strings__quantity1", :with => test_recipe.ingredients_with_quantities[0].quantity
+        fill_in "recipe_ingredients_strings__ingredient1", :with => test_recipe.ingredients_with_quantities[0].name
+        fill_in "recipe_ingredients_strings__quantity2", :with => test_recipe.ingredients_with_quantities[1].quantity
+        fill_in "recipe_ingredients_strings__ingredient2", :with => test_recipe.ingredients_with_quantities[1].name
+
         click_button "Speichern"
 
         page.should have_selector(:user_female, :value => "Male")
@@ -26,13 +31,13 @@ describe "RecipesController" do
   end
 
   describe "show" do
-   it "should be accessible through slug" do
-    recipe = Recipe.create! Factory.attributes_for(:recipe)
-    recipe1 = Recipe.create! Factory.attributes_for(:recipe)
+    it "should be accessible through slug" do
+      recipe = Recipe.create! Factory.attributes_for(:recipe)
+      recipe1 = Recipe.create! Factory.attributes_for(:recipe)
 
-    visit recipe_path(recipe1)
+      visit recipe_path(recipe1)
 
-    page.should have_selector "p", :text => recipe1.slug
-   end
+      page.should have_selector "p", :text => recipe1.slug
+    end
   end
 end

@@ -1,4 +1,7 @@
+%a{:href => new_recipe_path} neu
+
 %ul
   - @recipes.each do |r|
     %li
-      = r.name
+      %a{:href => recipe_path(r)}
+        = r.name

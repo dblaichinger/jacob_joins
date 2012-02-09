@@ -17,7 +17,6 @@
   
 %h1 New_recipe
 
-
 = form_for @recipe, :url => { :action => "create" } do |f|
   %p
     = f.label :name, "Name"
@@ -25,6 +24,13 @@
   %p
     = f.label :portion, "Anzahl Portionen"
     = f.text_field :portion
+
+  %p
+    - 5.times do |i|
+      %p
+        = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings__quantity#{i}"
+        = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings__ingredient#{i}"
+
   %p
     = f.label :preparation, "Zubereitung"
     = f.text_area :preparation

@@ -32,10 +32,6 @@ gem 'launchy'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
 gem 'capistrano'
 
 # To use debugger
@@ -45,6 +41,7 @@ gem 'capistrano'
 group :development do
   gem 'ruby-debug19'
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :test do
@@ -53,4 +50,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'mongoid-rspec'
   gem "database_cleaner"
+  gem 'pry'
 end
