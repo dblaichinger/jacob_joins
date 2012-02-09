@@ -13,7 +13,9 @@
   %p
     - 5.times do |i|
       %p
-        = text_field_tag "recipe[ingredients][]"
+        = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings__quantity#{i}"
+        = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings__ingredient#{i}"
+
   %p
     = f.label :preparation, "Zubereitung"
     = f.text_area :preparation

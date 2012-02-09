@@ -52,4 +52,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'mongoid-rspec'
   gem "database_cleaner"
+  gem 'pry'
 end
