@@ -1,6 +1,17 @@
+Factory.define :ingredient_with_quantity do |f|
+  f.quantity "100ml"
+  f.name "Milch"
+end
+
 Factory.define :recipe do |f|
   f.name "Kartoffelpuffer"
   f.portion 4
   f.preparation "Do some magic and add love!"
   f.duration 50
+  f.ingredients_with_quantities {[Factory.build(:ingredient_with_quantity, :name => "Milch1"), Factory.build(:ingredient_with_quantity, :name => "Milch2")]}
+end
+
+Factory.define :ingredients_strings do |f|
+  f.quantity "100ml"
+  f.ingredient "Wasser"
 end

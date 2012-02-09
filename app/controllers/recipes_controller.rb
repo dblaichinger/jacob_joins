@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
 
 	def create
     @recipe = Recipe.new params[:recipe]
+    
     if @recipe.save
       redirect_to recipes_path
     else

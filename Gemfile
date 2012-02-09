@@ -43,6 +43,7 @@ gem 'capistrano'
 group :development do
   gem 'ruby-debug19'
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :test do
@@ -51,4 +52,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'mongoid-rspec'
   gem "database_cleaner"
+  gem 'pry'
 end

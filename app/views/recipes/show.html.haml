@@ -8,3 +8,7 @@
   = @recipe.duration
 %p
   = @recipe.slug
+%ul
+  - @recipe.ingredients_with_quantities.each do |i|
+    %li
+      = "#{i.quantity} #{i.name}"
