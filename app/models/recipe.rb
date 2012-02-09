@@ -6,17 +6,20 @@ class Recipe
   field :portion, :type => Integer
   field :preparation, :type => String
   field :duration, :type => Integer
-  field :unique_name, :type => String
+  field :city, :type => String
+  field :country, :type => String
+  field :latitude, :type => Float
+  field :longitude, :type => Float
 
   belongs_to :user
   has_and_belongs_to_many :ingredients
   embeds_many :ingredients_with_quantities
 
-  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings
+  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude
   attr_accessor :ingredients_strings
+  validates_presence_of :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
 
   before_save :extract_ingredients
-
   slug :name
 
   protected

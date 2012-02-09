@@ -11,6 +11,10 @@ describe "RecipesController" do
       fill_in "recipe_portion", :with => test_recipe.portion
       fill_in "recipe_preparation", :with => test_recipe.preparation
       fill_in "recipe_duration", :with => test_recipe.duration
+      fill_in "recipe_country", :with => test_recipe.country
+      fill_in "recipe_city", :with => test_recipe.city
+      page.find('#recipe_longitude').set(test_recipe.longitude)
+      page.find('#recipe_latitude').set(test_recipe.latitude)
 
       fill_in "recipe_ingredients_strings__quantity1", :with => test_recipe.ingredients_with_quantities[0].quantity
       fill_in "recipe_ingredients_strings__ingredient1", :with => test_recipe.ingredients_with_quantities[0].name
