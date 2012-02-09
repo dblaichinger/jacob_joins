@@ -17,15 +17,15 @@ describe "RecipesController" do
         page.find('#recipe_longitude').set(test_recipe[:longitude])
         page.find('#recipe_latitude').set(test_recipe[:latitude])
 
-        fill_in "recipe_ingredients_strings__quantity1", :with => test_recipe.ingredients_with_quantities[0].quantity
-        fill_in "recipe_ingredients_strings__ingredient1", :with => test_recipe.ingredients_with_quantities[0].name
-        fill_in "recipe_ingredients_strings__quantity2", :with => test_recipe.ingredients_with_quantities[1].quantity
-        fill_in "recipe_ingredients_strings__ingredient2", :with => test_recipe.ingredients_with_quantities[1].name
+        fill_in "recipe_ingredients_strings__quantity1", :with => test_recipe[:ingredients_with_quantities][0][:quantity]
+        fill_in "recipe_ingredients_strings__ingredient1", :with => test_recipe[:ingredients_with_quantities][0][:name]
+        fill_in "recipe_ingredients_strings__quantity2", :with => test_recipe[:ingredients_with_quantities][1][:quantity]
+        fill_in "recipe_ingredients_strings__ingredient2", :with => test_recipe[:ingredients_with_quantities][1][:name]
 
         click_button "Speichern"
 
-        page.should have_selector(:user_female, :value => "Male")
-        page.should have_selector(:user_female, :value => "Female")
+        page.should have_selector(:user_name, :value => "Name")
+        page.should have_selector(:user_email, :value => "Email")
       end.should change(Recipe, :count).by(1)
     end
   end
