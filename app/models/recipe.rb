@@ -15,6 +15,7 @@ class Recipe
   has_and_belongs_to_many :ingredients
 
   attr_accessible :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
+  validates_presence_of :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
 
   slug :name
 end
