@@ -18,6 +18,7 @@
 %h1 New_recipe
 
 = form_for @recipe, :url => { :action => "create" } do |f|
+  = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
   %p
     = f.label :name, "Name"
     = f.text_field :name
@@ -39,17 +40,18 @@
     = f.text_field :duration
   %p
     = f.label :country, "Land"
-    - if @location.data['country_name'].empty?
+    - if (!defined? @location) || (@location.data['country_name'].empty?)
       = f.text_field :country
     - else
       = f.text_field :country, :value => @location.data['country_name']
       
   %p
     = f.label :city, "Stadt"
-    - if @location.data['city'].empty?
-      = f.text_field :city
-    - else
-      = f.text_field :city, :value => @location.data['city']
+    - if 
+      - if (!defined? @location) || (@location.data['city'].empty?)
+        = f.text_field :city
+      - else
+        = f.text_field :city, :value => @location.data['city']
       
   .hidden
     = f.hidden_field :longitude

@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
 
 	def create
     @recipe = Recipe.new params[:recipe]
+    # params[:recipe].inspect
     
     if @recipe.save
       redirect_to new_recipe_user_path(@recipe.slug)
