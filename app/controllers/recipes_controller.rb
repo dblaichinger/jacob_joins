@@ -20,6 +20,8 @@ class RecipesController < ApplicationController
     else
       render new_recipe_path
     end
+
+    binding.pry
 	end
 
   def show

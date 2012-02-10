@@ -14,17 +14,19 @@ class Recipe
   belongs_to :user
   has_and_belongs_to_many :ingredients
   embeds_many :ingredients_with_quantities
+  embeds_many :images
 
-  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude
+  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images
   attr_accessor :ingredients_strings
+  attr_accessor :image
   validates_presence_of :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
 
-  before_save :extract_ingredients
+  before_save :extract_ingredients #, :integrate_image
   slug :name
 
   protected
   def extract_ingredients
-    if !self.ingredients_strings.nil?
+    unless self.ingredients_strings.nil?
       self.ingredients = []
       self.ingredients_with_quantities = []
 
@@ -35,4 +37,17 @@ class Recipe
       end
     end
   end
+
+  def integrate_image
+    unless self.image.nil?
+      self.images << Image.new(:attachment => self.image)
+    end
+  end
+
+  #def images= (_images)
+  #  _images.each do |i|
+  #    Image.new(i)
+  #  end
+  #  write_attribute(:images, ...)
+  #end
 end
