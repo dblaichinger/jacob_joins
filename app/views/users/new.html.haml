@@ -1,7 +1,9 @@
 %h1 New_user
 
 
+
 = form_for @user, :url => { :action => "create" } do |f|
+  = handle_error_messages(@user).html_safe if @user.errors.any?
   %p
     = f.label :name, "Name"
     = f.text_field :name

@@ -15,11 +15,28 @@
     });
 
     $("#dynamicContainer").elementOnDemand();
+
+    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
+    if ($('#error_explanation').length > 0){
+      $.each($('#error_explanation ul li'), function(index, val){
+        if(val.innerHTML == "The country or city can't be found."){
+          addErrorOnField($(recipe_country));
+          addErrorOnField($(recipe_city));
+          $.each($('label'), function(index, val){
+            if(val.innerHTML == "City" || val.innerHTML == "Country"){
+              addErrorOnField($(val));
+            }
+          });
+        }
+      });
+    }
+
   });
   
 %h1 New_recipe
 
 = form_for @recipe, :url => { :action => "create" } do |f|
+  = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
   %p
     = f.label :name, "Name"
     = f.text_field :name
@@ -39,24 +56,22 @@
     = f.label :duration, "Zubereitungszeit in Minuten"
     = f.text_field :duration
   %p
-    = f.label :country, "Land"
-    - if @location.data['country_name'].empty?
+    = f.label :country, "Country"
+    - if (!defined? @location) || (@location.data['country_name'].empty?)
       = f.text_field :country
     - else
       = f.text_field :country, :value => @location.data['country_name']
       
   %p
-    = f.label :city, "Stadt"
-    - if @location.data['city'].empty?
+    = f.label :city, "City"
+    - if (!defined? @location) || (@location.data['city'].empty?)
       = f.text_field :city
     - else
       = f.text_field :city, :value => @location.data['city']
-      
+
   .hidden
     = f.hidden_field :longitude
     = f.hidden_field :latitude
-
-  .error
 
   %p
     = f.submit "Speichern"

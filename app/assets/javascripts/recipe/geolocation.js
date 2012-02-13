@@ -55,3 +55,7 @@ function getLatLngFromAddress(city, country){
     }
   });
 }
+
+function addErrorOnField(field){
+  field.wrap('<div class="field_with_errors" />');
+}
