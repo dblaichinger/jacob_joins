@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "UsersController" do
+describe UsersController do
   describe "create new user" do
     it "should create a new user and redirect to recipe#show" do
       lambda do

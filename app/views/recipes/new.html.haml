@@ -13,6 +13,8 @@
         getLatLngFromAddress(city, country);
       }, 500));
     });
+
+    $("#dynamicContainer").elementOnDemand();
   });
   
 %h1 New_recipe
@@ -25,11 +27,10 @@
     = f.label :portion, "Anzahl Portionen"
     = f.text_field :portion
 
-  %p
-    - 5.times do |i|
-      %p
-        = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings__quantity#{i}"
-        = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings__ingredient#{i}"
+  %div#dynamicContainer
+    %p.dynamicElement
+      = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
+      = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
 
   %p
     = f.label :preparation, "Zubereitung"
