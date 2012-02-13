@@ -42,6 +42,7 @@ group :development do
   gem 'ruby-debug19'
   gem 'rspec-rails'
   gem 'pry'
+  gem 'jasmine-rails'
 end
 
 group :test do
@@ -51,4 +52,5 @@ group :test do
   gem 'mongoid-rspec'
   gem "database_cleaner"
   gem 'pry'
+  gem 'jasmine-rails'
 end
