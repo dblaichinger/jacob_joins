@@ -1,6 +1,7 @@
 class Recipe
   include Mongoid::Document
   include Mongoid::Slug
+  include Mongoid::Paperclip
 
   field :name, :type => String
   field :portion, :type => Integer
@@ -14,14 +15,15 @@ class Recipe
   belongs_to :user
   has_and_belongs_to_many :ingredients
   embeds_many :ingredients_with_quantities
-  embeds_many :images
 
-  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images
+  embeds_many :images, :cascade_callbacks => true
+  accepts_nested_attributes_for :images, :allow_destroy => true
+
+  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images, :images_attributes
   attr_accessor :ingredients_strings
-  attr_accessor :image
   validates_presence_of :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
 
-  before_save :extract_ingredients #, :integrate_image
+  before_save :extract_ingredients
   slug :name
 
   protected
@@ -31,23 +33,10 @@ class Recipe
       self.ingredients_with_quantities = []
 
       self.ingredients_strings.each do |i|
-        break if i[:quantity] == "" && i[:ingredient] == ""
+       next if i[:quantity] == "" && i[:ingredient] == ""
         self.ingredients << Ingredient.find_or_create_by(:name => i[:ingredient])
         self.ingredients_with_quantities << IngredientWithQuantity.new(:quantity => i[:quantity], :name => i[:ingredient])
       end
     end
   end
-
-  def integrate_image
-    unless self.image.nil?
-      self.images << Image.new(:attachment => self.image)
-    end
-  end
-
-  #def images= (_images)
-  #  _images.each do |i|
-  #    Image.new(i)
-  #  end
-  #  write_attribute(:images, ...)
-  #end
 end

@@ -15,7 +15,8 @@ def create
     @recipe.save!
     redirect_to recipe_path(params[:recipe_id])
   else
-    redirect_to new_recipe_user_path(params[:recipe_id])
+    render :action => "new"
+    #redirect_to new_recipe_user_path(params[:recipe_id])
   end
 end
 
