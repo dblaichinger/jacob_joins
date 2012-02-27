@@ -7,7 +7,6 @@ set :application, "jacob_joins"
 
 set :scm, :git
 set :repository,  "git@github.com:dblaichinger/jacob_joins.git"
-set :branch, ENV["BRANCH"] || "master"
 set :deploy_via, :remote_cache
 default_run_options[:pty] = true
 
