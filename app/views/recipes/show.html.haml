@@ -1,13 +1,25 @@
+%h3
+  Recipe.name:
 %p
   = @recipe.name
+%h3
+  Recipe.portion:
 %p
   = @recipe.portion
+%h3
+  Recipe.preparation:
 %p
   = @recipe.preparation
+%h3
+  Recipe.duration:
 %p
   = @recipe.duration
+%h3
+  Recipe.slug:
 %p
   = @recipe.slug
+%h3
+  Recipe.ingredients_with_quantities:
 %ul
   - @recipe.ingredients_with_quantities.each do |i|
     %li
