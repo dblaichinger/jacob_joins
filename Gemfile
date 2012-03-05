@@ -28,6 +28,9 @@ gem 'launchy'
 gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
 
+#Wicked for the Upload-Wizard 
+gem 'wicked'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

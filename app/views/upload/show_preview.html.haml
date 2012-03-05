@@ -1,0 +1,48 @@
+%p
+  = link_to 'recipe', wizard_path(:recipe)
+  = link_to 'user', wizard_path(:user)
+  = link_to 'preview', wizard_path(:show_preview)
+
+%h1 Preview
+
+%h3 User:
+%p
+  Name:
+  = @user.name
+%p
+  Gender:
+  = @user.gender
+%p
+  Age:
+  = @user.age
+%p
+  Email:
+  = @user.email
+%p
+  Heard_from:
+  = @user.heard_from
+
+%h3 Recipe:
+%p
+  Name:
+  = @recipe.name
+%p
+  Portion:
+  = @recipe.portion
+%p
+  Preparation:
+  = @recipe.preparation
+%p
+  Duration:
+  = @recipe.duration
+%p
+  Slug:
+  = @recipe.slug
+ 
+%p
+  Ingredients_with_quantities:
+%ul
+  - @recipe.ingredients_with_quantities.each do |i|
+    %li
+      = "#{i.quantity} #{i.name}"
+
