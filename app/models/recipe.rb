@@ -1,6 +1,7 @@
 class Recipe
   include Mongoid::Document
   include Mongoid::Slug
+  include Mongoid::Paperclip
 
   field :name, :type => String
   field :portion, :type => Integer
@@ -15,7 +16,10 @@ class Recipe
   has_and_belongs_to_many :ingredients
   embeds_many :ingredients_with_quantities
 
-  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude
+  embeds_many :images, :cascade_callbacks => true
+  accepts_nested_attributes_for :images, :allow_destroy => true
+
+  attr_accessible :name, :portion, :preparation, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images, :images_attributes
   attr_accessor :ingredients_strings
   validates_presence_of :name, :portion, :preparation, :duration, :city, :country, :latitude, :longitude
 
@@ -24,12 +28,12 @@ class Recipe
 
   protected
   def extract_ingredients
-    if !self.ingredients_strings.nil?
+    unless self.ingredients_strings.nil?
       self.ingredients = []
       self.ingredients_with_quantities = []
 
       self.ingredients_strings.each do |i|
-        break if i[:quantity] == "" && i[:ingredient] == ""
+       next if i[:quantity] == "" && i[:ingredient] == ""
         self.ingredients << Ingredient.find_or_create_by(:name => i[:ingredient])
         self.ingredients_with_quantities << IngredientWithQuantity.new(:quantity => i[:quantity], :name => i[:ingredient])
       end

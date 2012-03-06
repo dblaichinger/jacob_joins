@@ -8,6 +8,7 @@ gem 'rails', '3.2.1'
 gem 'mongoid'
 gem 'bson_ext' # C extension to improve MongoDB performance
 gem 'mongoid_slug'
+gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +25,7 @@ end
 gem 'haml'
 gem 'jquery-rails'
 gem 'geocoder'
+gem 'launchy'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

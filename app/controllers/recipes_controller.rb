@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
 
 	def new
 		@recipe = Recipe.new
+    3.times { @recipe.images.build }
     
     #Get location by IP-address
     @location = request.location
@@ -14,12 +15,13 @@ class RecipesController < ApplicationController
 
 	def create
     @recipe = Recipe.new params[:recipe]
-    
+
     if @recipe.save
-      redirect_to recipes_path
+      redirect_to new_recipe_user_path(@recipe.slug)
     else
       render new_recipe_path
     end
+
 	end
 
   def show
