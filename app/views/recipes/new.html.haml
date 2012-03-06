@@ -13,6 +13,24 @@
         getLatLngFromAddress(city, country);
       }, 500));
     });
+
+    $("#dynamicContainer").elementOnDemand();
+
+    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
+    if ($('#error_explanation').length > 0){
+      $.each($('#error_explanation ul li'), function(index, val){
+        if(val.innerHTML == "The country or city can't be found."){
+          addErrorOnField($(recipe_country));
+          addErrorOnField($(recipe_city));
+          $.each($('label'), function(index, val){
+            if(val.innerHTML == "City" || val.innerHTML == "Country"){
+              addErrorOnField($(val));
+            }
+          });
+        }
+      });
+    }
+
   });
   
 %h1 New_recipe
@@ -27,11 +45,10 @@
     = f.label :portion, "Anzahl Portionen"
     = f.text_field :portion
 
-  %p
-    - 5.times do |i|
-      %p
-        = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings__quantity#{i}"
-        = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings__ingredient#{i}"
+  %div#dynamicContainer
+    %p.dynamicElement
+      = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
+      = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
 
   %p
     = f.label :preparation, "Zubereitung"
@@ -40,14 +57,14 @@
     = f.label :duration, "Zubereitungszeit in Minuten"
     = f.text_field :duration
   %p
-    = f.label :country, "Land"
+    = f.label :country, "Country"
     - if (!defined? @location) || (@location.data['country_name'].empty?)
       = f.text_field :country
     - else
       = f.text_field :country, :value => @location.data['country_name']
       
   %p
-    = f.label :city, "Stadt"
+    = f.label :city, "City"
     - if (!defined? @location) || (@location.data['city'].empty?)
       = f.text_field :city
     - else
@@ -57,15 +74,10 @@
     = f.fields_for :images do |image|
       = image.label :attachment, "Bild Upload"
       = image.file_field :attachment
-    =# label_tag "recipe[images][][attachment]", "Bild Upload"
-    =# file_field_tag "recipe[images][][attachment]", :accept => 'image/png,image/gif,image/jpeg'
-
       
   .hidden
     = f.hidden_field :longitude
     = f.hidden_field :latitude
-
-  .error
 
   %p
     = f.submit "Speichern"

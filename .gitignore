@@ -19,3 +19,6 @@
 /config/initializers/secret_token.rb
 /.rvmrc
 /public/system
+/.jhw-cache/
+
+/public/assets
