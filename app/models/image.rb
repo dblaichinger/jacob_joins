@@ -11,7 +11,5 @@ class Image
       :medium   => ['250x250',    :jpg],
       :large    => ['500x500>',   :jpg]
     }
-    #:path => ':rails_root/public/attachments/:attachment/:id/:style.:extension',
-    #:url => '/attachments/:attachment/:id/:style.:extension',
 
 end
