@@ -8,6 +8,7 @@ gem 'rails', '3.2.1'
 gem 'mongoid'
 gem 'bson_ext' # C extension to improve MongoDB performance
 gem 'mongoid_slug'
+gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,6 +26,11 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'geocoder'
 gem 'launchy'
+gem 'rails3-jquery-autocomplete'
+gem 'nifty-generators'
+
+#Wicked for the Upload-Wizard 
+gem 'wicked'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

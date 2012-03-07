@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe RecipesController do
   describe "create new recipe" do
-    it "should create a new recipe and redirect to new_user page" do
+    it "should create a new recipe, set a cookie and redirect to new_user page" do
       lambda do
-        visit new_recipe_path
+        visit recipe_upload_index_path
 
         test_recipe = Factory.attributes_for(:recipe)
 
@@ -19,8 +19,11 @@ describe RecipesController do
 
         fill_in "recipe_ingredients_strings_quantity", :with => test_recipe[:ingredients_with_quantities][0][:quantity]
         fill_in "recipe_ingredients_strings_ingredient", :with => test_recipe[:ingredients_with_quantities][0][:name]
+        
+        attach_file "recipe_images_attributes_0_attachment", "spec/files/test_image.png"
+        attach_file "recipe_images_attributes_1_attachment", "spec/files/test_image.png"
 
-        click_button "Speichern"
+         click_button "Save"
 
         page.should have_selector(:user_name, :value => "Name")
         page.should have_selector(:user_email, :value => "Email")
@@ -29,7 +32,7 @@ describe RecipesController do
 
     it "should not create a new recipe if the validation of the data fails" do
       lambda do
-        visit new_recipe_path
+        visit recipe_upload_index_path
 
         test_recipe = Factory.attributes_for(:recipe)
 
@@ -45,7 +48,7 @@ describe RecipesController do
         fill_in "recipe_ingredients_strings_quantity", :with => test_recipe[:ingredients_with_quantities][0][:quantity]
         fill_in "recipe_ingredients_strings_ingredient", :with => test_recipe[:ingredients_with_quantities][0][:name]
 
-        click_button "Speichern"
+        click_button "Save"
 
         page.should have_selector("li", :text => "Name can't be blank")
         page.should have_selector("li", :text => "Country can't be blank")

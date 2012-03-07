@@ -1,8 +1,21 @@
 JacobJoins::Application.routes.draw do
 
-  resources :recipes do
-    resources :users, :only => [:new, :create]
+  resources :recipes, :only =>[:index, :show, :create, :update]
+  resources :users, :only => [:index, :show, :create, :update]
+
+  #TODO: Limit ressource :upload to the action given in the collection
+  resources :upload do
+    collection do
+      get 'show_preview'
+      get 'delete_cookie'
+      get 'recipe'
+      get 'user'
+    end
   end
+
+  match '/upload' => 'upload#show'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

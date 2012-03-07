@@ -1,0 +1,48 @@
+%p
+  = link_to 'recipe', wizard_path(:recipe)
+  = link_to 'user', wizard_path(:user)
+  = link_to 'preview', wizard_path(:show_preview)
+
+=cookies[:recipe].inspect
+=cookies[:user].inspect
+
+=@user.inspect
+
+%h1 New_user
+
+- unless defined?(@user.name).nil?
+  %h2 Hallo #{@user.name}, du kannst hier deine User-Daten ändern!
+
+%h3
+  = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
+
+= form_for @user do |f|
+  = handle_error_messages(@user).html_safe if @user.errors.any?
+  %p
+    = f.label :name, "Name"
+    = f.text_field :name
+  %p
+    = f.label :gender, "Gender"
+    = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]) 
+      
+  %p
+    = f.label :age, "Age"
+    = f.text_field :age
+  %p
+    = f.label :email, "Email"
+    = f.text_field :email
+  %p
+    = f.label :heard_from, "How did you hear from Jacob Joins?"
+    = f.radio_button :heard_from, "Internet"
+    = f.label :heard_from, "Internet"
+    = f.radio_button :heard_from, "Letter"
+    = f.label :heard_from, "Letter"
+    = f.radio_button :heard_from, "blabla"
+    = f.label :heard_from, "blabla"
+    = f.radio_button :heard_from, "blablabla"
+    = f.label :heard_from, "blablabla"
+
+  .error
+
+  %p
+    = f.submit "Save"

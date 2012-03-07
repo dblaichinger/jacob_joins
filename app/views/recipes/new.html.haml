@@ -35,8 +35,9 @@
   
 %h1 New_recipe
 
-= form_for @recipe, :url => { :action => "create" } do |f|
+= form_for @recipe, :url => { :action => "create" }, :html => { :multipart => true } do |f|
   = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
+
   %p
     = f.label :name, "Name"
     = f.text_field :name
@@ -69,6 +70,11 @@
     - else
       = f.text_field :city, :value => @location.data['city']
 
+  %p
+    = f.fields_for :images do |image|
+      = image.label :attachment, "Bild Upload"
+      = image.file_field :attachment
+      
   .hidden
     = f.hidden_field :longitude
     = f.hidden_field :latitude
