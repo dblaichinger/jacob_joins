@@ -32,12 +32,12 @@ publicMethods =
       if not data
         settings = $.extend
           onKeyDown: true
-          element: $(this).html()
+          element: $("<div>").append($(".dynamicElement").last().clone()).html()
         , options
 
         $(this).data "elementOnDemand", settings
         appendAddButton $(this)
-        bindKeyDownIfConfigured settings.onKeyDown, $(".dynamicElement", $(this)).first()
+        bindKeyDownIfConfigured settings.onKeyDown, $(".dynamicElement", $(this)).last()
 
   destroy: ->
     this.each ->
@@ -52,6 +52,7 @@ publicMethods =
 
     removeAddButton()
     $(last_element).unbind("keydown.elementOnDemand")
+
     new_element = $(data.element).appendTo container
     appendAddButton container
 
