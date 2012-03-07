@@ -6,10 +6,15 @@
   Recipe.portion:
 %p
   = @recipe.portion
+  
 %h3
-  Recipe.preparation:
-%p
-  = @recipe.preparation
+  Recipe.steps:
+
+- @recipe.steps.each do |step|  
+  %p
+    = step.description
+    = step.image if step.image.present?
+
 %h3
   Recipe.duration:
 %p
