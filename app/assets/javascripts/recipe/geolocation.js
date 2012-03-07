@@ -21,7 +21,7 @@ function getAddress(lat, lng){
     if (status == google.maps.GeocoderStatus.OK) {
       //Print all results from Google
       //for(var i in results){
-        //console.debug(results);
+      //  console.debug(results);
       //}
       var objectnumber = results.length-4;
       var address = results[objectnumber].formatted_address;
@@ -42,20 +42,22 @@ function getAddress(lat, lng){
 }
 
 
-function getLatLngFromAddress(city, country){
-  var address = city +", "+ country;
+function getLatLngFromAddress(){
+  var address = $('#recipe_city').val() +", "+ $('#recipe_country').val();
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
         //console.debug(results);
-        $('#recipe_latitude').val(results[0].geometry.location.Pa);
-        $('#recipe_longitude').val(results[0].geometry.location.Qa);
+        $('#recipe_latitude').val(results[0].geometry.location.lat());
+        $('#recipe_longitude').val(results[0].geometry.location.lng());
     } else {
       console.log("Geocode was not successful for the following reason: " + status);
     }
   });
+  $('#save_recipe_button').submit();
 }
 
 function addErrorOnField(field){
   field.wrap('<div class="field_with_errors" />');
 }
+

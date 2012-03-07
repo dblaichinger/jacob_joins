@@ -25,6 +25,11 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'geocoder'
 gem 'launchy'
+gem 'rails3-jquery-autocomplete'
+gem 'nifty-generators'
+
+#Wicked for the Upload-Wizard 
+gem 'wicked'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -33,6 +38,7 @@ gem 'launchy'
 # gem 'jbuilder'
 
 gem 'capistrano'
+gem "capistrano-ext"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
@@ -42,6 +48,7 @@ group :development do
   gem 'ruby-debug19'
   gem 'rspec-rails'
   gem 'pry'
+  gem 'jasmine-rails'
 end
 
 group :test do
@@ -51,4 +58,5 @@ group :test do
   gem 'mongoid-rspec'
   gem "database_cleaner"
   gem 'pry'
+  gem 'jasmine-rails'
 end
