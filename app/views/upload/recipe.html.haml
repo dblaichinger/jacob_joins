@@ -93,16 +93,36 @@
   
   %div#preparation
     %p
-      = f.label :preparation, "Zubereitung"
-      = f.text_area :preparation
-    %p
       = f.label :duration, "Zubereitungszeit in Minuten"
       = f.text_field :duration
+
+  %p
+    = f.label :country, "Country"
+    - if (!defined? @location) || (@location.data['country_name'].empty?)
+      = f.text_field :country
+    - else
+      = f.text_field :country, :value => @location.data['country_name']
+      
+  %p
+    = f.label :city, "City"
+    - if (!defined? @location) || (@location.data['city'].empty?)
+      = f.text_field :city
+    - else
+      = f.text_field :city, :value => @location.data['city']
+      
+  .steps
+    = f.fields_for :steps do |step|
+      .step
+        = step.label :description, "Beschreibung"
+        = step.text_area :description
+        = step.label :image, "Bild Upload"
+        = step.file_field :image
 
       %p
     = f.fields_for :images do |image|
       = image.label :attachment, "Bild Upload"
       = image.file_field :attachment
+
 
   / %p
   /   = f.label :country, "Country"
