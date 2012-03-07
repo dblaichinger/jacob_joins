@@ -19,8 +19,11 @@ describe RecipesController do
 
         fill_in "recipe_ingredients_strings_quantity", :with => test_recipe[:ingredients_with_quantities][0][:quantity]
         fill_in "recipe_ingredients_strings_ingredient", :with => test_recipe[:ingredients_with_quantities][0][:name]
+        
+        attach_file "recipe_images_attributes_0_attachment", "spec/files/test_image.png"
+        attach_file "recipe_images_attributes_1_attachment", "spec/files/test_image.png"
 
-        click_button "Save"
+         click_button "Save"
 
         page.should have_selector(:user_name, :value => "Name")
         page.should have_selector(:user_email, :value => "Email")

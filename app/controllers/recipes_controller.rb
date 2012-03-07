@@ -9,8 +9,10 @@ def index
   @recipes = Recipe.all
 end
 
+
 def new
 	@recipe = Recipe.new
+  3.times { @recipe.images.build }
   
   #Get location by IP-address
   @location = request.location
