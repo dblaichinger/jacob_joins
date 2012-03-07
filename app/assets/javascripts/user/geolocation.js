@@ -30,10 +30,10 @@ function getAddress(lat, lng){
       var city = address[0].trim();
       var country = address[1].trim();
 
-      $('#recipe_country').val(country);
-      $('#recipe_city').val(city);
-      $('#recipe_latitude').val(lat);
-      $('#recipe_longitude').val(lng);        
+      $('#country').val(country);
+      $('#city').val(city);
+      $('#latitude').val(lat);
+      $('#longitude').val(lng);        
     } 
     else {
       console.log("Geocode was not successful for the following reason: " + status);
@@ -48,13 +48,13 @@ function getLatLngFromAddress(){
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
         //console.debug(results);
-        $('#recipe_latitude').val(results[0].geometry.location.lat());
-        $('#recipe_longitude').val(results[0].geometry.location.lng());
+        $('#latitude').val(results[0].geometry.location.lat());
+        $('#longitude').val(results[0].geometry.location.lng());
     } else {
       console.log("Geocode was not successful for the following reason: " + status);
     }
   });
-  $('#save_recipe_button').submit();
+  $('#save_user_button').submit();
 }
 
 function addErrorOnField(field){

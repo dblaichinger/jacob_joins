@@ -5,6 +5,7 @@ def new
 end
 
 def create
+  #raise params.inspect
   @user = User.new(params[:user])
 
   if @user.save
@@ -14,7 +15,12 @@ def create
       @recipe.user_id = @user.id
       @recipe.save!
     end
-    redirect_to show_preview_upload_index_path
+    if cookies[:jacob_joins_recipe].present? || cookies[:jacob_joins_csi].present?
+      redirect_to show_preview_upload_index_path
+    else 
+      flash[:error] = "Please provide at least one recipe or country information!"
+      redirect_to user_upload_index_path
+    end
   else
     session[:error] = @user
     redirect_to user_upload_index_path

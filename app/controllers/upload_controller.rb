@@ -16,12 +16,11 @@ def recipe
   if cookies[:jacob_joins_recipe].present?
     @recipe = Recipe.find(cookies[:jacob_joins_recipe])
     3.times { @recipe.images.build } if @recipe.images.count == 0
+    3.times { @recipe.steps.build } if @recipe.images.count == 0
   else
     @recipe = Recipe.new
     3.times { @recipe.images.build } #to show upload fields with form helper
-
-    #Get location by IP-address
-    @location = request.location
+    3.times { @recipe.steps.build } #to show upload fields with form helper
   end
   render_wizard
 end
@@ -43,6 +42,8 @@ def user
   else 
     @user = User.new
   end
+  #Get location by IP-address
+  @location = request.location
   render_step @next_step
 end
 

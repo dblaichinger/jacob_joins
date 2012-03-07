@@ -10,7 +10,6 @@ describe RecipesController do
 
         fill_in "recipe_name", :with => test_recipe[:name]
         fill_in "recipe_portion", :with => test_recipe[:portion]
-        fill_in "recipe_preparation", :with => test_recipe[:preparation]
         fill_in "recipe_duration", :with => test_recipe[:duration]
         fill_in "recipe_country", :with => test_recipe[:country]
         fill_in "recipe_city", :with => test_recipe[:city]
@@ -20,10 +19,13 @@ describe RecipesController do
         fill_in "recipe_ingredients_strings_quantity", :with => test_recipe[:ingredients_with_quantities][0][:quantity]
         fill_in "recipe_ingredients_strings_ingredient", :with => test_recipe[:ingredients_with_quantities][0][:name]
         
+        fill_in "recipe_steps_attributes_0_description", :with => test_recipe[:steps][0][:description]
+        attach_file "recipe_steps_attributes_0_image", "spec/files/test_image.png"
+
         attach_file "recipe_images_attributes_0_attachment", "spec/files/test_image.png"
         attach_file "recipe_images_attributes_1_attachment", "spec/files/test_image.png"
 
-         click_button "Save"
+        click_button "Save"
 
         page.should have_selector(:user_name, :value => "Name")
         page.should have_selector(:user_email, :value => "Email")
@@ -38,7 +40,6 @@ describe RecipesController do
 
         fill_in "recipe_name", :with => ""
         fill_in "recipe_portion", :with => test_recipe[:portion]
-        fill_in "recipe_preparation", :with => test_recipe[:preparation]
         fill_in "recipe_duration", :with => test_recipe[:duration]
         fill_in "recipe_country", :with => ""
         fill_in "recipe_city", :with => test_recipe[:city]

@@ -1,13 +1,13 @@
 $ = jQuery
 
-bindKeyUpIfConfigured = (activated, element) ->
+bindKeyDownIfConfigured = (activated, element) ->
   if activated
     last_input = $("input[type='text'], textarea", element).last()
 
     if not last_input
-      return $.error "onKeyUp was activated, but no input field exists"
+      return $.error "onKeyDown was activated, but no input field exists"
 
-    last_input.bind "keyup.elementOnDemand", keyUpHandler
+    last_input.bind "keydown.elementOnDemand", keyDownHandler
 
 appendAddButton = (parent) ->
   button = $("<img id='add' src='/assets/add_icon.png' />").appendTo parent
@@ -20,8 +20,8 @@ removeAddButton = ->
 clickHandler= ->
   $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(".dynamicElement").last()).last()
 
-keyUpHandler = (event) ->
-  if event.which is 13 and event.ctrlKey is true
+keyDownHandler = (event) ->
+  if event.which is 9
     $.fn.elementOnDemand "addElement", $(this)
 
 publicMethods =
@@ -31,13 +31,13 @@ publicMethods =
 
       if not data
         settings = $.extend
-          onKeyUp: true
-          element: $(this).html()
+          onKeyDown: true
+          element: $("<div>").append($(".dynamicElement").last().clone()).html()
         , options
 
         $(this).data "elementOnDemand", settings
         appendAddButton $(this)
-        bindKeyUpIfConfigured settings.onKeyUp, $(".dynamicElement", $(this)).first()
+        bindKeyDownIfConfigured settings.onKeyDown, $(".dynamicElement", $(this)).last()
 
   destroy: ->
     this.each ->
@@ -51,7 +51,8 @@ publicMethods =
     data = container.data "elementOnDemand"
 
     removeAddButton()
-    $(last_element).unbind("keyup.elementOnDemand")
+    $(last_element).unbind("keydown.elementOnDemand")
+
     new_element = $(data.element).appendTo container
     appendAddButton container
 
@@ -61,7 +62,7 @@ publicMethods =
       $(this).prop
         id: $(this).prop("id") + "_" + element_count
 
-    bindKeyUpIfConfigured data.onKeyUp, new_element
+    bindKeyDownIfConfigured data.onKeyDown, new_element
 
 $.fn.elementOnDemand = (method) ->
   if publicMethods[method]
