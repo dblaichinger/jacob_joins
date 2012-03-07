@@ -15,8 +15,11 @@ def recipe
   #When the user already saved the recipe data sucessfully, the form should contain the values
   if cookies[:jacob_joins_recipe].present?
     @recipe = Recipe.find(cookies[:jacob_joins_recipe])
+    3.times { @recipe.images.build } if @recipe.images.count == 0
   else
     @recipe = Recipe.new
+    3.times { @recipe.images.build } #to show upload fields with form helper
+
     #Get location by IP-address
     @location = request.location
   end

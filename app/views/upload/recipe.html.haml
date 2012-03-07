@@ -96,6 +96,11 @@
     - else
       = f.text_field :city, :value => @location.data['city']
 
+  %p
+    = f.fields_for :images do |image|
+      = image.label :attachment, "Bild Upload"
+      = image.file_field :attachment
+      
   .hidden
     = f.hidden_field :longitude
     = f.hidden_field :latitude
