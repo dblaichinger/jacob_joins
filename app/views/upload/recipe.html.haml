@@ -1,3 +1,46 @@
+//- content_for(:head) do
+:javascript
+  $(document).ready(function(){
+    getGeoLocation();
+
+    //TODO: Vorschläge von Google API anzeigen, sonst reicht .change auch
+    /*$('#recipe_city').bind('keypress', function(){
+      var self = $(this);
+      clearTimeout(self.data('timeout'));
+      self.data('timeout', setTimeout(function(){
+        var city = $('#recipe_city').val();
+        var country = $('#recipe_country').val();
+        getLatLngFromAddress(city, country);
+      }, 500));
+    });
+   
+    $('#recipe_city').change(function(){
+      var city = $('#recipe_city').val();
+      var country = $('#recipe_country').val();
+      getLatLngFromAddress(city, country);
+    });
+    */
+
+    $("#dynamicContainer").elementOnDemand();
+
+    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
+    if ($('#error_explanation').length > 0){
+      $.each($('#error_explanation ul li'), function(index, val){
+        if(val.innerHTML == "The country or city can't be found."){
+          addErrorOnField($(recipe_country));
+          addErrorOnField($(recipe_city));
+          $.each($('label'), function(index, val){
+            if(val.innerHTML == "City" || val.innerHTML == "Country"){
+              addErrorOnField($(val));
+            }
+          });
+        }
+      });
+    }
+
+  });
+
+
 %p
   = link_to 'recipe', wizard_path(:recipe)
   = link_to 'user', wizard_path(:user)
@@ -16,7 +59,7 @@
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 
-= form_for @recipe do |f|
+= form_for @recipe, :action => "create", :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
   = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
   %p
     = f.label :name, "Name"
@@ -55,7 +98,7 @@
     = f.hidden_field :latitude
 
   %p
-    = f.submit "Save"
+    = f.submit "Save", :id => "save_recipe_button"
 
 = button_to "Reset", delete_cookie_upload_index_path, :method => :get, :confirm => "Do you want to upload another recipe?"
 

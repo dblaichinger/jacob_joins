@@ -17,6 +17,8 @@ def recipe
     @recipe = Recipe.find(cookies[:jacob_joins_recipe])
   else
     @recipe = Recipe.new
+    #Get location by IP-address
+    @location = request.location
   end
   render_wizard
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RecipesController do
   describe "create new recipe" do
-    it "should create a new recipe and redirect to new_user page" do
+    it "should create a new recipe, set a cookie and redirect to new_user page" do
       lambda do
         visit recipe_upload_index_path
 
