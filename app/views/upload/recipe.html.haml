@@ -61,7 +61,7 @@
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 - #Begin of formular
-= form_for @recipe, :action => "create", :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
+= form_for @recipe, :url => recipe_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
   = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
   %p
     = f.label :name, "Name"
