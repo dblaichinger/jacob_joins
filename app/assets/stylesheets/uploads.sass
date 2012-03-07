@@ -1,22 +1,59 @@
 @import "compass/reset"
 
+#formular
+  max-width: 960px
+  min-width: 600px
+  margin: 50px auto
+  border: solid red 1px
+  position: relative
+  overflow: hidden
+
 h1
-  background-color: #FFF
+  margin: 0
   font-size: 24px
-  &:hover
-    background-color: #F00
+  font-weight: bold
+
+#left
+  float: left
+  width: 50%
+  overflow: hidden
 
 #formnav
-  background-color: #999
+  float: left
+  width: 15%
+  a
+    background-color: #ccc
+    display: block
+    height: 20px
+    padding: 15px
+
+#new_recipe, .edit_recipe 
+  width: 85%
+  margin-left: 15%
 
 #information
   background-color: #efefef
+  padding: 15px
 
 #ingredients
   background-color: #ccc
-
+  padding: 15px
+ 
 #preparation
   background-color: #666
+  width: 46%
+  float: right
+  padding: 2%
 
 #buttons
   background-color: #888
+  clear: both
+  overflow: hidden
+  input, div, a
+    float: left
+
+.active 
+  background-color: red !important
+
+label
+  display: block
