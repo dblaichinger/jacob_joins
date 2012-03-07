@@ -21,7 +21,7 @@
     });
     */
 
-    $("#dynamicContainer").elementOnDemand();
+    $("#ingredients").elementOnDemand();
 
     //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
     if ($('#error_explanation').length > 0){
@@ -40,77 +40,94 @@
 
   });
 
+=#cookies[:recipe].inspect
+=#cookies[:user].inspect
 
-%p
-  = link_to 'recipe', wizard_path(:recipe)
-  = link_to 'user', wizard_path(:user)
-  = link_to 'preview', wizard_path(:show_preview)
-
-
-
-=cookies[:recipe].inspect
-=cookies[:user].inspect
-
-=@recipe.inspect
-%h1 New_recipe
+=#@recipe.inspect
+/%h1 New_recipe
 - if @user && @recipe
   %h2 Hallo #{@user.name}, du kannst hier dein bestehendes Rezept "#{@recipe.name}" ändern!
   %h2 Klicke auf Reset um ein neues Rezept hochzuladen!
 
-%h3
-  = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+/ %h3
+/   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+
+%div#formnav
+  %p
+    = link_to 'recipe', wizard_path(:recipe)
+    / to do: Links zu csi
+    = link_to 'csi', wizard_path(:csi) 
+    = link_to 'user', wizard_path(:user)
+    = link_to 'preview', wizard_path(:show_preview)
+
 
 - #Begin of formular
+
 = form_for @recipe, :url => recipe_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
   = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
-  %p
-    = f.label :name, "Name"
-    = f.text_field :name
-  %p
-    = f.label :portion, "Anzahl Portionen"
-    = f.text_field :portion
+  %div#information
+    %h2
+      Information
 
-  %div#dynamicContainer
+    %p
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+
+    %p
+      = f.label :name, "Name"
+      = f.text_field :name
+    %p
+      = f.label :portion, "Anzahl Portionen"
+      = f.text_field :portion
+
+  %div#ingredients
+    %h2 
+      Ingredients
+
+    %p
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+    
     %p.dynamicElement
       = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
       = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
 
-  %div#rechts
+  
+  %div#preparation
     %p
       = f.label :preparation, "Zubereitung"
       = f.text_area :preparation
     %p
       = f.label :duration, "Zubereitungszeit in Minuten"
       = f.text_field :duration
-  %p
-    = f.label :country, "Country"
-    - if (!defined? @location) || (@location.data['country_name'].empty?)
-      = f.text_field :country
-    - else
-      = f.text_field :country, :value => @location.data['country_name']
-      
-  %p
-    = f.label :city, "City"
-    - if (!defined? @location) || (@location.data['city'].empty?)
-      = f.text_field :city
-    - else
-      = f.text_field :city, :value => @location.data['city']
 
-  %p
+      %p
     = f.fields_for :images do |image|
       = image.label :attachment, "Bild Upload"
       = image.file_field :attachment
+
+  / %p
+  /   = f.label :country, "Country"
+  /   - if (!defined? @location) || (@location.data['country_name'].empty?)
+  /     = f.text_field :country
+  /   - else
+  /     = f.text_field :country, :value => @location.data['country_name']
+      
+  / %p
+  /   = f.label :city, "City"
+  /   - if (!defined? @location) || (@location.data['city'].empty?)
+  /     = f.text_field :city
+  /   - else
+  /     = f.text_field :city, :value => @location.data['city']
       
   .hidden
     = f.hidden_field :longitude
     = f.hidden_field :latitude
 
-  %p
+  
+  %div#buttons
     = f.submit "Save", :id => "save_recipe_button"
-- # End of formular
 
-= button_to "Reset", delete_cookie_upload_index_path, :method => :get, :confirm => "Do you want to upload another recipe?"
+    = button_to "Reset", delete_cookie_upload_index_path, :method => :get, :confirm => "Do you want to upload another recipe?"
 
-= link_to "Skip this step", next_wizard_path
+    = link_to "Skip this step", next_wizard_path
 
 
