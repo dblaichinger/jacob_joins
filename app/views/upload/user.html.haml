@@ -1,3 +1,25 @@
+//- content_for(:head) do
+:javascript
+  $(document).ready(function(){
+    getGeoLocation();
+
+    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
+    if ($('#error_explanation').length > 0){
+      $.each($('#error_explanation ul li'), function(index, val){
+        if(val.innerHTML == "The country or city can't be found."){
+          addErrorOnField($(user_country));
+          addErrorOnField($(user_city));
+          $.each($('label'), function(index, val){
+            if(val.innerHTML == "City" || val.innerHTML == "Country"){
+              addErrorOnField($(val));
+            }
+          });
+        }
+      });
+    }
+
+  });
+
 %p
   = link_to 'recipe', wizard_path(:recipe)
   = link_to 'user', wizard_path(:user)
@@ -16,7 +38,7 @@
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
 
-= form_for @user do |f|
+= form_for @user, :url => user_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
   = handle_error_messages(@user).html_safe if @user.errors.any?
   %p
     = f.label :name, "Name"
@@ -42,7 +64,25 @@
     = f.radio_button :heard_from, "blablabla"
     = f.label :heard_from, "blablabla"
 
+  %p
+    = label_tag :country, "Country"
+    - if (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
+      = text_field_tag :country
+    - else
+      = text_field_tag :country, :value => @location.data['country_name']
+
+  %p
+    = label_tag :city, "City"
+    - if (!defined? @location) || (@location.data['city'].empty?)
+      = text_field_tag :city
+    - else
+      = text_field_tag :city, :value => @location.data['city']
+
+  .hidden
+    = hidden_field_tag :longitude
+    = hidden_field_tag :latitude
+
   .error
 
   %p
-    = f.submit "Save"
+    = f.submit "Save", :id => "save_user_button"
