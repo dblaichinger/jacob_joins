@@ -1,52 +1,13 @@
 //- content_for(:head) do
 :javascript
   $(document).ready(function(){
-    getGeoLocation();
-
-    //TODO: Vorschläge von Google API anzeigen, sonst reicht .change auch
-    /*$('#recipe_city').bind('keypress', function(){
-      var self = $(this);
-      clearTimeout(self.data('timeout'));
-      self.data('timeout', setTimeout(function(){
-        var city = $('#recipe_city').val();
-        var country = $('#recipe_country').val();
-        getLatLngFromAddress(city, country);
-      }, 500));
-    });
-   
-    $('#recipe_city').change(function(){
-      var city = $('#recipe_city').val();
-      var country = $('#recipe_country').val();
-      getLatLngFromAddress(city, country);
-    });
-    */
-
     $("#dynamicContainer").elementOnDemand();
-
-    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
-    if ($('#error_explanation').length > 0){
-      $.each($('#error_explanation ul li'), function(index, val){
-        if(val.innerHTML == "The country or city can't be found."){
-          addErrorOnField($(recipe_country));
-          addErrorOnField($(recipe_city));
-          $.each($('label'), function(index, val){
-            if(val.innerHTML == "City" || val.innerHTML == "Country"){
-              addErrorOnField($(val));
-            }
-          });
-        }
-      });
-    }
-
   });
-
 
 %p
   = link_to 'recipe', wizard_path(:recipe)
   = link_to 'user', wizard_path(:user)
   = link_to 'preview', wizard_path(:show_preview)
-
-
 
 =cookies[:recipe].inspect
 =cookies[:user].inspect
@@ -61,7 +22,7 @@
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 - #Begin of formular
-= form_for @recipe, :url => recipe_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
+= form_for @recipe do |f|
   = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
   %p
     = f.label :name, "Name"
@@ -82,31 +43,14 @@
     %p
       = f.label :duration, "Zubereitungszeit in Minuten"
       = f.text_field :duration
-  %p
-    = f.label :country, "Country"
-    - if (!defined? @location) || (@location.data['country_name'].empty?)
-      = f.text_field :country
-    - else
-      = f.text_field :country, :value => @location.data['country_name']
-      
-  %p
-    = f.label :city, "City"
-    - if (!defined? @location) || (@location.data['city'].empty?)
-      = f.text_field :city
-    - else
-      = f.text_field :city, :value => @location.data['city']
 
   %p
     = f.fields_for :images do |image|
       = image.label :attachment, "Bild Upload"
       = image.file_field :attachment
-      
-  .hidden
-    = f.hidden_field :longitude
-    = f.hidden_field :latitude
 
   %p
-    = f.submit "Save", :id => "save_recipe_button"
+    = f.submit "Save"
 - # End of formular
 
 = button_to "Reset", delete_cookie_upload_index_path, :method => :get, :confirm => "Do you want to upload another recipe?"

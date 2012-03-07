@@ -19,9 +19,6 @@ def recipe
   else
     @recipe = Recipe.new
     3.times { @recipe.images.build } #to show upload fields with form helper
-
-    #Get location by IP-address
-    @location = request.location
   end
   render_wizard
 end
@@ -43,6 +40,8 @@ def user
   else 
     @user = User.new
   end
+  #Get location by IP-address
+  @location = request.location
   render_step @next_step
 end
 
