@@ -49,7 +49,10 @@ end
 
 #The preview is the last step
 def show_preview
-  @user = User.last
+  if cookies[:jacob_joins_user].present?
+    @user = Recipe.find(cookies[:jacob_joins_user])
+  end
+
   if cookies[:jacob_joins_recipe].present?
     @recipe = Recipe.find(cookies[:jacob_joins_recipe])
   end
