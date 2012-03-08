@@ -5,6 +5,7 @@ class Recipe
 
   field :name, :type => String
   field :portion, :type => Integer
+  field :preparation, :type => String
   field :duration, :type => Integer
   field :city, :type => String
   field :country, :type => String
