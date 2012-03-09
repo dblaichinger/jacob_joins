@@ -1,46 +1,11 @@
 //- content_for(:head) do
 :javascript
   $(document).ready(function(){
-    getGeoLocation();
-
-    //TODO: Vorschläge von Google API anzeigen, sonst reicht .change auch
-    /*$('#recipe_city').bind('keypress', function(){
-      var self = $(this);
-      clearTimeout(self.data('timeout'));
-      self.data('timeout', setTimeout(function(){
-        var city = $('#recipe_city').val();
-        var country = $('#recipe_country').val();
-        getLatLngFromAddress(city, country);
-      }, 500));
-    });
-   
-    $('#recipe_city').change(function(){
-      var city = $('#recipe_city').val();
-      var country = $('#recipe_country').val();
-      getLatLngFromAddress(city, country);
-    });
-    */
 
     $("#ingredients").elementOnDemand();
 
-    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
-    if ($('#error_explanation').length > 0){
-      $.each($('#error_explanation ul li'), function(index, val){
-        if(val.innerHTML == "The country or city can't be found."){
-          addErrorOnField($(recipe_country));
-          addErrorOnField($(recipe_city));
-          $.each($('label'), function(index, val){
-            if(val.innerHTML == "City" || val.innerHTML == "Country"){
-              addErrorOnField($(val));
-            }
-          });
-        }
-      });
-    }
-
-
-    $("#new_recipe div").click(function(){
-      $("#new_recipe div").removeClass("active");
+    $("#new_recipe div div").click(function(){
+      $("#new_recipe div div").removeClass("active");
       $(this).addClass("active");
     });
   });
@@ -54,15 +19,14 @@
   %h2 Hallo #{@user.name}, du kannst hier dein bestehendes Rezept "#{@recipe.name}" ändern!
   %h2 Klicke auf Reset um ein neues Rezept hochzuladen!
 
-/ %h3
-/   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+%h3
+  = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 %div#formular
 
   %div#formnav
     %p
       = link_to 'recipe', wizard_path(:recipe)
-      / to do: Links zu csi
       = link_to 'csi', wizard_path(:csi) 
       = link_to 'user', wizard_path(:user)
       = link_to 'preview', wizard_path(:show_preview)
@@ -70,7 +34,7 @@
 
   - #Begin of formular
 
-  = form_for @recipe, :url => recipe_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
+  = form_for @recipe do |f|
     = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
     %div#left
       %div#information
@@ -101,43 +65,29 @@
           = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
           = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
 
-    
-    %div#preparation
-      %h1
-        Preparation
-      %p
-        = f.label :preparation, "Zubereitung"
-        = f.text_area :preparation
+    %div#right
+      %div#preparation
+        %h1
+          Preparation
+        %p
+          = f.label :preparation, "Zubereitung"
+          = f.text_area :preparation
+
+        
+        = f.fields_for :images do |image|
+          = image.label :attachment, "Bild Upload"
+          = image.file_field :attachment
+          
+      .hidden
+        = f.hidden_field :longitude
+        = f.hidden_field :latitude
 
       
-      = f.fields_for :images do |image|
-        = image.label :attachment, "Bild Upload"
-        = image.file_field :attachment
+      %div#buttons
+        = f.submit "Save", :id => "save_recipe_button"
 
-    / %p
-    /   = f.label :country, "Country"
-    /   - if (!defined? @location) || (@location.data['country_name'].empty?)
-    /     = f.text_field :country
-    /   - else
-    /     = f.text_field :country, :value => @location.data['country_name']
-        
-    / %p
-    /   = f.label :city, "City"
-    /   - if (!defined? @location) || (@location.data['city'].empty?)
-    /     = f.text_field :city
-    /   - else
-    /     = f.text_field :city, :value => @location.data['city']
-        
-    .hidden
-      = f.hidden_field :longitude
-      = f.hidden_field :latitude
+        = button_to "Reset", delete_cookie_upload_index_path, :method => :get, :confirm => "Do you want to upload another recipe?"
 
-    
-    %div#buttons
-      = f.submit "Save", :id => "save_recipe_button"
-
-      = button_to "Reset", delete_cookie_upload_index_path, :method => :get, :confirm => "Do you want to upload another recipe?"
-
-      = link_to "Skip this step", next_wizard_path
+        = link_to "Skip this step", next_wizard_path
 
 
