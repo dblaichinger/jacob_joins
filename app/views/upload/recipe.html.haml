@@ -54,14 +54,11 @@
   %h2 Hallo #{@user.name}, du kannst hier dein bestehendes Rezept "#{@recipe.name}" ändern!
   %h2 Klicke auf Reset um ein neues Rezept hochzuladen!
 
-/ %h3
-/   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
-
 %div#formular
 
   %div#formnav
     %p
-      = link_to 'recipe', wizard_path(:recipe)
+      = link_to 'recipe', wizard_path(:recipe), class:"current"
       / to do: Links zu csi
       = link_to 'csi', wizard_path(:csi) 
       = link_to 'user', wizard_path(:user)
@@ -79,6 +76,9 @@
 
         %p
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+
+        %h3
+          = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
         %p
           = f.label :name, "Name"

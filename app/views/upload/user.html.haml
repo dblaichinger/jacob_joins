@@ -20,69 +20,91 @@
 
   });
 
-%p
-  = link_to 'recipe', wizard_path(:recipe)
-  = link_to 'user', wizard_path(:user)
-  = link_to 'preview', wizard_path(:show_preview)
+%div#formular
 
-=cookies[:recipe].inspect
-=cookies[:user].inspect
+  %div#formnav
 
-=@user.inspect
+    %p
+      = link_to 'recipe', wizard_path(:recipe)
+      / to do: Links zu csi
+      = link_to 'csi', wizard_path(:csi) 
+      = link_to 'user', wizard_path(:user), class:"current"
+      = link_to 'preview', wizard_path(:show_preview)
 
-%h1 New_user
+    / =cookies[:recipe].inspect
+    / =cookies[:user].inspect
 
-- unless defined?(@user.name).nil?
-  %h2 Hallo #{@user.name}, du kannst hier deine User-Daten ändern!
+    / =@user.inspect
 
-%h3
-  = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
+    / Begin of formular
 
-= form_for @user, :url => user_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
-  = handle_error_messages(@user).html_safe if @user.errors.any?
-  %p
-    = f.label :name, "Name"
-    = f.text_field :name
-  %p
-    = f.label :gender, "Gender"
-    = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]) 
-      
-  %p
-    = f.label :age, "Age"
-    = f.text_field :age
-  %p
-    = f.label :email, "Email"
-    = f.text_field :email
-  %p
-    = f.label :heard_from, "How did you hear from Jacob Joins?"
-    = f.radio_button :heard_from, "Internet"
-    = f.label :heard_from, "Internet"
-    = f.radio_button :heard_from, "Letter"
-    = f.label :heard_from, "Letter"
-    = f.radio_button :heard_from, "blabla"
-    = f.label :heard_from, "blabla"
-    = f.radio_button :heard_from, "blablabla"
-    = f.label :heard_from, "blablabla"
+  
+  = form_for @user, :url => user_path, :html => { :method => :post, :onsubmit =>'getLatLngFromAddress(); return false;' } do |f|
+    = handle_error_messages(@user).html_safe if @user.errors.any?
+   
+    %div#information_user
+      %h1 Information
 
-  %p
-    = label_tag :country, "Country"
-    - if (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
-      = text_field_tag :country
-    - else
-      = text_field_tag :country, :value => @location.data['country_name']
+      %p Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
-  %p
-    = label_tag :city, "City"
-    - if (!defined? @location) || (@location.data['city'].empty?)
-      = text_field_tag :city
-    - else
-      = text_field_tag :city, :value => @location.data['city']
+      - unless defined?(@user.name).nil?
+        %h2 Hallo #{@user.name}, du kannst hier deine User-Daten ändern!
 
-  .hidden
-    = hidden_field_tag :longitude
-    = hidden_field_tag :latitude
+      %h3
+        = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
 
-  .error
+    / to do: 2 fields for first name + last name
 
-  %p
-    = f.submit "Save", :id => "save_user_button"
+    %div#user_data
+      %p
+        = f.label :name, "Name"
+        = f.text_field :name
+      %p
+        Lastname
+
+      %p Erklärung für Name
+
+      %p
+        = f.label :gender, "Gender"
+        = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]) 
+            
+      %p
+        = f.label :age, "Age"
+        = f.text_field :age
+      %p
+        = f.label :email, "Email"
+        = f.text_field :email
+      %p
+        = f.label :heard_from, "How did you hear from Jacob Joins?"
+        = f.radio_button :heard_from, "Internet"
+        = f.label :heard_from, "Internet"
+        = f.radio_button :heard_from, "Letter"
+        = f.label :heard_from, "Letter"
+        = f.radio_button :heard_from, "blabla"
+        = f.label :heard_from, "blabla"
+        = f.radio_button :heard_from, "blablabla"
+        = f.label :heard_from, "blablabla"
+
+      %p
+        = label_tag :country, "Country"
+        - if (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
+          = text_field_tag :country
+        - else
+          = text_field_tag :country, :value => @location.data['country_name']
+
+      %p
+        = label_tag :city, "City"
+        - if (!defined? @location) || (@location.data['city'].empty?)
+          = text_field_tag :city
+        - else
+          = text_field_tag :city, :value => @location.data['city']
+            
+    .hidden
+      = hidden_field_tag :longitude
+      = hidden_field_tag :latitude
+
+    .error
+
+    %div#buttons
+      %p buttons, momentan Fehleranzeige
+      = f.submit "Save", :id => "save_user_button"
