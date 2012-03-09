@@ -1,7 +1,7 @@
 describe "elementOnDemand", ->
   beforeEach ->
-    loadFixtures('elementOnDemand.html');
-    $("#dynamicContainer").appendTo "body"
+    # loadFixtures('elementOnDemand.html');
+    $("<div id='dynamicContainer'><p class='dynamicElement'><input name='recipe[ingredients_strings][][quantity]' type='text' /><input id='ingredient' name='recipe[ingredients_strings][][ingredient]' type='text' /></p></div>").appendTo "body"
 
     this.event = $.Event "keydown"
     this.event.which = 9
