@@ -54,6 +54,8 @@ describe RecipesController do
         page.should have_selector("li", :text => "Name can't be blank")
         page.should have_selector("li", :text => "Country can't be blank")
         page.should have_selector("div", :class => "field_with_errors")
+        page.should have_selector("input", :id => "recipe_ingredients_strings_quantity", :text => test_recipe[:ingredients_with_quantities][0][:quantity])
+        page.should have_selector("input", :id => "recipe_ingredients_strings_ingredient", :text => test_recipe[:ingredients_with_quantities][0][:name])
       end.should change(Recipe, :count).by(0)
     end
   end
