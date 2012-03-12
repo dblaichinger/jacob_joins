@@ -1,84 +1,44 @@
-//- content_for(:head) do
-:javascript
-  $(document).ready(function(){
-    getGeoLocation();
+= form_for recipe do |f|
+  #left
+    #information
+      %h1
+        Information
 
-    //TODO: Vorschläge von Google API anzeigen, sonst reicht .change auch
-    $('#recipe_city').bind('keypress', function(){
-      var self = $(this);
-      clearTimeout(self.data('timeout'));
-      self.data('timeout', setTimeout(function(){
-        var city = $('#recipe_city').val();
-        var country = $('#recipe_country').val();
-        getLatLngFromAddress(city, country);
-      }, 500));
-    });
+      %p
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
-    $("#dynamicContainer").elementOnDemand();
+      %p
+        = f.label :name, "Name"
+        = f.text_field :name
+      %p
+        = f.label :portion, "Anzahl Portionen"
+        = f.text_field :portion
+      %p
+        = f.label :duration, "Zubereitungszeit in Minuten"
+        = f.text_field :duration
 
-    //Check if Lng and Lat was found. If not, the label and the input of country and city should show the error
-    if ($('#error_explanation').length > 0){
-      $.each($('#error_explanation ul li'), function(index, val){
-        if(val.innerHTML == "The country or city can't be found."){
-          addErrorOnField($(recipe_country));
-          addErrorOnField($(recipe_city));
-          $.each($('label'), function(index, val){
-            if(val.innerHTML == "City" || val.innerHTML == "Country"){
-              addErrorOnField($(val));
-            }
-          });
-        }
-      });
-    }
+    #ingredients
+      %h1 
+        Ingredients
 
-  });
-  
-%h1 New_recipe
-
-= form_for @recipe, :url => { :action => "create" }, :html => { :multipart => true } do |f|
-  = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
-
-  %p
-    = f.label :name, "Name"
-    = f.text_field :name
-  %p
-    = f.label :portion, "Anzahl Portionen"
-    = f.text_field :portion
-
-  %div#dynamicContainer
-    %p.dynamicElement
-      = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
-      = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
-
-  %p
-    = f.label :preparation, "Zubereitung"
-    = f.text_area :preparation
-  %p
-    = f.label :duration, "Zubereitungszeit in Minuten"
-    = f.text_field :duration
-  %p
-    = f.label :country, "Country"
-    - if (!defined? @location) || (@location.data['country_name'].empty?)
-      = f.text_field :country
-    - else
-      = f.text_field :country, :value => @location.data['country_name']
+      %p
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
       
-  %p
-    = f.label :city, "City"
-    - if (!defined? @location) || (@location.data['city'].empty?)
-      = f.text_field :city
-    - else
-      = f.text_field :city, :value => @location.data['city']
+      - if recipe.ingredients_strings
+        - recipe.ingredients_strings.each do |ingredient_string|
+          - next if ingredient_string[:quantity] == "" && ingredient_string[:ingredient] == ""
+          %p.dynamicElement
+            = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity", :value => ingredient_string[:quantity]
+            = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient", :value => ingredient_string[:ingredient]
+      - else
+        %p.dynamicElement
+          = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
+          = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
 
-  %p
-    = f.fields_for :images do |image|
-      = image.label :attachment, "Bild Upload"
-      = image.file_field :attachment
-      
-  .hidden
-    = f.hidden_field :longitude
-    = f.hidden_field :latitude
-
-  %p
-    = f.submit "Speichern"
-
+  #right
+    #preparation
+      %h1
+        Preparation
+      %p
+        = f.label :preparation, "Zubereitung"
+        = f.text_area :preparation

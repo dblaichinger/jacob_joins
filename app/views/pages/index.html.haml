@@ -1,0 +1,16 @@
+:javascript
+  $(document).ready(function(){
+    $("#ingredients").elementOnDemand();
+  });
+
+#wizard
+  .navigation
+    %p
+      = link_to 'recipe', "#"
+      = link_to 'csi', "#"
+      = link_to 'user', "#"
+      = link_to 'preview', "#"
+  .forms
+    = render :template => "recipes/new", :locals => { :recipe => Recipe.new }
+    = render :template => "country_specific_informations/new", :locals => { :csis => CountrySpecificInformation.new }
+    = render :template => "users/new", :locals => { :user => User.new }

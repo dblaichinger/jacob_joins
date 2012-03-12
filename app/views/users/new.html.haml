@@ -1,9 +1,4 @@
-%h1 New_user
-
-
-
-= form_for @user, :url => { :action => "create" } do |f|
-  = handle_error_messages(@user).html_safe if @user.errors.any?
+= form_for user do |f|
   %p
     = f.label :name, "Name"
     = f.text_field :name
@@ -26,9 +21,4 @@
     = f.label :heard_from, "blabla"
     = f.radio_button :heard_from, "blablabla"
     = f.label :heard_from, "blablabla"
-
-  .error
-
-  %p
-    = f.submit "Speichern"
 
