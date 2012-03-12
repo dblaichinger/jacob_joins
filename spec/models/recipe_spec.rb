@@ -36,4 +36,22 @@ describe "Recipes" do
       recipe.ingredients_with_quantities.last.name.should == recipe.ingredients_strings[1][:ingredient]
     end
   end
+
+  describe "state machine" do
+    it "should save empty as draft" do
+      recipe = Recipe.new
+      recipe.save.should == true
+      recipe.state.should == "draft"
+    end
+
+    it "should not change to state published if validations fail" do
+      recipe = Recipe.new
+      recipe.publish.should == false
+    end
+
+    it "should change to state published if validations succeed" do
+      recipe = Recipe.new Factory.attributes_for(:recipe)
+      recipe.publish.should == true
+    end
+  end
 end

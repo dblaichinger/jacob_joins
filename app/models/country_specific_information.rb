@@ -11,9 +11,17 @@ class CountrySpecificInformation
   belongs_to :question_reference, :class_name => "Question"
   belongs_to :user
 
-  validates_presence_of :question_reference, :answer#, :city, :country, :latitude, :longitude
 
-  before_save :get_question_text
+  state_machine :initial => :draft do
+    event :publish do
+      transition :draft => :published
+    end
+
+    state :published do
+      validates_presence_of :question_reference, :answer, :city, :country, :latitude, :longitude
+      before_save :get_question_text
+    end
+  end
 
   def self.new_set
     csis = []

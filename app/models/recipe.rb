@@ -26,10 +26,20 @@ class Recipe
 
   attr_accessible :name, :portion, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images, :images_attributes, :steps
   attr_accessor :ingredients_strings
-  validates_presence_of :name, :portion, :duration, :city, :country, :latitude, :longitude
+  
 
   before_save :extract_ingredients
   slug :name
+
+  state_machine :initial => :draft do
+    event :publish do
+      transition :draft => :published
+    end
+
+    state :published do
+      validates_presence_of :name, :portion, :duration, :city, :country, :latitude, :longitude
+    end
+  end
 
   protected
   def extract_ingredients
