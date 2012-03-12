@@ -2,6 +2,7 @@ JacobJoins::Application.routes.draw do
 
   resources :recipes, :only =>[:index, :show, :create, :update]
   resources :users, :only => [:index, :show, :create, :update]
+  resources :country_specific_informations, :only => [:create, :update]
 
   #TODO: Limit ressource :upload to the action given in the collection
   resources :upload do
@@ -9,6 +10,7 @@ JacobJoins::Application.routes.draw do
       get 'show_preview'
       get 'delete_cookie'
       get 'recipe'
+      get 'country_specific_information'
       get 'user'
     end
   end

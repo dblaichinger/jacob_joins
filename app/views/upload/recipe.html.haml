@@ -45,9 +45,10 @@
 
 =#@recipe.inspect
 /%h1 New_recipe
+
 - if @user && @recipe
-  %h2 Hallo #{@user.name}, du kannst hier dein bestehendes Rezept "#{@recipe.name}" ändern!
-  %h2 Klicke auf Reset um ein neues Rezept hochzuladen!
+  %h2 Hallo #{@user.name}, du kannst hier deine bestehenden CSIs ändern!
+  %h2 Klicke auf Reset um ein neue CSIs hochzuladen!
 
 / %h3
 /   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
@@ -56,10 +57,9 @@
   %p
     = link_to 'recipe', wizard_path(:recipe)
     / to do: Links zu csi
-    = link_to 'csi', wizard_path(:csi) 
+    = link_to 'country_specific_information', wizard_path(:country_specific_information) 
     = link_to 'user', wizard_path(:user)
     = link_to 'preview', wizard_path(:show_preview)
-
 
 - #Begin of formular
 
