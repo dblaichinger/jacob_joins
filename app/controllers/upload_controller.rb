@@ -47,7 +47,7 @@ class UploadController < Wicked::WizardController
 
   #The action user represents User#new
   def user
-    binding.pry
+
     #Checks if an error happened when saving the user
     if session[:error]
       @user = session[:error]
@@ -68,7 +68,10 @@ class UploadController < Wicked::WizardController
 
   #The preview is the last step
   def show_preview
-    @user = User.last
+    if cookies[:jacob_joins_user].present?
+      @user = Recipe.find(cookies[:jacob_joins_user])
+    end
+
     if cookies[:jacob_joins_recipe].present?
       @recipe = Recipe.find(cookies[:jacob_joins_recipe])
     end

@@ -3,9 +3,8 @@ describe "elementOnDemand", ->
     loadFixtures('elementOnDemand.html');
     $("#dynamicContainer").appendTo "body"
 
-    this.event = $.Event "keyup"
-    this.event.which = 13
-    this.event.ctrlKey = true
+    this.event = $.Event "keydown"
+    this.event.which = 9
 
   afterEach ->
     $("#dynamicContainer").elementOnDemand "destroy"
@@ -16,7 +15,7 @@ describe "elementOnDemand", ->
       this.container = $("#dynamicContainer")
       this.container.elementOnDemand()
 
-    it "should be added if ctrl+return were pressed", ->
+    it "should be added if tab was pressed", ->
       $("#ingredient").trigger this.event
       expect(this.container.children(".dynamicElement").size() is 2).toBeTruthy()
 
@@ -25,10 +24,10 @@ describe "elementOnDemand", ->
       expect(this.container.children(".dynamicElement").size() is 2).toBeTruthy
 
   describe "Options", ->
-    it "should not bind the keyup event", ->
+    it "should not bind the keydown event", ->
       container = $("#dynamicContainer")
       container.elementOnDemand
-        onKeyUp: false
+        onKeyDown: false
 
       $("#ingredient").trigger this.event
       expect(container.children(".dynamicElement").size() is 1).toBeTruthy()
