@@ -9,6 +9,7 @@ gem 'mongoid'
 gem 'bson_ext' # C extension to improve MongoDB performance
 gem 'mongoid_slug'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
+gem 'high_voltage'
 
 # Gems used only for assets and not required
 # in production environments by default.

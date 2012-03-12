@@ -1,0 +1,10 @@
+= form_for csis do |f|
+  - csi_set = CountrySpecificInformation.new_set
+  - csi_set.each do |csi|
+    %p
+      = csi.question
+      = f.hidden_field :question_reference_id, :value => csi.question_reference_id
+
+    %p
+      = f.label :answer, "Antwort"
+      = f.text_area :answer
