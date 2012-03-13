@@ -9,6 +9,7 @@ class User
   field :gender, :type => String
 
   has_many :recipes
+  has_many :country_specific_informations
 
   validates_presence_of :name, :age, :gender
   validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :message => "is invalid", :allow_blank => true
