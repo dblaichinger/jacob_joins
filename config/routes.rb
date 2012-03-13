@@ -1,7 +1,12 @@
 JacobJoins::Application.routes.draw do
 
+  get '/recipes/last', :to => 'recipes#last'
+  post '/users/find_user', :to => 'users#find_user'
+
   resources :recipes, :only =>[:index, :show, :create, :update]
   resources :users, :only => [:index, :show, :create, :update]
+
+ 
 
   #TODO: Limit ressource :upload to the action given in the collection
   resources :upload do

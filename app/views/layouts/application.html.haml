@@ -5,6 +5,12 @@
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true"
+    :javascript
+      $(document).ready(function(){
+        countdown();
+        get_latest_recipe();
+        $('#fancy_counter').tzineClock();
+      });
     
     = csrf_meta_tags
     %meta{:charset => "utf-8"}
@@ -14,5 +20,21 @@
       - flash.each do |key, value|
         %div{:class => "flash_#{key}"}
           = value
-          
+    
+    %section#newsbar
+      %h1
+        NEWS_BAR
+      #countdown
+        Days:
+        #days
+        Hours:
+        #hours
+        Minutes:
+        #minutes
+        Seconds:
+        #seconds
+      #last_entry
+      #fancy_counter
+
+
     = yield

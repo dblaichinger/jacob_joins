@@ -1,12 +1,13 @@
 class RecipesController < ApplicationController
-  include Geocoder::Model::Mongoid
 
 def show
   @recipe = Recipe.find_by_slug(params[:id])
+  
 end
 
 def index
   @recipes = Recipe.all
+
 end
 
 def create
@@ -40,6 +41,14 @@ def update
   else
     session[:error] = @recipe
     redirect_to recipe_upload_index_path
+  end
+end
+
+def last
+  @last_recipe = Recipe.last
+
+  respond_to do |format|  
+    format.json { render :json => @last_recipe.to_json }
   end
 end
 

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+include Geocoder::Model::Mongoid
 
 def new
   @user = User.new
@@ -42,6 +43,14 @@ def update
   else
     session[:error] = @user
     redirect_to user_upload_index_path
+  end
+end
+
+def find_user
+  @user = User.find(params[:id])
+
+  respond_to do |format|  
+    format.json { render :json => @user.to_json }
   end
 end
 
