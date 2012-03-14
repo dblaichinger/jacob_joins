@@ -1,14 +1,5 @@
 src_files:
-  - "vendor/**/*.{js,coffee}"
-  - "lib/**/*.{js,coffee}"
-  - "app/**/*.{js,coffee}"
-  - "public/javascripts/*.{js,coffee}"
-
-stylesheets:
-  - stylesheets/**/*.css
-  - "vendor/**/*.css"
-  - "lib/**/*.css"
-  - "app/**/*.css"
+  - "**/*.{js,coffee}"
 
 helpers:
   - "helpers/**/*.{js,coffee}"
@@ -17,5 +8,8 @@ spec_files:
   - "**/*_spec.{coffee, js}"
 
 src_dir:
+  - app/assets/javascripts
+  - lib/assets/javascripts
+  - vendor/assets/javascripts
 
 spec_dir: spec/javascripts
