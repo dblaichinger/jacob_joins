@@ -1,6 +1,6 @@
 describe "elementOnDemand", ->
   beforeEach ->
-    loadFixtures('elementOnDemand.html');
+    loadFixtures "elementOnDemand.html"
     $("#dynamicContainer").appendTo "body"
 
     this.event = $.Event "keydown"
@@ -10,7 +10,7 @@ describe "elementOnDemand", ->
     $("#dynamicContainer").elementOnDemand "destroy"
     $("#dynamicContainer").remove()
 
-  describe "NewElement", ->
+  describe "Element", ->
     beforeEach ->
       this.container = $("#dynamicContainer")
       this.container.elementOnDemand()
@@ -19,9 +19,26 @@ describe "elementOnDemand", ->
       $("#ingredient").trigger this.event
       expect(this.container.children(".dynamicElement").size() is 2).toBeTruthy()
 
-    it "should be added if the button was clicked", ->
-      $("#add").trigger "click"
-      expect(this.container.children(".dynamicElement").size() is 2).toBeTruthy
+    describe "Button", ->
+      beforeEach ->
+        $("#add").trigger "click"
+
+      it "should add element", ->
+        expect(this.container.children(".dynamicElement").size() is 2).toBeTruthy
+
+      it "should change the ids of new children", ->
+        expect($("input[id]").last().prop "id" is "ingredient_2").toBeTruthy
+        expect($("input[id]").size() is 2).toBeTruthy
+        expect($(".dynamicElement > input:first-child").last().prop "id" is "").toBeTruthy
+
+      it "should remove last element", ->
+        $("#remove").trigger "click"
+        expect(this.container.children(".dynamicElement").size() is 1).toBeTruthy
+
+      it "should not remove the last remaining element", ->
+        $("#remove").trigger "click"
+        $("#remove").trigger "click"
+        expect(this.container.children(".dynamicElement").size() is 1).toBeTruthy
 
   describe "Options", ->
     it "should not bind the keydown event", ->
@@ -31,13 +48,3 @@ describe "elementOnDemand", ->
 
       $("#ingredient").trigger this.event
       expect(container.children(".dynamicElement").size() is 1).toBeTruthy()
-
-  describe "ElementAttribute", ->
-    beforeEach ->
-      $("#dynamicContainer").elementOnDemand()
-      $("#add").trigger "click"
-
-    it "should change the ids of the children", ->
-      expect($("input[id]").last().prop "id" is "ingredient_2").toBeTruthy
-      expect($("input[id]").size() is 2).toBeTruthy
-      expect($(".dynamicElement > input:first-child").last().prop "id" is "").toBeTruthy
