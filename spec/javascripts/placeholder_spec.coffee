@@ -3,26 +3,12 @@ describe "placeHolder", ->
     loadFixtures "placeHolder.html"
     $("#wrapper").appendTo "body"
 
-    $("#first_name").placeHolder
-    	text: "Chuck"
-
-    $("#last_name").placeHolder
-      text: "Testa"
+    $("input[placeholder]").placeholder()
 
   afterEach ->
     $("#wrapper").remove()
 
   describe "Input element", ->
     it "should have the plugin-assigned placeholders", ->
-      expect($("#first_name").val() is "Chuck").toBeTruthy()
-      expect($("#last_name").val() is "Testa").toBeTruthy()
-
-    it "should remove placeholder if it gets the focus", ->
-      $("#first_name").focus()
-      expect($("#first_name").val() is "").toBeTruthy()
-
-    it "should have placeholder if it loses the focus", ->
-      $("#first_name").focus()
-      $("#last_name").focus()
-      expect($("#first_name").val() is "Chuck").toBeTruthy()
-      expect($("#last_name").val() is "").toBeTruthy()
+      expect($("#first_name").prop("placeholder") is "Chuck").toBeTruthy()
+      expect($("#last_name").prop("placeholder") is "Testa").toBeTruthy()
