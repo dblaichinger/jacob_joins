@@ -4,54 +4,69 @@ body
   background-image: url(image_path('bg.png'))
 
 #newsbar
-  
+
 #formular
-  max-width: 960px
-  min-width: 600px
+  width: 960px
   margin: 50px auto
-  border: solid red 1px
   position: relative
-  overflow: hidden
-
-h1
-  margin: 0
-  font-size: 24px
-  font-weight: bold
-
-#left
-  float: left
-  width: 50%
   overflow: hidden
 
 #formnav
   float: left
-  width: 15%
+  width: 200px
+  height: 400px
+  background-image: url(image_path('formnav.png'))
   a
-    background-color: #ccc
     display: block
     height: 20px
     padding: 15px
+    text-align: center
 
 #formnav a.current
-  background-color: yellow
+  color: red
+
+#formnav img
+  display: block
+  margin: 10px auto 10px auto
+
+h1
+  margin: 0 0 20px 0
+  font-size: 24px
+  font-weight: bold
+  color: #fff
+  text-transform: uppercase
+  text-shadow: 2px 1px #531E09
+
+#right
+  outline: 1px solid blue
+
+#left
+  float: left
+  width: 365px
+  overflow: hidden
 
 #new_recipe, .edit_recipe, #new_user, .edit_user, #preview 
-  width: 85%
-  margin-left: 15%
+  width: 760px
+  margin-left: 200px
 
-#information
-  background-color: #efefef
+#information, #ingredients 
   padding: 15px
+  width: 270px
+  margin: 0 auto 70px auto
+  p
+    text-align: center
 
-#ingredients
-  background-color: #ccc
-  padding: 15px
- 
+#recipe_ingredients_strings_quantity, 
+  width: 55px
+
+#recipe_ingredients_strings_ingredient
+  width: 210px
+
 #preparation
-  background-color: #666
-  width: 46%
+  outline: 1px solid #666
+  width: 365px
   float: right
-  padding: 2%
+  padding: 15px
 
 #buttons
   background-color: #888
@@ -74,3 +89,15 @@ label
   padding: 15px
   background-color: #999
 
+input
+  background-color: rgba(83,30,9,0.3)
+  border: 2px solid #fff
+  padding: 5px
+
+value
+  color: #fff
+
+span
+  color: #531E09
+  text-transform: none
+  text-shadow: 2px 1px #FFF

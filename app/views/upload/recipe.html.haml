@@ -27,6 +27,7 @@
 %div#formular
 
   %div#formnav
+    = image_tag( 'bildzeichen.png')
     %p
       = link_to 'Your Recipe', wizard_path(:recipe), class:"current"
       = link_to 'About your country', wizard_path(:country_specific_information) 
@@ -41,27 +42,31 @@
     %div#left
       %div#information
         %h1
-          Information
+          1. What’s really 
+          %span going on 
+          here?
 
         %p
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
 
         %h3
           = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
-        %p
-          = f.label :name, "Name"
+        %div
+          = f.label :name, "Title"
           = f.text_field :name
-        %p
-          = f.label :portion, "Anzahl Portionen"
+        %div
+          = f.label :portion, "Portions"
           = f.text_field :portion
-        %p
-          = f.label :duration, "Zubereitungszeit in Minuten"
+        %div
+          = f.label :duration, "Preparation time"
           = f.text_field :duration
 
       %div#ingredients
         %h1 
-          Ingredients
+          2. Fill in tasteful 
+          %span ingredients 
+          here!
 
         %p
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
@@ -69,19 +74,21 @@
         - if @recipe.ingredients_strings
           - @recipe.ingredients_strings.each do |ingredient_string|
             - next if ingredient_string[:quantity] == "" && ingredient_string[:ingredient] == ""
-            %p.dynamicElement
+            %div.dynamicElement
               = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity", :value => ingredient_string[:quantity]
               = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient", :value => ingredient_string[:ingredient]
         - else
-          %p.dynamicElement
+          %div.dynamicElement
             = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
             = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
 
     %div#right
       %div#preparation
         %h1
-          Preparation
-        %p
+          3. Tell him how to 
+          %span preparate 
+          meal!
+        %div
           = f.label :preparation, "Zubereitung"
           = f.text_area :preparation
 
