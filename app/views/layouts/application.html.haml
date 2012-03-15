@@ -24,6 +24,7 @@
     %section#newsbar
       %h1
         NEWS_BAR
+      #last_entry
       #countdown
         Days:
         #days
@@ -33,8 +34,11 @@
         #minutes
         Seconds:
         #seconds
-      #last_entry
       #fancy_counter
+        %h2
+          Countdown to release
+      %div#logo
+        = image_tag( 'logo.png')
 
 
     = yield
