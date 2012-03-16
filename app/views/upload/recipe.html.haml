@@ -23,6 +23,9 @@
 / %h3
 /   = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
+%div#klickandsee
+  %a 
+  /to do: bitte die aktion einfügen, dass wenn man auf das Bild klickt, sich die Newsbar öffnet
 
 %div#formular
 
@@ -42,7 +45,8 @@
     %div#left
       %div#information
         %h1
-          1. What’s really 
+          %strong 1 
+          What’s really 
           %span going on 
           here?
 
@@ -66,7 +70,8 @@
 
       %div#ingredients
         %h1 
-          2. Fill in tasteful 
+          %strong 2 
+          Fill in tasteful 
           %span ingredients 
           here!
 
@@ -89,7 +94,8 @@
     %div#right
       %div#preparation
         %h1
-          3. Tell him how to 
+          %strong 3 
+          Tell him how to 
           %span preparate 
           meal!
 
