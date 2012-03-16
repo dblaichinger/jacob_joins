@@ -1,6 +1,12 @@
+@import compass/reset
+@import compass/css3/font-face
+ 
++font-face("Sanches", font-files("Sanches/203126_0_0.ttf"))
+
 body
   height: 100%
   color: #531E09
+  background-image: url(image_path('bg2.png'))
 
 #newsbar
   height: 280px
@@ -10,8 +16,8 @@ body
   color: #fff
   position: relative
 
-#newsbar h1
-  display: none
+  h1
+    display: none
 
 #countdown
   display: none
@@ -29,6 +35,6 @@ body
   bottom: 30px
   left: 45%
 
-#logo img
-  display: block
-  margin: 0 auto 0 auto
+  img
+    display: block
+    margin: 0 auto 0 auto

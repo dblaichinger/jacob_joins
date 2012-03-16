@@ -1,20 +1,16 @@
-@import "compass/reset"
+#klickandsee
+  a
+    display: block
+    height: 60px
+    background-image: url(image_path('klickandsee.png'))
+    background-repeat: no-repeat
+    background-position: center center
+    cursor: pointer
 
-body
-  background-image: url(image_path('bg2.png'))
-
-#klickandsee a
-  display: block
-  height: 60px
-  background-image: url(image_path('klickandsee.png'))
-  background-repeat: no-repeat
-  background-position: center center
-  cursor: pointer
-
-#klickandsee a:hover
-  background-image: url(image_path('klickandsee_hover.png'))
-  background-repeat: no-repeat
-  background-position: center center
+    &:hover
+      background-image: url(image_path('klickandsee_hover.png'))
+      background-repeat: no-repeat
+      background-position: center center
 
 #formular
   width: 960px
@@ -30,8 +26,9 @@ body
   background-image: url(image_path('formnav.png'))
   border-radius: 5px
   -moz-box-shadow: 0 0 5px 2px #888
-  -webkit-box-shadow: 0 0 5px 2px#888
+  -webkit-box-shadow: 0 0 5px 2px #888
   box-shadow: 0 0 5px 2px #888
+
   a
     text-decoration: none
     color: #fff
@@ -41,12 +38,13 @@ body
     text-align: center
     font-size: 24px
 
-#formnav a.current
-  color: red
+    &.current
+      color: red
+      font-family: "Sanches"
 
-#formnav img
-  display: block
-  margin: 10px auto 10px auto
+  img
+    display: block
+    margin: 10px auto 10px auto
 
 h1
   margin: 0 0 20px 0
@@ -93,12 +91,14 @@ span
   padding: 35px
   width: 300px
   margin: 0 auto 70px auto
+
   p
     text-align: center
 
 #buttons
   clear: both
   overflow: hidden
+
   input, div, a
     float: left
 
