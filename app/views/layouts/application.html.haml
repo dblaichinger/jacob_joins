@@ -22,21 +22,24 @@
           = value
     
     %section#newsbar
-      %h1
-        NEWS_BAR
-      #last_entry
-      #countdown
-        Days:
-        #days
-        Hours:
-        #hours
-        Minutes:
-        #minutes
-        Seconds:
-        #seconds
+      %div#fb
+        %p
+          hier kommen die fb-news rein
+      %div#entries
+        %h2
+          What happened so far  
+        #last_entry
+
       #fancy_counter
         %h2
           Countdown to release
+
+      #countdown
+        #days
+        #hours
+        #minutes
+        #seconds
+     
       %div#logo
         = image_tag( 'logo.png')
 
