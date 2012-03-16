@@ -1,6 +1,19 @@
+@import compass/reset
+@import compass/css3/font-face
+ 
++font-face("Sanches-Italic", font-files("Sanches/203126_0_0.ttf"))
++font-face("Sanches-SemiBold", font-files("Sanches/203126_2_0.ttf"))
++font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf"))
++font-face("Pacifico", font-files("Pacifico/Pacifico-webfont.ttf"))
++font-face("Pluto", font-files("Pluto/203124_2_0.ttf"))
+
+
 body
   height: 100%
   color: #531E09
+  background-image: url(image_path('6-Seamless-Patterns-Of-Paper-Material03.jpg'))
+  font-family: "Pluto"
+  font-size: 14px
 
 #newsbar
   height: 280px
@@ -10,8 +23,12 @@ body
   color: #fff
   position: relative
 
-#newsbar h1
-  display: none
+  h1
+    display: none
+
+#newsbar h2
+  font-family: "Sanches-Italic"
+  font-size: 24px
 
 #fb, #entries
   float: left
@@ -48,6 +65,6 @@ body
   left: 45%
   outline: 1px solid orange
 
-#logo img
-  display: block
-  margin: 0 auto 0 auto
+  img
+    display: block
+    margin: 0 auto 0 auto

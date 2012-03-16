@@ -58,27 +58,27 @@
         %h3
           = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
-        %div
-          = f.label :name, "Title"
+        %div#title
+          /= f.label :name, "Title"
           = f.text_field :name
-        %div
+        %div#portions
           = f.label :portion, "Portions"
           = f.text_field :portion
-        %div
+        %div#duration
           = f.label :duration, "Preparation time"
           = f.text_field :duration
 
       %div#ingredients
         %h1 
           %strong 2 
-          Fill in tasteful 
+          Fill in tasty 
           %span ingredients 
           here!
 
         %hr  
 
         %p
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit attachment
         
         - if @recipe.ingredients_strings
           - @recipe.ingredients_strings.each do |ingredient_string|
@@ -95,14 +95,14 @@
       %div#preparation
         %h1
           %strong 3 
-          Tell him how to 
+          Tell how to 
           %span preparate 
           meal!
 
         %hr
 
         %div
-          = f.label :preparation, "Zubereitung"
+          = f.label :preparation, "Step"
           = f.text_area :preparation
 
         

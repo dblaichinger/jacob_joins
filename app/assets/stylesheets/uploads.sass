@@ -1,20 +1,16 @@
-@import "compass/reset"
+#klickandsee
+  a
+    display: block
+    height: 60px
+    background-image: url(image_path('klickandsee.png'))
+    background-repeat: no-repeat
+    background-position: center center
+    cursor: pointer
 
-body
-  background-image: url(image_path('bg2.png'))
-
-#klickandsee a
-  display: block
-  height: 60px
-  background-image: url(image_path('klickandsee.png'))
-  background-repeat: no-repeat
-  background-position: center center
-  cursor: pointer
-
-#klickandsee a:hover
-  background-image: url(image_path('klickandsee_hover.png'))
-  background-repeat: no-repeat
-  background-position: center center
+    &:hover
+      background-image: url(image_path('klickandsee_hover.png'))
+      background-repeat: no-repeat
+      background-position: center center
 
 #formular
   width: 960px
@@ -22,6 +18,9 @@ body
   position: relative
   overflow: hidden
   padding: 5px
+
+#formular p
+  margin: 20px 0px
 
 #formnav
   float: left
@@ -32,6 +31,7 @@ body
   -moz-box-shadow: 0 0 5px 2px rgba(0,0,0,0.5)
   -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,0.5)
   box-shadow: 0 0 5px 2px rgba(0,0,0,0.5)
+
   a
     text-decoration: none
     color: #fff
@@ -41,17 +41,19 @@ body
     text-align: center
     font-size: 24px
 
-#formnav a.current
-  color: red
+    &.current
+      color: red
+      
 
-#formnav img
-  display: block
-  margin: 10px auto 10px auto
+  img
+    display: block
+    margin: 10px auto 10px auto
 
 h1
   margin: 0 0 20px 0
   font-size: 24px
   font-weight: bold
+  font-family: "Sanches-SemiBold"
   color: #fff
   text-transform: uppercase
   text-shadow: 2px 1px #531E09
@@ -59,15 +61,20 @@ h1
 strong
   display: block
   float: left
-  font-size: 60px
+  font-size: 75px
+  font-family: "Sanches-Bold"
   margin-right: 12px
   color: #531E09
   text-shadow: 2px 1px #FFF
+  vertical-align: text-top
 
 span
   color: #531E09
   text-transform: none
   text-shadow: 2px 1px #FFF
+  font-family: "Pacifico"
+  font-size: 30px
+  margin-right: 5px
 
 
 #right, #left
@@ -93,12 +100,16 @@ span
   padding: 35px
   width: 300px
   margin: 0 auto 70px auto
+
   p
     text-align: center
 
 #buttons
   clear: both
   overflow: hidden
+  margin: 10px
+  padding: 5px
+
   input, div, a
     float: left
 
@@ -110,6 +121,12 @@ span
 
 label
   display: block
+  float: left
+
+#portions
+  float: left
+
+#recipe_duration
 
 #information_user
   padding: 15px
