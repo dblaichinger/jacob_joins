@@ -58,3 +58,11 @@ function get_latest_recipe(){
   }, "json");
 }
 
+
+function get_facebook_stream(){
+  alert("hallo");
+  var token = "AAACEdEose0cBAK8Uf98VP2UWg7Bidj16RCFKP6sZCl712quaDwEGgZB5pDB8i8sXNIdSiFsdIZAsrCfIc0PzVuO50ZAJdnKigt2ZAxvdrYgZDZD";
+  $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
+    console.debug(data);
+  }, "json");
+}
