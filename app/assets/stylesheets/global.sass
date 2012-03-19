@@ -1,5 +1,19 @@
+@import compass/reset
+@import compass/css3/font-face
+ 
++font-face("Sanches-Italic", font-files("Sanches/203126_0_0.ttf"))
++font-face("Sanches-SemiBold", font-files("Sanches/203126_2_0.ttf"))
++font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf"))
++font-face("Pacifico", font-files("Pacifico/Pacifico-webfont.ttf"))
++font-face("Pluto", font-files("Pluto/203124_2_0.ttf"))
+
+
 body
   height: 100%
+  color: #531E09
+  background-image: url(image_path('6-Seamless-Patterns-Of-Paper-Material03.jpg'))
+  font-family: "Pluto"
+  font-size: 14px
 
 #newsbar
   height: 280px
@@ -7,24 +21,50 @@ body
   background-position: top center
   overflow: hidden
   color: #fff
+  position: relative
 
-#newsbar h1
-  display: none
+  h1
+    display: none
 
-#countdown
-  display: none
+#newsbar h2
+  font-family: "Sanches-Italic"
+  font-size: 24px
+
+#fb, #entries
+  float: left
+  margin: 20px 10px
+
+#fb
+  outline: 1px solid #fff
+
+#entries
+  outline: 1px solid yellow
 
 #last_entry
-  float: left
+
 
 #fancy_counter
+  float: right
+  margin: 20px 10px
+  outline: 1px solid blue
+
+#countdown
+  position: absolute
+  bottom: 40px
+  right: 15px
+  outline: 1px solid green
+
+#days, #hours, #minutes, #seconds
   float: left
-  margin-left: 20px
+  margin-right: 5px
 
 #logo
   clear: both
-  margin: 15px 0 5px 0
+  position: absolute
+  bottom: 30px
+  left: 45%
+  outline: 1px solid orange
 
-#logo img
-  display: block
-  margin: 0 auto 0 auto
+  img
+    display: block
+    margin: 0 auto 0 auto
