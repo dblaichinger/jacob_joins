@@ -1,0 +1,10 @@
+%p.dynamicElement
+  - quantity ||= ""
+  - ingredient ||= ""
+  - quantity_placeholder ||= ""
+  - ingredient_placeholder ||= ""
+  - ingredient_css_id ||= "recipe_ingredients_strings_ingredient"
+  - quantity_css_id ||= "recipe_ingredients_strings_quantity"
+
+  = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => quantity_css_id, :value => quantity , :placeholder => quantity_placeholder
+  = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => ingredient_css_id, :value => ingredient, :placeholder => ingredient_placeholder

@@ -29,26 +29,13 @@
 
       %p
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
-      
-      - if recipe.ingredients_strings
-        - recipe.ingredients_strings.each do |ingredient_string|
-          - next if ingredient_string[:quantity] == "" && ingredient_string[:ingredient] == ""
-          %p.dynamicElement
-            = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity", :value => ingredient_string[:quantity]
-            = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient", :value => ingredient_string[:ingredient]
+
+      - if recipe.valid_ingredients_strings
+        - prefill_ingredient_fields_with recipe.valid_ingredients_strings
       - else
-        %p.dynamicElement
-          = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity_1", :placeholder => "e.g.: 2 big"
-          = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient_1", :value => "Eggs"
-        %p.dynamicElement
-          = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity_2", :placeholder => "e.g.: 1 red"
-          = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient_2", :value => "Onion"
-        %p.dynamicElement
-          = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity_3", :placeholder => "e.g.: 3"
-          = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient_3", :value => "Potatoes"
-        %p.dynamicElement
-          = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity_4", :placeholder => "enter the quantity"
-          = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient_4", :placeholder => "additional ingredient"
+        - default_ingredients = Array[Hash[:ingredient => "Eggs", :quantity => "e.g.: 2 big"], Hash[:ingredient => "Onion", :quantity => "e.g.: 1 red"], Hash[:ingredient => "Potatoes", :quantity => "e.g.: 3"], Hash[:ingredient => "additional ingredient", :quantity => "enter the quantity"]]
+        = render_default_ingredient_fields_with(default_ingredients).html_safe
+
 
   #right
     #preparation

@@ -26,6 +26,14 @@ class Recipe
 
   attr_accessible :name, :portion, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images, :images_attributes, :steps
   attr_accessor :ingredients_strings
+
+  def valid_ingredients_strings
+    if ingredients_strings
+      ingredients_strings.reject{ |ingredient_string| ingredient_string[:quantity].blank? && ingredient_string[:ingredient].blank? }
+    else
+      nil
+    end
+  end
   
 
   before_save :extract_ingredients
@@ -47,8 +55,7 @@ class Recipe
       self.ingredients = []
       self.ingredients_with_quantities = []
 
-      self.ingredients_strings.each do |i|
-       next if i[:quantity] == "" && i[:ingredient] == ""
+      self.valid_ingredients_strings.each do |i|
         self.ingredients << Ingredient.find_or_create_by(:name => i[:ingredient])
         self.ingredients_with_quantities << IngredientWithQuantity.new(:quantity => i[:quantity], :name => i[:ingredient])
       end
