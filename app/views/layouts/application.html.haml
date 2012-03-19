@@ -11,6 +11,7 @@
         get_latest_recipe();
         $('#fancy_counter').tzineClock();
         get_facebook_stream();
+        slide_newsbar();
       });
     
     = csrf_meta_tags
@@ -43,6 +44,9 @@
      
       %div#logo
         = image_tag( 'logo.png')
+
+      %div#klickandsee
+        %a{:href => "#", :class => "show_newsbar"}
 
 
     = yield

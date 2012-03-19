@@ -62,9 +62,7 @@ function get_latest_recipe(){
 function get_facebook_stream(){
   var token = "AAACEdEose0cBAK8Uf98VP2UWg7Bidj16RCFKP6sZCl712quaDwEGgZB5pDB8i8sXNIdSiFsdIZAsrCfIc0PzVuO50ZAJdnKigt2ZAxvdrYgZDZD";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
-    console.debug(data);
     $.each(data.data, function(key, value){
-      console.debug(value);
       $('#newsbar #fb p').append(value.from.name+":" + "<br />");
       $('#newsbar #fb p').append("Message: "+value.message + "<br />");
       $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
@@ -108,3 +106,16 @@ if ( typeof jQuery != "undefined" )
         jQuery(this).text( date );
     });
   };
+
+
+function slide_newsbar(){
+  $(".show_newsbar").toggle(function(){
+    $("#newsbar").stop().animate({
+      top: "-215px"
+    }, 500);
+  }, function(){
+    $("#newsbar").stop().animate({
+      top: "0"
+    }, 500);
+  });
+}
