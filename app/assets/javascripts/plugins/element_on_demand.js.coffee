@@ -68,6 +68,7 @@ publicMethods =
     new_element.children("[id]").each ->
       $(this).prop
         id: $(this).prop("id") + "_" + element_count
+        name: $(this).prop("name").replace /[0-9]/, element_count - 1
 
     bindKeyDownIfConfigured data.onKeyDown, new_element
 

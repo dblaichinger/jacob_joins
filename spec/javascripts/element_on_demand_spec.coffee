@@ -31,6 +31,9 @@ describe "elementOnDemand", ->
         expect($("input[id]").size() is 2).toBeTruthy
         expect($(".dynamicElement > input:first-child").last().prop "id" is "").toBeTruthy
 
+      it "should change the name attribute of new children", ->
+        expect($("input[name]").last().prop "name" is "recipe[ingredients_with_quantities_attributes][1][name]").toBeTruthy
+
       it "should remove last element", ->
         $("#remove").trigger "click"
         expect(this.container.children(".dynamicElement").size() is 1).toBeTruthy
