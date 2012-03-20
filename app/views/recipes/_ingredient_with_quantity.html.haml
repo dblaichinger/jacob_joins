@@ -1,10 +1,9 @@
-%p.dynamicElement
-  - quantity ||= ""
-  - ingredient ||= ""
-  - quantity_placeholder ||= ""
-  - ingredient_placeholder ||= ""
-  - ingredient_css_id ||= "recipe_ingredients_strings_ingredient"
-  - quantity_css_id ||= "recipe_ingredients_strings_quantity"
+- quantity ||= ""
+- ingredient ||= ""
+- quantity_placeholder ||= ""
+- ingredient_placeholder ||= ""
 
-  = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => quantity_css_id, :value => quantity , :placeholder => quantity_placeholder
-  = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => ingredient_css_id, :value => ingredient, :placeholder => ingredient_placeholder
+= form.fields_for :ingredients_with_quantities, data do |ingredients_with_quantity|
+  %p.dynamicElement
+    = ingredients_with_quantity.text_field :quantity, value:quantity, placeholder:quantity_placeholder
+    = ingredients_with_quantity.text_field :name, value:ingredient, placeholder:ingredient_placeholder

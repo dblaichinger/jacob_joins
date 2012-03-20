@@ -30,12 +30,10 @@
       %p
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
-      - if recipe.valid_ingredients_strings
-        - prefill_ingredient_fields_with recipe.valid_ingredients_strings
+      - if recipe.errors.any?
+        = prefill_ingredient_fields(f, recipe).html_safe
       - else
-        - default_ingredients = Array[Hash[:ingredient => "Eggs", :quantity => "e.g.: 2 big"], Hash[:ingredient => "Onion", :quantity => "e.g.: 1 red"], Hash[:ingredient => "Potatoes", :quantity => "e.g.: 3"], Hash[:ingredient => "additional ingredient", :quantity => "enter the quantity"]]
-        = render_default_ingredient_fields_with(default_ingredients).html_safe
-
+        = render_default_ingredient_fields(f, recipe).html_safe
 
   #right
     #preparation
