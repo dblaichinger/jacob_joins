@@ -58,3 +58,65 @@ function get_latest_recipe(){
   }, "json");
 }
 
+
+function get_facebook_stream(){
+  var token = "AAACEdEose0cBAK8Uf98VP2UWg7Bidj16RCFKP6sZCl712quaDwEGgZB5pDB8i8sXNIdSiFsdIZAsrCfIc0PzVuO50ZAJdnKigt2ZAxvdrYgZDZD";
+  $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
+    $.each(data.data, function(key, value){
+      $('#newsbar #fb p').append(value.from.name+":" + "<br />");
+      $('#newsbar #fb p').append("Message: "+value.message + "<br />");
+      $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
+      $('#newsbar #fb p').append("<br />");
+    });
+  }, "json");
+}
+
+/*
+ * JavaScript Pretty Date
+ * Copyright (c) 2011 John Resig (ejohn.org)
+ * Licensed under the MIT and GPL licenses.
+ */
+// Takes an ISO time and returns a string representing how
+// long ago the date represents.
+function prettyDate(time){
+  var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+    diff = (((new Date()).getTime() - date.getTime()) / 1000),
+    day_diff = Math.floor(diff / 86400);
+      
+  if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+    return;
+      
+  return day_diff == 0 && (
+      diff < 60 && "just now" ||
+      diff < 120 && "1 minute ago" ||
+      diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+      diff < 7200 && "1 hour ago" ||
+      diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+    day_diff == 1 && "Yesterday" ||
+    day_diff < 7 && day_diff + " days ago" ||
+    day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+}
+
+// If jQuery is included in the page, adds a jQuery plugin to handle it as well
+if ( typeof jQuery != "undefined" )
+  jQuery.fn.prettyDate = function(){
+    return this.each(function(){
+      var date = prettyDate(this.title);
+      if ( date )
+        jQuery(this).text( date );
+    });
+  };
+
+
+function slide_newsbar(){
+  $(".show_newsbar").toggle(function(){
+    $("#newsbar").stop().animate({
+      top: "0"
+    }, 500);
+  }, function(){
+    $("#newsbar").stop().animate({
+      top: "-215px"
+    }, 500);
+
+  });
+}
