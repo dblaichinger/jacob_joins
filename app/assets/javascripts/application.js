@@ -16,4 +16,5 @@
 //= require plugins/jquery-file-upload/jquery.iframe-transport
 //= require plugins/jquery-file-upload/jquery.fileupload
 //= require_tree .
+//= require jquery.placeholder
  

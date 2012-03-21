@@ -1,52 +1,27 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'mongoid'
-gem 'bson_ext' # C extension to improve MongoDB performance
+gem 'bson_ext'
 gem 'mongoid_slug'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'state_machine'
 gem 'high_voltage'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'compass-rails'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
-  gem 'uglifier', '>= 1.0.3'
-end
-
 gem 'haml'
 gem 'jquery-rails'
 gem 'geocoder'
 gem 'launchy'
 gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
-
-#Wicked for the Upload-Wizard 
-gem 'wicked'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
 gem 'capistrano'
 gem "capistrano-ext"
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'compass-rails'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+end
 
 group :development do
   gem 'ruby-debug19'

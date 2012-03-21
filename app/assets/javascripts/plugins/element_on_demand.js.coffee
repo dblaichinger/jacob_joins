@@ -9,16 +9,23 @@ bindKeyDownIfConfigured = (activated, element) ->
 
     last_input.bind "keydown.elementOnDemand", keyDownHandler
 
-appendAddButton = (parent) ->
-  button = $("<img id='add' src='/assets/add_icon.png' />").appendTo parent
-  button.bind "click.elementOnDemand", clickHandler
+appendButtons = (parent) ->
+  addButton = $("<img id='add' src='/assets/add_icon.png' />").appendTo parent
+  addButton.bind "click.elementOnDemand", clickAddHandler
+  removeButton = $("<img id='remove' src='/assets/delete_icon.jpg' />").appendTo parent
+  removeButton.bind "click.elementOnDemand", clickDeleteHandler
 
-removeAddButton = ->
+revomeButtons = ->
   $("#add").unbind ".elementOnDemand"
   $("#add").remove()
+  $("#remove").unbind ".elementOnDemand"
+  $("#remove").remove()
 
-clickHandler= ->
+clickAddHandler= ->
   $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(".dynamicElement").last()).last()
+
+clickDeleteHandler= ->
+  $.fn.elementOnDemand "removeElement", $("input[type='text'], textarea", $(".dynamicElement").last()).last()
 
 keyDownHandler = (event) ->
   if event.which is 9
@@ -36,7 +43,7 @@ publicMethods =
         , options
 
         $(this).data "elementOnDemand", settings
-        appendAddButton $(this)
+        appendButtons $(this)
         bindKeyDownIfConfigured settings.onKeyDown, $(".dynamicElement", $(this)).last()
 
   destroy: ->
@@ -50,19 +57,28 @@ publicMethods =
     container = $(".dynamicElement").parent()
     data = container.data "elementOnDemand"
 
-    removeAddButton()
+    revomeButtons()
     $(last_element).unbind("keydown.elementOnDemand")
 
     new_element = $(data.element).appendTo container
-    appendAddButton container
+    appendButtons container
 
     element_count = container.children(".dynamicElement").size()
 
     new_element.children("[id]").each ->
       $(this).prop
         id: $(this).prop("id") + "_" + element_count
+        name: $(this).prop("name").replace /[0-9]/, element_count - 1
 
     bindKeyDownIfConfigured data.onKeyDown, new_element
+
+  removeElement: (last_element) ->
+    if $(".dynamicElement").size() > 1
+      data = $(".dynamicElement").parent().data "elementOnDemand"
+      previous_element = $(".dynamicElement").last().prev()
+
+      bindKeyDownIfConfigured data.onKeyDown, previous_element
+      $(last_element).parent().remove()
 
 $.fn.elementOnDemand = (method) ->
   if publicMethods[method]

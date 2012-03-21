@@ -2,6 +2,12 @@
 - 3.times { recipe.steps.build } if recipe.steps.empty?
 - recipe.images.build if recipe.images.empty?
 
+:javascript
+  $(document).ready(function(){
+    $("#ingredients").elementOnDemand();
+    $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
+  });
+
 = form_for recipe do |f|
   #left
     #information
@@ -26,18 +32,13 @@
         Ingredients
 
       %p
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
-      
-      - if recipe.ingredients_strings
-        - recipe.ingredients_strings.each do |ingredient_string|
-          - next if ingredient_string[:quantity] == "" && ingredient_string[:ingredient] == ""
-          %p.dynamicElement
-            = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity", :value => ingredient_string[:quantity]
-            = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient", :value => ingredient_string[:ingredient]
+
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+
+      - if recipe.errors.any?
+        = prefill_ingredient_fields(f, recipe).html_safe
       - else
-        %p.dynamicElement
-          = text_field_tag "recipe[ingredients_strings][][quantity]", nil, :id => "recipe_ingredients_strings_quantity"
-          = text_field_tag "recipe[ingredients_strings][][ingredient]", nil, :id => "recipe_ingredients_strings_ingredient"
+        = render_default_ingredient_fields(f, recipe).html_safe
 
   #right
     #preparation

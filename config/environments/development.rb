@@ -32,6 +32,9 @@ JacobJoins::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+  # Fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = true
+
   # Expands the lines which load the assets
   config.assets.debug = true
 end
