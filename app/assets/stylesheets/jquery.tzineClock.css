@@ -7,8 +7,8 @@
 
 .clock{
 	/* The .clock div. Created dynamically by jQuery */
-	height:200px;
-	width:200px;
+	height:100px;
+	width:100px;
 	position:relative;
 	overflow:hidden;
 	float:left;
@@ -22,8 +22,8 @@
 .clock .rotate{
 	/* There are two .rotate divs - one for each half of the background */
 	position:absolute;
-	width:200px;
-	height:200px;
+	width:100px;
+	height:100px;
 	top:0;
 	left:0;
 }
@@ -34,8 +34,8 @@
 }
 
 .clock .bg, .clock .front{
-	width:100px;
-	height:200px;
+	width:50px;
+	height:100px;
 	position:absolute;
 	top:0;
 }
@@ -43,13 +43,13 @@
 .clock .display{
 	/* Holds the number of seconds, minutes or hours respectfully */
 	position:absolute;
-	width:200px;
+	width:100px;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	z-index:20;
 	color:#F5F5F5;
-	font-size:60px;
+	font-size:20px;
 	text-align:center;
-	top:65px;
+	top:40px;
 	left:0;
 	
 	/* CSS3 text shadow: */
@@ -67,7 +67,7 @@
 .red .bg.left{	background:url(/assets/counter_clock/bg_blue.png) no-repeat left top; }
 
 /* The right part of the background: */
-.clock .bg.right{ left:100px; }
+.clock .bg.right{ left:50px; }
 
 .orange .bg.right{ background:url(/assets/counter_clock/bg_orange.png) no-repeat right top; }
 .green .bg.right{ background:url(/assets/counter_clock/bg_green.png) no-repeat right top; }

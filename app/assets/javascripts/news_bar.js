@@ -111,11 +111,12 @@ if ( typeof jQuery != "undefined" )
 function slide_newsbar(){
   $(".show_newsbar").toggle(function(){
     $("#newsbar").stop().animate({
-      top: "-215px"
+      top: "0"
     }, 500);
   }, function(){
     $("#newsbar").stop().animate({
-      top: "0"
+      top: "-215px"
     }, 500);
+
   });
 }
