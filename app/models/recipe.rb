@@ -5,7 +5,6 @@ class Recipe
 
   field :name, :type => String
   field :portion, :type => Integer
-  field :preparation, :type => String
   field :duration, :type => Integer
   field :city, :type => String
   field :country, :type => String
@@ -18,16 +17,15 @@ class Recipe
 
   embeds_many :ingredients_with_quantities
 
-  embeds_many :steps, :cascade_callbacks => true
-  accepts_nested_attributes_for :steps, :allow_destroy => true
+  embeds_many :steps, :validate => false, :cascade_callbacks => true
+  accepts_nested_attributes_for :steps, :allow_destroy => true, :reject_if => :all_blank
 
   embeds_many :images, :cascade_callbacks => true
   accepts_nested_attributes_for :images, :allow_destroy => true
 
-  attr_accessible :name, :portion, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images, :images_attributes, :steps
+  attr_accessible :name, :portion, :duration, :ingredients_strings, :city, :country, :latitude, :longitude, :images, :images_attributes, :steps, :steps_attributes
   attr_accessor :ingredients_strings
   
-
   before_save :extract_ingredients
   slug :name
 
@@ -38,6 +36,7 @@ class Recipe
 
     state :published do
       validates_presence_of :name, :portion, :duration, :city, :country, :latitude, :longitude
+      validates_associated :steps
     end
   end
 

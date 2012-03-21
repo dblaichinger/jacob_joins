@@ -32,17 +32,19 @@ class CountrySpecificInformation
   end
 
   def self.save_new_set(csis, eliminate_empty_answers = true)
-    csis.select! { |csi| !csi[:answer].empty? } if eliminate_empty_answers
-    worked = true
-    new_set = []
+    unless csis.nil?
+      csis.select! { |csi| !csi[:answer].empty? } if eliminate_empty_answers
+      worked = true
+      new_set = []
 
-    csis.each do |csi|
-      new_csi = CountrySpecificInformation.new csi
-      worked &= new_csi.save
-      new_set << new_csi if worked
+      csis.each do |csi|
+        new_csi = CountrySpecificInformation.new csi
+        worked &= new_csi.save
+        new_set << new_csi if worked
+      end
+
+      new_set if worked
     end
-
-    new_set if worked
   end
 
   protected

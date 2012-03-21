@@ -1,6 +1,8 @@
 class RecipesController < ApplicationController
   include Geocoder::Model::Mongoid
 
+  before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
+
   def show
     @recipe = Recipe.find_by_slug(params[:id])
   end
@@ -11,7 +13,8 @@ class RecipesController < ApplicationController
   
   def new
   	@recipe = Recipe.new
-    3.times { @recipe.images.build }
+    3.times { @recipe.images.build } #to show upload fields with form helper
+    3.times { @recipe.steps.build } #to show upload fields with form helper
     
     #Get location by IP-address
     @location = request.location
@@ -51,4 +54,56 @@ class RecipesController < ApplicationController
     end
   end
 
+  def sync_wizard
+    if @recipe.update_attributes params[:recipe]
+      render :status => 200, :text => 'OK'
+    else
+      render :status => 400, :text => 'Bad Request'
+    end
+  end
+
+  def upload_step_image
+    if @recipe.update_attributes params[:recipe]
+      render :json => [@recipe.steps.where(:image_updated_at.exists => true).desc(:image_updated_at).first.to_jq_upload].to_json
+    else
+      render :status => 400, :text => 'Bad Request'
+    end
+  end
+
+  def delete_step_image
+    @recipe = Recipe.find(session[:recipe_id])
+    @step = @recipe.steps.find(params[:step_id])
+    if @step.image.destroy && (@step.image = nil).nil? && @recipe.save
+      render :status => 200, :text => 'OK'
+    else
+      render :status => 400, :text => 'Bad Request'
+    end
+  end
+
+  def upload_image
+    #binding.pry
+    if @recipe.update_attributes params[:recipe]
+      render :json => [@recipe.images.where(:attachment_updated_at.exists => true).desc(:attachment_updated_at).first.to_jq_upload].to_json
+    else
+      render :status => 400, :text => 'Bad Request'
+    end
+  end
+
+  def delete_image
+    if Recipe.find(session[:recipe_id]).images.find(params[:image_id]).destroy
+      render :status => 200, :text => 'OK'
+    else
+      render :status => 400, :text => 'Bad Request'
+    end
+  end
+
+  protected
+  def get_or_create_recipe
+    if session[:recipe_id].present?
+      @recipe = Recipe.find(session[:recipe_id])
+    else
+      @recipe = Recipe.create
+      session[:recipe_id] = @recipe.id
+    end
+  end
 end

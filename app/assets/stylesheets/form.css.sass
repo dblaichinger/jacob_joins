@@ -1,0 +1,25 @@
+@import "compass/css3/opacity"
+
+.ui-tabs
+  .ui-tabs-hide
+    display: none
+
+.steps
+  .step
+    .upload_wrapper
+      background: red
+      width: 150px
+      overflow: hidden
+      position: relative
+      text-align: center
+
+      span
+        line-height: 1.5em
+
+      input
+        position: absolute
+        top: 0
+        right: 0
+        cursor: pointer
+        font-size: 20px
+        @include opacity(0)

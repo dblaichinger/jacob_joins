@@ -4,13 +4,21 @@
   });
 
 #wizard
-  .navigation
-    %p
-      = link_to 'recipe', "#"
-      = link_to 'csi', "#"
-      = link_to 'user', "#"
-      = link_to 'preview', "#"
-  .forms
-    = render :template => "recipes/new", :locals => { :recipe => Recipe.new }
+  %ul.navigation
+    %li
+      = link_to 'recipe', "#recipe_tab"
+    %li
+      = link_to 'csi', "#country_specific_information_tab"
+    %li
+      = link_to 'user', "#user_tab"
+    %li
+      = link_to 'preview', "#preview_tab"
+  
+  #recipe_tab
+    = render :template => "recipes/new", :locals => { :recipe => Recipe.new, :steps => [Step.new] }
+  #country_specific_information_tab
     = render :template => "country_specific_informations/new", :locals => { :csis => CountrySpecificInformation.new }
+  #user_tab
     = render :template => "users/new", :locals => { :user => User.new }
+  #preview_tab
+    %h1 Nothing to do here...
