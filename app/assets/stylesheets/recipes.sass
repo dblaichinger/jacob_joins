@@ -1,1 +1,146 @@
+@import "compass/css3/box-shadow"
+
+#klickandsee
+  top: 275px
+  position: relative
+  a
+    display: block
+    height: 60px
+    background-image: url(image_path('klickandsee.png'))
+    background-repeat: no-repeat
+    background-position: center center
+    cursor: pointer
+
+    &:hover
+      background-image: url(image_path('klickandsee_hover.png'))
+      background-repeat: no-repeat
+      background-position: center center
+
+#wizard
+  width: 960px
+  margin: 40px auto
+  position: relative
+  overflow: hidden
+  padding: 5px
+
+  p
+    margin: 20px 0px
+
+#formnav
+  float: left
+  width: 200px
+  height: 400px
+  background-image: url(image_path('formnav.png'))
+  border-radius: 5px
+  +box-shadow(0 0 5px 2px rgba(0,0,0,0.5))
+
+  a
+    text-decoration: none
+    color: #fff
+    display: block
+    height: 20px
+    padding: 20px
+    text-align: center
+    font-size: 24px
+
+  .ui-state-active
+    a
+      color: red
+      
+
+  img
+    display: block
+    margin: 10px auto 10px auto
+
+h1
+  margin: 0 0 20px 0
+  font-size: 24px
+  font-weight: bold
+  font-family: "Sanches-SemiBold"
+  color: #fff
+  text-transform: uppercase
+  text-shadow: 2px 1px #531E09
+
+strong
+  display: block
+  float: left
+  font-size: 75px
+  font-family: "Sanches-Bold"
+  margin-right: 12px
+  color: #531E09
+  text-shadow: 2px 1px #FFF
+  vertical-align: text-top
+
+span
+  color: #531E09
+  text-transform: none
+  text-shadow: 2px 1px #FFF
+  font-family: "Pacifico"
+  font-size: 30px
+  margin-right: 5px
+
+
+#right, #left
+  padding: 1px 0 1px 0
+
+#left, #preparation
+  float: left
+  width: 380px
+  overflow: hidden
+
+#left
+  margin-left: 5px
+
+#preparation
+  margin-left: 20px
+  padding-top: 1px
+
+#new_recipe, .edit_recipe, #new_user, .edit_user, #preview 
+  width: 760px
+  margin-left: 200px
+
+#information, #ingredients , #preparation
+  padding: 35px
+  width: 300px
+  margin: 0 auto 70px auto
+
+  p
+    text-align: center
+
+#buttons
+  clear: both
+  overflow: hidden
+  margin: 10px
+  padding: 5px
+
+  input, div, a
+    float: left
+
+.active 
+  outline: 1px solid #531E09
+  -moz-box-shadow: inset 0 0 0 15px #fff
+  -webkit-box-shadow: inset 0 0 0 15px #fff
+  box-shadow: inner 0 0 0 15px #fff
+
+label
+  display: block
+  float: left
+
+#portions
+  float: left
+
+#recipe_duration
+
+#information_user
+  padding: 15px
+  background-color: #ccc
+
+#user_data
+  padding: 15px
+  background-color: #999
+
+input
+  background-color: rgba(83,30,9,0.3)
+  border: 2px solid #fff
+  padding: 5px
 

@@ -43,4 +43,21 @@ class CountrySpecificInformationsController < ApplicationController
       redirect_to country_specific_information_upload_index_path
     end
   end
+
+  def sync_wizard
+    if session[:csi_id].present?
+      @csi = CountrySpecificInformation.find(session[:recipe_id])
+    else
+      @csi = CountrySpecificInformation.create
+      session[:csi_id] = @csi.id
+    end
+
+    if @csi.update_attributes params[:country_specific_information]
+      render :status => 200, :text => 'OK'
+    else
+      render :status => 400, :text => 'Bad Request'
+    end
+
+    #binding.pry
+  end
 end

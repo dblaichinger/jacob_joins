@@ -1,9 +1,4 @@
-%h1 New_user
-
-
-
-= form_for @user, :url => { :action => "create" } do |f|
-  = handle_error_messages(@user).html_safe if @user.errors.any?
+= form_for user do |f|
   %p
     = f.label :name, "Name"
     = f.text_field :name
@@ -27,8 +22,22 @@
     = f.radio_button :heard_from, "blablabla"
     = f.label :heard_from, "blablabla"
 
-  .error
 
   %p
-    = f.submit "Speichern"
+    = label_tag :country, "Country"
+    - if (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
+      = text_field_tag :country
+    - else
+      = text_field_tag :country, :value => @location.data['country_name']
+
+  %p
+    = label_tag :city, "City"
+    - if (!defined? @location) || (@location.data['city'].empty?)
+      = text_field_tag :city
+    - else
+      = text_field_tag :city, :value => @location.data['city']
+
+  .hidden
+    = hidden_field_tag :longitude
+    = hidden_field_tag :latitude
 
