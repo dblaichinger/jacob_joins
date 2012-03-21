@@ -13,8 +13,8 @@
   });
 
   
-  %h3
-    = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+%h3
+  = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 = form_for recipe do |f|
   = handle_error_messages(recipe).html_safe if recipe.errors.any?
