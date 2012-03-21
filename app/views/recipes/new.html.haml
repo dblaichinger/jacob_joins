@@ -6,34 +6,52 @@
   $(document).ready(function(){
     $("#ingredients").elementOnDemand();
     $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
+    $("#new_recipe div div").click(function(){
+      $("#new_recipe div div").removeClass("active");
+      $(this).addClass("active");
+    });
   });
 
+  
+  %h3
+    = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+
 = form_for recipe do |f|
+  = handle_error_messages(recipe).html_safe if recipe.errors.any?
   #left
     #information
       %h1
-        Information
+        %strong 1 
+        What’s really 
+        %span going on 
+        here
+
+      %hr
 
       %p
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
-      %p
-        = f.label :name, "Name"
+      #title
+        /= f.label :name, "Name"
         = f.text_field :name
-      %p
-        = f.label :portion, "Anzahl Portionen"
+      #portions
+        = f.label :portion, "Portions"
         = f.text_field :portion
-      %p
-        = f.label :duration, "Zubereitungszeit in Minuten"
+      #duration
+        = f.label :duration, "Preparation time"
         = f.text_field :duration
 
     #ingredients
       %h1 
-        Ingredients
+        %strong 2 
+        Fill in tasty 
+        %span ingredients 
+        here!
+
+      %hr
 
       %p
-
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
       - if recipe.errors.any?
         = prefill_ingredient_fields(f, recipe).html_safe
@@ -43,7 +61,12 @@
   #right
     #preparation
       %h1
-        Preparation
+        %strong 3 
+        Tell how to 
+        %span preparate 
+        meal!
+
+      %hr
 
       .steps
         = f.fields_for :steps do |step|

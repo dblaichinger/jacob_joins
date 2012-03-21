@@ -1,4 +1,10 @@
+%h3
+  = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
+
 = form_for csis do |f|
+  -# @csis.each do |csi|
+    =# handle_error_messages(csi).html_safe if csi.errors.any?
+    
   - csi_set = CountrySpecificInformation.new_set
   - csi_set.each do |csi|
     %p

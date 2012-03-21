@@ -1,5 +1,6 @@
 class Recipe
   include Mongoid::Document
+  include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Paperclip
 

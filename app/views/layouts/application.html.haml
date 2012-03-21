@@ -5,10 +5,48 @@
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true"
+    :javascript
+      $(document).ready(function(){
+        countdown();
+        get_latest_recipe();
+        $('#fancy_counter').tzineClock();
+        get_facebook_stream();
+        slide_newsbar();
+      });
     
     = csrf_meta_tags
     %meta{:charset => "utf-8"}
 
   %body
-          
+
+    %section
+      - flash.each do |key, value|
+        %div{:class => "flash_#{key}"}
+          = value
+    
+    %section#newsbar
+      %div#fb
+        %p
+
+      %div#entries
+        %h2
+          What happened so far  
+        #last_entry
+
+      #fancy_counter
+        %h2
+          Countdown to release
+
+      #countdown
+        #days
+        #hours
+        #minutes
+        #seconds
+     
+      %div#logo
+        = image_tag( 'logo.png')
+
+      %div#klickandsee
+        %a{:href => "#", :class => "show_newsbar"}
+
     = yield

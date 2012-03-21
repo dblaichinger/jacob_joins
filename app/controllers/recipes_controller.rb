@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-  include Geocoder::Model::Mongoid
 
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
 
@@ -81,7 +80,6 @@ class RecipesController < ApplicationController
   end
 
   def upload_image
-    #binding.pry
     if @recipe.update_attributes params[:recipe]
       render :json => [@recipe.images.where(:attachment_updated_at.exists => true).desc(:attachment_updated_at).first.to_jq_upload].to_json
     else
@@ -94,6 +92,14 @@ class RecipesController < ApplicationController
       render :status => 200, :text => 'OK'
     else
       render :status => 400, :text => 'Bad Request'
+    end
+  end
+
+  def last
+    @last_recipe = Recipe.last
+
+    respond_to do |format|  
+      format.json { render :json => @last_recipe.to_json }
     end
   end
 
