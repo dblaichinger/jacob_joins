@@ -86,6 +86,7 @@ GEM
     high_voltage (1.0.1)
     highline (1.6.11)
     hike (1.2.1)
+    hirb (0.6.2)
     i18n (0.6.0)
     jasmine (1.1.2)
       jasmine-core (>= 1.1.0)
@@ -248,6 +249,7 @@ DEPENDENCIES
   geocoder
   haml
   high_voltage
+  hirb
   jasmine-rails
   jquery-rails
   launchy

@@ -1,16 +1,9 @@
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
 
-= form_for csis do |f|
-  -# @csis.each do |csi|
-    =# handle_error_messages(csi).html_safe if csi.errors.any?
-    
-  - csi_set = CountrySpecificInformation.new_set
-  - csi_set.each do |csi|
-    %p
-      = csi.question
-      = f.hidden_field :question_reference_id, :value => csi.question_reference_id
+= form_for csi_set, :url => country_specific_informations_path do |f|
+  - f.fields_for :country_specific_informations do |csi|
+    = csi.hidden :question_reference, csi.object.question_reference
+    = csi.label :answer, csi.object.question
+    = csi.text_field :answer
 
-    %p
-      = f.label :answer, "Antwort"
-      = f.text_area :answer
