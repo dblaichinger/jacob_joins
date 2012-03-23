@@ -6,8 +6,8 @@
   $(document).ready(function(){
     $("#ingredients").elementOnDemand();
     $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
-    $("#new_recipe div div").click(function(){
-      $("#new_recipe div div").removeClass("active");
+    $("form div div").click(function(){
+      $("form div div").removeClass("active");
       $(this).addClass("active");
     });
   });
