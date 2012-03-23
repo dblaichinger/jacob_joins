@@ -1,9 +1,11 @@
+- csi_set = CSISet.find(session[:csi_set_id]) if session[:csi_set_id].present?
+
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
 
 = form_for csi_set, :url => country_specific_informations_path do |f|
   - f.fields_for :country_specific_informations do |csi|
-    = csi.hidden :question_reference, csi.object.question_reference
+    = csi.hidden_field :question_reference_id
     = csi.label :answer, csi.object.question
     = csi.text_field :answer
 
