@@ -46,18 +46,16 @@ class CountrySpecificInformationsController < ApplicationController
 
   def sync_wizard
     if session[:csi_set_id].present?
-      @csi_set = CSISet.find(session[:csi_set_id])
+      @csi_set = CsiSet.find(session[:csi_set_id])
     else
-      @csi_set = CSISet.create
+      @csi_set = CsiSet.create
       session[:csi_set_id] = @csi_set.id
     end
 
-    if @csi_set.update_attributes_by_question params[:csi_set]
-      render :status => 200, :text => 'OK'
+    if @csi_set.update_attributes params[:csi_set]
+      render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
     end
-
-    binding.pry
   end
 end

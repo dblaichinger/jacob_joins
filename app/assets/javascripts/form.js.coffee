@@ -1,22 +1,4 @@
-$ ->
-  $('#wizard').tabs()
-  $('#wizard').bind 'tabsselect', (event, ui) ->
-    oldTabIndex = $('#wizard').tabs 'option', 'selected'
-    oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
-
-    if oldTabIndex < $('#wizard').tabs('length') - 1
-      url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
-      console.log url
-      console.log oldTab
-      params = oldTab.children('form').serialize()
-      console.log params
-
-      $.ajax
-        url: url
-        type: 'POST'
-        data: params
-
-  # --- recipe -------------------------------------------------
+prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
     currentFileInput = $(this)
     currentFileInput.fileupload
@@ -37,7 +19,6 @@ $ ->
         data
 
       done: (e, data) ->
-        console.log data
         image = data.result[0]
         stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
         stepIdInputName = currentFileInput.attr('name').replace 'image', 'id'
@@ -54,13 +35,10 @@ $ ->
 
       add: (e, data) ->
         data.submit()
-      ###submit: (e, data) ->
-        console.log "submit"
-        #console.log data.formData###
       fail: (e, data) ->
-        console.log "fail"
-      ###always: (e, data) ->
-        console.log "always"###
+        alert "fail"
+      #submit: (e, data) ->
+      #always: (e, data) ->
 
   $('.step').on 'click', 'a.delete', (e) ->
     clicked_link = $(this)
@@ -90,9 +68,6 @@ $ ->
         value: form.find('input[name="authenticity_token"]').attr('value')
       ]
     done: (e, data) ->
-      console.log "success"
-      console.log data
-
       data.htmlElement.prepend('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '">')
       data.htmlElement.append('<a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
       data.htmlElement.css
@@ -124,4 +99,44 @@ $ ->
         alert 'Image delete failed!'
     false
 
+prepare_csi_slider = () ->
+  csi_slider = $('#csi_slider').bxSlider
+    pager: true
+    infiniteLoop: false
+    hideControlOnEnd: true
+    mode: 'fade'
+  $('#csi_slider_navigation').on "click", "a", (e) ->
+    csi_slider.goToSlide $('#csi_slider_navigation a').index(this)
+    false
+
+$ ->
+  $('#wizard').tabs()
+  $('#wizard').bind 'tabsselect', (event, ui) ->
+    oldTabIndex = $('#wizard').tabs 'option', 'selected'
+    oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
+
+    if oldTabIndex < $('#wizard').tabs('length') - 1
+      url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
+      params = oldTab.children('form').serializeArray()
+
+      $.ajax
+        url: url
+        type: 'POST'
+        data: params
+        success: (data, textStatus, jqXHR) ->
+          oldTab.html(data)
+          if oldTab.attr('id') == "recipe_tab"
+            prepare_recipe_uploads()
+
+          switch oldTab.attr('id')
+            when "recipe_tab"
+              prepare_recipe_uploads()
+            when "country_specific_information_tab"
+              prepare_csi_slider()
+
+
+  # --- recipe -------------------------------------------------
+  prepare_recipe_uploads()
+
   # --- csi ----------------------------------------------
+  prepare_csi_slider()
