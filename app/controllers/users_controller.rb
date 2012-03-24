@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 include Geocoder::Model::Mongoid
 
+before_filter :get_or_create_user, :only => [:sync_wizard]
+
 def new
   @user = User.new
 end
@@ -46,6 +48,17 @@ def update
   end
 end
 
+def sync_wizard
+  if(params[:longitude] && params[:latitude] && params[:city] && params[:country])
+    session[:location] = [{"longitude" => params[:longitude], "latitude" => params[:latitude], "city" => params[:city], "country" => params[:country]}]
+  end
+  if @user.update_attributes params[:user]
+    render :status => 200, :text => 'OK'
+  else
+    render :status => 400, :text => 'Bad Request'
+  end
+end
+
 def find_user
   @user = User.find(params[:id])
 
@@ -53,5 +66,16 @@ def find_user
     format.json { render :json => @user.to_json }
   end
 end
+
+protected
+def get_or_create_user
+  if session[:user_id].present?
+    @user = User.find(session[:user_id])
+  else
+    @user = User.create
+    session[:user_id] = @user.id
+  end
+end
+
 
 end

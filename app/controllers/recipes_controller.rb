@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
     3.times { @recipe.steps.build } #to show upload fields with form helper
     
     #Get location by IP-address
-    @location = request.location
+    #@location = request.location
   end
 
   def create
