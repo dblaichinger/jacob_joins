@@ -45,19 +45,17 @@ class CountrySpecificInformationsController < ApplicationController
   end
 
   def sync_wizard
-    if session[:csi_id].present?
-      @csi = CountrySpecificInformation.find(session[:recipe_id])
+    if session[:csi_set_id].present?
+      @csi_set = CsiSet.find(session[:csi_set_id])
     else
-      @csi = CountrySpecificInformation.create
-      session[:csi_id] = @csi.id
+      @csi_set = CsiSet.create
+      session[:csi_set_id] = @csi_set.id
     end
 
-    if @csi.update_attributes params[:country_specific_information]
-      render :status => 200, :text => 'OK'
+    if @csi_set.update_attributes params[:csi_set]
+      render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
     end
-
-    #binding.pry
   end
 end

@@ -20,5 +20,6 @@
 /.rvmrc
 /public/system
 /.jhw-cache/
+.DS_Store
 
 /public/assets

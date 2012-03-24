@@ -50,6 +50,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    capybara-webkit (0.11.0)
+      capybara (>= 1.0.0, < 1.2)
+      json
     childprocess (0.3.1)
       ffi (~> 1.0.6)
     chunky_png (1.2.5)
@@ -86,6 +89,7 @@ GEM
     high_voltage (1.0.1)
     highline (1.6.11)
     hike (1.2.1)
+    hirb (0.6.2)
     i18n (0.6.0)
     jasmine (1.1.2)
       jasmine-core (>= 1.1.0)
@@ -241,6 +245,7 @@ DEPENDENCIES
   capistrano
   capistrano-ext
   capybara
+  capybara-webkit
   coffee-rails (~> 3.2.1)
   compass-rails
   database_cleaner
@@ -248,6 +253,7 @@ DEPENDENCIES
   geocoder
   haml
   high_voltage
+  hirb
   jasmine-rails
   jquery-rails
   launchy
