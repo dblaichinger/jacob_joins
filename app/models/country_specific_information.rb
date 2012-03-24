@@ -25,6 +25,6 @@ class CountrySpecificInformation
 
   protected
   def get_question_text
-    self.question = self.question_reference.text if self.question.present?
+    self.question = self.question_reference.text if self.question_reference.present?
   end
 end
