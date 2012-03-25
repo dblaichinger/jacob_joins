@@ -110,8 +110,13 @@ prepare_csi_slider = () ->
     false
 
 $ ->
-  $('#wizard').tabs()
+  wizard_tabs = $('#wizard').tabs()
+
   $('#wizard').bind 'tabsselect', (event, ui) ->
+    newHash = '#!/form/' + ui.tab.hash.slice(1)
+    if window.location.hash != newHash
+      window.location.hash = newHash
+
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
 
@@ -125,8 +130,6 @@ $ ->
         data: params
         success: (data, textStatus, jqXHR) ->
           oldTab.html(data)
-          if oldTab.attr('id') == "recipe_tab"
-            prepare_recipe_uploads()
 
           switch oldTab.attr('id')
             when "recipe_tab"
