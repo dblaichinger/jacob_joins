@@ -1,16 +1,13 @@
+- csi_set = CsiSet.find(session[:csi_set_id]) if session[:csi_set_id].present?
+
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
 
-= form_for csis do |f|
-  -# @csis.each do |csi|
-    =# handle_error_messages(csi).html_safe if csi.errors.any?
-    
-  - csi_set = CountrySpecificInformation.new_set
-  - csi_set.each do |csi|
-    %p
-      = csi.question
-      = f.hidden_field :question_reference_id, :value => csi.question_reference_id
-
-    %p
-      = f.label :answer, "Antwort"
-      = f.text_area :answer
+= form_for csi_set, :url => country_specific_informations_path do |f|
+  %ul#csi_slider
+    = f.fields_for :country_specific_informations do |csi|
+      %li  
+        = csi.hidden_field :id unless csi.object.new_record?
+        = csi.hidden_field :question_reference_id
+        = csi.label :answer, csi.object.question
+        = csi.text_field :answer

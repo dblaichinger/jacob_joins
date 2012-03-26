@@ -1,6 +1,5 @@
 - recipe = Recipe.find(session[:recipe_id]) if session[:recipe_id].present?
 - 3.times { recipe.steps.build } if recipe.steps.empty?
-- recipe.images.build if recipe.images.empty?
 
 :javascript
   $(document).ready(function(){

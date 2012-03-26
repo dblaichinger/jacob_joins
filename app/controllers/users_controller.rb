@@ -56,7 +56,7 @@ def sync_wizard
     if params[:heard_from_other] && params[:user][:heard_from] == "other"
       @user.update_attribute(:heard_from, params[:heard_from_other])
     end
-    render :status => 200, :text => 'OK'
+    render :new, :layout => false
   else
     render :status => 400, :text => 'Bad Request'
   end
