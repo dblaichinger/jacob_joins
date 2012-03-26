@@ -18,7 +18,7 @@ class User
     end
 
     state :published do
-      validates_presence_of :name, :age, :gender
+      validates_presence_of :firstname, :age, :gender
       validates :age, :numericality => { :only_integer => true }
       validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :message => "is invalid", :allow_blank => true
     end
