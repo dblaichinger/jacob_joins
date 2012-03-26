@@ -1,12 +1,22 @@
+:javascript
+  $(document).ready(function(){
+    getGeoLocation();
+  });
+
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
 
 = form_for user do |f|
   %p
-    = f.label :name, "Name"
-    = f.text_field :name
+    = f.label :firstname, "First name"
+    = f.text_field :firstname
+  %p
+    = f.label :lastname, "Last name"
+    = f.text_field :lastname
   %p
     = f.label :gender, "Gender"
+    = link_to image_tag("male.png", :class=>"male"), "#", :id => "male_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
+    = link_to image_tag("female.png", :class=>"female"), "#", :id => "female_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
     = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']])
   %p
     = f.label :age, "Age"
@@ -15,16 +25,9 @@
     = f.label :email, "Email"
     = f.text_field :email
   %p
-    = f.label :heard_from, "How did you hear from Jacob Joins?"
-    = f.radio_button :heard_from, "Internet"
-    = f.label :heard_from, "Internet"
-    = f.radio_button :heard_from, "Letter"
-    = f.label :heard_from, "Letter"
-    = f.radio_button :heard_from, "blabla"
-    = f.label :heard_from, "blabla"
-    = f.radio_button :heard_from, "blablabla"
-    = f.label :heard_from, "blablabla"
-
+    = f.label :heard_from, "How did you hear from Jacob Joins?" 
+    = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
+    = text_field_tag :heard_from_other
 
   %p
     = label_tag :country, "Country"
