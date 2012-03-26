@@ -16,6 +16,7 @@
 //= require plugins/jquery-file-upload/jquery.iframe-transport
 //= require plugins/jquery-file-upload/jquery.fileupload
 //= require plugins/jquery.bxSlider.min
+//= require plugins/jquery.tzineClock
 //= require plugins/path.min
 //= require_tree .
 //= require jquery.placeholder
