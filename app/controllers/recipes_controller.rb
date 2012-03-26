@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
     3.times { @recipe.steps.build } #to show upload fields with form helper
     
     #Get location by IP-address
-    @location = request.location
+    #@location = request.location
   end
 
   def create
@@ -55,7 +55,7 @@ class RecipesController < ApplicationController
 
   def sync_wizard
     if @recipe.update_attributes params[:recipe]
-      render :status => 200, :text => 'OK'
+      render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
     end

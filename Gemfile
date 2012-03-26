@@ -28,10 +28,12 @@ group :development do
   gem 'rspec-rails'
   gem 'pry'
   gem 'jasmine-rails'
+  gem 'hirb'
 end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'mongoid-rspec'

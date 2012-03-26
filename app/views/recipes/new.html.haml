@@ -1,13 +1,12 @@
 - recipe = Recipe.find(session[:recipe_id]) if session[:recipe_id].present?
 - 3.times { recipe.steps.build } if recipe.steps.empty?
-- recipe.images.build if recipe.images.empty?
 
 :javascript
   $(document).ready(function(){
     $("#ingredients").elementOnDemand();
     $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
-    $("#new_recipe div div").click(function(){
-      $("#new_recipe div div").removeClass("active");
+    $("form div div").click(function(){
+      $("form div div").removeClass("active");
       $(this).addClass("active");
     });
   });
@@ -70,7 +69,7 @@
 
       .steps
         = f.fields_for :steps do |step|
-          .step
+          .step.dynamicElement
             = step.label :description, "Beschreibung"
             = step.text_area :description
             = step.label :image, "Bild Upload"

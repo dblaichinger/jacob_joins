@@ -55,7 +55,7 @@
 	function setUp()
 	{
 		// The colors of the dials:
-		var colors = ['red', 'orange','blue','green'];
+		var colors = ['red','orange','blue','green'];
 		
 		var tmp;
 		
@@ -69,7 +69,6 @@
 				case 2: text = "Minutes"; break;
 				case 3: text = "Seconds"; break;
 			}
-			var text 
 
 			tmp = $('<div>').attr('class',colors[i]+' clock').html(
 				'<div class="text">'+text+'</div>' +
@@ -153,6 +152,9 @@
 	
 		var element;
 
+		if(clock == gVars.green)
+			console.log("current: " + current + " angle: " + angle);
+
 		if(current==0)
 		{
 			// Hiding the right half of the background:
@@ -164,6 +166,9 @@
 		
 		if(angle<=180)
 		{
+			clock.rotateRight.hide();
+			if(clock == gVars.green)
+				console.log("<=180");
 			// The left part is rotated, and the right is currently hidden:
 			element = clock.rotateLeft;
 		}

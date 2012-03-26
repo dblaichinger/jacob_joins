@@ -1,66 +1,46 @@
-$ ->
-  $('#wizard').tabs()
-  $('#wizard').bind 'tabsselect', (event, ui) ->
-    oldTabIndex = $('#wizard').tabs 'option', 'selected'
-    oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
+prepare_recipe_step_upload = (currentFileInput) ->
+  currentFileInput.fileupload
+    dataType: 'json'
+    url: '/recipes/upload_step_image'
+    formData: (form) ->
+      stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
+      stepIdInputElement = form.find('#' + stepIdInputId)
+      data = [
+        name: "authenticity_token"
+        value: form.find('input[name="authenticity_token"]').attr('value')
+      ]
 
-    if oldTabIndex < $('#wizard').tabs('length') - 1
-      url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
-      console.log url
-      console.log oldTab
-      params = oldTab.children('form').serialize()
-      console.log params
+      if stepIdInputElement.length > 0
+        data.push 
+          name: stepIdInputElement.attr 'name'
+          value: stepIdInputElement.attr 'value'
+      data
 
-      $.ajax
-        url: url
-        type: 'POST'
-        data: params
+    done: (e, data) ->
+      image = data.result[0]
+      stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
+      stepIdInputName = currentFileInput.attr('name').replace 'image', 'id'
+      uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
+      stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
 
-  # --- recipe -------------------------------------------------
+      uploadWrapper.css
+        display: 'none'
+
+      if stepIdInputElement.length == 0
+        uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
+
+      uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
+
+    add: (e, data) ->
+      data.submit()
+    fail: (e, data) ->
+      alert "fail"
+    #submit: (e, data) ->
+    #always: (e, data) ->
+
+prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
-    currentFileInput = $(this)
-    currentFileInput.fileupload
-      dataType: 'json'
-      url: '/recipes/upload_step_image'
-      formData: (form) ->
-        stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
-        stepIdInputElement = form.find('#' + stepIdInputId)
-        data = [
-          name: "authenticity_token"
-          value: form.find('input[name="authenticity_token"]').attr('value')
-        ]
-
-        if stepIdInputElement.length > 0
-          data.push 
-            name: stepIdInputElement.attr 'name'
-            value: stepIdInputElement.attr 'value'
-        data
-
-      done: (e, data) ->
-        console.log data
-        image = data.result[0]
-        stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
-        stepIdInputName = currentFileInput.attr('name').replace 'image', 'id'
-        uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
-        stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
-
-        uploadWrapper.css
-          display: 'none'
-
-        if stepIdInputElement.length == 0
-          uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
-
-        uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
-
-      add: (e, data) ->
-        data.submit()
-      ###submit: (e, data) ->
-        console.log "submit"
-        #console.log data.formData###
-      fail: (e, data) ->
-        console.log "fail"
-      ###always: (e, data) ->
-        console.log "always"###
+    prepare_recipe_step_upload $(this)
 
   $('.step').on 'click', 'a.delete', (e) ->
     clicked_link = $(this)
@@ -90,9 +70,6 @@ $ ->
         value: form.find('input[name="authenticity_token"]').attr('value')
       ]
     done: (e, data) ->
-      console.log "success"
-      console.log data
-
       data.htmlElement.prepend('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '">')
       data.htmlElement.append('<a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
       data.htmlElement.css
@@ -124,4 +101,60 @@ $ ->
         alert 'Image delete failed!'
     false
 
+prepare_csi_slider = () ->
+  csi_slider = $('#csi_slider').bxSlider
+    pager: true
+    infiniteLoop: false
+    hideControlOnEnd: true
+    mode: 'fade'
+  $('#csi_slider_navigation').on "click", "a", (e) ->
+    csi_slider.goToSlide $('#csi_slider_navigation a').index(this)
+    false
+
+$ ->
+  elementTemplate = c = $('#recipe_tab .steps .step:last').clone(true, true)
+  elementTemplate.children('.image_preview').remove()
+  elementTemplate.children('input[type="hidden"]').remove()
+  elementTemplate.children('.upload_wrapper').css
+    display: 'block'
+  elementTemplate = $('<div>').append(elementTemplate).html()
+
+  $('#recipe_tab .steps').elementOnDemand
+    element: elementTemplate
+
+  $('#recipe_tab .steps').bind 'addElement.elementOnDemand', (e, new_element) ->
+    prepare_recipe_step_upload $(new_element).find('input[type="file"]:first')
+
+  wizard_tabs = $('#wizard').tabs()
+
+  $('#wizard').bind 'tabsselect', (event, ui) ->
+    newHash = '#!/form/' + ui.tab.hash.slice(1)
+    if window.location.hash != newHash
+      window.location.hash = newHash
+
+    oldTabIndex = $('#wizard').tabs 'option', 'selected'
+    oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
+
+    if oldTabIndex < $('#wizard').tabs('length') - 1
+      url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
+      params = oldTab.children('form').serializeArray()
+
+      $.ajax
+        url: url
+        type: 'POST'
+        data: params
+        success: (data, textStatus, jqXHR) ->
+          oldTab.html(data)
+
+          switch oldTab.attr('id')
+            when "recipe_tab"
+              prepare_recipe_uploads()
+            when "country_specific_information_tab"
+              prepare_csi_slider()
+
+
+  # --- recipe -------------------------------------------------
+  prepare_recipe_uploads()
+
   # --- csi ----------------------------------------------
+  prepare_csi_slider()

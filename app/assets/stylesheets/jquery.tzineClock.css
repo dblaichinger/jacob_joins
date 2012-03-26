@@ -36,6 +36,7 @@
 .clock .bg, .clock .front{
 	width:50px;
 	height:100px;
+	background: pink;
 	position:absolute;
 	top:0;
 }

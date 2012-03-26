@@ -1,4 +1,4 @@
-function countdown(){
+/*function countdown(){
   var days;
   var hours;
   var minutes;
@@ -38,7 +38,7 @@ function countdown(){
   
   setTimeout('countdown()',200);
 
-};
+};*/
 
 
 function get_latest_recipe(){
