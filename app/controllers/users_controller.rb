@@ -53,6 +53,9 @@ def sync_wizard
     session[:location] = [{"longitude" => params[:longitude], "latitude" => params[:latitude], "city" => params[:city], "country" => params[:country]}]
   end
   if @user.update_attributes params[:user]
+    if params[:heard_from_other] && params[:user][:heard_from] == "other"
+      @user.update_attribute(:heard_from, params[:heard_from_other])
+    end
     render :new, :layout => false
   else
     render :status => 400, :text => 'Bad Request'
