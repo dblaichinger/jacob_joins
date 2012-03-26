@@ -69,7 +69,7 @@
 
       .steps
         = f.fields_for :steps do |step|
-          .step
+          .step.dynamicElement
             = step.label :description, "Beschreibung"
             = step.text_area :description
             = step.label :image, "Bild Upload"

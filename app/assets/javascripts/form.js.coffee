@@ -1,44 +1,46 @@
+prepare_recipe_step_upload = (currentFileInput) ->
+  currentFileInput.fileupload
+    dataType: 'json'
+    url: '/recipes/upload_step_image'
+    formData: (form) ->
+      stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
+      stepIdInputElement = form.find('#' + stepIdInputId)
+      data = [
+        name: "authenticity_token"
+        value: form.find('input[name="authenticity_token"]').attr('value')
+      ]
+
+      if stepIdInputElement.length > 0
+        data.push 
+          name: stepIdInputElement.attr 'name'
+          value: stepIdInputElement.attr 'value'
+      data
+
+    done: (e, data) ->
+      image = data.result[0]
+      stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
+      stepIdInputName = currentFileInput.attr('name').replace 'image', 'id'
+      uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
+      stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
+
+      uploadWrapper.css
+        display: 'none'
+
+      if stepIdInputElement.length == 0
+        uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
+
+      uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
+
+    add: (e, data) ->
+      data.submit()
+    fail: (e, data) ->
+      alert "fail"
+    #submit: (e, data) ->
+    #always: (e, data) ->
+
 prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
-    currentFileInput = $(this)
-    currentFileInput.fileupload
-      dataType: 'json'
-      url: '/recipes/upload_step_image'
-      formData: (form) ->
-        stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
-        stepIdInputElement = form.find('#' + stepIdInputId)
-        data = [
-          name: "authenticity_token"
-          value: form.find('input[name="authenticity_token"]').attr('value')
-        ]
-
-        if stepIdInputElement.length > 0
-          data.push 
-            name: stepIdInputElement.attr 'name'
-            value: stepIdInputElement.attr 'value'
-        data
-
-      done: (e, data) ->
-        image = data.result[0]
-        stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
-        stepIdInputName = currentFileInput.attr('name').replace 'image', 'id'
-        uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
-        stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
-
-        uploadWrapper.css
-          display: 'none'
-
-        if stepIdInputElement.length == 0
-          uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
-
-        uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
-
-      add: (e, data) ->
-        data.submit()
-      fail: (e, data) ->
-        alert "fail"
-      #submit: (e, data) ->
-      #always: (e, data) ->
+    prepare_recipe_step_upload $(this)
 
   $('.step').on 'click', 'a.delete', (e) ->
     clicked_link = $(this)
@@ -110,6 +112,19 @@ prepare_csi_slider = () ->
     false
 
 $ ->
+  elementTemplate = c = $('#recipe_tab .steps .step:last').clone(true, true)
+  elementTemplate.children('.image_preview').remove()
+  elementTemplate.children('input[type="hidden"]').remove()
+  elementTemplate.children('.upload_wrapper').css
+    display: 'block'
+  elementTemplate = $('<div>').append(elementTemplate).html()
+
+  $('#recipe_tab .steps').elementOnDemand
+    element: elementTemplate
+
+  $('#recipe_tab .steps').bind 'addElement.elementOnDemand', (e, new_element) ->
+    prepare_recipe_step_upload $(new_element).find('input[type="file"]:first')
+
   wizard_tabs = $('#wizard').tabs()
 
   $('#wizard').bind 'tabsselect', (event, ui) ->

@@ -10,26 +10,24 @@ bindKeyDownIfConfigured = (activated, element) ->
     last_input.bind "keydown.elementOnDemand", keyDownHandler
 
 appendButtons = (parent) ->
-  addButton = $("<img id='add' src='/assets/add_icon.png' />").appendTo parent
+  addButton = $("<img class='add' src='/assets/add_icon.png' />").appendTo parent
   addButton.bind "click.elementOnDemand", clickAddHandler
-  removeButton = $("<img id='remove' src='/assets/delete_icon.jpg' />").appendTo parent
+  removeButton = $("<img class='remove' src='/assets/delete_icon.jpg' />").appendTo parent
   removeButton.bind "click.elementOnDemand", clickDeleteHandler
 
-revomeButtons = ->
-  $("#add").unbind ".elementOnDemand"
-  $("#add").remove()
-  $("#remove").unbind ".elementOnDemand"
-  $("#remove").remove()
+revomeButtons = (container) ->
+  $(".add", container).unbind(".elementOnDemand").remove()
+  $(".remove", container).unbind(".elementOnDemand").remove()
 
 clickAddHandler= ->
-  $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(".dynamicElement").last()).last()
+  $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(".dynamicElement", $(this).parent()).last()).last(), $(this).parent()
 
 clickDeleteHandler= ->
-  $.fn.elementOnDemand "removeElement", $("input[type='text'], textarea", $(".dynamicElement").last()).last()
+  $.fn.elementOnDemand "removeElement", $("input[type='text'], textarea", $(".dynamicElement", $(this).parent()).last()).last(), $(this).parent()
 
 keyDownHandler = (event) ->
   if event.which is 9
-    $.fn.elementOnDemand "addElement", $(this)
+    $.fn.elementOnDemand("addElement", $("input[type='text'], textarea", $(this).parents('.dynamicElement').last()).last(), $(this).parents('.dynamicElement').parent())
 
 publicMethods =
   init: (options) ->
@@ -39,12 +37,11 @@ publicMethods =
       if not data
         settings = $.extend
           onKeyDown: true
-          element: $("<div>").append($(".dynamicElement").last().clone()).html()
+          element: $("<div>").append($(".dynamicElement", this).last().clone()).html()
         , options
-
         $(this).data "elementOnDemand", settings
         appendButtons $(this)
-        bindKeyDownIfConfigured settings.onKeyDown, $(".dynamicElement", $(this)).last()
+        bindKeyDownIfConfigured settings.onKeyDown, $(".dynamicElement", this).last()
 
   destroy: ->
     this.each ->
@@ -53,29 +50,27 @@ publicMethods =
       $(window).unbind ".elementOnDemand"
       $(this).removeData "elementOnDemand"
 
-  addElement: (last_element) ->
-    container = $(".dynamicElement").parent()
+  addElement: (last_element, container) ->
     data = container.data "elementOnDemand"
-
-    revomeButtons()
+    revomeButtons(container)
     $(last_element).unbind("keydown.elementOnDemand")
-
     new_element = $(data.element).appendTo container
     appendButtons container
 
-    element_count = container.children(".dynamicElement").size()
+    element_count = container.children(".dynamicElement", this).size()
 
-    new_element.children("[id]").each ->
+    new_element.find("[id]").each ->
       $(this).prop
         id: $(this).prop("id") + "_" + element_count
         name: $(this).prop("name").replace /[0-9]/, element_count - 1
 
     bindKeyDownIfConfigured data.onKeyDown, new_element
+    container.trigger('addElement.elementOnDemand', new_element);
 
-  removeElement: (last_element) ->
-    if $(".dynamicElement").size() > 1
-      data = $(".dynamicElement").parent().data "elementOnDemand"
-      previous_element = $(".dynamicElement").last().prev()
+  removeElement: (last_element, container) ->
+    if $(".dynamicElement", container).size() > 1
+      data = $(".dynamicElement", container).parent().data "elementOnDemand"
+      previous_element = $(".dynamicElement", container).last().prev()
 
       bindKeyDownIfConfigured data.onKeyDown, previous_element
       $(last_element).parent().remove()
