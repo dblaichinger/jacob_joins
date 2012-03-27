@@ -32,13 +32,13 @@
 
       #title
         /= f.label :name, "Name"
-        = f.text_field :name
+        = f.text_field :name, :class => "required"
       #portions
         = f.label :portion, "Portions"
-        = f.text_field :portion
+        = f.text_field :portion, :class => "required"
       #duration
         = f.label :duration, "Preparation time"
-        = f.text_field :duration
+        = f.text_field :duration, :class => "required"
 
     #ingredients
       %h1 
@@ -68,10 +68,15 @@
       %hr
 
       .steps
+        - counter = 0
         = f.fields_for :steps do |step|
           .step.dynamicElement
             = step.label :description, "Beschreibung"
-            = step.text_area :description
+            - if counter==0
+              = step.text_area :description, :class => "required"
+              - counter+=1
+            - else
+              = step.text_area :description
             = step.label :image, "Bild Upload"
             = step.hidden_field :id unless step.object.new_record?
 

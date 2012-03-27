@@ -164,7 +164,6 @@
 		if(angle<=180)
 		{
 			clock.rotateRight.hide();
-			
 			// The left part is rotated, and the right is currently hidden:
 			element = clock.rotateLeft;
 		}

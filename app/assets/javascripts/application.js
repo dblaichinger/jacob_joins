@@ -20,4 +20,5 @@
 //= require plugins/path.min
 //= require_tree .
 //= require jquery.placeholder
+//= require jquery.validate.min
  

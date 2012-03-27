@@ -139,18 +139,32 @@ $ ->
       url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
       params = oldTab.children('form').serializeArray()
 
-      $.ajax
-        url: url
-        type: 'POST'
-        data: params
-        success: (data, textStatus, jqXHR) ->
-          oldTab.html(data)
+      actual_form = oldTab.find("form")
 
-          switch oldTab.attr('id')
-            when "recipe_tab"
-              prepare_recipe_uploads()
-            when "country_specific_information_tab"
-              prepare_csi_slider()
+      input_fields = $(actual_form).find('input:text')
+      validation = false
+      $.each input_fields, (index, field) ->
+        # Check if it's not a hidden field, built by Rails. Second check if a value is inserted and third check if it's not the prefilled ingredients
+        if !($(field).is(':hidden')) && ($(field).val().length > 0) && !($(field).attr("id").indexOf("recipe_ingredients") >=0)
+          console.debug("this one!")
+          validation = true
+
+      console.debug("val:" +validation)
+      if validation == true
+        $.ajax
+          url: url
+          beforeSend: () ->
+            return validate_form(actual_form)
+          type: 'POST'
+          data: params
+          success: (data, textStatus, jqXHR) ->
+            oldTab.html(data)
+
+            switch oldTab.attr('id')
+              when "recipe_tab"
+                prepare_recipe_uploads()
+              when "country_specific_information_tab"
+                prepare_csi_slider()
 
 
   # --- recipe -------------------------------------------------
@@ -158,3 +172,12 @@ $ ->
 
   # --- csi ----------------------------------------------
   prepare_csi_slider()
+
+validate_form = (form) ->
+  validator = form.validate
+    debug: true
+    onsubmit: false
+    sucess: "valid"
+
+  return form.valid()
+
