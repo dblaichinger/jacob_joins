@@ -149,68 +149,56 @@ $ ->
       params = oldTab.children('form').serializeArray()
 
       actual_form = oldTab.find("form")
+      actual_nav_link = $('.ui-state-active')
 
       input_fields = $(actual_form).find('input:text')
       validation = false
       $.each input_fields, (index, field) ->
         # Check if it's not a hidden field, built by Rails. Second check if a value is inserted and third check if it's not the prefilled ingredients
         if !($(field).is(':hidden')) && ($(field).val().length > 0) && !($(field).attr("id").indexOf("recipe_ingredients") >=0)
-          console.debug("this one!")
           validation = true
 
-      console.debug("val:" +validation)
       if validation == true
         $.ajax
           url: url
-          beforeSend: () ->
-            return validate_form(actual_form)
           type: 'POST'
           data: params
           success: (data, textStatus, jqXHR) ->
-            oldTab.html(data)
+            oldTab.html data
+
+            oldTab.css
+              display: "block"
+            validate_form(oldTab.find("form"), actual_nav_link)
+            oldTab.attr("style", "")
 
             switch oldTab.attr('id')
               when "recipe_tab"
                 prepare_recipe_uploads()
               when "country_specific_information_tab"
                 prepare_csi_slider()
-
-      $.ajax
-        url: url
-        type: 'POST'
-        data: params
-        success: (data, textStatus, jqXHR) ->
-          oldTab.html data
-
-          switch oldTab.attr('id')
-            when "recipe_tab"
-              prepare_recipe_uploads()
-            when "country_specific_information_tab"
-              prepare_csi_slider()
-        statusCode:
-          400: ->
-            console.log "Unable to save changes"
-          200: ->
-            if ui.index is $('#wizard').tabs('length') - 1
-              $.get "recipes/draft", (data, textStatus) ->
-                if textStatus is "Gone"
-                  return
-                  
-                $("#preview_tab .recipe").empty()
-                $(data).appendTo $("#preview_tab .recipe")
-
-              $.get "country_specific_informations/draft", (data, textStatus) ->
-                if textStatus is "Gone"
-                  return
-                  
-                $("#preview_tab .csi").empty()
-                $(data).appendTo $("#preview_tab .csi")
-
+            
             newHash = '#!/form/' + ui.tab.hash.slice(1)
             if window.location.hash != newHash
               window.location.hash = newHash
+            
+          statusCode:
+            400: ->
+              console.log "Unable to save changes"
+            200: ->
+              if ui.index is $('#wizard').tabs('length') - 1
+                $.get "recipes/draft", (data, textStatus) ->
+                  if textStatus is "Gone"
+                    return
+                    
+                  $("#preview_tab .recipe").empty()
+                  $(data).appendTo $("#preview_tab .recipe")
 
-        true
+                $.get "country_specific_informations/draft", (data, textStatus) ->
+                  if textStatus is "Gone"
+                    return
+                    
+                  $("#preview_tab .csi").empty()
+                  $(data).appendTo $("#preview_tab .csi")
 
   # --- recipe -------------------------------------------------
   prepare_recipe_uploads()
@@ -218,11 +206,18 @@ $ ->
   # --- csi ----------------------------------------------
   prepare_csi_slider()
 
-validate_form = (form) ->
+validate_form = (form, nav_link) ->
   validator = form.validate
     debug: true
     onsubmit: false
     sucess: "valid"
+
+  if form.valid()
+    nav_link.removeClass("form_not_valid")
+    nav_link.addClass("form_valid")
+  else
+    nav_link.removeClass("form_valid")
+    nav_link.addClass("form_not_valid")
 
   return form.valid()
 
