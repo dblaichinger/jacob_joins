@@ -38,6 +38,7 @@ publicMethods =
         settings = $.extend
           onKeyDown: true
           element: $("<div>").append($(".dynamicElement", this).last().clone()).html()
+          onAddElement: ->
         , options
         $(this).data "elementOnDemand", settings
         appendButtons $(this)
@@ -66,6 +67,7 @@ publicMethods =
 
     bindKeyDownIfConfigured data.onKeyDown, new_element
     container.trigger('addElement.elementOnDemand', new_element);
+    data.onAddElement.call new_element
 
   removeElement: (last_element, container) ->
     if $(".dynamicElement", container).size() > 1

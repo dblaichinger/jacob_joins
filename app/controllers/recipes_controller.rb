@@ -1,66 +1,46 @@
 class RecipesController < ApplicationController
 
+  respond_to :json, :only => [:show, :update, :sync_wizard, :upload_step_image, :delete_step_image, :upload_image, :delete_image, :last]
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
 
   def show
-    @recipe = Recipe.find_by_slug(params[:id])
+    render :status => 410, :text => "Gone" and return unless session[:recipe_id]
+    
+    @recipe = Recipe.find session[:recipe_id]
+    render :layout => false
   end
 
   def index
     @recipes = Recipe.all
   end
-  
-  def new
-  	@recipe = Recipe.new
-    3.times { @recipe.images.build } #to show upload fields with form helper
-    3.times { @recipe.steps.build } #to show upload fields with form helper
-    
-    #Get location by IP-address
-    #@location = request.location
-  end
-
-  def create
-    @recipe = Recipe.new(params[:recipe])
-    
-    if @recipe.save 
-      cookies[:jacob_joins_recipe] = { :value => @recipe.id, :expires => 20.years.from_now.utc }
-      if cookies[:jacob_joins_user].present?
-        @user = User.find(cookies[:jacob_joins_user])
-        @recipe.user_id = @user.id
-        @recipe.save!
-      end
-      redirect_to country_specific_information_upload_index_path
-    else
-      session[:error] = @recipe
-      redirect_to recipe_upload_index_path
-    end
-  end
 
   def update
-    @recipe = Recipe.find_by_slug(params[:id])
+    render :status => 400, :text => "Bad Request" and return unless params[:user_id] && params[:location]
+    render :status => 410, :text => "Gone" and return unless session[:recipe_id]
 
-    if @recipe.update_attributes(params[:recipe])
-      cookies[:jacob_joins_recipe] = { :value => @recipe.id, :expires => 20.years.from_now.utc } unless cookies[:jacob_joins_user].present?
-      if cookies[:jacob_joins_user].present?
-        @user = User.find(cookies[:jacob_joins_user])
-        @recipe.user_id = @user.id
-        @recipe.save!
-      end
-      redirect_to country_specific_information_upload_index_path
+    recipe = Recipe.find session[:recipe_id]
+    render :status => 304, :text => "Not Modified" and return if recipe.published?
+    
+    user = User.find params[:user_id]
+
+    if recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && recipe.publish
+      session[:recipe_id] = nil
+      render :status => 200, :text => "OK"
     else
-      session[:error] = @recipe
-      redirect_to recipe_upload_index_path
+      render :status => 400, :text => "Bad Request"
     end
   end
 
   def sync_wizard
+    render :status => 410, :text => "Gone" and return if @recipe.published?
+
+    params[:recipe][:ingredients_with_quantities_attributes].reject!{ |index,ingredient| ingredient[:name].blank? && ingredient[:quantity].blank? }
+
     if @recipe.update_attributes params[:recipe]
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
     end
-
-    binding.pry
   end
 
   def upload_step_image
@@ -98,17 +78,13 @@ class RecipesController < ApplicationController
   end
 
   def last
-    @last_recipe = Recipe.last
-
-    respond_to do |format|  
-      format.json { render :json => @last_recipe.to_json }
-    end
+    respond_with Recipe.last
   end
 
-  protected
+  private
   def get_or_create_recipe
     if session[:recipe_id].present?
-      @recipe = Recipe.find(session[:recipe_id])
+      @recipe = Recipe.find session[:recipe_id]
     else
       @recipe = Recipe.create
       session[:recipe_id] = @recipe.id

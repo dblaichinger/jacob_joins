@@ -14,7 +14,7 @@ end
 FactoryGirl.define do
   factory :recipe do |f|
     f.name "Kartoffelpuffer"
-    f.portion 4
+    f.portions 4
     f.duration 50
     f.city "Salzburg"
     f.country "Austria"
