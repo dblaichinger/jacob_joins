@@ -1,7 +1,32 @@
 @import "compass/css3/opacity"
 
+#clickandsee
+  top: 270px
+  position: relative
+  a
+    display: block
+    height: 85px
+    background-image: url(image_path('clickandsee.png'))
+    background-repeat: no-repeat
+    background-position: center center
+    cursor: pointer
+
+    &:hover
+      background-image: url(image_path('clickandsee_hover.png'))
+      background-repeat: no-repeat
+      background-position: center center
+
+#wizard
+  width: 1000px
+  margin: 40px auto
+  position: relative
+  padding: 5px
+
+  p
+    margin: 20px 0px
+
 =input-placeholder
-  color: red
+  color: #fff
 
 #wizard input
   &:-moz-placeholder
@@ -14,32 +39,6 @@
     +input-placeholder
 
 
-#user_gender
-  display: none
-
-#heard_from_other
-  display: none
-
 .ui-tabs
   .ui-tabs-hide
     display: none
-
-.steps
-  .step
-    .upload_wrapper
-      background: red
-      width: 150px
-      overflow: hidden
-      position: relative
-      text-align: center
-
-      span
-        line-height: 1.5em
-
-      input
-        position: absolute
-        top: 0
-        right: 0
-        cursor: pointer
-        font-size: 20px
-        @include opacity(0)
