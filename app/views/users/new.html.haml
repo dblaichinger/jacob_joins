@@ -1,4 +1,4 @@
-- user = User.find(session[:user_id]) if session[:user_id].present?
+- user = session[:user_id].present? ? User.find(session[:user_id]) : User.new
 
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"

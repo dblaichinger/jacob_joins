@@ -12,10 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require plugins/jquery-ui-1.8.18.custom.min
-//= require plugins/jquery-file-upload/jquery.iframe-transport
-//= require plugins/jquery-file-upload/jquery.fileupload
-//= require plugins/jquery.bxSlider.min
 //= require_tree .
+//= require jquery-ui-1.8.18.custom.min
 //= require jquery.placeholder
+//= require jquery.iframe-transport
+//= require jquery.bxSlider.min
+//= require jquery.fileupload
+//= require jquery.tzineClock
  

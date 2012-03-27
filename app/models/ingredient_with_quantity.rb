@@ -4,5 +4,5 @@ class IngredientWithQuantity
   field :quantity
   field :name
 
-  embedded_in :recipe
+  embedded_in :recipe, :inverse_of => :ingredients_with_quantities
 end

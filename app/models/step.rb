@@ -4,7 +4,7 @@ class Step
 
   field :description, :type => String
 
-  embedded_in :recipe
+  embedded_in :recipe, :inverse_of => :steps
   
   has_mongoid_attached_file :image,
     :url => "/system/steps_images/:id/:style/:filename",
