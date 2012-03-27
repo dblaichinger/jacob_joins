@@ -152,9 +152,6 @@
 	
 		var element;
 
-		if(clock == gVars.green)
-			console.log("current: " + current + " angle: " + angle);
-
 		if(current==0)
 		{
 			// Hiding the right half of the background:
@@ -167,8 +164,6 @@
 		if(angle<=180)
 		{
 			clock.rotateRight.hide();
-			if(clock == gVars.green)
-				console.log("<=180");
 			// The left part is rotated, and the right is currently hidden:
 			element = clock.rotateLeft;
 		}

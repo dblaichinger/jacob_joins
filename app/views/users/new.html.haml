@@ -8,10 +8,10 @@
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
 
-= form_for user do |f|
+= form_for user, :html =>{:class => "user_form"} do |f|
   %p
     = f.label :firstname, "First name"
-    = f.text_field :firstname
+    = f.text_field :firstname, :class => "required"
   %p
     = f.label :lastname, "Last name"
     = f.text_field :lastname
@@ -19,10 +19,10 @@
     = f.label :gender, "Gender"
     = link_to image_tag("male.png", :class=>"male"), "#", :id => "male_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
     = link_to image_tag("female.png", :class=>"female"), "#", :id => "female_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
-    = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']])
+    = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]), :class => "required"
   %p
     = f.label :age, "Age"
-    = f.text_field :age
+    = f.text_field :age, :class => "required"
   %p
     = f.label :email, "Email"
     = f.text_field :email
@@ -33,19 +33,25 @@
 
   %p
     = label_tag :country, "Country"
+
     - #Get location by IP-address
     - @location = request.location
-    - if (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
-      = text_field_tag :country
+    
+    - if session[:location]
+      = text_field_tag :country, nil, :class => "required", :value => session[:location][0]['country']
+    - elsif (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
+      = text_field_tag :country, nil, :class => "required"
     - else
-      = text_field_tag :country, :value => @location.data['country_name']
+      = text_field_tag :country, nil, :class => "required", :value => @location.data['country_name']
 
   %p
     = label_tag :city, "City"
-    - if (!defined? @location) || (@location.data['city'].empty?)
-      = text_field_tag :city
+    - if session[:location]
+      = text_field_tag :country, nil, :class => "required", :value => session[:location][0]['city']
+    - elsif (!defined? @location) || (@location.data['city'].empty?)
+      = text_field_tag :city, nil, :class => "required"
     - else
-      = text_field_tag :city, :value => @location.data['city']
+      = text_field_tag :city, nil, :class => "required", :value => @location.data['city']
 
   .hidden
     = hidden_field_tag :longitude
