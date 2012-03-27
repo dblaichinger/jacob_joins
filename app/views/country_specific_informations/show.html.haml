@@ -1,0 +1,8 @@
+%h1 COUNTRY SPECIFIC
+%ul
+  - @csi_set.country_specific_informations.where(:answer.ne => "").each do |csi|
+    %li
+      %h3
+        = csi.question
+      %p
+        = csi.answer
