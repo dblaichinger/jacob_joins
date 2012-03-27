@@ -128,9 +128,7 @@ $ ->
   wizard_tabs = $('#wizard').tabs()
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
-    newHash = '#!/form/' + ui.tab.hash.slice(1)
-    if window.location.hash != newHash
-      window.location.hash = newHash
+
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
@@ -140,6 +138,7 @@ $ ->
       params = oldTab.children('form').serializeArray()
 
       actual_form = oldTab.find("form")
+      actual_nav_link = $('.ui-state-active')
 
       input_fields = $(actual_form).find('input:text')
       validation = false
@@ -151,12 +150,13 @@ $ ->
       if validation == true
         $.ajax
           url: url
-          beforeSend: () ->
-            return validate_form(actual_form)
           type: 'POST'
           data: params
           success: (data, textStatus, jqXHR) ->
             oldTab.html(data)
+            oldTab.css("display", "block")
+            validate_form(oldTab.find("form"), actual_nav_link)
+            oldTab.attr("style", "")
 
             switch oldTab.attr('id')
               when "recipe_tab"
@@ -164,6 +164,10 @@ $ ->
               when "country_specific_information_tab"
                 prepare_csi_slider()
 
+            newHash = '#!/form/' + ui.tab.hash.slice(1)
+            if window.location.hash != newHash
+              window.location.hash = newHash
+      return true
 
   # --- recipe -------------------------------------------------
   prepare_recipe_uploads()
@@ -171,18 +175,18 @@ $ ->
   # --- csi ----------------------------------------------
   prepare_csi_slider()
 
-validate_form = (form) ->
+validate_form = (form, nav_link) ->
   validator = form.validate
     debug: true
     onsubmit: false
     sucess: "valid"
 
   if form.valid()
-    $('.ui-state-active').removeClass("form_not_valid")
-    $('.ui-state-active').addClass("form_valid")
+    nav_link.removeClass("form_not_valid")
+    nav_link.addClass("form_valid")
   else
-    $('.ui-state-active').removeClass("form_valid")
-    $('.ui-state-active').addClass("form_not_valid")
+    nav_link.removeClass("form_valid")
+    nav_link.addClass("form_not_valid")
 
   return form.valid()
 
