@@ -4,8 +4,6 @@ class CsiSet
   has_and_belongs_to_many :country_specific_informations, :inverse_of => nil
   accepts_nested_attributes_for :country_specific_informations
 
-  attr_accessible :country_specific_informations, :country_specific_informations_attributes
-
   def publish
     worked = true
 
@@ -30,6 +28,7 @@ class CsiSet
     if allowed_methods.include? method
       self.country_specific_informations.each do |csi|
         csi.send(method, *args)
+        csi.save
       end
     else
       raise NoMethodError.new("undefined method `#{method}' for #{self}", method, args)

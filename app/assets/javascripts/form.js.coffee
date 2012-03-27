@@ -126,8 +126,19 @@ $ ->
       $(this).find('label[for=*"description"] span').html(count)
       prepare_recipe_step_upload $(this).find('input[type="file"]:first')
 
-  wizard_tabs = $('#wizard').tabs()
+  $("#wizard #send").click ->
+      user_info = publish_user();
 
+      if user_info
+        recipe = publish_recipe user_info.user_id, user_info.location
+        csi = publish_csi user_info.location
+        
+        if recipe and csi
+          alert "Your drafts were saved successfully"
+      else
+        alert "Saving the drafts failed"
+
+  $('#wizard').tabs()
   $('#wizard').bind 'tabsselect', (event, ui) ->
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
@@ -164,12 +175,42 @@ $ ->
               when "country_specific_information_tab"
                 prepare_csi_slider()
 
+      $.ajax
+        url: url
+        type: 'POST'
+        data: params
+        success: (data, textStatus, jqXHR) ->
+          oldTab.html data
+
+          switch oldTab.attr('id')
+            when "recipe_tab"
+              prepare_recipe_uploads()
+            when "country_specific_information_tab"
+              prepare_csi_slider()
+        statusCode:
+          400: ->
+            console.log "Unable to save changes"
+          200: ->
+            if ui.index is $('#wizard').tabs('length') - 1
+              $.get "recipes/draft", (data, textStatus) ->
+                if textStatus is "Gone"
+                  return
+                  
+                $("#preview_tab .recipe").empty()
+                $(data).appendTo $("#preview_tab .recipe")
+
+              $.get "country_specific_informations/draft", (data, textStatus) ->
+                if textStatus is "Gone"
+                  return
+                  
+                $("#preview_tab .csi").empty()
+                $(data).appendTo $("#preview_tab .csi")
+
             newHash = '#!/form/' + ui.tab.hash.slice(1)
             if window.location.hash != newHash
               window.location.hash = newHash
 
         true
-
 
   # --- recipe -------------------------------------------------
   prepare_recipe_uploads()

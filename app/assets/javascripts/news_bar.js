@@ -44,8 +44,8 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
     var recipe = data;
-    //console.debug(recipe);
-    if(data.user_id){
+
+    if(data && data.user_id){
       var id = {"id": data.user_id};
       //Get the user, which created the recipe
       $.post('/users/find_user', id, function(data, textstatus, jqxhr) {

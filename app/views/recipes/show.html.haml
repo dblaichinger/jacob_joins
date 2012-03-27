@@ -1,31 +1,26 @@
-%h3
-  Recipe.name:
-%p
-  = @recipe.name
-%h3
-  Recipe.portion:
-%p
-  = @recipe.portion
-  
-%h3
-  Recipe.steps:
+- recipe ||= @recipe
 
-- @recipe.steps.each do |step|  
-  %p
-    = step.description
-    = step.image if step.image.present?
+%h1
+  = recipe.name.blank? ? "TITLE OF THE RECIPE" : recipe.name
 
-%h3
-  Recipe.duration:
+- recipe.images.each do |image|
+  = image_tag asset_path(image.attachement(:medium))
+
 %p
-  = @recipe.duration
-%h3
-  Recipe.slug:
+  = "Portions: #{recipe.portions}"
 %p
-  = @recipe.slug
-%h3
-  Recipe.ingredients_with_quantities:
-%ul
-  - @recipe.ingredients_with_quantities.each do |i|
-    %li
-      = "#{i.quantity} #{i.name}"
+  = "Preparation time: #{recipe.duration}"
+
+%h2 
+  = "INGREDIENTS"
+  - recipe.ingredients_with_quantities.each do |ingredient|
+    %p
+      = "#{ingredient.quantity} #{ingredient.name}"
+
+%h2
+  = "PREPARATION"
+  - recipe.steps.each do |step|
+    %p
+      = step.description
+
+    = image_tag asset_path(step.image(:medium))

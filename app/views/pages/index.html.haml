@@ -1,10 +1,7 @@
-- if @user && @recipe
-  %h2 Hallo #{@user.name}, du kannst hier deine bestehenden CSIs ändern!
-  %h2 Klicke auf Reset um ein neue CSIs hochzuladen!
-
 #wizard
   #formnav
-    = image_tag('schleife.png', id:"schleife")
+    = image_tag 'schleife.png', id:"schleife"
+
     %ul
       %li
         = link_to 'Your Recipe', "#recipe_tab", id:"yourrecipe"
@@ -17,10 +14,18 @@
     = image_tag('formnav_endimg.png', id:"endimg")
 
   #recipe_tab
-    = render :template => "recipes/new", :locals => { :recipe => Recipe.new, :steps => [Step.new] }
+    - session[:recipe_id] = nil
+    = render :template => "recipes/new"
   #country_specific_information_tab
-    = render :template => "country_specific_informations/new", :locals => { :csi_set => CsiSet.new(:country_specific_informations => CsiSet.empty_set) }
+    - session[:csi_set_id] = nil
+    = render :template => "country_specific_informations/new"
   #user_tab
-    = render :template => "users/new", :locals => { :user => User.new }
+    - session[:user_id] = nil
+    - session[:location] = nil
+    = render :template => "users/new"
   #preview_tab
-    %h1 Nothing to do here...
+    .recipe
+    .csi
+
+    = button_tag "Finish and Send", id:"send"
+
