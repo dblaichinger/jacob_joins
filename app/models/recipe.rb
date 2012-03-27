@@ -9,7 +9,7 @@ class Recipe
   slug :name
 
   field :name, :type => String
-  field :portion, :type => Integer
+  field :portions, :type => Integer
   field :duration, :type => Integer
   field :city, :type => String
   field :country, :type => String
@@ -29,15 +29,13 @@ class Recipe
   embeds_many :images, :cascade_callbacks => true
   accepts_nested_attributes_for :images, :allow_destroy => true
   
-  attr_accessible :name, :portion, :duration, :ingredients_with_quantities, :city, :country, :latitude, :longitude, :images, :images_attributes, :steps, :steps_attributes
-
   state_machine :initial => :draft do
     event :publish do
       transition :draft => :published
     end
 
     state :published do
-      validates_presence_of :name, :portion, :duration, :city, :country, :latitude, :longitude
+      validates_presence_of :name, :portions, :duration, :city, :country, :latitude, :longitude
       validates_associated :steps
     end
   end

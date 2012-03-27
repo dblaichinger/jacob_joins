@@ -1,4 +1,4 @@
-- csi_set = CsiSet.find(session[:csi_set_id]) if session[:csi_set_id].present?
+- csi_set = session[:csi_set_id].present? ? CsiSet.find(session[:csi_set_id]) : CsiSet.new(:country_specific_informations => CsiSet.empty_set)
 
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
