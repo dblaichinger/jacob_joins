@@ -70,23 +70,24 @@
         - counter = 0
         = f.fields_for :steps do |step|
           .step.dynamicElement
-            = step.label :description, "Step <span>#{counter + 1}</span>".html_safe
+            = step.label :description, "<span>#{counter + 1}</span> Step".html_safe
             - if counter == 0
               = step.text_area :description, :class => "required"
             - else
               = step.text_area :description
             - counter += 1
-            = step.label :image, "Bild Upload"
-            = step.hidden_field :id unless step.object.new_record?
+            #stepupload
+              = step.label :image, "Bild Upload", id:"bildupload"
+              = step.hidden_field :id unless step.object.new_record?
 
-            .upload_wrapper{:style => "#{ 'display: none;' if step.object.image.present? }"}
-              %p Upload Image
-              = step.file_field :image
+              .upload_wrapper{:style => "#{ 'display: none;' if step.object.image.present? }"}
+                %p Upload Image
+                = step.file_field :image
 
-            - if step.object.image.present?
-              .image_preview
-                = image_tag step.object.image(:small)
-                = link_to "delete", recipes_delete_step_image_path(step.object.id), :class => "delete"
+              - if step.object.image.present?
+                .image_preview
+                  = image_tag step.object.image(:small)
+                  = link_to "delete", recipes_delete_step_image_path(step.object.id), :class => "delete"
   
   #recipe_images
     %h1 Images

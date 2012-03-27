@@ -55,7 +55,7 @@
 	function setUp()
 	{
 		// The colors of the dials:
-		var colors = ['red', 'orange','blue','green'];
+		var colors = ['red', 'brown','grey','white'];
 		
 		var tmp;
 		
