@@ -146,10 +146,8 @@ $ ->
       $.each input_fields, (index, field) ->
         # Check if it's not a hidden field, built by Rails. Second check if a value is inserted and third check if it's not the prefilled ingredients
         if !($(field).is(':hidden')) && ($(field).val().length > 0) && !($(field).attr("id").indexOf("recipe_ingredients") >=0)
-          console.debug("this one!")
           validation = true
 
-      console.debug("val:" +validation)
       if validation == true
         $.ajax
           url: url
@@ -178,6 +176,13 @@ validate_form = (form) ->
     debug: true
     onsubmit: false
     sucess: "valid"
+
+  if form.valid()
+    $('.ui-state-active').removeClass("form_not_valid")
+    $('.ui-state-active').addClass("form_valid")
+  else
+    $('.ui-state-active').removeClass("form_valid")
+    $('.ui-state-active').addClass("form_not_valid")
 
   return form.valid()
 
