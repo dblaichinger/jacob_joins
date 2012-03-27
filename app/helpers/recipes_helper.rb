@@ -24,6 +24,9 @@ module RecipesHelper
       object.ingredients_with_quantities.each do |ingredient_with_quantity|
         html << render(:partial => "recipes/ingredient_with_quantity", :locals => { :form => form, :data => ingredient_with_quantity, :quantity => ingredient_with_quantity[:quantity], :quantity_placeholder => default_ingredients.last[:quantity], :ingredient => ingredient_with_quantity[:name], :ingredient_placeholder => default_ingredients.last[:name] }).to_s
       end
+
+      object.ingredients_with_quantities.build
+      html << render(:partial => "recipes/ingredient_with_quantity", :locals => { :form => form, :data => object.ingredients_with_quantities.last, :quantity_placeholder => default_ingredients.last[:quantity], :ingredient_placeholder => default_ingredients.last[:name] }).to_s
     end
 
     html

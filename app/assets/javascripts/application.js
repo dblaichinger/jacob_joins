@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require jquery-ui-1.8.18.custom.min
 //= require jquery.placeholder
 //= require jquery.validate.min
@@ -21,4 +20,5 @@
 //= require jquery.fileupload
 //= require jquery.tzineClock
 //= require path.min
+//= require_tree .
  
