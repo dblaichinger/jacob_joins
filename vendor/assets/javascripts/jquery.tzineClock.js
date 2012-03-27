@@ -100,16 +100,7 @@
 		
 		// Setting up a interval, executed every 1000 milliseconds:
 		setInterval(function(){
-			/*
-			var currentTime = new Date();
-			var h = currentTime.getHours();
-			var m = currentTime.getMinutes();
-			var s = currentTime.getSeconds();
-			*/
-		 	var days;
-		  var hours;
-		  var minutes;
-		  var seconds;
+		 	var days, hours, minutes, seconds;
 
 		  var now = new Date();
 		  now.getTime();
@@ -139,9 +130,14 @@
 		  }
 
 			animation(gVars.red, days, 100);	
-			animation(gVars.green, seconds, 60);
-			animation(gVars.blue, minutes, 60);
-			animation(gVars.orange, hours, 24);
+			animation(gVars.brown, hours, 24);
+			animation(gVars.grey, minutes, 60);
+			animation(gVars.white, seconds, 60);
+
+			$('#days').html(days);
+			$('#hours').html(hours);
+			$('#minutes').html(minutes);
+			$('#seconds').html(seconds);
 				
 		},1000);
 	}
