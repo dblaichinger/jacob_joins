@@ -60,7 +60,7 @@ publicMethods =
 
     element_count = container.children(".dynamicElement", this).size()
 
-    new_element.find("[id]").each ->
+    new_element.find("[id][name]").each ->
       $(this).prop
         id: $(this).prop("id") + "_" + element_count
         name: $(this).prop("name").replace /[0-9]/, element_count - 1
