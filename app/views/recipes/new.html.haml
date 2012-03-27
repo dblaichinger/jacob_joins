@@ -1,5 +1,5 @@
 - recipe = Recipe.find(session[:recipe_id]) if session[:recipe_id].present?
-- 3.times { recipe.steps.build } if recipe.steps.empty?
+- (3 - recipe.steps.count).times { recipe.steps.build }
 
 :javascript
   $(document).ready(function(){

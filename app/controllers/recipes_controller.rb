@@ -59,8 +59,6 @@ class RecipesController < ApplicationController
     else
       render :status => 400, :text => 'Bad Request'
     end
-
-    binding.pry
   end
 
   def upload_step_image
