@@ -121,16 +121,14 @@ $ ->
 
   $('#recipe_tab .steps').elementOnDemand
     element: elementTemplate
-
-  $('#recipe_tab .steps').bind 'addElement.elementOnDemand', (e, new_element) ->
-    prepare_recipe_step_upload $(new_element).find('input[type="file"]:first')
+    onAddElement: (context) ->
+      count = $(this).siblings('.step').length + 1
+      $(this).find('label[for=*"description"] span').html(count)
+      prepare_recipe_step_upload $(this).find('input[type="file"]:first')
 
   wizard_tabs = $('#wizard').tabs()
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
-    newHash = '#!/form/' + ui.tab.hash.slice(1)
-    if window.location.hash != newHash
-      window.location.hash = newHash
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
@@ -165,6 +163,12 @@ $ ->
                 prepare_recipe_uploads()
               when "country_specific_information_tab"
                 prepare_csi_slider()
+
+            newHash = '#!/form/' + ui.tab.hash.slice(1)
+            if window.location.hash != newHash
+              window.location.hash = newHash
+
+        true
 
 
   # --- recipe -------------------------------------------------

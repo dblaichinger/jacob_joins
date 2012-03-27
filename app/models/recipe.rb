@@ -42,14 +42,6 @@ class Recipe
     end
   end
 
-  def valid_ingredients_strings
-    if ingredients_strings
-      ingredients_strings.reject{ |ingredient_string| ingredient_string[:quantity].blank? && ingredient_string[:ingredient].blank? }
-    else
-      nil
-    end
-  end
-
   private
   def save_ingredients
     ingredients_with_quantities.each do |ingredient_with_quantity|

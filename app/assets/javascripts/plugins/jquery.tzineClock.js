@@ -55,7 +55,7 @@
 	function setUp()
 	{
 		// The colors of the dials:
-		var colors = ['red','orange','blue','green'];
+		var colors = ['red','brown','grey','white'];
 		
 		var tmp;
 		
@@ -138,9 +138,9 @@
 		  }
 
 			animation(gVars.red, days, 100);	
-			animation(gVars.green, seconds, 60);
-			animation(gVars.blue, minutes, 60);
-			animation(gVars.orange, hours, 24);
+			animation(gVars.brown, hours, 24);
+			animation(gVars.grey, minutes, 60);
+			animation(gVars.white, seconds, 60);
 				
 		},1000);
 	}

@@ -1,5 +1,19 @@
 @import "compass/css3/opacity"
 
+=input-placeholder
+  color: red
+
+#wizard input
+  &:-moz-placeholder
+    +input-placeholder
+
+  &::-webkit-input-placeholder
+    +input-placeholder
+
+  &.placeholder
+    +input-placeholder
+
+
 #user_gender
   display: none
 

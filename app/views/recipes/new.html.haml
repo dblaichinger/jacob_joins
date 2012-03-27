@@ -1,5 +1,5 @@
 - recipe = Recipe.find(session[:recipe_id]) if session[:recipe_id].present?
-- 3.times { recipe.steps.build } if recipe.steps.empty?
+- (3 - recipe.steps.count).times { recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
@@ -71,12 +71,12 @@
         - counter = 0
         = f.fields_for :steps do |step|
           .step.dynamicElement
-            = step.label :description, "Beschreibung"
-            - if counter==0
+            = step.label :description, "Step <span>#{counter + 1}</span>".html_safe
+            - if counter == 0
               = step.text_area :description, :class => "required"
-              - counter+=1
             - else
               = step.text_area :description
+            - counter += 1
             = step.label :image, "Bild Upload"
             = step.hidden_field :id unless step.object.new_record?
 
