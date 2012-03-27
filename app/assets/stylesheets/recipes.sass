@@ -1,4 +1,7 @@
 @import "compass/css3/box-shadow"
+@import compass/css3/font-face
+ 
++font-face("Sanches-Light", font-files("Sanches/203126_4_0.ttf", "Sanches/203126_4_0.woff"), "Sanches/203126_4_0.eot")
 
 #clickandsee
   top: 270px
@@ -25,13 +28,31 @@
   p
     margin: 20px 0px
 
+=input-placeholder
+  color: #fff
+
+#wizard input
+  &:-moz-placeholder
+  +input-placeholder
+
+  &::-webkit-input-placeholder
+  +input-placeholder
+
+  &.placeholder
+  +input-placeholder
+
 #formnav
   float: left
   width: 200px
-  height: 400px
+  height: 450px
   background-image: url(image_path('formnav.png'))
   border-radius: 5px
   +box-shadow(0 0 5px 2px rgba(0,0,0,0.5))
+
+  #aboutyourcountry
+    font-family: "Sanches-Light"
+    text-transform: uppercase
+    font-size: 20px
 
   a
     text-decoration: none
@@ -48,7 +69,7 @@
       
   #schleife
     display: block
-    margin: 20px auto 10px -33px
+    margin: 30px auto 10px -33px
 
   img
     display: block
@@ -95,9 +116,13 @@ span
   margin-left: 20px
   padding-top: 1px
 
+textarea
+  width: 95%
+  height: 150px
+
 #new_recipe, .edit_recipe, #new_user, .edit_user, #preview 
   width: 760px
-  margin-left: 200px
+  margin-left: 240px
 
 #information, #ingredients , #preparation
   padding: 35px
@@ -139,8 +164,9 @@ label
   padding: 15px
   background-color: #999
 
-input
+input, textarea
   background-color: rgba(83,30,9,0.3)
   border: 2px solid #fff
   padding: 5px
+  color: #fff
 
