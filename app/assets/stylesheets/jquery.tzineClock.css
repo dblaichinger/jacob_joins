@@ -12,6 +12,7 @@
 	position:relative;
 	overflow:hidden;
 	float:left;
+	background: url(/assets/counter_clock/bg_black_full.png) no-repeat left top;
 }
 
 .clock .text{
@@ -36,7 +37,7 @@
 .clock .bg, .clock .front{
 	width:50px;
 	height:100px;
-	background: pink;
+	background: url(/assets/counter_clock/bg_black_full.png) no-repeat left top;
 	position:absolute;
 	top:0;
 }
@@ -62,18 +63,18 @@
 .clock .bg.left{ left:0; }
 
 /* Individual styles for each color: */
-.orange .bg.left{ background:url(/assets/counter_clock/bg_orange.png) no-repeat left top; }
-.green .bg.left{ background:url(/assets/counter_clock/bg_green.png) no-repeat left top; }
-.blue .bg.left{	background:url(/assets/counter_clock/bg_blue.png) no-repeat left top; }
-.red .bg.left{	background:url(/assets/counter_clock/bg_blue.png) no-repeat left top; }
+.white .bg.left{ background:url(/assets/counter_clock/bg_white.png) no-repeat left top; }
+.grey .bg.left{ background:url(/assets/counter_clock/bg_grey.png) no-repeat left top; }
+.brown .bg.left{	background:url(/assets/counter_clock/bg_brown.png) no-repeat left top; }
+.red .bg.left{	background:url(/assets/counter_clock/bg_red.png) no-repeat left top; }
 
 /* The right part of the background: */
 .clock .bg.right{ left:50px; }
 
-.orange .bg.right{ background:url(/assets/counter_clock/bg_orange.png) no-repeat right top; }
-.green .bg.right{ background:url(/assets/counter_clock/bg_green.png) no-repeat right top; }
-.blue .bg.right{ background:url(/assets/counter_clock/bg_blue.png) no-repeat right top; }
-.red .bg.right{ background:url(/assets/counter_clock/bg_blue.png) no-repeat right top; }
+.white .bg.right{ background:url(/assets/counter_clock/bg_white.png) no-repeat right top; }
+.grey .bg.right{ background:url(/assets/counter_clock/bg_grey.png) no-repeat right top; }
+.brown .bg.right{ background:url(/assets/counter_clock/bg_brown.png) no-repeat right top; }
+.red .bg.right{ background:url(/assets/counter_clock/bg_red.png) no-repeat right top; }
 
 
 .clock .front.left{
