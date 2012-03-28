@@ -55,7 +55,7 @@
     %p
       = label_tag :city, "City"
       - if session[:location]
-        = text_field_tag :country, nil, :class => "required", :value => session[:location][:city]
+        = text_field_tag :city, nil, :class => "required", :value => session[:location][:city]
       - elsif (!defined? @location) || (@location.data['city'].empty?)
         = text_field_tag :city, nil, :class => "required"
       - else
@@ -67,5 +67,4 @@
         = hidden_field_tag :latitude, session[:location][:latitude]
       - else
         = hidden_field_tag :longitude
-        = hidden_field_tag :latitude  
-
+        = hidden_field_tag :latitude

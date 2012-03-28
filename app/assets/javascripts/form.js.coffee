@@ -134,7 +134,7 @@ $ ->
         csi = publish_csi user_info.location
         
         if recipe and csi
-          alert "Your drafts were saved successfully"
+          $('#preview_tab').prepend '<p class="success">Saved successfully</p>'
       else
         alert "Saving the drafts failed"
 

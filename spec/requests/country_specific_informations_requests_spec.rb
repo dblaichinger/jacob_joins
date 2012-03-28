@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CountrySpecificInformationsController do
   describe "sync_wizard" do
     it "should sync csi data on tab switch" do
-      csi_set = FactoryGirl.create :csi_set
+      csi_set = FactoryGirl.build :csi_set
 
       visit root_path
       click_link 'About your country'
