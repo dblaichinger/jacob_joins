@@ -20,7 +20,7 @@ FactoryGirl.define do
     f.country "Austria"
     f.latitude 47.812232
     f.longitude 13.055019
-    f.steps {[Factory.build(:step)]}
-    f.ingredients_with_quantities {[Factory.build(:ingredient_with_quantity, :name => "Milch1"), Factory.build(:ingredient_with_quantity, :name => "Milch2")]}
+    f.steps {[FactoryGirl.build(:step)]}
+    f.ingredients_with_quantities {[FactoryGirl.build(:ingredient_with_quantity, :name => "Milch1"), FactoryGirl.build(:ingredient_with_quantity, :name => "Milch2")]}
   end
 end
