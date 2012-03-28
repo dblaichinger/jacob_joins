@@ -63,8 +63,8 @@
 
     .hidden
       - if session[:location]
-        = hidden_field_tag :longitude, :value => session[:location][:longitude]
-        = hidden_field_tag :latitude, :value => session[:location][:latitude]
+        = hidden_field_tag :longitude, session[:location][:longitude]
+        = hidden_field_tag :latitude, session[:location][:latitude]
       - else
         = hidden_field_tag :longitude
         = hidden_field_tag :latitude  

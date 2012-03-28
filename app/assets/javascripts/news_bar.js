@@ -64,7 +64,6 @@ function get_facebook_stream(){
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
     var counter = 0;
     $.each(data.data, function(key, value){
-       
       if(value.message && counter <=4){
         $('#newsbar #fb p').append(value.from.name+":" + "<br />");
         $('#newsbar #fb p').append("Message: "+value.message + "<br />");
