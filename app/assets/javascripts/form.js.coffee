@@ -164,6 +164,9 @@ $ ->
       if validation == true
         $.ajax
           url: url
+          beforeSend: ()->
+            if oldTab.attr("id") == "user_tab"
+              getLatLngFromAddress()
           type: 'POST'
           data: params
           success: (data, textStatus, jqXHR) ->
