@@ -190,6 +190,12 @@ $ ->
                   if textStatus is "Gone"
                     return
                     
+                  no_preview_content = !!$(".no_preview")
+
+                  if no_preview_content
+                    $(".no_preview").empty()
+                    $("#send").removeAttr "disabled"
+
                   $("#preview_tab .recipe").empty()
                   $(data).appendTo $("#preview_tab .recipe")
 
