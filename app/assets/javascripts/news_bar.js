@@ -60,13 +60,18 @@ function get_latest_recipe(){
 
 
 function get_facebook_stream(){
-  var token = "AAACEdEose0cBAK8Uf98VP2UWg7Bidj16RCFKP6sZCl712quaDwEGgZB5pDB8i8sXNIdSiFsdIZAsrCfIc0PzVuO50ZAJdnKigt2ZAxvdrYgZDZD";
+  var token = "AAACEdEose0cBADdBQSEcqbJxxj0ZALvMkWDql7NuRw9qqza3Ero2HaOEoCCvgmddIKmGV8mvgmjxAXQ4xk41eXaUHIjOzooYYaUY6fAZDZD";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
+    var counter = 0;
     $.each(data.data, function(key, value){
-      $('#newsbar #fb p').append(value.from.name+":" + "<br />");
-      $('#newsbar #fb p').append("Message: "+value.message + "<br />");
-      $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
-      $('#newsbar #fb p').append("<br />");
+       
+      if(value.message && counter <=4){
+        $('#newsbar #fb p').append(value.from.name+":" + "<br />");
+        $('#newsbar #fb p').append("Message: "+value.message + "<br />");
+        $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
+        $('#newsbar #fb p').append("<br />");
+        counter++;
+      }
     });
   }, "json");
 }
