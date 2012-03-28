@@ -46,7 +46,7 @@
       - @location = request.location
       
       - if session[:location]
-        = text_field_tag :country, nil, :class => "required", :value => session[:location]['country']
+        = text_field_tag :country, nil, :class => "required", :value => session[:location][:country]
       - elsif (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
         = text_field_tag :country, nil, :class => "required"
       - else
@@ -55,13 +55,17 @@
     %p
       = label_tag :city, "City"
       - if session[:location]
-        = text_field_tag :country, nil, :class => "required", :value => session[:location]['city']
+        = text_field_tag :country, nil, :class => "required", :value => session[:location][:city]
       - elsif (!defined? @location) || (@location.data['city'].empty?)
         = text_field_tag :city, nil, :class => "required"
       - else
         = text_field_tag :city, nil, :class => "required", :value => @location.data['city']
 
     .hidden
-      = hidden_field_tag :longitude
-      = hidden_field_tag :latitude
+      - if session[:location]
+        = hidden_field_tag :longitude, :value => session[:location][:longitude]
+        = hidden_field_tag :latitude, :value => session[:location][:latitude]
+      - else
+        = hidden_field_tag :longitude
+        = hidden_field_tag :latitude  
 
