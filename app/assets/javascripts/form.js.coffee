@@ -140,6 +140,9 @@ $ ->
 
   $('#wizard').tabs()
   $('#wizard').bind 'tabsselect', (event, ui) ->
+    newHash = '#!/form/' + ui.tab.hash.slice(1)
+    if window.location.hash != newHash
+      window.location.hash = newHash
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
@@ -175,12 +178,7 @@ $ ->
               when "recipe_tab"
                 prepare_recipe_uploads()
               when "country_specific_information_tab"
-                prepare_csi_slider()
-            
-            newHash = '#!/form/' + ui.tab.hash.slice(1)
-            if window.location.hash != newHash
-              window.location.hash = newHash
-            
+                prepare_csi_slider()            
           statusCode:
             400: ->
               console.log "Unable to save changes"
