@@ -11,13 +11,10 @@ describe "stepHighlighting", ->
     $("#dynamicContainer").remove()
 
   describe "Step", ->
-    beforeEach ->
-      $(".part-1").trigger this.event
-
-    it "should be active if step was clicked", ->
+    it "1 should be marked when plugin gets called", ->
       expect($ ".part-1").toHaveClass "active"
 
-    it "should mark next step if it was clicked", ->
+    it "should mark next step", ->
       expect($ ".part-2").toHaveClass "next"
 
     it "should mark next step if last step was clicked", ->
