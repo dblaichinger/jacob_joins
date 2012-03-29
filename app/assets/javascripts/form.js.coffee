@@ -131,7 +131,7 @@ $ ->
 
       if user_info
         recipe = publish_recipe user_info.user_id, user_info.location
-        csi = publish_csi user_info.location
+        csi = publish_csi user_info.user_id, user_info.location
         
         if recipe and csi
           $('#preview_tab').prepend '<p class="success">Saved successfully</p>'

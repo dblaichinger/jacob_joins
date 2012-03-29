@@ -23,4 +23,15 @@ class User
       validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :message => "is invalid", :allow_blank => true
     end
   end
+
+  def formatted_user_info
+    "#{firstname} #{shorten_lastname} (#{age})"
+  end
+
+  private
+
+  def shorten_lastname
+    return "" unless lastname
+    "#{lastname[0]}."
+  end
 end

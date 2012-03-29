@@ -1,4 +1,4 @@
-var publish_csi = function(user_location) {
+var publish_csi = function(user_id, user_location) {
   var error = false;
 
   $.ajax({
@@ -6,6 +6,7 @@ var publish_csi = function(user_location) {
     type: "POST",
     data: {
     	_method: "PUT",
+      user: user_id,
       location:{
         latitude: user_location.latitude,
         longitude: user_location.longitude,
