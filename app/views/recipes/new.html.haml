@@ -83,7 +83,7 @@
                   = image_tag step.object.image(:small)
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), :class => "delete"
   
-      #recipe_images.part-4
+      #recipe_images
         %h1 Images
         = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
         %ul.file_uploads
