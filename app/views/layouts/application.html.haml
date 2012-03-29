@@ -3,8 +3,8 @@
   %head
     %title JacobJoins
     = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
     = javascript_include_tag "application"
-    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true"
     :javascript
       $(document).ready(function(){
         get_latest_recipe();

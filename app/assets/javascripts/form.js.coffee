@@ -212,6 +212,10 @@ $ ->
     $(e.delegateTarget).tabs("select", current+1)
     false
 
+  $('#wizard #recipe_tab .ingredient_with_quantity_name').autocomplete
+    source: '/ingredients/names'
+    minLength: 2
+
   # --- recipe -------------------------------------------------
   prepare_recipe_uploads()
 

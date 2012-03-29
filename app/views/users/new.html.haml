@@ -61,6 +61,9 @@
       - else
         = text_field_tag :city, nil, :class => "required", :value => @location.data['city']
 
+    = text_field_tag "address-search", nil, class:"address-search"
+    .map
+
     .hidden
       - if session[:location]
         = hidden_field_tag :longitude, session[:location][:longitude]
