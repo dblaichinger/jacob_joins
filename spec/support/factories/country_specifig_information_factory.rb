@@ -10,4 +10,13 @@ FactoryGirl.define do
     f.longitude 13.055019
     f.association :question_reference, :factory => :question
   end
+  factory :another_country_specific_information, :class => "CountrySpecificInformation" do |f|
+    f.question "How large is your country?"
+    f.answer "Veeeeeery BIG!"
+    f.city "Berlin"
+    f.country "Germany"
+    f.latitude 52.0
+    f.longitude 13.0
+    f.association :question_reference, :factory => :another_question
+  end
 end

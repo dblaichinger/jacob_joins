@@ -19,10 +19,10 @@ revomeButtons = (container) ->
   $(".add", container).unbind(".elementOnDemand").remove()
   $(".remove", container).unbind(".elementOnDemand").remove()
 
-clickAddHandler= ->
+clickAddHandler = ->
   $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(".dynamicElement", $(this).parent()).last()).last(), $(this).parent()
 
-clickDeleteHandler= ->
+clickDeleteHandler = ->
   $.fn.elementOnDemand "removeElement", $("input[type='text'], textarea", $(".dynamicElement", $(this).parent()).last()).last(), $(this).parent()
 
 keyDownHandler = (event) ->
