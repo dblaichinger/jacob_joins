@@ -31,7 +31,7 @@
         = f.text_field :name, :class => "required", size:"40"
       #portions
         = f.label :portions, "Portions"
-        = f.text_field :portions, :class => "required"
+        = f.text_field :portions, :class => "required", :style => "display: inline;"
       #duration
         = f.label :duration, "Preparation time", id:"recipe_duration"
         = f.text_field :duration, :class => "required"
@@ -67,7 +67,7 @@
         - counter = 0
         = f.fields_for :steps do |step|
           .step.dynamicElement
-            = step.label :description, "#{counter + 1} Step".html_safe, id:"steps"
+            = step.label :description, "<span>#{counter + 1}</span> Step".html_safe, class:"step_label"
             - if counter == 0
               = step.text_area :description, :class => "required"
             - else

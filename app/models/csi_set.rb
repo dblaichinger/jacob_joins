@@ -1,7 +1,7 @@
 class CsiSet
   include Mongoid::Document
 
-  has_and_belongs_to_many :country_specific_informations, :inverse_of => nil
+  has_and_belongs_to_many :country_specific_informations, :inverse_of => nil, :autosave => true
   accepts_nested_attributes_for :country_specific_informations
 
   def publish
