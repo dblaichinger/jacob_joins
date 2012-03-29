@@ -3,6 +3,10 @@
 %h1
   = recipe.name.blank? ? "TITLE OF THE RECIPE" : recipe.name
 
+- if recipe.user
+  %h2
+    = "Author: #{recipe.user.formatted_user_info}"
+
 - recipe.images.each do |image|
   = image_tag image.attachment(:medium)
 
