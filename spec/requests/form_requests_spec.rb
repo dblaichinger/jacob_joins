@@ -26,8 +26,10 @@ describe "form submit" do
       page.should have_css('.steps .step .image_preview')
 
       # TODO: "add test case for recipe image upload" # was not working, test.log showed unfinished controller action
-      #attach_file "recipe_images_attributes_0_attachment", "spec/files/test_image.png"
-      #page.should have_css('#recipe_images ul.file_uploads li', :count => 1)
+      attach_file "recipe_images_attributes_0_attachment", "spec/files/test_image.png"
+      page.should have_css('#recipe_images ul.file_uploads li', :count => 1)
+
+      sleep 1
     end
 
     click_link "About your country"

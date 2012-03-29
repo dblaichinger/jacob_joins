@@ -201,6 +201,11 @@ $ ->
                   $("#preview_tab .csi").empty()
                   $(data).appendTo $("#preview_tab .csi")
 
+  $('#wizard').on "click", ".next_tab", (e) ->
+    current = $(e.delegateTarget).tabs("option", "selected")
+    $(e.delegateTarget).tabs("select", current+1)
+    false
+
   # --- recipe -------------------------------------------------
   prepare_recipe_uploads()
 
