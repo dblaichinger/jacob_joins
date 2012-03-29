@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Recipe do
   it "should save ingredients and ingredients_with_quantities" do
-    recipe = Recipe.create Factory.attributes_for(:recipe)
+    recipe = Recipe.create FactoryGirl.attributes_for(:recipe)
 
     recipe.ingredients_with_quantities.count.should == 2
     recipe.ingredients_with_quantities.first.quantity.should == "100ml"
@@ -17,13 +17,13 @@ describe Recipe do
 
   describe "slug" do
     it "should save url friendly name" do
-      recipe = Recipe.create!(Factory.attributes_for(:recipe, :name => "äö ü@-,"))
+      recipe = Recipe.create!(FactoryGirl.attributes_for(:recipe, :name => "äö ü@-,"))
       recipe.slug.should == "ao-u-at"
     end
 
     it "should concat a number to the slug" do
-      recipe = Recipe.create!(Factory.attributes_for(:recipe))
-      recipe1 = Recipe.create!(Factory.attributes_for(:recipe))
+      recipe = Recipe.create!(FactoryGirl.attributes_for(:recipe))
+      recipe1 = Recipe.create!(FactoryGirl.attributes_for(:recipe))
 
       recipe1.slug.should == "#{recipe.slug}-1"
     end
@@ -31,7 +31,7 @@ describe Recipe do
 
   describe "state machine" do
     before :each do
-      @recipe = Recipe.new Factory.attributes_for(:recipe)
+      @recipe = Recipe.new FactoryGirl.attributes_for(:recipe)
     end
 
     it "should save empty as draft" do

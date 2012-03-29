@@ -1,4 +1,9 @@
 %h1 COUNTRY SPECIFIC
+
+- if @csi_set.user
+  %h2
+    = "Author: #{@csi_set.user.formatted_user_info}"
+
 %ul
   - @csi_set.country_specific_informations.where(:answer.ne => "").each do |csi|
     %li

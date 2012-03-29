@@ -131,10 +131,10 @@ $ ->
 
       if user_info
         recipe = publish_recipe user_info.user_id, user_info.location
-        csi = publish_csi user_info.location
+        csi = publish_csi user_info.user_id, user_info.location
         
         if recipe and csi
-          alert "Your drafts were saved successfully"
+          $('#preview_tab').prepend '<p class="success">Saved successfully</p>'
       else
         alert "Saving the drafts failed"
 
@@ -164,6 +164,9 @@ $ ->
       if validation == true
         $.ajax
           url: url
+          beforeSend: ()->
+            if oldTab.attr("id") == "user_tab"
+              getLatLngFromAddress()
           type: 'POST'
           data: params
           success: (data, textStatus, jqXHR) ->
@@ -188,6 +191,12 @@ $ ->
                   if textStatus is "Gone"
                     return
                     
+                  no_preview_content = !!$(".no_preview")
+
+                  if no_preview_content
+                    $(".no_preview").empty()
+                    $("#send").removeAttr "disabled"
+
                   $("#preview_tab .recipe").empty()
                   $(data).appendTo $("#preview_tab .recipe")
 
@@ -197,6 +206,11 @@ $ ->
                     
                   $("#preview_tab .csi").empty()
                   $(data).appendTo $("#preview_tab .csi")
+
+  $('#wizard').on "click", ".next_tab", (e) ->
+    current = $(e.delegateTarget).tabs("option", "selected")
+    $(e.delegateTarget).tabs("select", current+1)
+    false
 
   # --- recipe -------------------------------------------------
   prepare_recipe_uploads()

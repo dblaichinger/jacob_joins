@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   include Geocoder::Model::Mongoid
 
   before_filter :get_or_create_user, :only => [:sync_wizard]
+  before_filter :save_recipe, :only => [:sync_wizard], :if => lambda{ session[:recipe_id].present? }
+  before_filter :save_csi_set, :only => [:sync_wizard], :if => lambda{ session[:csi_set_id].present? }
 
   def update
     render :status => 400, :text => "Bad Request" and return unless session[:user_id]
@@ -46,5 +48,16 @@ class UsersController < ApplicationController
       @user = User.create
       session[:user_id] = @user.id
     end
+  end
+
+  def save_recipe
+    recipe = Recipe.criteria.for_ids(session[:recipe_id]).entries.first
+    @user.recipes << recipe if recipe && !@user.recipes.include?(recipe)
+  end
+
+  def save_csi_set
+    csi_set = CsiSet.criteria.for_ids(session[:csi_set_id]).entries.first
+    user = User.find session[:user_id]
+    csi_set.user =  user
   end
 end

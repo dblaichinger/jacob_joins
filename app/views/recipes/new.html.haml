@@ -4,11 +4,8 @@
 :javascript
   $(document).ready(function(){
     $("#ingredients").elementOnDemand();
+    $("#new_recipe").stepHighlighting();
     $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
-    $("form div div").click(function(){
-      $("form div div").removeClass("active");
-      $(this).addClass("active");
-    });
   });
 
 %h3
@@ -17,7 +14,7 @@
 = form_for recipe do |f|
   = handle_error_messages(recipe).html_safe if recipe.errors.any?
   #left
-    #information
+    #information.part-1
       %h1
         %strong 1 
         What’s really 
@@ -34,12 +31,12 @@
         = f.text_field :name, :class => "required", size:"40"
       #portions
         = f.label :portions, "Portions"
-        = f.text_field :portions, :class => "required"
+        = f.text_field :portions, :class => "required", style:'display: inline;'
       #duration
         = f.label :duration, "Preparation time", id:"recipe_duration"
-        = f.text_field :duration, :class => "required"
+        = f.text_field :duration, class:'required', placeholder:'minutes'
 
-    #ingredients
+    #ingredients.part-2
       %h1 
         %strong 2 
         Fill in tasty 
@@ -66,11 +63,11 @@
 
       %hr
 
-      .steps
+      .part-3.steps
         - counter = 0
         = f.fields_for :steps do |step|
           .step.dynamicElement
-            = step.label :description, "#{counter + 1} Step".html_safe, id:"steps"
+            = step.label :description, "<span>#{counter + 1}</span> Step".html_safe, class:"step_label"
             - if counter == 0
               = step.text_area :description, :class => "required"
             - else
@@ -88,7 +85,7 @@
                   = image_tag step.object.image(:small)
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), :class => "delete"
   
-      #recipe_images
+      #recipe_images.part-4
         %h1 Images
         = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
         %ul.file_uploads
@@ -97,3 +94,5 @@
               = image_tag i.attachment(:small)
               = i.attachment_file_name
               = link_to "delete", recipes_delete_image_path(i.id), :class => "delete"
+
+    = button_to "Next tab", '#', :class => "next_tab"

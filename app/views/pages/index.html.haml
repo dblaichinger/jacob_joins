@@ -11,7 +11,7 @@
         = link_to 'About you', "#user_tab", id:"aboutyou"
       %li
         = link_to 'preview', "#preview_tab", id:"yourpreview"
-    = image_tag('formnav_endimg.png', id:"endimg")
+    = image_tag 'formnav_endimg.png', id:"endimg"
 
   #recipe_tab
     - session[:recipe_id] = nil
@@ -24,8 +24,11 @@
     - session[:location] = nil
     = render :template => "users/new"
   #preview_tab
+    - unless session[:user_id] || session[:recipe_id]
+      %h1.no_preview NOTHING TO DO HERE
+
     .recipe
     .csi
 
-    = button_tag "Finish and Send", id:"send"
+    = button_tag "Finish and Send", id:"send", disabled:"disabled"
 

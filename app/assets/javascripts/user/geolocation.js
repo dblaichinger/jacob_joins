@@ -43,7 +43,7 @@ function getAddress(lat, lng){
 
 
 function getLatLngFromAddress(){
-  var address = $('#recipe_city').val() +", "+ $('#recipe_country').val();
+  var address = $('#city').val() +", "+ $('#country').val();
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {

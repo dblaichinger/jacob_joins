@@ -8,9 +8,10 @@ class CountrySpecificInformationsController < ApplicationController
 
   def update
     render :status => 410, :text => "Gone" and return unless session[:csi_set_id]
-    render :status => 400, :text => "Bad Request" and return unless params[:location]
+    render :status => 400, :text => "Bad Request" and return unless params[:user_id] && params[:location]
     
     csi_set = CsiSet.find session[:csi_set_id]
+    user = User.find params[:user_id]
 
     csi_set.latitude = params[:location][:latitude]
     csi_set.longitude = params[:location][:longitude]
