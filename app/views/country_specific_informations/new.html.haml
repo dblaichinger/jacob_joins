@@ -1,8 +1,5 @@
 - csi_set = session[:csi_set_id].present? ? CsiSet.find(session[:csi_set_id]) : CsiSet.new(:country_specific_informations => CsiSet.empty_set)
 
-%h3
-  = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
-
 = form_for csi_set, :url => country_specific_informations_path do |f|
   %ul#csi_slider
     = f.fields_for :country_specific_informations do |csi|

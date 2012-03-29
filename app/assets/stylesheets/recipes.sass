@@ -5,6 +5,7 @@
  
 +font-face("Sanches-Light", font-files("Sanches/203126_9_0.ttf", "Sanches/203126_9_0.woff"), "Sanches/203126_9_0.eot")
 +font-face("Sanches-SemiBold", font-files("Sanches/203126_2_0.ttf", "Sanches/203126_2_0.woff"),"Sanches/203126_2_0.eot")
++font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf", "Sanches/203126_1_0.woff"),"Sanches/203126_1_0.eot")
 +font-face("Pacifico", font-files("Pacifico/Pacifico-webfont.ttf", "Pacifico/Pacifico-webfont.woff"), "Pacifico/Pacifico-webfont.eot")
 
 
@@ -44,6 +45,7 @@
     font-family: "Pacifico"
     font-size: 28px
     margin-bottom: 55px
+    font-weight: lighter
 
   #yourpreview
     font-family: "Sanches-SemiBold"
@@ -80,7 +82,7 @@
 h1
   margin: 0 0 20px 0
   font-size: 24px
-  font-family: "Sanches-SemiBold"
+  font-family: "Sanches-Bold"
   font-weight: normal
   color: #531E09
   text-transform: uppercase
@@ -151,6 +153,10 @@ textarea
 #titel
   margin-bottom: 10px
 
+#title
+  input
+    width: 95%
+
 #portions, #duration
   margin-top: 35px
 
@@ -180,7 +186,7 @@ textarea
 
 
 #steps
-  font-family: Sanches-SemiBold
+  font-family: Sanches-Bold
   text-transform: uppercase  
 
 #stepupload
@@ -202,15 +208,16 @@ textarea
   top: 0
   text-align: center
   cursor: pointer
+  overflow: hidden
 
   input
     width: 80px
-    height: 30px
     position: absolute
     right: 0
     top: 0
-    font-size: 20px
+    font-size: 60px
     @include opacity(0)
+    cursor: pointer
 
   p
     margin: 0 !important

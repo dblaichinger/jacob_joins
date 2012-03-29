@@ -11,8 +11,6 @@
     });
   });
 
-%h3
-  = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 = form_for recipe do |f|
   = handle_error_messages(recipe).html_safe if recipe.errors.any?
@@ -44,7 +42,7 @@
         %strong 2 
         Fill in tasty 
         %span ingredients 
-        here!
+        here
 
       %hr
 
@@ -62,7 +60,7 @@
         %strong 3 
         Tell him how to 
         %span prepare 
-        the meal!
+        the meal
 
       %hr
 
