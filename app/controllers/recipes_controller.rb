@@ -1,11 +1,11 @@
 class RecipesController < ApplicationController
 
-  respond_to :json, :only => [:show, :update, :sync_wizard, :upload_step_image, :delete_step_image, :upload_image, :delete_image, :last]
+  respond_to :json, :except => :index
+  append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
+  before_filter :check_recipe_id_presence, :only => :show
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
 
   def show
-    render :status => 410, :text => "Gone" and return unless session[:recipe_id]
-    
     @recipe = Recipe.find session[:recipe_id]
     render :layout => false
   end
@@ -15,15 +15,9 @@ class RecipesController < ApplicationController
   end
 
   def update
-    render :status => 400, :text => "Bad Request" and return unless params[:user_id] && params[:location]
-    render :status => 410, :text => "Gone" and return unless session[:recipe_id]
-
-    recipe = Recipe.find session[:recipe_id]
-    render :status => 304, :text => "Not Modified" and return if recipe.published?
-    
     user = User.find params[:user_id]
 
-    if recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && recipe.publish
+    if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
       session[:recipe_id] = nil
       render :status => 200, :text => "OK"
     else
@@ -89,5 +83,14 @@ class RecipesController < ApplicationController
       @recipe = Recipe.create
       session[:recipe_id] = @recipe.id
     end
+  end
+
+  def check_recipe_id_presence
+    render :status => 410, :text => "Gone" and return unless session[:recipe_id].present?
+  end
+
+  def already_published?
+    @recipe = Recipe.find session[:recipe_id]
+    render :status => 304, :text => "Not Modified" and return if @recipe.published?
   end
 end

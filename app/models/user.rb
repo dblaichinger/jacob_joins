@@ -25,13 +25,13 @@ class User
   end
 
   def formatted_user_info
-    "#{firstname} #{shorten_lastname} (#{age})"
+    "#{firstname} #{shorten_lastname} #{"(#{age})" if age.present?}"
   end
 
   private
 
   def shorten_lastname
-    return "" unless lastname
+    return "" unless lastname.present?
     "#{lastname[0]}."
   end
 end

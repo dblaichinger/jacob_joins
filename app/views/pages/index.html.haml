@@ -29,7 +29,7 @@
     - session[:location] = nil
     = render :template => "users/new"
   #preview_tab
-    - unless session[:user_id] || session[:recipe_id]
+    - unless session[:csi_set_id] || session[:recipe_id]
       %h1.no_preview NOTHING TO DO HERE
 
     .recipe
