@@ -1,12 +1,13 @@
-var publish_csi = function(user_id, user_location) {
+var publish_csi = function(id, user_location) {
   var error = false;
 
   $.ajax({
     url: "country_specific_informations/draft",
     type: "POST",
+    async: false,
     data: {
     	_method: "PUT",
-      user: user_id,
+      user_id: id,
       location:{
         latitude: user_location.latitude,
         longitude: user_location.longitude,

@@ -139,9 +139,9 @@
 			if(minutes < 10) minutes = "0"+minutes;
 			if(seconds < 10) seconds = "0"+seconds;
 
-			$('#days').html(days+":");
-			$('#hours').html(hours+":");
-			$('#minutes').html(minutes+":");
+			$('#days').html(days+" :");
+			$('#hours').html(hours+" :");
+			$('#minutes').html(minutes+" :");
 			$('#seconds').html(seconds);
 				
 		},1000);

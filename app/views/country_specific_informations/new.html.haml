@@ -1,7 +1,18 @@
 - csi_set = session[:csi_set_id].present? ? CsiSet.find(session[:csi_set_id]) : CsiSet.new(:country_specific_informations => CsiSet.empty_set)
 
-%h3
-  = link_to "Fill in with fake data", "#", :onclick => "fill_in_csis(); return false;"
+#csi_information
+  %h1 
+    Give the world a pure impression of your
+    %span country,
+    your
+    %span lifestyle
+    and
+    %span yourself
+
+    %hr
+
+  %p
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
 
 = form_for csi_set, :url => country_specific_informations_path do |f|
   %ul#csi_slider
@@ -10,6 +21,6 @@
         = csi.hidden_field :id unless csi.object.new_record?
         = csi.hidden_field :question_reference_id
         = csi.label :answer, csi.object.question
-        = csi.text_field :answer
+        = csi.text_area :answer
 
-  = button_to "Next tab", '#', :class => "next_tab"
+  = button_to "Save this step", '#', :class => "next_tab"

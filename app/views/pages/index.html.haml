@@ -1,3 +1,11 @@
+%h3
+  = link_to "Fill in recipe with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+%h3
+  = link_to "Fill in CSI with fake data", "#", :onclick => "fill_in_csis(); return false;"
+%h3
+  = link_to "Fill in about you with fake data", "#", :onclick => "fill_in_user(); return false;"
+  
+
 #wizard
   #formnav
     = image_tag 'schleife.png', id:"schleife"
@@ -13,6 +21,9 @@
         = link_to 'preview', "#preview_tab", id:"yourpreview"
     = image_tag 'formnav_endimg.png', id:"endimg"
 
+    #general
+      If there´s an ! at one point in the navigation make sure you filled in the form correctly.
+
   #recipe_tab
     - session[:recipe_id] = nil
     = render :template => "recipes/new"
@@ -24,7 +35,7 @@
     - session[:location] = nil
     = render :template => "users/new"
   #preview_tab
-    - unless session[:user_id] || session[:recipe_id]
+    - unless session[:csi_set_id] || session[:recipe_id]
       %h1.no_preview NOTHING TO DO HERE
 
     .recipe

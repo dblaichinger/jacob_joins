@@ -5,6 +5,7 @@
  
 +font-face("Sanches-Light", font-files("Sanches/203126_9_0.ttf", "Sanches/203126_9_0.woff"), "Sanches/203126_9_0.eot")
 +font-face("Sanches-SemiBold", font-files("Sanches/203126_2_0.ttf", "Sanches/203126_2_0.woff"),"Sanches/203126_2_0.eot")
++font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf", "Sanches/203126_1_0.woff"),"Sanches/203126_1_0.eot")
 +font-face("Pacifico", font-files("Pacifico/Pacifico-webfont.ttf", "Pacifico/Pacifico-webfont.woff"), "Pacifico/Pacifico-webfont.eot")
 
 
@@ -33,6 +34,8 @@
   #yourrecipe
     font-size: 24px
     margin-top: 35px
+    font-family: "Pluto"
+    font-size: 24px
 
   #aboutyourcountry
     font-family: "Sanches-Light"
@@ -44,6 +47,7 @@
     font-family: "Pacifico"
     font-size: 28px
     margin-bottom: 55px
+    font-weight: lighter
 
   #yourpreview
     font-family: "Sanches-SemiBold"
@@ -77,13 +81,22 @@
     bottom: 15px
     left: 25px
 
+  #general
+    width: 180px
+    text-align: center
+    font-family: "Pluto-CondensedItalic"
+    font-size: 12px
+    line-height: 1.3em
+    margin: 120px auto 0 auto
+
 h1
   margin: 0 0 20px 0
   font-size: 24px
-  font-family: "Sanches-SemiBold"
+  font-family: "Sanches-Bold"
   font-weight: normal
-  color: #531E09
+  color: #7C6259
   text-transform: uppercase
+  text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
 
 strong
   display: block
@@ -91,9 +104,9 @@ strong
   font-size: 75px
   font-family: "Sanches-Bold"
   font-weight: normal
-  margin-right: 12px
-  color: #531E09
-  text-shadow: 2px 1px #FFF
+  margin: -3px 12px 0px 0px
+  color: #7C6259
+  text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
   vertical-align: text-top
 
 span
@@ -107,8 +120,12 @@ span
   -webkit-font-smoothing: antialiased
   margin-right: 5px
 
+hr
+  border-top: solid 1px #531E09
+  background-color: #fff
+  height: 0.5px
 
-#right, #left
+#right 
   padding: 1px 0 1px 0
 
 #left, #preparation
@@ -118,6 +135,7 @@ span
 
 #left
   margin-left: 5px
+  padding: 1px 0 1px 0
 
 #preparation
   margin-left: 20px
@@ -127,18 +145,18 @@ textarea
   width: 95%
   height: 150px
 
-#new_recipe, .edit_recipe, #new_user, .edit_user, #preview 
+#new_recipe, .edit_recipe, #new_user, .edit_user, .user_form, #preview, #country_specific_information_tab, 
   width: 760px
   margin-left: 240px
 
 #information, #ingredients , #preparation
-  padding: 35px
+  padding: 37.5px
   width: 300px
-  margin: 0 auto 0px auto
+  margin: 0px auto 0px auto
 
   p
-    text-align: center
-
+    text-align: justify
+    
 #buttons
   clear: both
   overflow: hidden
@@ -149,28 +167,41 @@ textarea
     float: left
 
 #titel
-  margin-bottom: 10px
+  margin-bottom: 5px
+
+#title, #portions, #duration  
+  font-family: "Sanches-SemiBold"
+  text-transform: uppercase
+
+#title
+  input
+    width: 95%
 
 #portions, #duration
   margin-top: 35px
 
 #portions
   float: left
-  margin-right: 50px
+  margin-right: 40px
 
   input
-    display: none
+    width: 10px
 
 #duration
   overflow: hidden
 
   #recipe_duration
-    width: 90px
-    overflow: hidden
     float: left
 
   input
-    float: right
+    width: 60px
+
+.menge
+  width: 65px
+  margin-right: 3px
+
+.zutat
+  width: 200px
 
 .active 
   outline: 1px solid #531E09
@@ -179,9 +210,13 @@ textarea
   box-shadow: inner 0 0 0 15px #fff
 
 
+.next
+  outline: 1px solid #531E09
+
 .step_label
   font-family: Sanches-SemiBold
   text-transform: uppercase
+  margin-bottom: 5px
 
   span
     color: inherit
@@ -209,23 +244,30 @@ textarea
   top: 0
   text-align: center
   cursor: pointer
+  overflow: hidden
 
   input
     width: 80px
-    height: 30px
     position: absolute
     right: 0
     top: 0
-    font-size: 20px
+    font-size: 60px
     @include opacity(0)
+    cursor: pointer
 
   p
     margin: 0 !important
+
+.image_preview
+  font-family: "PlutoCondensed"
+  font-size: 14px
+  line-height: 1.4em
 
 label
   display: block
 
 #recipe_images
+  margin-top: 50px
 
 #information_user
   padding: 15px
@@ -240,4 +282,11 @@ input, textarea
   border: 2px solid #fff
   padding: 5px
   color: #fff
+  font-family: "PlutoCondensed"
+  font-size: 14px
 
+input:focus, textarea:focus
+  border: 2px solid #531E09
+
+#recipe_images_attributes_0_attachment
+  width: 95%

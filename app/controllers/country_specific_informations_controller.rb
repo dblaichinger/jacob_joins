@@ -1,15 +1,13 @@
 class CountrySpecificInformationsController < ApplicationController
+  append_before_filter :check_csi_set_id_presence, :check_for_user_and_location, :only => :update
+  before_filter :check_csi_set_id_presence, :only => :show
+
   def show
-    render :status => 410, :text => "Gone" and return unless session[:csi_set_id]
-    
     @csi_set = CsiSet.find session[:csi_set_id]
     render :layout => false
   end
 
   def update
-    render :status => 410, :text => "Gone" and return unless session[:csi_set_id]
-    render :status => 400, :text => "Bad Request" and return unless params[:user_id] && params[:location]
-    
     csi_set = CsiSet.find session[:csi_set_id]
     user = User.find params[:user_id]
 
@@ -17,6 +15,7 @@ class CountrySpecificInformationsController < ApplicationController
     csi_set.longitude = params[:location][:longitude]
     csi_set.city = params[:location][:city]
     csi_set.country = params[:location][:country]
+    csi_set.user = user
 
     if csi_set.publish
       session[:csi_set_id] = nil
@@ -39,5 +38,10 @@ class CountrySpecificInformationsController < ApplicationController
     else
       render :status => 400, :text => 'Bad Request'
     end
+  end
+
+  private
+  def check_csi_set_id_presence
+    render :status => 410, :text => "Gone" and return unless session[:csi_set_id].present?
   end
 end
