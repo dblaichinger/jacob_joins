@@ -20,28 +20,7 @@
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
-        = f.text_field :firstname, :class => "required"
-    .rechts    
-      %p
-        = f.label :lastname, "Last name"
-        = f.text_field :lastname
-    .links        
-      %p
-        = f.label :email, "Your E-mail address"
-        = f.text_field :email
-    .rechts    
-      %p
-        We just need your e-mail address to send you our final product!
-    .links        
-      %p
-        = label_tag :city, "City"
-        - if session[:location]
-          = text_field_tag :country, nil, :class => "required", :value => session[:location][:city]
-        - elsif (!defined? @location) || (@location.data['city'].empty?)
-          = text_field_tag :city, nil, :class => "required"
-        - else
-          = text_field_tag :city, nil, :class => "required", :value => @location.data['city']   
-    .rechts
+        = f.text_field :firstname, :class => "required"      
       %p
         = label_tag :country, "Country"
 
@@ -53,38 +32,43 @@
         - elsif (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
           = text_field_tag :country, nil, :class => "required"
         - else
-          = text_field_tag :country, nil, :class => "required", :value => @location.data['country_name']
-    %p
-      = f.label :gender, "Gender"
-      = link_to image_tag("male.png", :class=>"male"), "#", :id => "male_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
-      = link_to image_tag("female.png", :class=>"female"), "#", :id => "female_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
-      = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]), :class => "required"
-    %p
-      = f.label :age, "Age"
-      = f.text_field :age, :class => "required", id:"age"
-    %p
-      = f.label :heard_from, "How did you hear from Jacob Joins?" 
-      = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
-      = text_field_tag :heard_from_other
+          = text_field_tag :country, nil, :class => "required", :value => @location.data['country_name']  
+      %p
+        = label_tag :city, "City"
+        - if session[:location]
+          = text_field_tag :city, nil, :class => "required", :value => session[:location][:city]
+        - elsif (!defined? @location) || (@location.data['city'].empty?)
+          = text_field_tag :city, nil, :class => "required"
+        - else
+          = text_field_tag :city, nil, :class => "required", :value => @location.data['city']
+      %p
+        = f.label :gender, "Gender"
+        = link_to image_tag("male_inactive.png", :class=>"male"), "#", :id => "male_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
+        = link_to image_tag("female_inactive.png", :class=>"female"), "#", :id => "female_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
+        = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]), :class => "required"   
+    .rechts    
+      %p
+        = f.label :lastname, "Last name"
+        = f.text_field :lastname
+      %p.youremailmargin
+        = f.label :email, "Your E-mail address"
+        = f.text_field :email  
+        .email
+          We just need your e-mail address to send you our final product!            
+      %p
+        = f.label :heard_from, "How did you hear from Jacob Joins?"            
+      %p  
+        = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
+        = text_field_tag :heard_from_other
+      %p
+        = f.label :age, "Age"
+        = f.text_field :age, :class => "required", id:"age"     
+    .einzug  
 
-      - #Get location by IP-address
-      - @location = request.location
-      
-      - if session[:location]
-        = text_field_tag :country, nil, :class => "required", :value => session[:location][:country]
-      - elsif (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
-        = text_field_tag :country, nil, :class => "required"
-      - else
-        = text_field_tag :country, nil, :class => "required", :value => @location.data['country_name']
+     
 
-    %p
-      = label_tag :city, "City"
-      - if session[:location]
-        = text_field_tag :city, nil, :class => "required", :value => session[:location][:city]
-      - elsif (!defined? @location) || (@location.data['city'].empty?)
-        = text_field_tag :city, nil, :class => "required"
-      - else
-        = text_field_tag :city, nil, :class => "required", :value => @location.data['city']
+      = button_to "Next tab", '#', :class => "next_tab"
+         
 
     .hidden
       - if session[:location]
@@ -93,5 +77,3 @@
       - else
         = hidden_field_tag :longitude
         = hidden_field_tag :latitude
-
-    = button_to "Next tab", '#', :class => "next_tab"
