@@ -1,16 +1,14 @@
 class UsersController < ApplicationController
   include Geocoder::Model::Mongoid
 
-  before_filter :get_or_create_user, :only => [:sync_wizard]
+  before_filter :get_or_create_user, :only => :sync_wizard
+  append_before_filter :check_user_id_presence, :already_published?, :only => :update
+  before_filter :save_recipe, :only => :sync_wizard, :if => lambda{ session[:recipe_id].present? }
+  before_filter :save_csi_set, :only => :sync_wizard, :if => lambda{ session[:csi_set_id].present? }
 
   def update
-    render :status => 400, :text => "Bad Request" and return unless session[:user_id]
-
-    user = User.find session[:user_id]
-    render :status => 304, :text => "Not Modified" and return if user.published?
-
-    if user.publish
-      render :json => { user_id: session[:user_id], location: session[:location] }.to_json
+    if @user.publish
+      render :json => { id: session[:user_id], location: session[:location] }.to_json
       session[:user_id] = session[:location] = nil
     else
       render :status => 400, :text => "Bad Request"
@@ -46,5 +44,25 @@ class UsersController < ApplicationController
       @user = User.create
       session[:user_id] = @user.id
     end
+  end
+
+  def save_recipe
+    recipe = Recipe.criteria.for_ids(session[:recipe_id]).entries.first
+    @user.recipes << recipe if recipe && !@user.recipes.include?(recipe)
+  end
+
+  def save_csi_set
+    csi_set = CsiSet.criteria.for_ids(session[:csi_set_id]).entries.first
+    user = User.find session[:user_id]
+    csi_set.user =  user
+  end
+
+  def check_user_id_presence
+    render :status => 400, :text => "Bad Request" and return unless session[:user_id].present?
+  end
+
+  def already_published?
+    @user = User.find session[:user_id]
+    render :status => 304, :text => "Not Modified" and return if @user.published?
   end
 end

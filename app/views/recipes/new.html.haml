@@ -8,8 +8,6 @@
     $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
   });
 
-%h3
-  = link_to "Fill in with fake data", "#", :onclick => "fill_in_recipe(); return false;"
 
 = form_for recipe do |f|
   = handle_error_messages(recipe).html_safe if recipe.errors.any?
@@ -24,29 +22,31 @@
       %hr
 
       %p
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+        Here is where you enter the name of your recipe.
+        %br
+        By the way: All the entries on this form are not necessarily your final recipe. You forgot salt? No problem! You can adapt every step before you finally share your post on the preview page. 
 
       #title
-        = f.label :name, "Title", id:"titel"
-        = f.text_field :name, :class => "required", size:"40"
+        = f.label :name, "Name", id:"titel"
+        = f.text_field :name, :class => "required", size:"40", placeholder:'tell us the name of your recipe'
       #portions
         = f.label :portions, "Portions"
         = f.text_field :portions, :class => "required", style:'display: inline;'
       #duration
-        = f.label :duration, "Preparation time", id:"recipe_duration"
+        = f.label :duration, "Preparation", id:"recipe_duration"
         = f.text_field :duration, class:'required', placeholder:'minutes'
 
     #ingredients.part-2
       %h1 
         %strong 2 
-        Fill in tasty 
+        Add your tasty 
         %span ingredients 
-        here!
+        here
 
       %hr
 
       %p
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+        Just press the + button to add the ingredients which make your recipe special and worth trying. You don´t have or just don´t like one of our 3 already selected ingredients? Just replace it by another one.  Of course you can split the ingredients in two or three courses by explaining the preparation step by step (3). Everybody loves a dessert.
 
       - if recipe.errors.any?
         = prefill_ingredient_fields(f, recipe).html_safe
@@ -54,20 +54,24 @@
         = render_default_ingredient_fields(f, recipe).html_safe
 
   #right
-    #preparation
+    #preparation.part-3
       %h1
         %strong 3 
-        Tell him how to 
+        Tell us how to 
         %span prepare 
-        the meal!
+        the meal
 
       %hr
 
-      .part-3.steps
+      %p
+        Jacob wants to know how to do it. Maybe you want to give us a step-by-step instruction to make it easier for us to try your recipe at home. 
+        Again you can add or delete steps as required. Plus: We love pictures!
+
+      .steps
         - counter = 0
         = f.fields_for :steps do |step|
           .step.dynamicElement
-            = step.label :description, "<span>#{counter + 1}</span> Step".html_safe, class:"step_label"
+            = step.label :description, "Step <span>#{counter + 1}</span>".html_safe, class:"step_label"
             - if counter == 0
               = step.text_area :description, :class => "required"
             - else
@@ -85,8 +89,18 @@
                   = image_tag step.object.image(:small)
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), :class => "delete"
   
-      #recipe_images.part-4
-        %h1 Images
+      #recipe_images
+        %h1 
+          %strong 4
+          Show us your
+          %span incredible
+          meal
+
+        %hr
+        
+        %p
+          You filled in our form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: We would love to see a picture of your creation together with your written recipe!
+
         = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
         %ul.file_uploads
           - f.object.images.each do |i|
@@ -95,4 +109,4 @@
               = i.attachment_file_name
               = link_to "delete", recipes_delete_image_path(i.id), :class => "delete"
 
-    = button_to "Next tab", '#', :class => "next_tab"
+    = button_to "Save this step", '#', :class => "next_tab"

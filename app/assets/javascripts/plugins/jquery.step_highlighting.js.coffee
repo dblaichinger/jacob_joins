@@ -15,6 +15,7 @@ publicMethods =
   init: ->
     this.each ->
       $("[class|='part']", $(this)).bind "click.stepHighlighting", clickHandler
+      $(".part-1").trigger "click"
 
   destroy: ->
     this.each ->

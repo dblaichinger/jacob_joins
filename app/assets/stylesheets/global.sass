@@ -5,21 +5,30 @@
 +font-face("Sanches-SemiBold", font-files("Sanches/203126_2_0.ttf", "Sanches/203126_2_0.woff"),"Sanches/203126_2_0.eot")
 +font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf", "Sanches/203126_1_0.woff"),"Sanches/203126_1_0.eot")
 +font-face("Pacifico", font-files("Pacifico/Pacifico-webfont.ttf", "Pacifico/Pacifico-webfont.woff"), "Pacifico/Pacifico-webfont.eot")
-+font-face("Pluto", font-files("Pluto/203124_2_0.ttf", "Pluto/203124_2_0.woff"), "Pluto/203124_2_0.eot")
++font-face("PlutoCondensed", font-files("Pluto/203124_2_0.ttf", "Pluto/203124_2_0.woff"), "Pluto/203124_2_0.eot")
++font-face("Pluto-LightCondensed", font-files("Pluto/203124_4_0.ttf", "Pluto/203124_4_0.woff"), "Pluto/203124_4_0.eot")
++font-face("Pluto-Light", font-files("Pluto/203124_B_0.ttf", "Pluto/203124_B_0.woff"), "Pluto/203124_B_0.eot")
++font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
++font-face("Pluto-CondensedItalic", font-files("Pluto-Italic/203125_9_0.ttf", "Pluto-Italic/203125_9_0.woff"), "Pluto-Italic/203125_9_0.eot")
++font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
++font-face("Pluto-Heavy", font-files("Pluto/203124_1_0.ttf", "Pluto/203124_1_0.woff"), "Pluto/203124_1_0.eot")
 
 
 body
   height: 100%
   color: #531E09
-  background-image: url(image_path('6-Seamless-Patterns-Of-Paper-Material03.jpg'))
-  font-family: "Pluto"
-  font-size: 14px
+  background-image: url(image_path('bg4.jpg'))
+  font-weight: normal
+  p
+    font-family: "PlutoCondensed"
+    font-size: 14px
+    line-height: 1.4em
 
 #newsbar
   height: 360px
-  background-image: url(image_path('newsbar_offen.png'))
-  background-position: top center
-  background-repeat: no-repeat
+  background-image: url(image_path('newsbar_offen2.png')), url(image_path('newsbar_offen_repeat.png'))
+  background-position: top center, top center
+  background-repeat: no-repeat, repeat-x
   overflow: hidden
   color: #fff
   position: relative
@@ -74,8 +83,15 @@ body
   border: 2px solid red
   float: none
 
+label.error
+  border: none
+  font-family: "Pluto-CondensedItalic" !important
+  font-size: 12px
+  color: #E2001A
+  float: none
+
 .valid
-  border: 2px solid green
+  
 
 .form_valid
   background-image: url("finished_form_tmp.png")

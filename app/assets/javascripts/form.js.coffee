@@ -127,16 +127,21 @@ $ ->
       prepare_recipe_step_upload $(this).find('input[type="file"]:first')
 
   $("#wizard #send").click ->
-      user_info = publish_user();
+      if not window.user
+        window.user = publish_user()
 
-      if user_info
-        recipe = publish_recipe user_info.user_id, user_info.location
-        csi = publish_csi user_info.location
+      if window.user
+        recipe = publish_recipe window.user.id, window.user.location
+        csi = publish_csi window.user.id, window.user.location
+
+        $("#preview_tab .success").remove()
         
         if recipe and csi
           $('#preview_tab').prepend '<p class="success">Saved successfully</p>'
+        else
+          alert "Failed to save the draft(s)!"
       else
-        alert "Saving the drafts failed"
+        alert "Unable to save user information (maybe not provided)."
 
   $('#wizard').tabs()
   $('#wizard').bind 'tabsselect', (event, ui) ->
@@ -203,16 +208,22 @@ $ ->
                 $.get "country_specific_informations/draft", (data, textStatus) ->
                   if textStatus is "Gone"
                     return
+
+                  no_preview_content = !!$(".no_preview")
+
+                  if no_preview_content
+                    $(".no_preview").empty()
+                    $("#send").removeAttr "disabled"
                     
                   $("#preview_tab .csi").empty()
                   $(data).appendTo $("#preview_tab .csi")
 
   $('#wizard').on "click", ".next_tab", (e) ->
     current = $(e.delegateTarget).tabs("option", "selected")
-    $(e.delegateTarget).tabs("select", current+1)
+    $(e.delegateTarget).tabs("select", current + 1)
     false
 
-  $('#wizard #recipe_tab .ingredient_with_quantity_name').autocomplete
+  $('#wizard #recipe_tab .zutat').autocomplete
     source: '/ingredients/names'
     minLength: 2
 

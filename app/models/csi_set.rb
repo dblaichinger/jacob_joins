@@ -7,7 +7,7 @@ class CsiSet
   def publish
     worked = true
 
-    self.country_specific_informations.where(:state.ne => "published").entries.each do |csi|
+    country_specific_informations.where(:state.ne => "published").and(:answer => true).entries.each do |csi|
       worked &&= csi.publish
     end
     
@@ -24,14 +24,18 @@ class CsiSet
 
   protected
   def method_missing(method, *args, &block)
-    allowed_methods = [:city=, :country=, :latitude=, :longitude=]
-    if allowed_methods.include? method
-      self.country_specific_informations.each do |csi|
-        csi.send(method, *args)
+    allowed_setters = [:city=, :country=, :latitude=, :longitude=, :user=]
+    allowed_getters = [:user]
+
+    if allowed_setters.include? method
+      country_specific_informations.each do |csi|
+        csi.send method, *args
         csi.save
       end
+    elsif allowed_getters.include? method
+      country_specific_informations.first.user
     else
-      raise NoMethodError.new("undefined method `#{method}' for #{self}", method, args)
+      raise NoMethodError.new "undefined method `#{method}' for #{self}", method, args
     end
   end
 end

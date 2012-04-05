@@ -6,7 +6,7 @@ module RecipesHelper
       { :name => "Eggs", :quantity => "e.g.: 2 big" }, 
       { :name => "Onion", :quantity => "e.g.: 1 red" }, 
       { :name => "Potatoes", :quantity => "e.g.: 3" }, 
-      { :name => "additional ingredient", :quantity => "enter the quantity" }
+      { :name => "your additional ingredient", :quantity => "quantity" }
     ] 
 
     if object.ingredients_with_quantities.empty?
