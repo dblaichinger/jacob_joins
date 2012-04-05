@@ -1,10 +1,5 @@
 - user = session[:user_id].present? ? User.find(session[:user_id]) : User.new
 
-:javascript
-  $(document).ready(function(){
-    getGeoLocation();
-  });
-
 %h3
   = link_to "Fill in with fake data", "#", :onclick => "fill_in_user(); return false;"
 
@@ -39,37 +34,43 @@
       = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
       = text_field_tag :heard_from_other
 
-    %p
-      = label_tag :country, "Country"
+    
+      =# label_tag :country, "Country"
 
       - #Get location by IP-address
-      - @location = request.location
+      - #@location = request.location
       
-      - if session[:location]
-        = text_field_tag :country, nil, :class => "required", :value => session[:location][:country]
-      - elsif (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
-        = text_field_tag :country, nil, :class => "required"
-      - else
-        = text_field_tag :country, nil, :class => "required", :value => @location.data['country_name']
+      -# if session[:location]
+        =# text_field_tag :country, nil, :class => "required", :value => session[:location][:country]
+      -# elsif (!defined? @location) || (@location.data['country_name'].empty?) || (@location.data['country_name'] == "Reserved")
+        =# text_field_tag :country, nil, :class => "required"
+      -# else
+        =# text_field_tag :country, nil, :class => "required", :value => @location.data['country_name']
 
-    %p
-      = label_tag :city, "City"
-      - if session[:location]
-        = text_field_tag :city, nil, :class => "required", :value => session[:location][:city]
-      - elsif (!defined? @location) || (@location.data['city'].empty?)
-        = text_field_tag :city, nil, :class => "required"
-      - else
-        = text_field_tag :city, nil, :class => "required", :value => @location.data['city']
+    
+      =# label_tag :city, "City"
+      -# if session[:location]
+        =# text_field_tag :city, nil, :class => "required", :value => session[:location][:city]
+      -# elsif (!defined? @location) || (@location.data['city'].empty?)
+        =# text_field_tag :city, nil, :class => "required"
+      -# else
+        =# text_field_tag :city, nil, :class => "required", :value => @location.data['city']
 
-    = text_field_tag "address-search", nil, class:"address-search"
-    .map
+    - @location = request.location.data
+    - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
+    - @country = (session[:location][:country] if session[:location]) || @location[:country_name] || ""
+    - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
+    - @latitude = (session[:location][:latitude] if session[:location]) || @location[:latitude] || ""
+    - #@country
+    - #binding.pry
+
+    = text_field_tag "address-search", nil, class:"address-search", value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
+    .map{"data-longitude" => "#{@longitude}", "data-latitude" => "#{@latitude}"}
 
     .hidden
-      - if session[:location]
-        = hidden_field_tag :longitude, session[:location][:longitude]
-        = hidden_field_tag :latitude, session[:location][:latitude]
-      - else
-        = hidden_field_tag :longitude
-        = hidden_field_tag :latitude
+      = hidden_field_tag :longitude, @longitude
+      = hidden_field_tag :latitude, @latitude
+      = hidden_field_tag :country, @country
+      = hidden_field_tag :city, @city
 
     = button_to "Next tab", '#', :class => "next_tab"

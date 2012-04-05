@@ -164,9 +164,6 @@ $ ->
       if validation == true
         $.ajax
           url: url
-          beforeSend: ()->
-            if oldTab.attr("id") == "user_tab"
-              getLatLngFromAddress()
           type: 'POST'
           data: params
           success: (data, textStatus, jqXHR) ->
@@ -181,7 +178,10 @@ $ ->
               when "recipe_tab"
                 prepare_recipe_uploads()
               when "country_specific_information_tab"
-                prepare_csi_slider()            
+                prepare_csi_slider()
+              when "user_tab"
+                prepare_user_map()
+
           statusCode:
             400: ->
               console.log "Unable to save changes"
@@ -216,11 +216,9 @@ $ ->
     source: '/ingredients/names'
     minLength: 2
 
-  # --- recipe -------------------------------------------------
   prepare_recipe_uploads()
-
-  # --- csi ----------------------------------------------
   prepare_csi_slider()
+  prepare_user_map()
 
 validate_form = (form, nav_link) ->
   validator = form.validate
