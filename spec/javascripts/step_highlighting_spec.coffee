@@ -8,7 +8,7 @@ describe "stepHighlighting", ->
 
   afterEach ->
     $("form").stepHighlighting "destroy"
-    $("#dynamicContainer").remove()
+    $("form").remove()
 
   describe "Step", ->
     it "1 should be marked when plugin gets called", ->

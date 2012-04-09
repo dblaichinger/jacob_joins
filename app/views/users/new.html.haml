@@ -3,10 +3,11 @@
 :javascript
   $(document).ready(function(){
     getGeoLocation();
+    $("form", "#user_tab").dirtyValidation();
   });
 
 
-= form_for user, :html =>{:class => "user_form"} do |f|
+= form_for user, :html => { :class => "user_form" } do |f|
   #content
     %h1.tellus
       Tell Jacob 
@@ -18,7 +19,7 @@
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
-        = f.text_field :firstname, :class => "required"      
+        = f.text_field :firstname, "data-required" => true
 
       - @location = request.location.data
       - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
@@ -26,7 +27,7 @@
       - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
       - @latitude = (session[:location][:latitude] if session[:location]) || @location[:latitude] || ""
 
-      = text_field_tag "address-search", nil, class:"address-search", value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
+      = text_field_tag "address-search", nil, class:"address-search", "data-required" => true, value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
       .map{"data-longitude" => "#{@longitude}", "data-latitude" => "#{@latitude}"}
 
       = hidden_field_tag :longitude, @longitude
@@ -38,7 +39,7 @@
         = f.label :gender, "Gender"
         = link_to image_tag("male_inactive.png", :class=>"male"), "#", :id => "male_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
         = link_to image_tag("female_inactive.png", :class=>"female"), "#", :id => "female_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
-        = f.select :gender, options_for_select([['Female', 'female'], ['Male', 'male']]), :class => "required"
+        = f.select :gender, options_for_select([['',''], ['Female', 'female'], ['Male', 'male']]), {}, { "data-required" => true }
 
     .rechts    
       %p
@@ -46,7 +47,7 @@
         = f.text_field :lastname
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
-        = f.text_field :email  
+        = f.text_field :email, "data-type" => "email"
         .email
           We just need your e-mail address to send you our final product!            
       %p
@@ -56,7 +57,6 @@
         = text_field_tag :heard_from_other
       %p
         = f.label :age, "Age"
-        = f.text_field :age, :class => "required", id:"age"     
+        = f.text_field :age, "data-required" => true, "data-type" => "numerical", id:"age"     
     .einzug  
       = button_to "Next tab", '#', :class => "next_tab"
-
