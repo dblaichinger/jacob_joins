@@ -1,11 +1,19 @@
 - recipe = session[:recipe_id].present? ? Recipe.find(session[:recipe_id]) : Recipe.new
+- perform_validation = @perform_validation || perform_validation
 - (3 - recipe.steps.count).times { recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
-    $("#ingredients").elementOnDemand();
-    $("#new_recipe").stepHighlighting();
-    $("#new_recipe input[placeholder], textarea[placeholder]").placeholder();
+    $(":input[placeholder]", "#recipe_tab").placeholder();
+    $("form", "#recipe_tab").stepHighlighting().dirtyValidation();
+    $("#ingredients").elementOnDemand({
+      onAddElement: function(context){
+        $("form", "#recipe_tab").dirtyValidation("validate",  $("form", "#recipe_tab"));
+      },
+      onRemoveElement: function(context){
+        $("form", "#recipe_tab").dirtyValidation("validate",  $("form", "#recipe_tab"));
+      }
+    });
   });
 
 
@@ -28,13 +36,13 @@
 
       #title
         = f.label :name, "Name", id:"titel"
-        = f.text_field :name, :class => "required", size:"40", placeholder:'tell us the name of your recipe'
+        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe"
       #portions
         = f.label :portions, "Portions"
-        = f.text_field :portions, :class => "required", style:'display: inline;'
+        = f.text_field :portions, "data-required" => true, "data-type" => "numerical", style:"display: inline;"
       #duration
-        = f.label :duration, "Preparation", id:"recipe_duration"
-        = f.text_field :duration, class:'required', placeholder:'minutes'
+        = f.label :duration, "Preparation", id:"duration_label"
+        = f.text_field :duration, "data-required" => true, "data-type" => "numerical", placeholder:"minutes"
 
     #ingredients.part-2
       %h1 
@@ -73,7 +81,7 @@
           .step.dynamicElement
             = step.label :description, "Step <span>#{counter + 1}</span>".html_safe, class:"step_label"
             - if counter == 0
-              = step.text_area :description, :class => "required"
+              = step.text_area :description, "data-required" => true
             - else
               = step.text_area :description
             - counter += 1
@@ -87,7 +95,7 @@
               - if step.object.image.present?
                 .image_preview
                   = image_tag step.object.image(:small)
-                  = link_to "delete", recipes_delete_step_image_path(step.object.id), :class => "delete"
+                  = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
   
       #recipe_images
         %h1 
@@ -107,6 +115,6 @@
             %li
               = image_tag i.attachment(:small)
               = i.attachment_file_name
-              = link_to "delete", recipes_delete_image_path(i.id), :class => "delete"
+              = link_to "delete", recipes_delete_image_path(i.id), class:"delete"
 
-    = button_to "Save this step", '#', :class => "next_tab"
+    = button_to "Save this step", '#', class:"next_tab"

@@ -36,6 +36,7 @@ class Recipe
 
     state :published do
       validates_presence_of :name, :portions, :duration, :city, :country, :latitude, :longitude
+      validates :portions, :duration, :numericality => { :only_integer => true }
       validates_associated :steps
     end
   end

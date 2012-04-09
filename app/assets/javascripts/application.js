@@ -13,12 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.8.18.custom.min
+//= require jquery.livequery
 //= require jquery.placeholder
-//= require jquery.validate.min
 //= require jquery.iframe-transport
 //= require jquery.bxSlider.min
 //= require jquery.fileupload
 //= require jquery.tzineClock
+//= require jquery.dirtyform
 //= require path.min
 //= require_tree .
  
