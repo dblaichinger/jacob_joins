@@ -191,7 +191,9 @@ $ ->
             when "recipe_tab"
               prepare_recipe_uploads()
             when "country_specific_information_tab"
-              prepare_csi_slider()            
+              prepare_csi_slider()
+            when "user_tab"
+              prepare_user_map()         
         statusCode:
           400: ->
             console.log "Unable to save changes"
