@@ -67,14 +67,14 @@ function get_facebook_stream(){
     $.each(data.data, function(key, value){
       if(value.message && counter <=4){
 
-        $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
-           $('#newsbar #fb p').append("<img src='"+data.picture+"' alt='profile_picture' />");
+        /*$.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
+          $('#newsbar #fb p').append("<img src='"+data.picture+"' alt='profile_picture' />");
           $('#newsbar #fb p').append(value.from.name+":" + "<br />");
           $('#newsbar #fb p').append("Message: "+value.message + "<br />");
           $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
           $('#newsbar #fb p').append("<br />");
 
-        }, "json");
+        }, "json");*/
 
 
 
