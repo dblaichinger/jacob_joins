@@ -32,6 +32,8 @@ window.prepare_user_map = ->
   autoCompleteInput.keydown (e) ->
     if e.which == 13
       e.preventDefault()
+  autoCompleteInput.attr "data-valid", "false"
+  autoCompleteInput.attr "data-error-message", "Location not found."
 
   autocomplete = new google.maps.places.Autocomplete autoCompleteInput[0], { types: ['(regions)'] }
   autocomplete.bindTo('bounds', map)
@@ -99,8 +101,14 @@ window.prepare_user_map = ->
   # location via user input
   google.maps.event.addListener autocomplete, 'place_changed', ->
     place = autocomplete.getPlace()
-    setMarker place.geometry.location
 
-    address = place.address_components
-    setHiddenFields place.geometry.latitude, place.geometry.longitude, address[0].long_name, address[3].long_name
+    if !!place.geometry
+      autoCompleteInput.attr "data-valid", "true"
+      autoCompleteInput.trigger "change"
+      setMarker place.geometry.location
+
+      address = place.address_components
+      setHiddenFields place.geometry.location.Ya, place.geometry.location.Za, address[0].long_name, address[3].long_name
+    else
+      autoCompleteInput.attr "data-valid", "false"
 

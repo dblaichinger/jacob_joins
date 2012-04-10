@@ -9,7 +9,7 @@ class User
   field :heard_from, :type => String
   field :gender, :type => String
 
-  has_many :recipes
+  has_one :recipe
   has_many :country_specific_informations
 
   state_machine :initial => :draft do

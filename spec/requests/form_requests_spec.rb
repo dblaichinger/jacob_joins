@@ -49,8 +49,8 @@ describe "form submit" do
       fill_in "user_age", :with => user.age
       fill_in "user_email", :with => user.email
       select user.heard_from, :from => "user_heard_from"
-      fill_in "country", :with => recipe.country
-      fill_in "city", :with => recipe.city
+      page.find('#country').set(recipe.country)
+      page.find('#city').set(recipe.city)
       page.find('#latitude').set(recipe.latitude)
       page.find('#longitude').set(recipe.longitude)
     end
@@ -86,7 +86,6 @@ describe "form submit" do
       #end
 
       click_button "Finish and Send"
-      #binding.pry
       page.should have_css('p.success', :text => "Saved successfully")
     end
   end
