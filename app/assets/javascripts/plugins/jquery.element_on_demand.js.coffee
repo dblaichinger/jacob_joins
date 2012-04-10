@@ -12,7 +12,7 @@ bindKeyDownIfConfigured = (activated, element) ->
 appendButtons = (parent) ->
   addButton = $("<img class='add' src='/assets/add_icon.png' />").appendTo parent
   addButton.bind "click.elementOnDemand", clickAddHandler
-  removeButton = $("<img class='remove' src='/assets/delete_icon.jpg' />").appendTo parent
+  removeButton = $("<img class='remove' src='/assets/delete_icon.png' />").appendTo parent
   removeButton.bind "click.elementOnDemand", clickDeleteHandler
 
 revomeButtons = (container) ->
