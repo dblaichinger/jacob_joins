@@ -44,7 +44,7 @@ class Recipe
   private
   def save_ingredients
     ingredients_with_quantities.each do |ingredient_with_quantity|
-      ingredients << Ingredient.find_or_create_by(:name => ingredient_with_quantity.name)
+      ingredients << Ingredient.find_or_create_by(:name => ingredient_with_quantity.name) if ingredients.where(:name => ingredient_with_quantity.name).count == 0
     end
   end
 end

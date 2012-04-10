@@ -122,15 +122,29 @@ if ( typeof jQuery != "undefined" )
 
 
 function slide_newsbar(){
-  $(".show_newsbar").toggle(function(){
-    $("#newsbar").stop().animate({
-      top: "0"
-    }, 500);
-    $("#newsbar #countdown").fadeToggle(500);
-  }, function(){
-    $("#newsbar").stop().animate({
-      top: "-215px"
-    }, 500);
-    $("#newsbar #countdown").fadeToggle(500);
+  $('#clickandsee').click(function(e){
+    return false;
+  });
+  
+  $("#newsbar, .show_newsbar").click(function(e){
+    console.log("in");
+    var newsBar = $('#newsbar');
+
+    if(newsBar.hasClass('extended')){
+      newsBar.stop().animate({
+        top: "-215px"
+      }, 500);
+    } else {
+      newsBar.stop().animate({
+        top: "0"
+      }, 500);
+    }
+
+    $("#countdown", newsBar).fadeToggle(500);
+    $("#clickandsee", newsBar).fadeToggle(500);
+
+    $('#newsbar').toggleClass('extended');
+
+    return false;
   });
 }

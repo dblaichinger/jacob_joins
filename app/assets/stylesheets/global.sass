@@ -25,13 +25,14 @@ body
     line-height: 1.4em
 
 #newsbar
-  height: 360px
+  height: 280px
   background-image: url(image_path('newsbar_offen2.png')), url(image_path('newsbar_offen_repeat.png'))
   background-position: top center, top center
   background-repeat: no-repeat, repeat-x
-  overflow: hidden
   color: #fff
-  position: relative
+  position: fixed
+  width: 100%
+  z-index: 100
   top: -215px
 
   h1
@@ -100,7 +101,7 @@ body
 
 #countdown
   position: absolute
-  bottom: 115px
+  bottom: 35px
   right: 15px
   font-family: "Sanches-Semibold"
 
@@ -111,7 +112,7 @@ body
 #logo
   clear: both
   position: absolute
-  bottom: 110px
+  bottom: 30px
   left: 47%
 
   img
