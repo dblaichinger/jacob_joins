@@ -102,5 +102,5 @@ window.prepare_user_map = ->
     setMarker place.geometry.location
 
     address = place.address_components
-    setHiddenFields place.geometry.latitude, place.geometry.longitude, address[0].long_name, address[3].long_name
+    setHiddenFields place.geometry.location.Ya, place.geometry.location.Za, address[0].long_name, address[3].long_name
 

@@ -176,9 +176,6 @@ $ ->
 
       $.ajax
         url: url
-        beforeSend: () ->
-          if oldTab.attr("id") is "user_tab"
-            getLatLngFromAddress()
         type: 'POST'
         async: false
         data: params
