@@ -10,20 +10,35 @@ bindKeyDownIfConfigured = (activated, element) ->
     last_input.bind "keydown.elementOnDemand", keyDownHandler
 
 appendButtons = (parent) ->
-  addButton = $("<img class='add' src='/assets/add_icon.png' />").appendTo parent
+  buttonContainer = $("<div class='is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen'></div>").appendTo parent
+  addButton = $("<img class='add' src='/assets/add_icon.png' />").appendTo buttonContainer
   addButton.bind "click.elementOnDemand", clickAddHandler
-  removeButton = $("<img class='remove' src='/assets/delete_icon.jpg' />").appendTo parent
+  addButton.bind "mouseenter.elementOnDemand", mouseenterHandler
+  addButton.bind "mouseleave.elementOnDemand", mouseleaveHandler
+  removeButton = $("<img class='remove' src='/assets/delete_icon.png' />").appendTo buttonContainer
   removeButton.bind "click.elementOnDemand", clickDeleteHandler
+  removeButton.bind "mouseenter.elementOnDemand", mouseenterHandler
+  removeButton.bind "mouseleave.elementOnDemand", mouseleaveHandler
 
 revomeButtons = (container) ->
-  $(".add", container).unbind(".elementOnDemand").remove()
-  $(".remove", container).unbind(".elementOnDemand").remove()
+  $(".add", container).unbind ".elementOnDemand"
+  $(".add", container).closest("div").remove()
+  $(".remove", container).unbind ".elementOnDemand"
+  $(".remove", container).closest("div").remove()
+
+mouseenterHandler = (event) ->
+  new_src = $(this).attr("src").substring(0, $(this).attr("src").indexOf(".")) + "_hover" + $(this).attr("src").substring($(this).attr("src").indexOf("."))
+  $(this).attr "src", new_src
+
+mouseleaveHandler = (event) ->
+  new_src = $(this).attr("src").substring(0, $(this).attr("src").search("_hover")) + $(this).attr("src").substring($(this).attr("src").indexOf("."))
+  $(this).attr "src", new_src
 
 clickAddHandler = ->
-  $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(".dynamicElement", $(this).parent()).last()).last(), $(this).parent()
+  $.fn.elementOnDemand "addElement", $("input[type='text'], textarea", $(this).parent().siblings(".dynamicElement").last()), $(this).parent().parent()
 
 clickDeleteHandler = ->
-  $.fn.elementOnDemand "removeElement", $("input[type='text'], textarea", $(".dynamicElement", $(this).parent()).last()).last(), $(this).parent()
+  $.fn.elementOnDemand "removeElement", $("input[type='text'], textarea", $(this).parent().siblings(".dynamicElement").last()), $(this).parent().parent()
 
 keyDownHandler = (event) ->
   if event.which is 9
