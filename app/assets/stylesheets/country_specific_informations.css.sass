@@ -18,12 +18,11 @@
   #csi_slider
     li
       width: 600px
-      height: 300px
+      height: 250px
 
-    input
-      width: 500px
-      height: 200px
-      padding: 5px
+    textarea
+      width: 586px
+      margin: 0 auto
 
     label
       font-family: "Sanches-Bold"
@@ -51,6 +50,35 @@
 .bx-wrapper, .bx-wrapper
   width: 700px
   margin: 0 auto
+  position: relative
+
+.bx-prev
+  text-indent: -9000px
+  display: block
+  width: 25px
+  height: 90px
+  background-image: url(image_path('prev.png'))
+  background-repeat: no-repeat
+  position: absolute
+  top: 80px
+  left: -30px
+
+.bx-prev:hover
+  background-image: url(image_path('prev_hover.png'))
+
+.bx-next
+  text-indent: -9000px
+  display: block
+  width: 25px
+  height: 90px
+  background-image: url(image_path('next.png'))
+  background-repeat: no-repeat
+  position: absolute
+  top: 80px
+  right: -30px
+
+.bx-next:hover
+  background-image: url(image_path('next_hover.png'))
 
 .next_tab
   margin-top: 20px

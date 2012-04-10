@@ -4,7 +4,7 @@ handleFieldValidation = (target) ->
   container = target.closest ".dirtyform"
   data = $(container).data "dirtyValidation"
 
-  markAsValid target
+  $.fn.dirtyValidation "markAsValid", target
 
   if target.val().length > 0 and target.val() isnt " "
     if target.attr("data-type") and not validateType(target)
@@ -14,7 +14,13 @@ handleFieldValidation = (target) ->
         when "numerical"
           error_message = "It has to be a number."
 
-      markAsInvalid target, error_message
+      $.fn.dirtyValidation "markAsInvalid", target, error_message
+    else if target.attr("data-valid") and not fieldIsValid(target)
+      console.log "in"
+      error_message = target.attr("data-error-message")
+      error_message ||= "Field is invalid."
+      $.fn.dirtyValidation "markAsInvalid", target, error_message
+
   else
     markIfRequired target
 
@@ -34,22 +40,18 @@ validateType = (input) ->
     when "numerical"
       return not isNaN input.val()
 
-markAsInvalid = (field, error_message) ->
-  data = field.closest(".dirtyform").data "dirtyValidation"
-  field.addClass data.errorClass
-  field.after '<label for="' + $(this).prop("id") + '" class="' + data.errorClass + '">' + error_message + '</label>'
+fieldIsValid = (input) ->
+  console.log input.attr("data-valid") == "true"
+  input.attr("data-valid") == "true"
 
-markAsValid = (field) ->
-  data = field.closest(".dirtyform").data "dirtyValidation"
-  field.removeClass data.errorClass
-  field.next().remove() if field.next().is "label.error"
 
 markIfRequired = (field) ->
-  markAsInvalid field, "This field is required." if field.attr("data-required") and not field.hasClass("error")
+  $.fn.dirtyValidation "markAsInvalid", field, "This field is required." if field.attr("data-required") and not field.hasClass("error")
 
 publicMethods =
   init: (options) ->
     this.each ->
+      $.DirtyForm.monitorEvent = 'change'
       data = $(this).data "dirtyValidation"
 
       if not data
@@ -60,6 +62,16 @@ publicMethods =
 
         $(this).dirty_form({dynamic:true}).dirty (event, event_data) ->
           handleFieldValidation event_data.target
+
+  markAsInvalid: (field, error_message) ->
+    data = field.closest(".dirtyform").data "dirtyValidation"
+    field.addClass data.errorClass
+    field.after '<label for="' + $(this).prop("id") + '" class="' + data.errorClass + '">' + error_message + '</label>'
+
+  markAsValid: (field) ->
+    data = field.closest(".dirtyform").data "dirtyValidation"
+    field.removeClass data.errorClass
+    field.next().remove() if field.next().is "label.error"
 
   destroy: ->
     this.each ->

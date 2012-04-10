@@ -2,7 +2,6 @@
 
 :javascript
   $(document).ready(function(){
-    getGeoLocation();
     $("form", "#user_tab").dirtyValidation();
   });
 
@@ -15,7 +14,8 @@
       %br
       about yourself!
     %p
-      Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet  
+      Of course we want to get to know the person how shared a great recipe with us..   
+      But no worries. Your email-address is optional and only the first letter of your sirname will be shown online.  
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
@@ -57,6 +57,6 @@
         = text_field_tag :heard_from_other
       %p
         = f.label :age, "Age"
-        = f.text_field :age, "data-required" => true, "data-type" => "numerical", id:"age"     
+        = f.text_field :age, "data-required" => true, "data-type" => "numerical"   
     .einzug  
       = button_to "Next tab", '#', :class => "next_tab"
