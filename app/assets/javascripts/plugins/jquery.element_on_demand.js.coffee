@@ -2,7 +2,7 @@ $ = jQuery
 
 bindKeyDownIfConfigured = (activated, element) ->
   if activated
-    last_input = $("input[type='text'], textarea", element).last()
+    last_input = $(":input[type='text'], textarea", element).last()
 
     if not last_input
       return $.error "onKeyDown was activated, but no input field exists"
@@ -39,6 +39,7 @@ publicMethods =
           onKeyDown: true
           element: $("<div>").append($(".dynamicElement", this).last().clone()).html()
           onAddElement: ->
+          onRemoveElement: ->
         , options
         $(this).data "elementOnDemand", settings
         appendButtons $(this)
@@ -66,7 +67,7 @@ publicMethods =
         name: $(this).prop("name").replace /[0-9]/, element_count - 1
 
     bindKeyDownIfConfigured data.onKeyDown, new_element
-    container.trigger('addElement.elementOnDemand', new_element);
+    container.trigger 'addElement.elementOnDemand', new_element
     data.onAddElement.call new_element
 
   removeElement: (last_element, container) ->
@@ -75,7 +76,9 @@ publicMethods =
       previous_element = $(".dynamicElement", container).last().prev()
 
       bindKeyDownIfConfigured data.onKeyDown, previous_element
-      $(last_element).parent().remove()
+      deleted_element = $(last_element).parent().remove()
+      container.trigger 'removeElement.elementOnDemand'
+      data.onRemoveElement.call deleted_element
 
 $.fn.elementOnDemand = (method) ->
   if publicMethods[method]
