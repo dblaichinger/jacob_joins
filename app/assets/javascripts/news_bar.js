@@ -60,15 +60,24 @@ function get_latest_recipe(){
 
 
 function get_facebook_stream(){
-  var token = "AAACEdEose0cBADdBQSEcqbJxxj0ZALvMkWDql7NuRw9qqza3Ero2HaOEoCCvgmddIKmGV8mvgmjxAXQ4xk41eXaUHIjOzooYYaUY6fAZDZD";
+  var token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
+    console.debug(data);
     var counter = 0;
     $.each(data.data, function(key, value){
       if(value.message && counter <=4){
-        $('#newsbar #fb p').append(value.from.name+":" + "<br />");
-        $('#newsbar #fb p').append("Message: "+value.message + "<br />");
-        $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
-        $('#newsbar #fb p').append("<br />");
+
+        $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
+           $('#newsbar #fb p').append("<img src='"+data.picture+"' alt='profile_picture' />");
+          $('#newsbar #fb p').append(value.from.name+":" + "<br />");
+          $('#newsbar #fb p').append("Message: "+value.message + "<br />");
+          $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
+          $('#newsbar #fb p').append("<br />");
+
+        }, "json");
+
+
+
         counter++;
       }
     });
@@ -117,10 +126,11 @@ function slide_newsbar(){
     $("#newsbar").stop().animate({
       top: "0"
     }, 500);
+    $("#newsbar #countdown").fadeToggle(500);
   }, function(){
     $("#newsbar").stop().animate({
       top: "-215px"
     }, 500);
-
+    $("#newsbar #countdown").fadeToggle(500);
   });
 }
