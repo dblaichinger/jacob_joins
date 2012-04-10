@@ -117,10 +117,11 @@ function slide_newsbar(){
     $("#newsbar").stop().animate({
       top: "0"
     }, 500);
+    $("#newsbar #countdown").fadeToggle(500);
   }, function(){
     $("#newsbar").stop().animate({
       top: "-215px"
     }, 500);
-
+    $("#newsbar #countdown").fadeToggle(500);
   });
 }
