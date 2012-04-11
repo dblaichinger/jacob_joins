@@ -21,7 +21,7 @@
         = f.label :firstname, "First name", id:"vorname"
         = f.text_field :firstname, "data-required" => true, tabindex:"1"
 
-      - @location = request.location.data
+      - @location = request.location.data if request.location.data
       - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
       - @country = (session[:location][:country] if session[:location]) || @location[:country_name] || ""
       - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
