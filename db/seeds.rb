@@ -29,6 +29,7 @@ questions = [
   {text: "What's your favourite self-made recipe?"},
 ]
 
+Question.delete_all
 questions.each do |q|
   Question.find_or_create_by q
 end
