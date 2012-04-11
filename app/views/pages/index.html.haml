@@ -1,10 +1,51 @@
-%h3
-  = link_to "Fill in recipe with fake data", "#", :onclick => "fill_in_recipe(); return false;"
-%h3
-  = link_to "Fill in CSI with fake data", "#", :onclick => "fill_in_csis(); return false;"
-%h3
-  = link_to "Fill in about you with fake data", "#", :onclick => "fill_in_user(); return false;"
-  
+/ %h3
+/   = link_to "Fill in recipe with fake data", "#", :onclick => "fill_in_recipe(); return false;"
+/ %h3
+/   = link_to "Fill in CSI with fake data", "#", :onclick => "fill_in_csis(); return false;"
+/ %h3
+/   = link_to "Fill in about you with fake data", "#", :onclick => "fill_in_user(); return false;"
+ 
+#jacobsstory
+  #start
+    #story_0
+      = image_tag 'Logo_start.png', id:"Logo_start"
+      = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen"
+      
+      %h3
+        Who is Jacob?
+
+      %p.scroll
+        Scroll down
+        = image_tag 'pfeil.png'
+
+      %a
+        = link_to "You already know the story? Just go on to the form!"
+
+  #story_1
+    %p
+      Welcome. Here’s what it’s all about 
+      %br
+      There is this young bookseller from the beautiful
+      %br
+      city Salzburg in the little european Country Austria.
+      %br
+      his name is jacob
+      %br
+      and suddenly he had
+      %br
+      a wonderful idea
+
+  #story_2
+
+  #story_3
+
+  #story_4
+
+  #story_5
+
+  #story_6
+
+
 
 #wizard
   #formnav
@@ -42,4 +83,20 @@
     .csi
 
     = button_tag "Finish and Send", id:"send", disabled:"disabled"
+
+#footer
+  .schleifn
+    = image_tag 'schleife.png', class:"schleife"
+  .kastl
+    = image_tag 'bildzeichen_footer.png', id:"bildzeichen_footer"
+    %h1.likeproject
+      You like this 
+      %br
+      project?
+    %p.know
+      Please let us know
+    %p.mailto
+      hello@jacobjoins.com
+  %p.year
+    2012 © jacobjoins
 

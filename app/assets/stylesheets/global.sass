@@ -25,14 +25,16 @@ body
     line-height: 1.4em
 
 #newsbar
-  height: 360px
+  height: 280px
   background-image: url(image_path('newsbar_offen2.png')), url(image_path('newsbar_offen_repeat.png'))
   background-position: top center, top center
   background-repeat: no-repeat, repeat-x
-  overflow: hidden
   color: #fff
-  position: relative
+  position: fixed
+  width: 100%
+  z-index: 100
   top: -215px
+  cursor: pointer
 
   h1
     display: none
@@ -44,9 +46,35 @@ body
 #fb, #entries
   float: left
   margin: 20px 10px
+  width: 350px
 
 #fb
-  outline: 1px solid #fff
+  height: 190px
+  overflow: auto
+
+  .post
+    overflow: hidden
+    margin: 10px 0px
+    padding-top: 5px
+
+    img
+      width: 50px
+      height: 50px
+      margin-right: 10px
+      float: left
+
+    h5
+      font-family: "Sanches-SemiBold"
+      margin-bottom: 5px
+      font-size: 14px
+
+    .message
+      font-size: 12px
+
+    .time
+      font-size: 10px
+      font-family: "Pluto-LightCondensed"
+      margin-top: 5px
 
 #entries
   outline: 1px solid yellow
@@ -61,7 +89,7 @@ body
 
   h2
     margin-left: 15px
-    
+
   .text
     position: absolute
     bottom: 0
@@ -74,7 +102,7 @@ body
 
 #countdown
   position: absolute
-  bottom: 115px
+  bottom: 35px
   right: 15px
   font-family: "Sanches-Semibold"
 
@@ -85,12 +113,67 @@ body
 #logo
   clear: both
   position: absolute
-  bottom: 110px
+  bottom: 30px
   left: 47%
 
   img
     display: block
     margin: 0 auto 0 auto
+
+
+#start
+  background-image: url(image_path('pattern1.png'))
+  background-repeat: repeat-x
+  #story_0
+    width: 1024px
+    min-height: 640px
+    margin: 45px auto 0 auto
+    background-image: url(image_path('kuvert_bg.png'))
+    background-repeat: no-repeat
+    background-position: 0 center
+    text-align: center
+    
+    #Logo_start
+      width: 654px
+      margin: 50px 185px 0 185px
+
+    #Bildzeichen_Screen
+      margin: 70px 430px 0 430px
+
+    h3
+      font-family: "Sanches-Bold"
+      text-transform: uppercase
+      font-size: 40px
+      margin: 20px 0 0 0
+
+    .scroll
+      color: #E2001A
+      text-transform: none
+      font-family: "Pacifico"
+      font-size: 26px
+      font-weight: normal
+
+      img
+        display: block
+        margin: 5px auto
+
+    a
+      display: block
+      margin-top: 15px
+      text-transform: uppercase
+      font-family: "Pluto-CondensedItalic"
+      text-decoration: none
+      color: #531E09
+
+#story_2, #story_3, #story_4, #story_5
+  min-height: 700px
+
+#story_3
+  background-image: url(image_path('pattern2.png'))
+
+#story_4
+  background-image: url(image_path('pattern.png'))
+
 
 .error
   border: 2px solid #E2001A
@@ -109,11 +192,73 @@ label.error
 .form_valid
   background-image: url("finished_form_tmp.png")
   background-repeat: no-repeat
-  background-position: 100% 50%
+  background-position: 98% 100%
 
 .form_not_valid
   background-image: url("edit_form_tmp.png")
   background-repeat: no-repeat
-  background-position: 100% 50%
+  background-position: 95% 50%
 
+.ui-state-default, .ui-corner-top
+  min-height: 30px
+
+#footer
+  background-image: url("footer_bg.png")
+  background-repeat: repeat-x
+  height: 334px
+  padding: 10px
+  position: relative
+  bottom: 0
+  clear: both
+
+.kastl
+  text-align: center
+  clear: both
+  background-color: #FFF4E0
+  width: 200px
+  margin: auto
+  padding: 20px 0
+  top: -30px
+  position: relative
+  margin-top: 20px
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
+  z-index: 1
+
+
+.know
+  font-size: 15px
+  font-family: Pluto-CondensedItalic
+  padding-bottom: 5px
+  text-transform: uppercase
+
+.year
+  text-align: center
+
+#bildzeichen_footer
+  padding: 0 0 20px 0
+
+.schleife
+  width: 270px
+  display: block
+  margin: auto
+  top: 20px
+
+.likeproject
+  font-size: 20px  
+  line-height: 1.3
+  margin-bottom: 15px
+
+.mailto
+  color: #E2001A  
+  font-family: Pluto-CondensedItalic
+  font-size: 15px
+
+.year
+  text-transform: uppercase
+  font-size: 12px  
+
+.schleifn
+  widht: 270px
+  margin: auto
+  z-index: 2  
 

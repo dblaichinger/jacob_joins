@@ -68,14 +68,13 @@ function get_facebook_stream(){
     $.each(data.data, function(key, value){
       if(value.message && counter <=4){
 
-        $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
-           $('#newsbar #fb p').append("<img src='"+data.picture+"' alt='profile_picture' />");
+        /*$.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
+          $('#newsbar #fb p').append("<img src='"+data.picture+"' alt='profile_picture' />");
           $('#newsbar #fb p').append(value.from.name+":" + "<br />");
           $('#newsbar #fb p').append("Message: "+value.message + "<br />");
           $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
-          $('#newsbar #fb p').append("<br />");
-        }, "json");
-        
+          $('#newsbar #fb p').append("<br />");       
+        }, "json");*/
         counter++;
       }
     });
@@ -120,15 +119,29 @@ if ( typeof jQuery != "undefined" )
 
 
 function slide_newsbar(){
-  $(".show_newsbar").toggle(function(){
-    $("#newsbar").stop().animate({
-      top: "0"
-    }, 500);
-    $("#newsbar #countdown").fadeToggle(500);
-  }, function(){
-    $("#newsbar").stop().animate({
-      top: "-215px"
-    }, 500);
-    $("#newsbar #countdown").fadeToggle(500);
+  $('#clickandsee').click(function(e){
+    return false;
+  });
+  
+  $("#newsbar, .show_newsbar").click(function(e){
+    console.log("in");
+    var newsBar = $('#newsbar');
+
+    if(newsBar.hasClass('extended')){
+      newsBar.stop().animate({
+        top: "-215px"
+      }, 500);
+    } else {
+      newsBar.stop().animate({
+        top: "0"
+      }, 500);
+    }
+
+    $("#countdown", newsBar).fadeToggle(500);
+    $("#clickandsee", newsBar).fadeToggle(500);
+
+    $('#newsbar').toggleClass('extended');
+
+    return false;
   });
 }

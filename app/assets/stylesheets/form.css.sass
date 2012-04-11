@@ -1,24 +1,30 @@
 @import "compass/css3/opacity"
 
 #clickandsee
-  top: 270px
-  position: relative
+  text-align: center
+  position: absolute
+  bottom: 10px
+  width: 100%
+  height: 1px
+
   a
-    display: block
+    display: inline-block
+    margin-right: 110px
     height: 85px
+    width: 155px
     background-image: url(image_path('clickandsee.png'))
     background-repeat: no-repeat
-    background-position: center center
+    background-position: left center
     cursor: pointer
 
     &:hover
       background-image: url(image_path('clickandsee_hover.png'))
       background-repeat: no-repeat
-      background-position: center center
+      background-position: left center
 
 #wizard
   width: 1000px
-  margin: 40px auto
+  margin: 150px auto
   position: relative
   padding: 5px
 

@@ -19,15 +19,16 @@
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
-        = f.text_field :firstname, "data-required" => true
+        = f.text_field :firstname, "data-required" => true, tabindex:"1"
 
-      - @location = request.location.data
-      - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
-      - @country = (session[:location][:country] if session[:location]) || @location[:country_name] || ""
-      - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
-      - @latitude = (session[:location][:latitude] if session[:location]) || @location[:latitude] || ""
+      - if request.location
+        - @location = request.location.data
+        - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
+        - @country = (session[:location][:country] if session[:location]) || @location[:country_name] || ""
+        - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
+        - @latitude = (session[:location][:latitude] if session[:location]) || @location[:latitude] || ""
 
-      = text_field_tag "address-search", nil, class:"address-search", "data-required" => true, value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
+      = text_field_tag "address-search", nil, class:"address-search", "data-required" => true, tabindex:"3", value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
       .map{"data-longitude" => "#{@longitude}", "data-latitude" => "#{@latitude}"}
 
       = hidden_field_tag :longitude, @longitude
@@ -44,7 +45,7 @@
     .rechts    
       %p
         = f.label :lastname, "Last name"
-        = f.text_field :lastname
+        = f.text_field :lastname, tabindex:"2", placeholder:"your last name"
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
         = f.text_field :email, "data-type" => "email"
