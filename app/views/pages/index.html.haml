@@ -22,17 +22,19 @@
         = link_to "You already know the story? Just go on to the form!"
 
   #story_1
-    %p
-      Welcome. Here’s what it’s all about 
-      %br
+    %p.welcome1
+      Welcome 
+    %p.welcome11
+      Here’s what it’s all about 
+    %p.welcome2
       There is this young bookseller from the beautiful
-      %br
+    %p.welcome3
       city Salzburg in the little european Country Austria.
-      %br
+    %p.welcome4
       his name is jacob
-      %br
+    %p.welcome5
       and suddenly he had
-      %br
+    %p.welcome5
       a wonderful idea
 
   #story_2
@@ -85,9 +87,8 @@
     = button_tag "Finish and Send", id:"send", disabled:"disabled"
 
 #footer
-  .schleifn
-    = image_tag 'schleife.png', class:"schleife"
   .kastl
+    = image_tag 'schleife2.png', class:"schleife" 
     = image_tag 'bildzeichen_footer.png', id:"bildzeichen_footer"
     %h1.likeproject
       You like this 
@@ -96,7 +97,7 @@
     %p.know
       Please let us know
     %p.mailto
-      hello@jacobjoins.com
+      hello@jacobjoins.com 
   %p.year
     2012 © jacobjoins
 
