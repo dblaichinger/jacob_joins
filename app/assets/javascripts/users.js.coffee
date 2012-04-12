@@ -17,6 +17,10 @@ window.publish_user = ->
   return return_value
 
 window.prepare_user_map = ->
+  unless typeof google is 'object' and typeof google.maps is 'object' 
+    console.log "Google Maps API not available."
+    return false
+
   map = new google.maps.Map $('#user_tab .map')[0],
     center: new google.maps.LatLng(47.806357, 13.039623) # lat and lng of salzburg
     zoom: 6
