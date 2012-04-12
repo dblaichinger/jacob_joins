@@ -33,7 +33,7 @@
 
   #yourrecipe
     font-size: 24px
-    margin-top: 35px
+    margin-top: 25px
     font-family: "Pluto"
     font-size: 24px
 
@@ -41,24 +41,26 @@
     font-family: "Sanches-Light"
     text-transform: uppercase
     font-size: 20px
-    margin-bottom: 55px
+    margin-bottom: 45px
+    height: 45px
 
   #aboutyou
     font-family: "Pacifico"
     font-size: 28px
     margin-bottom: 55px
     font-weight: lighter
+    height: 30px
 
   #yourpreview
     font-family: "Sanches-SemiBold"
     text-transform: uppercase
     font-size: 24px
+    height: 15px
 
   a
     text-decoration: none
     color: #fff
     display: block
-    height: 20px
     width: 200px
     margin: 50px 0
     text-align: center
@@ -67,10 +69,21 @@
     color: #E2001A
 
   .ui-state-active
+    position: relative
     a
       color: #E2001A
-      text-decoration: underline
-      
+      text-decoration: none
+  
+  .ui-state-active:after
+    content: ""
+    height: 5px
+    width: 200px
+    position: absolute
+    bottom: -5px
+    background-image: url(image_path('nav_underline.png'))
+    background-position: center 100%
+    background-repeat: no-repeat    
+
   #schleife
     display: block
     margin: 30px auto 10px -33px
@@ -78,7 +91,7 @@
   #endimg
     display: block
     position: absolute
-    bottom: 15px
+    bottom: 10px
     left: 25px
 
   #general
@@ -180,6 +193,9 @@ textarea
 #portions, #duration
   margin-top: 35px
 
+  label
+    margin-bottom: 5px
+
 #portions
   float: left
   margin-right: 40px
@@ -265,6 +281,11 @@ textarea
   font-family: "PlutoCondensed"
   font-size: 14px
   line-height: 1.4em
+
+.delete
+  position: absolute
+  right: 0
+  color: #E2001A
 
 label
   display: block
