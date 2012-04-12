@@ -43,18 +43,20 @@
 
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-    var recipe = data;
-
-    if(data && data.user_id){
-      var id = {"id": data.user_id};
-      //Get the user, which created the recipe
-      $.post('/users/find_user', id, function(data, textstatus, jqxhr) {
-        var user = data;
-        //console.debug(user);
-        if(user.name && recipe.city)
-          $('#last_entry').append("<p>Jacob joins "+user.name+" from "+recipe.city+"</p>");
-      }, "json");
-    }
+    //console.debug(data);
+    $.each(data, function(key, value){
+      var recipe = value;
+      if(recipe && recipe.user_id){
+        var id = {"id": recipe.user_id};
+        //Get the user, which created the recipe
+        $.post('/users/find_user', id, function(data, textstatus, jqxhr){
+          var user = data;
+          console.debug(user);
+          if(user.name && recipe.city)
+            $('#last_entry').append("<p>Jacob joins "+user.name+" from "+recipe.city+"</p>");
+        }, "json");
+      }
+    });
   }, "json");
 }
 
@@ -62,7 +64,6 @@ function get_latest_recipe(){
 function get_facebook_stream(){
   var token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
-    console.debug(data);
     var counter = 0;
     $.each(data.data, function(key, value){
       if(value.message && counter <=4){
@@ -72,12 +73,8 @@ function get_facebook_stream(){
           $('#newsbar #fb p').append(value.from.name+":" + "<br />");
           $('#newsbar #fb p').append("Message: "+value.message + "<br />");
           $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
-          $('#newsbar #fb p').append("<br />");
-
+          $('#newsbar #fb p').append("<br />");       
         }, "json");*/
-
-
-
         counter++;
       }
     });
