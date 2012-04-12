@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   before_filter :save_csi_set, :only => :sync_wizard, :if => lambda{ session[:csi_set_id].present? }
 
   def update
+    binding.pry
     if @user.publish
       render :json => { id: session[:user_id], location: session[:location] }.to_json
       session[:user_id] = session[:location] = nil
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
 
   def save_recipe
     recipe = Recipe.criteria.for_ids(session[:recipe_id]).entries.first
-    @user.recipes << recipe if recipe && !@user.recipes.include?(recipe)
+    @user.recipe = recipe if recipe
   end
 
   def save_csi_set
