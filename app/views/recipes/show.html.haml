@@ -1,31 +1,36 @@
 - recipe ||= @recipe
 
-%h1
-  = recipe.name.blank? ? "TITLE OF THE RECIPE" : recipe.name
-
-- if recipe.user
-  %h2
-    = "Author: #{recipe.user.formatted_user_info}"
-
 - recipe.images.each do |image|
   = image_tag image.attachment(:medium)
 
-%p
+%h1
+  = recipe.name.blank? ? "TITLE OF YOUR RECIPE" : recipe.name
+
+%p.prev_red
   = "Portions: #{recipe.portions}"
+
 %p
   = "Preparation time: #{recipe.duration}"
 
-%h2 
-  = "INGREDIENTS"
-- recipe.ingredients_with_quantities.each do |ingredient|
+- if recipe.user
   %p
-    = "#{ingredient.quantity} #{ingredient.name}"
+    = "Cooked by: #{recipe.user.formatted_user_info}"
 
-%h2
-  = "PREPARATION"
+%div#prev_ingredients
+  %h2 
+    = "your ingredients"
+  - recipe.ingredients_with_quantities.each do |ingredient|
+    %ul
+      %li
+        = "#{ingredient.quantity} #{ingredient.name}"
 
-- recipe.steps.each do |step|
-  %p
-    = step.description
+%div#prev_preparation
+  %h2
+    = "how to prepare your meal"
 
-  = image_tag step.image(:medium)
+  - recipe.steps.each do |step|
+    = image_tag step.image(:medium)
+    %p
+      = "Step X: #{step.description}"
+
+  
