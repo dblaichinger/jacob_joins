@@ -3,7 +3,8 @@ function gender_icon(classname){
   $('.male').removeClass('selected');
   $('#user_gender').val(classname);
   $('.'+classname).addClass('selected');
-  $(".dirtyform", "#user_tab").dirtyValidation("validate", $('#user_gender'))
+  $('#user_gender').addClass("changed");
+  $(".dirtyform", "#user_tab").dirtyValidation("validate", $('#user_gender'), false)
   return false;
 }
 

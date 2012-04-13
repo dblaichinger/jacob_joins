@@ -126,10 +126,6 @@ $ ->
       $(this).find('label[for=*"description"] span').html(count)
       prepare_recipe_step_upload $(this).find('input[type="file"]:first')
 
-      $("form", "#recipe_tab").dirtyValidation "validate",  $("form", "#recipe_tab")
-    onRemoveElement: (context) ->
-      $("form", "#recipe_tab").dirtyValidation "validate",  $("form", "#recipe_tab")
-
   $("#wizard #send").click ->
       unless window.user?
         window.user = publish_user()
@@ -159,13 +155,18 @@ $ ->
       referring_link.removeClass("form_valid").addClass("form_not_valid")
 
   $('#wizard').tabs()
+
+  $('#wizard').bind 'tabsshow', (event, ui) ->
+    $(".error:input, .error :input", ui.panel).qtip "show"
+
   $('#wizard').bind 'tabsselect', (event, ui) ->
-    newHash = '#!/form/' + ui.tab.hash.slice(1)
-    if window.location.hash isnt newHash
-      window.location.hash = newHash
+    newHash = "#!/form/#{ui.tab.hash.slice 1}"
+    window.location.hash = newHash if window.location.hash isnt newHash
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
+
+    $(".error:input", oldTab).qtip "hide"
 
     if oldTabIndex < $('#wizard').tabs('length') and oldTab.find(":input").hasClass("changed")
       url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
@@ -181,11 +182,11 @@ $ ->
         data: params
         success: (data, textStatus, jqXHR) ->
           oldTab.html data
-          $(".dirtyform", oldTab).dirtyValidation "validate", $(".dirtyform", oldTab)
+          $(".dirtyform", oldTab).dirtyValidation "validate", $(":input", oldTab).not("[type='hidden']")
 
           oldTab.css
             display: "block"
-          oldTab.attr("style", "")
+          oldTab.attr "style", ""
 
           switch oldTab.attr('id')
             when "recipe_tab"
@@ -226,8 +227,8 @@ $ ->
         $(data).appendTo $("#preview_tab .csi")
 
   $('#wizard').on "click", ".next_tab", (e) ->
-    current = $(e.delegateTarget).tabs("option", "selected")
-    $(e.delegateTarget).tabs("select", current + 1)
+    current = $(e.delegateTarget).tabs "option", "selected"
+    $(e.delegateTarget).tabs "select", current + 1
     false
 
   $('#wizard #recipe_tab .zutat').autocomplete
