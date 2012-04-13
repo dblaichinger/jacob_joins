@@ -16,21 +16,12 @@ handleFieldValidation = (target) ->
 
       $.fn.dirtyValidation "markAsInvalid", target, error_message
     else if target.attr("data-valid") and not fieldIsValid(target)
-      console.log "in"
       error_message = target.attr("data-error-message")
       error_message ||= "Field is invalid."
       $.fn.dirtyValidation "markAsInvalid", target, error_message
 
   else
     markIfRequired target
-
-  $(":input[data-required]", container).not(target).filter ->
-    return $(this).val().length is 0 or $(this).val() is " "
-  .each ->
-    markIfRequired $(this)
-
-  $(container).trigger "validated.dirtyValidation",
-    valid: $("label.error", container).size() is 0
 
 validateType = (input) ->
   switch input.attr "data-type"
@@ -44,49 +35,83 @@ fieldIsValid = (input) ->
   console.log input.attr("data-valid") == "true"
   input.attr("data-valid") == "true"
 
-
 markIfRequired = (field) ->
   $.fn.dirtyValidation "markAsInvalid", field, "This field is required." if field.attr("data-required") and not field.hasClass("error")
 
 publicMethods =
   init: (options) ->
     this.each ->
-      $.DirtyForm.monitorEvent = 'change'
       data = $(this).data "dirtyValidation"
 
       if not data
         settings = $.extend
           errorClass: "error"
+          monitorEvent: "change"
         , options
         $(this).data "dirtyValidation", settings
 
+        $.DirtyForm.monitorEvent = settings.monitorEvent
         $(this).dirty_form({dynamic:true}).dirty (event, event_data) ->
           handleFieldValidation event_data.target
 
+          $(event_data.target).qtip "show"
+
   markAsInvalid: (field, error_message) ->
     data = field.closest(".dirtyform").data "dirtyValidation"
-    field.addClass data.errorClass
-    field.after '<label for="' + $(this).prop("id") + '" class="' + data.errorClass + '">' + error_message + '</label>'
+
+    if field.css("visibility") is "hidden"
+      field.parent().addClass data.errorClass
+    else
+      field.addClass data.errorClass
+
+    field.qtip
+      overwrite: false
+      content:
+        text: error_message
+      position:
+        my: "left center"
+        at: "right center"
+        target: field
+      hide:
+        event: false
+      show:
+        event: false
+    .qtip('option', 'content.text', error_message)
 
   markAsValid: (field) ->
     data = field.closest(".dirtyform").data "dirtyValidation"
+
+    if field.css("visibility") is "hidden"
+      field.parent().removeClass data.errorClass
+    else
+      field.removeClass data.errorClass
+
     field.removeClass data.errorClass
-    field.next().remove() if field.next().is "label.error"
+    field.qtip "destroy"
 
   destroy: ->
     this.each ->
       data = $(this).data "dirtyValidation"
 
+      $(":input", $(this)).qtip "destroy"
+
       $(window).unbind ".dirtyValidation"
       $(this).removeData "dirtyValidation"
 
-  validate: (field) ->
-    data = $(this).data "dirtyValidation"
+  validate: (fields, trigger_event = true) ->
+    this.each ->
+      data = $(this).data "dirtyValidation"
 
-    if data
-      handleFieldValidation field
-    else
-      console.debug "Can't validate form. Plugin not initialized."
+      unless data
+        console.error "Can't validate form. Plugin not initialized."
+        return false
+
+      fields.each ->
+        handleFieldValidation $(this)
+
+      if trigger_event
+        $(this).trigger "validated.dirtyValidation",
+          valid: $(".error", $(this)).size() is 0
 
 $.fn.dirtyValidation = (method) ->
   if publicMethods[method]
@@ -94,4 +119,4 @@ $.fn.dirtyValidation = (method) ->
   else if typeof method is "object" or not method
     publicMethods.init.apply this, arguments
   else
-    $.error "Method " +  method + " does not exist on jQuery.dirtyValidation"
+    $.error "Method #{method} does not exist on jQuery.dirtyValidation"

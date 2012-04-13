@@ -7,6 +7,7 @@ function get_latest_recipe(){
         //Get the user, which created the recipe
         $.post('/users/find_user', id, function(data, textstatus, jqxhr){
           var user = data;
+
           if(user.name && recipe.city)
             $('#last_entry').append("<p>Jacob joins "+user.name+" from "+recipe.city+"</p>");
         }, "json");
@@ -21,7 +22,7 @@ function get_facebook_stream(){
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
     var counter = 0;
     $.each(data.data, function(key, value){
-      if(value.message && counter <=4){
+      if(value.message && counter <= 4){
         $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
           if($('#newsbar #fb .post').length <= 0)
             $('#newsbar #fb h2').after("<div class='post'>");
@@ -35,6 +36,7 @@ function get_facebook_stream(){
           current_post.append("<p class='time'>"+prettyDate(value.created_time) +"</p>");
           current_post.append("</div>");      
         }, "json");
+
         counter++;
       }
     });
