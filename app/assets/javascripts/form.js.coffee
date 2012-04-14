@@ -204,10 +204,10 @@ $ ->
         if textStatus is "Gone"
           return
           
-        no_preview_content = !!$(".no_preview")
+        no_preview_content = !!$(".no_recipe_preview")
 
         if no_preview_content
-          $(".no_preview").empty()
+          $(".no_recipe_preview").empty()
           $("#send").removeAttr "disabled"
 
         $("#preview_tab .recipe").empty()
@@ -217,10 +217,10 @@ $ ->
         if textStatus is "Gone"
           return
 
-        no_preview_content = !!$(".no_preview")
+        no_preview_content = !!$(".no_csi_preview")
 
         if no_preview_content
-          $(".no_preview").empty()
+          $(".no_csi_preview").empty()
           $("#send").removeAttr "disabled"
           
         $("#preview_tab .csi").empty()

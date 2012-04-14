@@ -19,7 +19,7 @@
         = image_tag 'pfeil.png'
 
       %a
-        = link_to "You already know the story? Just go on to the form!"
+        = link_to 'You already know the story? Just go on to the form!', "#wizard"
 
   #story_1
     %p.welcome1
@@ -89,7 +89,7 @@
     %hr
 
     - unless session[:recipe_id]
-      %p.no_preview 
+      %p.no_recipe_preview 
         Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
         %a 
           = link_to 'Post Your recipe.'
@@ -106,7 +106,7 @@
     %hr
 
     - unless session[:csi_set_id]
-      %p.no_preview 
+      %p.no_csi_preview 
         We would love to find out more about country specific traditions and different lifestyles. Maybe you want to answer a few questions 
         %a 
           = link_to 'here.'

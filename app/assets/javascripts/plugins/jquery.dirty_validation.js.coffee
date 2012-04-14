@@ -69,8 +69,8 @@ publicMethods =
       content:
         text: error_message
       position:
-        my: "left center"
-        at: "right center"
+        my: "bottom left"
+        at: "top center"
         target: field
       hide:
         event: false

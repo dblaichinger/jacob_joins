@@ -57,8 +57,10 @@ textarea:focus, input:focus
 
 #preview_tab
   padding: 37.5px
+  width: 685px
+  margin-left: 240px
 
-  .no_preview
+  .no_recipe_preview, .no_csi_preview
     font-family: "Sanches-Bold"
     text-transform: uppercase
     text-align: center
@@ -68,13 +70,31 @@ textarea:focus, input:focus
       color: #E2001A
 
   .recipe
-    img.image.attachment
+    overflow: hidden
+
+    #img_preview
       display: block
       width: 350px
       height: 230px
       float: left
-      margin: 20px 15px 20px 0px
-      background-color: #fff
+      margin: 20px 20px 30px 0px
+      background-image: url(image_path('no_image_prev.png'))
+      background-repeat: no-repeat
+
+    #prev_recipe_info
+      height: 200px
+      width: 300px
+      margin: 20px 0 30px 0
+      padding: 15px 0
+      overflow: hidden
+      position: relative
+
+      #p_prev
+        position: absolute
+        bottom: 10px
+
+        p
+          margin: 0
 
     h1
       font-family: "Pluto-Heavy"
@@ -90,12 +110,33 @@ textarea:focus, input:focus
       text-transform: uppercase
       text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
 
+    em
+      color: #E2001A
+
     #prev_ingredients
       float: left
+      width: 300px
+      overflow: hidden
       margin: 0 15px 0 0
+
+    #prev_preparation
+      .img_step_preview
+        display: block
+        width: 50px
+        height: 50px
+        float: left
+        margin: 20px 15px 20px 0px
+        background-color: #fff
+
+      em
+        color: #E2001A
+        font-family: "Sanches-SemiBold"
+        text-transform: uppercase
+
 
   #abyc_preview
     margin-top: 150px
+
 
 
 

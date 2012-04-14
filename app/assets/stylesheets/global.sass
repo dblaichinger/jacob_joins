@@ -32,7 +32,7 @@ body
   color: #fff
   position: fixed
   width: 100%
-  z-index: 100
+  z-index: 20000
   top: -215px
   cursor: pointer
 
@@ -194,9 +194,18 @@ label.error
   color: #E2001A
   float: none
 
-.valid
+.ui-tooltip-default .ui-tooltip-titlebar, .ui-tooltip-default .ui-tooltip-content
+  width: 90px
+  height: 40px
+  background-image: url("error_bubble.png")
+  background-repeat: no-repeat
+  background-position: 0 0
+  padding: 6px 5px 4px 5px
+  text-align: center
+  font-family: "Pluto"
+  font-size: 10px
+  color: #E2001A
   
-
 .form_valid
   background-image: url("finished_form_tmp.png")
   background-repeat: no-repeat
