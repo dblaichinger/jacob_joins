@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def save_recipe
     recipe = Recipe.criteria.for_ids(session[:recipe_id]).entries.first
-    @user.recipes << recipe if recipe && !@user.recipes.include?(recipe)
+    @user.recipe = recipe if recipe
   end
 
   def save_csi_set

@@ -1,49 +1,5 @@
-/*function countdown(){
-  var days;
-  var hours;
-  var minutes;
-  var seconds;
-
-  var now = new Date();
-  now.getTime();
-  var time = Date.parse(now);
-  
-  var release = Date.parse("Su, 03 Jun 2012 00:00:00 GMT+1");
-  
-  var diff = release - time;
-  
-  if (diff < 0){
-    days = hours = minutes = seconds = "00";
-  }
-  else {
-    var diff = diff /1000;
-    
-    days = Math.floor( diff/(60*60*24) );
-    if(days < 10) days = "0"+days;
-    
-    hours = Math.floor( (diff - days*24*60*60)/(60*60) );
-    if(hours < 10) hours = "0"+hours;
-    
-    minutes = Math.floor( (diff - days*24*60*60 - hours*60*60)/60);
-    if(minutes < 10) minutes = "0"+minutes;
-    
-    seconds = Math.floor( diff - days*24*60*60 - hours*60*60 - minutes*60);
-    if(seconds < 10) seconds = "0"+seconds;
-  }
-
-  $('#days').html(days);
-  $('#hours').html(hours);
-  $('#minutes').html(minutes);
-  $('#seconds').html(seconds);
-  
-  setTimeout('countdown()',200);
-
-};*/
-
-
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-    //console.debug(data);
     $.each(data, function(key, value){
       var recipe = value;
       if(recipe && recipe.user_id){
@@ -51,7 +7,7 @@ function get_latest_recipe(){
         //Get the user, which created the recipe
         $.post('/users/find_user', id, function(data, textstatus, jqxhr){
           var user = data;
-          console.debug(user);
+
           if(user.name && recipe.city)
             $('#last_entry').append("<p>Jacob joins "+user.name+" from "+recipe.city+"</p>");
         }, "json");
@@ -66,15 +22,21 @@ function get_facebook_stream(){
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
     var counter = 0;
     $.each(data.data, function(key, value){
-      if(value.message && counter <=4){
+      if(value.message && counter <= 4){
+        $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
+          if($('#newsbar #fb .post').length <= 0)
+            $('#newsbar #fb h2').after("<div class='post'>");
+          else
+            $('#newsbar #fb .post:last').after("<div class='post'>");
 
-        /*$.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
-          $('#newsbar #fb p').append("<img src='"+data.picture+"' alt='profile_picture' />");
-          $('#newsbar #fb p').append(value.from.name+":" + "<br />");
-          $('#newsbar #fb p').append("Message: "+value.message + "<br />");
-          $('#newsbar #fb p').append(prettyDate(value.created_time) + "<br />");
-          $('#newsbar #fb p').append("<br />");       
-        }, "json");*/
+          var current_post = $('#newsbar #fb .post:last');
+          current_post.append("<img src='"+data.picture+"' alt='profile_picture' />");
+          current_post.append("<h5>"+value.from.name+"</h5>");
+          current_post.append("<p class='message'>"+value.message+"</p>");
+          current_post.append("<p class='time'>"+prettyDate(value.created_time) +"</p>");
+          current_post.append("</div>");      
+        }, "json");
+
         counter++;
       }
     });
@@ -124,7 +86,6 @@ function slide_newsbar(){
   });
   
   $("#newsbar, .show_newsbar").click(function(e){
-    console.log("in");
     var newsBar = $('#newsbar');
 
     if(newsBar.hasClass('extended')){

@@ -54,3 +54,133 @@ textarea:focus, input:focus
   .ui-tabs-hide
     position: absolute
     left: -10000px
+
+#preview_tab
+  padding: 37.5px
+  width: 685px
+  margin-left: 240px
+
+  .no_recipe_preview, .no_csi_preview
+    font-family: "Sanches-Bold"
+    text-transform: uppercase
+    text-align: center
+    font-size: 16px
+
+    a
+      color: #E2001A
+
+  .recipe
+    overflow: hidden
+
+    #img_preview
+      display: block
+      width: 350px
+      height: 230px
+      float: left
+      margin: 20px 20px 30px 0px
+      background-image: url(image_path('no_image_prev.png'))
+      background-repeat: no-repeat
+
+    #prev_recipe_info
+      height: 200px
+      width: 300px
+      margin: 20px 0 30px 0
+      padding: 15px 0
+      overflow: hidden
+      position: relative
+
+      #p_prev
+        position: absolute
+        bottom: 10px
+
+        p
+          margin: 0
+
+    h1
+      font-family: "Pluto-Heavy"
+      color: #E2001A
+      font-size: 30px
+      text-transform: none
+
+    h2
+      font-size: 20px
+      font-family: "Sanches-Bold"
+      font-weight: normal
+      color: #7C6259
+      text-transform: uppercase
+      text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
+
+    em
+      color: #E2001A
+
+    #prev_ingredients
+      float: left
+      width: 300px
+      overflow: hidden
+      margin: 0 15px 0 0
+
+      ul
+        li
+          font-family: "PlutoCondensed"
+          font-size: 14px
+          line-height: 1.4em
+
+    #prev_preparation
+      .img_step_preview
+        display: block
+        width: 50px
+        height: 50px
+        float: left
+        margin: 20px 15px 20px 0px
+        background-color: #fff
+
+      em
+        color: #E2001A
+        font-family: "Sanches-SemiBold"
+        text-transform: uppercase
+
+
+  #abyc_preview
+    margin-top: 150px
+
+  .csi
+    ul
+      margin: 20px auto
+      li
+        text-align: center
+        margin: 40px auto
+
+        .question
+          color: #E2001A
+          font-family: "Sanches-SemiBold"
+          text-transform: uppercase
+
+        h3
+          font-family: "Pluto-Heavy"
+          text-transform: uppercase
+
+        p
+          margin-top: 5px
+
+  #answered
+    margin: 20px auto
+    text-align: center
+
+    .herz
+      display: block
+      margin: 0 auto
+
+    .fragen
+      font-size: 20px
+      font-family: "Sanches-Bold"
+      font-weight: normal
+      color: #7C6259
+      text-transform: uppercase
+      text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
+
+    .tell_more
+      a
+        text-transform: uppercase
+        color: #E2001A
+        font-family: "Pluto-CondensedItalic"
+

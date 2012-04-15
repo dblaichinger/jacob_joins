@@ -1,9 +1,10 @@
 function gender_icon(classname){
-  $('.female').css('border', 'none');
-  $('.male').css('border', 'none');
+  $('.female').removeClass('selected');
+  $('.male').removeClass('selected');
   $('#user_gender').val(classname);
-  $('.'+classname).css('border', '1px solid red');
-  $(".dirtyform", "#user_tab").dirtyValidation("validate", $('#user_gender'))
+  $('.'+classname).addClass('selected');
+  $('#user_gender').addClass("changed");
+  $(".dirtyform", "#user_tab").dirtyValidation("validate", $('#user_gender'), false)
   return false;
 }
 

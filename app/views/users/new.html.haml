@@ -13,8 +13,11 @@
       %span something 
       %br
       about yourself!
+
+    %hr
+    
     %p
-      Of course we want to get to know the person how shared a great recipe with us..   
+      Of course Jacob wants to get to know the person how shared a great recipe with him..   
       But no worries. Your email-address is optional and only the first letter of your sirname will be shown online.  
     .links
       %p
@@ -38,9 +41,9 @@
 
       %p
         = f.label :gender, "Gender"
-        = link_to image_tag("male_inactive.png", :class=>"male"), "#", :id => "male_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
-        = link_to image_tag("female_inactive.png", :class=>"female"), "#", :id => "female_link", :onclick => "return gender_icon($(this).find('img').attr('class'));"
-        = f.select :gender, options_for_select([['',''], ['Female', 'female'], ['Male', 'male']]), {}, { "data-required" => true }
+        = link_to image_tag("male_inactive.png", :class=>"male #{'selected' if user.gender == 'male'}"), "#", :id => "male_link", :onclick => "return gender_icon('male');"
+        = link_to image_tag("female_inactive.png", :class=>"female #{'selected' if user.gender == 'female'}"), "#", :id => "female_link", :onclick => "return gender_icon('female');"
+        = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true }
 
     .rechts    
       %p

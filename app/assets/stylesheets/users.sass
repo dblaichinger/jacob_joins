@@ -1,5 +1,10 @@
 #user_gender
-  display: none
+  visibility: hidden
+  display: block
+
+.male, .female
+  &.selected
+    border: 1px solid red
 
 #heard_from_other
   display: none
@@ -9,7 +14,6 @@
 
 .tellus
   line-height: 1.5em
-  text-align: center
 
 .address-search
   width: 300px

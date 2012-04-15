@@ -33,93 +33,97 @@ body
   color: #fff
   position: fixed
   width: 100%
-  z-index: 100
+  z-index: 20000
   top: -215px
   cursor: pointer
 
-  h1
-    display: none
-
-  h2
-    font-family: "Sanches-Italic"
-    font-size: 22px
-
-#fb, #entries
-  float: left
-  margin: 20px 10px
-  width: 350px
-
-#fb
-  height: 190px
-  overflow: auto
-
-  .post
+  #newsbar_content
+    width: 1000px
+    margin: 0 auto
     overflow: hidden
-    margin: 10px 0px
-    padding-top: 5px
+    h1
+      display: none
+
+    h2
+      font-family: "Sanches-Italic"
+      font-size: 20px
+
+    #fb, #entries
+      float: left
+      width: 255px
+      margin: 20px 10px 20px 0px
+
+    #fb
+      height: 190px
+      overflow: auto
+
+      .post
+        overflow: hidden
+        margin: 10px 0px
+        padding-top: 5px
+
+        img
+          width: 50px
+          height: 50px
+          margin-right: 10px
+          float: left
+
+        h5
+          font-family: "Sanches-SemiBold"
+          margin-bottom: 5px
+          font-size: 14px
+
+        .message
+          font-size: 12px
+
+        .time
+          font-size: 10px
+          font-family: "Pluto-LightCondensed"
+          margin-top: 5px
+
+    #entries
+
+
+    #last_entry
+
+
+    #fancy_counter
+      float: right
+      margin: 20px 0
+      height: 190px
+
+      h2
+        margin-left: 15px
+
+      .text
+        position: absolute
+        bottom: 0
+        font-family: "Pluto-CondensedItalic"
+        width: 100px
+        text-align: center
+
+      .display
+        font-family: "Sanches-Bold"
+
+    #countdown
+      position: absolute
+      bottom: 35px
+      right: 15px
+      font-family: "Sanches-Semibold"
+
+      #days, #hours, #minutes, #seconds
+        float: left
+        margin-right: 5px
+
+  #logo
+    clear: both
+    position: absolute
+    bottom: 30px
+    left: 46%
 
     img
-      width: 50px
-      height: 50px
-      margin-right: 10px
-      float: left
-
-    h5
-      font-family: "Sanches-SemiBold"
-      margin-bottom: 5px
-      font-size: 14px
-
-    .message
-      font-size: 12px
-
-    .time
-      font-size: 10px
-      font-family: "Pluto-LightCondensed"
-      margin-top: 5px
-
-#entries
-  outline: 1px solid yellow
-
-#last_entry
-
-
-#fancy_counter
-  float: right
-  margin: 20px 15px
-  height: 190px
-
-  h2
-    margin-left: 15px
-
-  .text
-    position: absolute
-    bottom: 0
-    font-family: "Pluto-CondensedItalic"
-    width: 100px
-    text-align: center
-
-  .display
-    font-family: "Sanches-Bold"
-
-#countdown
-  position: absolute
-  bottom: 35px
-  right: 15px
-  font-family: "Sanches-Semibold"
-
-#days, #hours, #minutes, #seconds
-  float: left
-  margin-right: 5px
-
-#logo
-  clear: both
-  position: absolute
-  bottom: 30px
-  left: 47%
-
-  img
-    display: block
-    margin: 0 auto 0 auto
+      display: block
+      margin: 0 auto 0 auto
 
 
 #start
@@ -136,10 +140,10 @@ body
     
     #Logo_start
       width: 654px
-      margin: 50px 185px 0 185px
+      margin: 60px 185px 0 185px
 
     #Bildzeichen_Screen
-      margin: 70px 430px 0 430px
+      margin: 60px 430px 0 430px
 
     h3
       font-family: "Sanches-Bold"
@@ -187,9 +191,18 @@ label.error
   color: #E2001A
   float: none
 
-.valid
+.ui-tooltip-default .ui-tooltip-titlebar, .ui-tooltip-default .ui-tooltip-content
+  width: 90px
+  height: 40px
+  background-image: url("error_bubble.png")
+  background-repeat: no-repeat
+  background-position: 0 0
+  padding: 6px 5px 4px 5px
+  text-align: center
+  font-family: "Pluto"
+  font-size: 10px
+  color: #E2001A
   
-
 .form_valid
   background-image: url("finished_form_tmp.png")
   background-repeat: no-repeat

@@ -1,5 +1,3 @@
-%h1 COUNTRY SPECIFIC
-
 - if @csi_set.user
   %h2
     = "Author: #{@csi_set.user.formatted_user_info}"
@@ -7,7 +5,20 @@
 %ul
   - @csi_set.country_specific_informations.where(:answer.ne => "").each do |csi|
     %li
+      %p.question
+        Question X
       %h3
         = csi.question
       %p
         = csi.answer
+
+%div#answered
+  = image_tag 'herz.png', class:"herz"
+  %p.fragen
+    You’ve answered 
+    %br
+    X of X questions
+
+  %p.tell_more
+    %a
+      = link_to 'Do you want to tell us more about your country?' 

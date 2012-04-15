@@ -158,7 +158,7 @@ textarea
   width: 95%
   height: 150px
 
-#new_recipe, .edit_recipe, #new_user, .edit_user, .user_form, #preview, #country_specific_information_tab, #preview_tab 
+#new_recipe, .edit_recipe, #new_user, .edit_user, .user_form, #preview, #country_specific_information_tab,  
   width: 760px
   margin-left: 240px
 
@@ -234,7 +234,10 @@ textarea
   border-left: 190px solid transparent
   border-right: 190px solid transparent
   border-top: 25px solid #fff
-
+  
+#ingredients.active
+  overflow: visible
+  
 #ingredients.active:after
   content: ""
   width: 0
@@ -244,6 +247,7 @@ textarea
   border-left: 25px solid #fff
   border-bottom: 190px solid transparent
   border-top: 190px solid transparent
+  z-index: 1000
 
 .next
   -moz-box-shadow: inset 0 0 0 2px #fff
@@ -277,13 +281,14 @@ textarea
   float: left
 
 .upload_wrapper
-  background-color: rgba(83,30,9,0.3)
+  background-image: url(image_path('btn_upload_image.png'))
+  background-position: 0 0
+  background-repeat: no-repeat  
   width: 80px
   height: 30px
   position: absolute
   right: 0
   top: 0
-  text-align: center
   cursor: pointer
   overflow: hidden
 
@@ -298,6 +303,10 @@ textarea
 
   p
     margin: 0 !important
+
+.upload_wrapper:hover
+  background-image: url(image_path('btn_upload_image_hover.png'))
+  cursor: pointer
 
 .image_preview
   font-family: "PlutoCondensed"

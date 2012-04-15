@@ -23,52 +23,28 @@
           = value
     
     %section#newsbar
-      %div#fb
-        %h2
-          Join Jacob on Facebook
-        %div.post
-          = image_tag 'katze.jpg'
-          %h5
-            Name
-          %p.message
-            jacobjoins ist sooooo cool :)
-          %p.time
-            1 hour ago
-        %div.post
-          = image_tag 'katze.jpg'
-          %h5
-            Name
-          %p.message
-            jacobjoins ist sooooo cool :)
-          %p.time
-            1 hour ago
-        %div.post
-          = image_tag 'katze.jpg'
-          %h5
-            Name
-          %p.message
-            jacobjoins ist sooooo cool :)
-          %p.time
-            1 hour ago
+      %div#newsbar_content
+        %div#fb
+          %h2
+            Join Jacob on Facebook
           
+        %div#entries
+          %h2
+            What happened so far  
+          #last_entry
 
-      %div#entries
-        %h2
-          What happened so far  
-        #last_entry
+        #fancy_counter
+          %h2
+            Countdown to release on 4 June 2012
 
-      #fancy_counter
-        %h2
-          Countdown to release on 4 June 2012
-
-      #countdown
-        #days
-        #hours
-        #minutes
-        #seconds
-     
-      %div#logo
-        = image_tag( 'logo.png')
+        #countdown
+          #days
+          #hours
+          #minutes
+          #seconds
+       
+        %div#logo
+          = image_tag( 'logo.png')
 
       %div#clickandsee
         %a{:href => "#", :class => "show_newsbar"}
