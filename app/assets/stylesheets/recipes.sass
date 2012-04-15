@@ -279,13 +279,14 @@ textarea
   float: left
 
 .upload_wrapper
-  background-color: rgba(83,30,9,0.3)
+  background-image: url(image_path('btn_upload_image.png'))
+  background-position: 0 0
+  background-repeat: no-repeat  
   width: 80px
   height: 30px
   position: absolute
   right: 0
   top: 0
-  text-align: center
   cursor: pointer
   overflow: hidden
 
@@ -300,6 +301,10 @@ textarea
 
   p
     margin: 0 !important
+
+.upload_wrapper:hover
+  background-image: url(image_path('btn_upload_image_hover.png'))
+  cursor: pointer
 
 .image_preview
   font-family: "PlutoCondensed"
