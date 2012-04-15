@@ -65,15 +65,15 @@
     #preparation.part-3
       %h1
         %strong 3 
-        Tell us how to 
+        Tell Jacob how to 
         %span prepare 
-        the meal
+        meal
 
       %hr
 
       %p
-        Jacob wants to know how to do it. Maybe you want to give us a step-by-step instruction to make it easier for us to try your recipe at home. 
-        Again you can add or delete steps as required. Plus: We love pictures!
+        Jacob wants to know how to do it. Maybe you want to give him a step-by-step instruction to make it easier for him to try your recipe at home. 
+        Again you can add or delete steps as required. Plus: He loves pictures!
 
       .steps
         - counter = 0
@@ -100,14 +100,13 @@
       #recipe_images
         %h1 
           %strong 4
-          Show us your
-          %span incredible
-          meal
+          Show Jacob your
+          %span meal
 
         %hr
         
         %p
-          You filled in our form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: We would love to see a picture of your creation together with your written recipe!
+          You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see a picture of your creation together with your written recipe!
 
         = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
         %ul.file_uploads
