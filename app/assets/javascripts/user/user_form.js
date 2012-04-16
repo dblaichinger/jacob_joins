@@ -1,8 +1,8 @@
 function gender_icon(classname){
-  $('.female').removeClass('selected');
-  $('.male').removeClass('selected');
+  $('.female').attr('src', '/assets/female_inactive.png');
+  $('.male').attr('src', '/assets/male_inactive.png');
   $('#user_gender').val(classname);
-  $('.'+classname).addClass('selected');
+  $('.' + classname).attr('src', '/assets/' + classname + '_active.png');
   $('#user_gender').addClass("changed");
   $(".dirtyform", "#user_tab").dirtyValidation("validate", $('#user_gender'), false)
   return false;

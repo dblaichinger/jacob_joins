@@ -1,19 +1,11 @@
 - recipe = session[:recipe_id].present? ? Recipe.find(session[:recipe_id]) : Recipe.new
-- perform_validation = @perform_validation || perform_validation
 - (3 - recipe.steps.count).times { recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
     $(":input[placeholder]", "#recipe_tab").placeholder();
     $("form", "#recipe_tab").stepHighlighting().dirtyValidation();
-    $("#ingredients").elementOnDemand({
-      onAddElement: function(context){
-        $("form", "#recipe_tab").dirtyValidation("validate",  $("form", "#recipe_tab"));
-      },
-      onRemoveElement: function(context){
-        $("form", "#recipe_tab").dirtyValidation("validate",  $("form", "#recipe_tab"));
-      }
-    });
+    $("#ingredients").elementOnDemand();
   });
 
 
