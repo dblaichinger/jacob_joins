@@ -43,8 +43,8 @@
 
         = hidden_field_tag :longitude, @longitude
         = hidden_field_tag :latitude, @latitude
-        = hidden_field_tag :country, @country
-        = hidden_field_tag :city, @city
+        = hidden_field_tag :country, @country, :id => "country_hidden"
+        = hidden_field_tag :city, @city, :id => "city_hidden"
 
       %p
         = f.label :gender, "Gender"
