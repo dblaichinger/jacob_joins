@@ -47,19 +47,24 @@
 textarea:focus, input:focus
   outline: 0px
 
-input.next_tab
-  background-color: none 
-
 .next_tab
-  display:block
+  width: 155px
+  height: 30px
+  display: block
   text-transform: uppercase
-  position: relative
-  width: 200px
-  height: 80px
+  vertical-align: middle
   border: none
-  color: #E2001A
+  color: #fff
   background-color: transparent
-  background-image: url(image_path('next.png'))
+  background-image: url(image_path('next_tab.png'))
+  background-repeat: no-repeat
+  background-position: 0 0
+  position: absolute
+  bottom: 0
+  right: 0
+
+.next_tab:hover
+  background-image: url(image_path('next_tab_hover.png'))
 
 
 .ui-tabs
