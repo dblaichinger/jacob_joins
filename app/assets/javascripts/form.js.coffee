@@ -35,8 +35,6 @@ prepare_recipe_step_upload = (currentFileInput) ->
       data.submit()
     fail: (e, data) ->
       alert "fail"
-    #submit: (e, data) ->
-    #always: (e, data) ->
 
 prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
@@ -111,6 +109,18 @@ prepare_csi_slider = () ->
     csi_slider.goToSlide $('#csi_slider_navigation a').index(this)
     false
 
+window.reinitialize_tooltips = (context) ->
+  $("[data-tooltip]", context).each ->
+    $(this).qtip
+      overwrite: false
+      content:
+        text: $(this).attr "data-tooltip"
+      position:
+        my: "bottom left"
+        at: "top center"
+        target: $(this)
+    .qtip('option', 'content.text', $(this).attr("data-tooltip"))
+
 $ ->
   elementTemplate = c = $('#recipe_tab .steps .step:last').clone(true, true)
   elementTemplate.children('.image_preview').remove()
@@ -183,6 +193,8 @@ $ ->
         success: (data, textStatus, jqXHR) ->
           oldTab.html data
           $(".dirtyform", oldTab).dirtyValidation "validate", $(":input", oldTab).not("[type='hidden']")
+
+          reinitialize_tooltips oldTab
 
           oldTab.css
             display: "block"

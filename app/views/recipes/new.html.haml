@@ -6,6 +6,8 @@
     $(":input[placeholder]", "#recipe_tab").placeholder();
     $("form", "#recipe_tab").stepHighlighting().dirtyValidation();
     $("#ingredients").elementOnDemand();
+
+    reinitialize_tooltips($("#recipe_tab"));
   });
 
 
