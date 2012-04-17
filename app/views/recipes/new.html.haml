@@ -19,6 +19,24 @@
       minLength: 2
     });
 
+    var elementTemplate;
+    elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
+    elementTemplate.children('.image_preview').remove();
+    elementTemplate.children('input[type="hidden"]').remove();
+    elementTemplate.children('.upload_wrapper').css({
+      display: 'block'
+    });
+    elementTemplate = $('<div>').append(elementTemplate).html();
+    $('#recipe_tab .steps').elementOnDemand({
+      element: elementTemplate,
+      onAddElement: function(context) {
+        var count;
+        count = $(this).siblings('.step').length + 1;
+        $(this).find('label[for=*"description"] span').html(count);
+        return prepare_recipe_step_upload($(this).find('input[type="file"]:first'));
+      }
+    });
+
     reinitialize_tooltips($("#recipe_tab"));
   });
 

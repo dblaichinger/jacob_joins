@@ -1,4 +1,4 @@
-prepare_recipe_step_upload = (currentFileInput) ->
+window.prepare_recipe_step_upload = (currentFileInput) ->
   currentFileInput.fileupload
     dataType: 'json'
     url: '/recipes/upload_step_image'
@@ -122,20 +122,6 @@ window.reinitialize_tooltips = (context) ->
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
 $ ->
-  elementTemplate = c = $('#recipe_tab .steps .step:last').clone(true, true)
-  elementTemplate.children('.image_preview').remove()
-  elementTemplate.children('input[type="hidden"]').remove()
-  elementTemplate.children('.upload_wrapper').css
-    display: 'block'
-  elementTemplate = $('<div>').append(elementTemplate).html()
-
-  $('#recipe_tab .steps').elementOnDemand
-    element: elementTemplate
-    onAddElement: (context) ->
-      count = $(this).siblings('.step').length + 1
-      $(this).find('label[for=*"description"] span').html(count)
-      prepare_recipe_step_upload $(this).find('input[type="file"]:first')
-
   $("#wizard #send").click ->
       unless window.user?
         window.user = publish_user()
