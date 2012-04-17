@@ -200,8 +200,25 @@ textarea
   float: left
   margin-right: 40px
 
-  input
-    width: 10px
+  .ui-rating
+    overflow: hidden
+    
+    .ui-rating-star, .ui-rating-cancel
+      width: 18px
+      height: 33px
+      background-image: url(/assets/portions.png)
+
+      &:last-child
+        background-image: url(/assets/portions_plus.png)
+
+  .ui-rating-full
+    background-position: left top
+
+  .ui-rating-empty
+    background-position: left -33px
+
+  .ui-rating-hover
+    background-position: left -68px
 
 #duration
   overflow: hidden

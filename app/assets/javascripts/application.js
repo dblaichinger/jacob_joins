@@ -22,5 +22,6 @@
 //= require jquery.tzineClock
 //= require jquery.dirtyform
 //= require path.min
+//= require jquery.rating
 //= require_tree .
  

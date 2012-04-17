@@ -41,6 +41,10 @@ class Recipe
     end
   end
 
+  def formatted_portions
+    portions > 6 ? "more than six" : portions
+  end
+
   private
   def save_ingredients
     ingredients_with_quantities.each do |ingredient_with_quantity|
