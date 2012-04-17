@@ -17,7 +17,7 @@
     %p
       Preparation time: 
       %em
-        = recipe.duration
+        = recipe.duration.present? ? "#{recipe.duration} min" : "PREPARATION TIME"
 
     - if recipe.user
       %p
@@ -37,11 +37,11 @@
   %h2
     = "how to prepare your meal"
 
-  - recipe.steps.each do |step|
+  - recipe.steps.each_with_index do |step, index|
     = image_tag step.image(:medium)
     %p
       %em
-        Step X: 
+        = "Step #{index + 1}:" 
       = step.description
 
   
