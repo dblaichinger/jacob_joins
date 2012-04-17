@@ -47,8 +47,20 @@
 textarea:focus, input:focus
   outline: 0px
 
+input.next_tab
+  background-color: none 
+
 .next_tab
+  display:block
   text-transform: uppercase
+  position: relative
+  width: 200px
+  height: 80px
+  border: none
+  color: #E2001A
+  background-color: transparent
+  background-image: url(image_path('next.png'))
+
 
 .ui-tabs
   .ui-tabs-hide
@@ -60,6 +72,9 @@ textarea:focus, input:focus
   width: 685px
   margin-left: 240px
 
+#prev_recipe, #prev_csi
+  position: relative
+
   .no_recipe_preview, .no_csi_preview
     font-family: "Sanches-Bold"
     text-transform: uppercase
@@ -67,7 +82,7 @@ textarea:focus, input:focus
     font-size: 16px
 
     a
-      color: #E2001A
+      color: #E2001A  
 
   .recipe
     overflow: hidden
@@ -184,3 +199,31 @@ textarea:focus, input:focus
         color: #E2001A
         font-family: "Pluto-CondensedItalic"
 
+  .edit_recipe
+    width: 93px
+    height: 30px
+    background-image: url(image_path('btn_edit_recipe.png'))
+    background-position: 0 0
+    background-repeat: no-repeat  
+
+  .edit_recipe:hover
+    background-image: url(image_path('btn_edit_recipe_hover.png'))
+
+  .edit_answers
+    width: 106px
+    height: 30px
+    background-image: url(image_path('btn_edit_answers.png'))
+    background-position: 0 0
+    background-repeat: no-repeat  
+
+  .edit_answers:hover
+    background-image: url(image_path('btn_edit_answers_hover.png'))
+
+  .edit_recipe, .edit_answers
+    float: right
+    margin: 0px
+    position: absolute
+    top: 0
+    right: 0
+    border: none
+    cursor: pointer

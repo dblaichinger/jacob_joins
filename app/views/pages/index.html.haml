@@ -78,41 +78,46 @@
     - session[:location] = nil
     = render :template => "users/new"
   #preview_tab
-    
-    %h1
-      %strong 1
-      Here is what you told 
-      %br
-      Jacob about
-      %span your recipe
+    #prev_recipe
+      %h1
+        %strong 1
+        Here is what you told 
+        %br
+        Jacob about
+        %span your recipe
 
-    %hr
+      = button_to "", '#', class:"edit_recipe"
 
-    - unless session[:recipe_id]
-      %p.no_recipe_preview 
-        Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-        %a 
-          = link_to 'Post Your recipe.'
+      %hr
 
-    .recipe
+      - unless session[:recipe_id]
+        %p.no_recipe_preview 
+          Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
+          %a 
+            = link_to 'Post Your recipe.'
 
-    %h1#abyc_preview
-      %strong 2
-      That’s what you told 
-      %br
-      Jacob 
-      %span about your country
+      .recipe
 
-    %hr
+    #prev_csi
+      %h1#abyc_preview
+        %strong 2
+        That’s what you told 
+        %br
+        Jacob 
+        %span about your country
 
-    - unless session[:csi_set_id]
-      %p.no_csi_preview 
-        We would love to find out more about country specific traditions and different lifestyles. Maybe you want to answer a few questions 
-        %a 
-          = link_to 'here.'
-        Do it!
-    
-    .csi
+      = button_to "", '#', class:"edit_answers"
+
+      %hr
+
+      - unless session[:csi_set_id]
+        %p.no_csi_preview 
+          We would love to find out more about country specific traditions and different lifestyles. Maybe you want to answer a few questions 
+          %a 
+            = link_to 'here.'
+          Do it!
+      
+      .csi
 
     = button_tag "Finish and Send", id:"send", disabled:"disabled"
 
