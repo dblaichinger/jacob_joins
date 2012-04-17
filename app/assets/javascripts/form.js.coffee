@@ -243,10 +243,6 @@ $ ->
     $(e.delegateTarget).tabs "select", current + 1
     false
 
-  $('#wizard #recipe_tab .zutat').autocomplete
-    source: '/ingredients/names'
-    minLength: 2
-
   prepare_recipe_uploads()
   prepare_csi_slider()
   prepare_user_map()
