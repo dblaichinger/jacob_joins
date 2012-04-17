@@ -10,7 +10,7 @@ handleFieldValidation = (target) ->
     if target.attr("data-type") and not validateType(target)
       switch target.attr "data-type"
         when "email"
-          error_message = "It has to be a valid email address."
+          error_message = "It has to be a email address."
         when "numerical"
           error_message = "It has to be a number."
 
@@ -32,11 +32,10 @@ validateType = (input) ->
       return not isNaN input.val()
 
 fieldIsValid = (input) ->
-  console.log input.attr("data-valid") == "true"
-  input.attr("data-valid") == "true"
+  input.attr("data-valid") is "true"
 
 markIfRequired = (field) ->
-  $.fn.dirtyValidation "markAsInvalid", field, "This field is required." if field.attr("data-required") and not field.hasClass("error")
+  $.fn.dirtyValidation "markAsInvalid", field, "This field is required." if field.attr "data-required"
 
 publicMethods =
   init: (options) ->
@@ -60,7 +59,12 @@ publicMethods =
     data = field.closest(".dirtyform").data "dirtyValidation"
 
     if field.css("visibility") is "hidden"
-      field.parent().addClass data.errorClass
+      $("option", field).not (index) ->
+        return $(this).val().length is 0 or $(this).val() is " "
+      .each ->
+        $(".#{$(this).val()}", field.closest(".dirtyform")).addClass data.errorClass
+
+      field = field.parent()
     else
       field.addClass data.errorClass
 
@@ -82,7 +86,12 @@ publicMethods =
     data = field.closest(".dirtyform").data "dirtyValidation"
 
     if field.css("visibility") is "hidden"
-      field.parent().removeClass data.errorClass
+      $("option", field).not (index) ->
+        return $(this).val().length is 0 or $(this).val() is " "
+      .each ->
+        $(".#{$(this).val()}", field.closest(".dirtyform")).removeClass data.errorClass
+
+      field = field.parent()
     else
       field.removeClass data.errorClass
 

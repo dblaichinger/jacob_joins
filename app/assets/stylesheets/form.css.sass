@@ -48,8 +48,24 @@ textarea:focus, input:focus
   outline: 0px
 
 .next_tab
+  width: 143px
+  height: 30px
+  display: block
   text-transform: uppercase
+  vertical-align: middle
+  border: none
+  color: #fff
+  background-color: transparent
+  background-image: url(image_path('next_tab.png'))
+  background-repeat: no-repeat
+  background-position: 0 0
+  position: absolute
+  bottom: 0
+  right: 0
 
+.next_tab:hover
+  background-image: url(image_path('next_tab_hover.png'))
+   
 .ui-tabs
   .ui-tabs-hide
     position: absolute
@@ -61,6 +77,9 @@ textarea:focus, input:focus
   width: 685px
   margin-left: 240px
 
+#prev_recipe, #prev_csi
+  position: relative
+
   .no_recipe_preview, .no_csi_preview
     font-family: "Sanches-Bold"
     text-transform: uppercase
@@ -68,7 +87,7 @@ textarea:focus, input:focus
     font-size: 16px
 
     a
-      color: #E2001A
+      color: #E2001A  
 
   .recipe
     overflow: hidden
@@ -185,3 +204,31 @@ textarea:focus, input:focus
         color: #E2001A
         font-family: "Pluto-CondensedItalic"
 
+  .edit_recipe
+    width: 93px
+    height: 30px
+    background-image: url(image_path('btn_edit_recipe.png'))
+    background-position: 0 0
+    background-repeat: no-repeat  
+
+  .edit_recipe:hover
+    background-image: url(image_path('btn_edit_recipe_hover.png'))
+
+  .edit_answers
+    width: 106px
+    height: 30px
+    background-image: url(image_path('btn_edit_answers.png'))
+    background-position: 0 0
+    background-repeat: no-repeat  
+
+  .edit_answers:hover
+    background-image: url(image_path('btn_edit_answers_hover.png'))
+
+  .edit_recipe, .edit_answers
+    float: right
+    margin: 0px
+    position: absolute
+    top: 0
+    right: 0
+    border: none
+    cursor: pointer
