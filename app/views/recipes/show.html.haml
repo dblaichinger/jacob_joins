@@ -6,7 +6,7 @@
 
 %div#prev_recipe_info
   %h1
-    = recipe.name.blank? ? "TITLE OF YOUR RECIPE" : recipe.name
+    = recipe.name.blank? ? "The title of your recipe" : recipe.name
 
   %div#p_prev
     %p
@@ -17,7 +17,7 @@
     %p
       Preparation time: 
       %em
-        = recipe.duration.present? ? "#{recipe.duration} min" : "PREPARATION TIME"
+        = recipe.duration.present? ? "#{recipe.duration} min" : "your preparation time"
 
     - if recipe.user
       %p
@@ -37,11 +37,14 @@
   %h2
     = "how to prepare your meal"
 
+  
   - recipe.steps.each_with_index do |step, index|
-    = image_tag step.image(:medium)
-    %p
-      %em
-        = "Step #{index + 1}:" 
-      = step.description
+    %div.prev_preparatoin_step
+      = image_tag step.image(:medium)
+      %p
+        %em
+          = "Step #{index + 1}:" 
+        %br
+        = step.description
 
   
