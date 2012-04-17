@@ -5,7 +5,39 @@
   $(document).ready(function(){
     $(":input[placeholder]", "#recipe_tab").placeholder();
     $("form", "#recipe_tab").stepHighlighting().dirtyValidation();
-    $("#ingredients").elementOnDemand();
+    $("#ingredients").elementOnDemand({
+      onAddElement: function(context){
+        $(this).find('.zutat').autocomplete({
+          source: '/ingredients/names',
+          minLength: 2
+        });
+      }
+    });
+
+    $('#wizard #recipe_tab .zutat').autocomplete({
+      source: '/ingredients/names',
+      minLength: 2
+    });
+
+    var elementTemplate;
+    elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
+    elementTemplate.children('.image_preview').remove();
+    elementTemplate.children('input[type="hidden"]').remove();
+    elementTemplate.children('.upload_wrapper').css({
+      display: 'block'
+    });
+    elementTemplate = $('<div>').append(elementTemplate).html();
+    $('#recipe_tab .steps').elementOnDemand({
+      element: elementTemplate,
+      onAddElement: function(context) {
+        var count;
+        count = $(this).siblings('.step').length + 1;
+        $(this).find('label[for=*"description"] span').html(count);
+        return prepare_recipe_step_upload($(this).find('input[type="file"]:first'));
+      }
+    });
+
+    reinitialize_tooltips($("#recipe_tab"));
   });
 
 
@@ -108,4 +140,4 @@
               = i.attachment_file_name
               = link_to "delete", recipes_delete_image_path(i.id), class:"delete"
 
-    = button_to "Save this step", '#', class:"next_tab"
+  = link_to "", '#!/form/country_specific_information_tab', class:"next_tab"

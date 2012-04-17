@@ -10,7 +10,7 @@ handleFieldValidation = (target) ->
     if target.attr("data-type") and not validateType(target)
       switch target.attr "data-type"
         when "email"
-          error_message = "It has to be a valid email address."
+          error_message = "It has to be a email address."
         when "numerical"
           error_message = "It has to be a number."
 
