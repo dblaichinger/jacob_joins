@@ -166,7 +166,7 @@ $ ->
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
 
-    $(".error:input", oldTab).qtip "hide"
+    $("[aria-describedby]", oldTab).qtip "hide"
 
     if oldTabIndex < $('#wizard').tabs('length') and oldTab.find(":input").hasClass("changed")
       url = oldTab.attr('id').replace '_tab', 's/sync_wizard'

@@ -1,5 +1,8 @@
 @import compass/reset
 @import compass/css3/font-face
+@import mixins
+
+
  
 +font-face("Sanches-Italic", font-files("Sanches/203126_0_0.ttf", "Sanches/203126_0_0.woff"), "Sanches/203126_0_0.eot")
 +font-face("Sanches-SemiBold", font-files("Sanches/203126_2_0.ttf", "Sanches/203126_2_0.woff"),"Sanches/203126_2_0.eot")
@@ -11,8 +14,9 @@
 +font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
 +font-face("Pluto-CondensedItalic", font-files("Pluto-Italic/203125_9_0.ttf", "Pluto-Italic/203125_9_0.woff"), "Pluto-Italic/203125_9_0.eot")
 +font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
-+font-face("Pluto-Heavy", font-files("Pluto/203124_1_0.ttf", "Pluto/203124_1_0.woff"), "Pluto/203124_1_0.eot")
-
++font-face("Pluto-Heavy", font-files("Pluto/203124_D_0.ttf", "Pluto/203124_D_0.woff"), "Pluto/203124_D_0.eot")
++font-face("Pluto-HeavyCondensed", font-files("Pluto/203124_5_0.ttf", "Pluto/203124_5_0.woff"), "Pluto/203124_5_0.eot")
++font-face("Pluto-LightItalic", font-files("Pluto-Italic/203125_1_0.ttf", "Pluto-Italic/203125_1_0.woff"), "Pluto-Italic/203125_1_0.eot")
 
 body
   height: 100%
@@ -169,13 +173,19 @@ body
       text-decoration: none
       color: #531E09
 
-#story_2, #story_3, #story_4, #story_5
+#text_1, #text_2, #text_3, #text_4, #text_5
+  margin: auto
+  width: 1024px
+  padding: 50px 0
+
+
+#story_1, #story_2, #story_3, #story_4, #story_5
   min-height: 700px
 
-#story_3
+#story_2, #story_5
   background-image: url(image_path('pattern2.png'))
 
-#story_4
+#story_3
   background-image: url(image_path('pattern.png'))
 
 
@@ -273,9 +283,155 @@ label.error
   text-transform: uppercase
   font-size: 12px  
 
-
 .welcome1
-  font-family: Pacifico
-  font-size: 130px
+  +weiß-shadow-welcome(Pacifico, 90pt)
+  width: 500px
+  display: inline
+
+.welcome11
+  font-family: Pluto-HeavyCondensed
+  text-transform: uppercase
+  display: inline
+  font-size: 30pt  
+  color: #E2001A
  
+.welcome2
+  +weiß-shadow-welcome(Pluto-LightItalic, 29pt)
+
+.welcome4
+  +letterpress-rot-welcome(Sanches-Bold, 91pt)
+
+.welcome5
+  +weiß-shadow-welcome(Pluto, 45pt)
+  text-transform: uppercase
+  letter-spacing: 13px
+
+.welcome6
+  +letterpress-braun-welcome(Sanches-Bold, 94pt)
+
+.idea1
+  +weiß-shadow-idea(Pacifico, 62pt)
+  width: 600px
+  display: inline
+
+.idea11  
+  +letterpress-rot-idea(Pluto-HeavyCondensed, 30pt)
+  text-transform: uppercase
+  display: inline
+
+.idea2
+  +weiß-shadow-idea(Pluto-LightItalic, 34pt)
+  padding-top: 10px
+
+.idea3
+  +letterpress-rot-idea(Sanches-Bold, 45pt)  
+
+.idea4
+  +weiß-shadow-idea(Pluto, 25pt)
+  text-transform: uppercase
+  letter-spacing: 13px
+  padding-top: 20px
+
+.idea5
+  +letterpress-braun-idea(Sanches-Bold, 80pt)  
+
+
+.intention1
+  +letterpress-braun-intention(Pacifico, 82pt)  
+
+.intention2
+  +weiß-shadow-intention(Pluto-LightItalic, 27pt)
+.intention5
+  +weiß-shadow-intention(Pluto-LightItalic, 27pt)
+  padding-top: 15px
+
+.intention55
+  +weiß-shadow-intention(Pluto-LightItalic, 27pt)
+  letter-spacing: 1px
+
+.intention22
+  +weiß-shadow-intention(Pluto-LightItalic, 27pt)
+  letter-spacing: 1px
+
+
+.intention3
+  +letterpress-braun-intention(Sanches-Bold, 73pt)   
+
+.intention4
+  +letterpress-rot-intention(Pluto, 26pt)
+  text-transform: uppercase
+  letter-spacing: 8px  
+
+.intention6
+  +letterpress-braun-intention(Sanches-Bold, 56pt)  
+
+.join1
+  +weiß-shadow-idea(Pacifico, 63pt)
+
+.join2
+  +weiß-shadow-idea(Pluto-LightItalic, 28pt)
+  padding-top: 20px  
+
+.join3  
+  +weiß-shadow-idea(Pluto-LightItalic, 28pt)
+  width: 400px
+  display: inline
+
+.join33
+  +letterpress-braun-idea(Pluto-HeavyCondensed, 41pt)
+  text-transform: uppercase
+  display: inline  
+  letter-spacing: 5px
+  padding-left: 10px
+
+.join4
+  +letterpress-rot-idea(Pluto, 24pt)
+  text-transform: uppercase
+  letter-spacing: 13px  
+  padding-top: 15px
+
+.join5
+  +letterpress-braun-idea(Sanches-Bold, 76pt)  
+
+.share
+  +weiß-shadow-welcome(Pluto-Heavy, 42pt)
+  text-transform: uppercase
+  text-align: center
+
+.share2  
+  +letterpress-rot-share(Pluto-Heavy, 20pt)
+  text-align: center
+  text-transform: uppercase
+
+.sharing1
+  +weiß-shadow-idea(Pacifico, 50pt)
+  width: 400px
+  display: inline
+
+.sharing11  
+  +letterpress-rot-idea(Pluto-HeavyCondensed, 23pt)
+  text-transform: uppercase
+  display: inline
+  letter-spacing: 1px
+
+.sharing2
+  +weiß-shadow-idea(Pluto-LightItalic, 32pt)
+
+.sharing3
+  +letterpress-rot-idea(Sanches-Bold, 63pt)
+
+.sharing4
+  +weiß-shadow-idea(Pluto, 33pt) 
+  text-transform: uppercase
+  letter-spacing: 13px
+
+.sharing44
+  +weiß-shadow-idea(Pluto-LightItalic, 36pt)  
+
+.sharing5
+  +letterpress-braun-idea(Sanches-Bold, 65pt)
+
+.stories
+  margin: auto  
+
 
