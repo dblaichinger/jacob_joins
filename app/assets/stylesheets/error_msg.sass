@@ -32,4 +32,39 @@
     list-style: square
 
 .flash_error
-  background-color: #f00
+
+.error
+  border: 2px solid #E2001A
+  float: none
+
+label.error
+  border: none
+  font-family: "Pluto-CondensedItalic" !important
+  font-size: 12px
+  color: #E2001A
+  float: none
+
+.ui-tooltip-default .ui-tooltip-titlebar, .ui-tooltip-default .ui-tooltip-content
+  width: 90px
+  height: 40px
+  background-image: url("error_bubble.png")
+  background-repeat: no-repeat
+  background-position: 0 0
+  padding: 6px 5px 4px 5px
+  text-align: center
+  font-family: "Pluto"
+  font-size: 10px
+  color: #E2001A
+  
+.form_valid
+  background-image: url("finished_form_tmp.png")
+  background-repeat: no-repeat
+  background-position: 98% 100%
+
+.form_not_valid
+  background-image: url("edit_form_tmp.png")
+  background-repeat: no-repeat
+  background-position: 95% 50%
+
+.ui-state-default, .ui-corner-top
+  min-height: 30px
