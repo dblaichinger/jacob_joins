@@ -50,6 +50,7 @@ body
     h2
       font-family: "Sanches-Italic"
       font-size: 20px
+      overflow: visible
 
     #fb, #entries
       float: left
@@ -59,6 +60,9 @@ body
     #fb
       height: 190px
       overflow: auto
+
+      h2
+        margin-top: 1px
 
       .post
         overflow: hidden
@@ -192,47 +196,11 @@ body
   background-image: url(image_path('pattern.png'))
 
 
-.error
-  border: 2px solid #E2001A
-  float: none
-
-label.error
-  border: none
-  font-family: "Pluto-CondensedItalic" !important
-  font-size: 12px
-  color: #E2001A
-  float: none
-
-.ui-tooltip-default .ui-tooltip-titlebar, .ui-tooltip-default .ui-tooltip-content
-  width: 90px
-  height: 40px
-  background-image: url("error_bubble.png")
-  background-repeat: no-repeat
-  background-position: 0 0
-  padding: 6px 5px 4px 5px
-  text-align: center
-  font-family: "Pluto"
-  font-size: 10px
-  color: #E2001A
-  
-.form_valid
-  background-image: url("finished_form_tmp.png")
-  background-repeat: no-repeat
-  background-position: 98% 100%
-
-.form_not_valid
-  background-image: url("edit_form_tmp.png")
-  background-repeat: no-repeat
-  background-position: 95% 50%
-
-.ui-state-default, .ui-corner-top
-  min-height: 30px
 
 #footer
   background-image: url("footer_bg.png")
-  background-repeat: repeat-x
+  background-repeat: repeat
   height: 334px
-  padding: 10px
   position: relative
   bottom: 0
   clear: both
@@ -244,9 +212,8 @@ label.error
   width: 202px
   margin: auto
   padding: 0px 0 20px 0
-  top: -10px
+  top: 20px
   position: relative
-  margin-top: 20px
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
   z-index: 1
 

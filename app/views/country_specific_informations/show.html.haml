@@ -1,12 +1,16 @@
 - if @csi_set.user
-  %h2
-    = "Author: #{@csi_set.user.formatted_user_info}"
+  %p
+    Author:
+    %em
+      = @csi_set.user.formatted_user_info
+
 
 %ul
-  - @csi_set.country_specific_informations.where(:answer.ne => "").each do |csi|
+  - answered_csis = @csi_set.country_specific_informations.where(:answer.ne => "").entries
+  - answered_csis.each_with_index do |csi, index|
     %li
       %p.question
-        Question X
+        = "Question #{index + 1}"
       %h3
         = csi.question
       %p
@@ -17,7 +21,7 @@
   %p.fragen
     You’ve answered 
     %br
-    X of X questions
+    = "#{answered_csis.count} of #{Question.count} questions"
 
   %p.tell_more
     %a

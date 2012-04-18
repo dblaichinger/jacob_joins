@@ -1,4 +1,4 @@
-prepare_recipe_step_upload = (currentFileInput) ->
+window.prepare_recipe_step_upload = (currentFileInput) ->
   currentFileInput.fileupload
     dataType: 'json'
     url: '/recipes/upload_step_image'
@@ -35,8 +35,6 @@ prepare_recipe_step_upload = (currentFileInput) ->
       data.submit()
     fail: (e, data) ->
       alert "fail"
-    #submit: (e, data) ->
-    #always: (e, data) ->
 
 prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
@@ -111,21 +109,19 @@ prepare_csi_slider = () ->
     csi_slider.goToSlide $('#csi_slider_navigation a').index(this)
     false
 
+window.reinitialize_tooltips = (context) ->
+  $("[data-tooltip]", context).each ->
+    $(this).qtip
+      overwrite: false
+      content:
+        text: $(this).attr "data-tooltip"
+      position:
+        my: "bottom left"
+        at: "top center"
+        target: $(this)
+    .qtip('option', 'content.text', $(this).attr("data-tooltip"))
+
 $ ->
-  elementTemplate = c = $('#recipe_tab .steps .step:last').clone(true, true)
-  elementTemplate.children('.image_preview').remove()
-  elementTemplate.children('input[type="hidden"]').remove()
-  elementTemplate.children('.upload_wrapper').css
-    display: 'block'
-  elementTemplate = $('<div>').append(elementTemplate).html()
-
-  $('#recipe_tab .steps').elementOnDemand
-    element: elementTemplate
-    onAddElement: (context) ->
-      count = $(this).siblings('.step').length + 1
-      $(this).find('label[for=*"description"] span').html(count)
-      prepare_recipe_step_upload $(this).find('input[type="file"]:first')
-
   $("#wizard #send").click ->
       unless window.user?
         window.user = publish_user()
@@ -157,7 +153,10 @@ $ ->
   $('#wizard').tabs()
 
   $('#wizard').bind 'tabsshow', (event, ui) ->
-    $(".error:input, .error :input", ui.panel).qtip "show"
+    $(".error:input", ui.panel).qtip "show"
+    $(":input", ui.panel).filter (index) ->
+      return $(this).attr("visibility") isnt "hidden"
+    .parent().qtip "show"
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
     newHash = "#!/form/#{ui.tab.hash.slice 1}"
@@ -183,6 +182,8 @@ $ ->
         success: (data, textStatus, jqXHR) ->
           oldTab.html data
           $(".dirtyform", oldTab).dirtyValidation "validate", $(":input", oldTab).not("[type='hidden']")
+
+          reinitialize_tooltips oldTab
 
           oldTab.css
             display: "block"
@@ -230,10 +231,6 @@ $ ->
     current = $(e.delegateTarget).tabs "option", "selected"
     $(e.delegateTarget).tabs "select", current + 1
     false
-
-  $('#wizard #recipe_tab .zutat').autocomplete
-    source: '/ingredients/names'
-    minLength: 2
 
   prepare_recipe_uploads()
   prepare_csi_slider()

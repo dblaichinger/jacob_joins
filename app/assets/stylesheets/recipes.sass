@@ -110,6 +110,7 @@ h1
   color: #7C6259
   text-transform: uppercase
   text-shadow: 0 -1px 0px #531E09, 0 1px 0px #FFFFFF
+  overflow: visible
 
 strong
   display: block
@@ -140,6 +141,8 @@ hr
 
 #right 
   padding: 1px 0 1px 0
+  overflow: hidden
+  margin-bottom: 60px
 
 #left, #preparation
   float: left
@@ -161,6 +164,8 @@ textarea
 #new_recipe, .edit_recipe, #new_user, .edit_user, .user_form, #preview, #country_specific_information_tab,  
   width: 760px
   margin-left: 240px
+  overflow: hidden
+
 
 #information, #ingredients , #preparation
   padding: 37.5px
@@ -169,6 +174,9 @@ textarea
 
   p
     text-align: justify
+
+.is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
+  margin-left: 232px
     
 #buttons
   clear: both
@@ -204,7 +212,7 @@ textarea
     width: 10px
 
 #duration
-  overflow: hidden
+  overflow: visible
 
   #duration_label
     float: left
@@ -257,6 +265,9 @@ textarea
 .remove
   margin-left: 5px
 
+.step
+  margin-top: 25px
+
 .step_label
   font-family: Sanches-SemiBold
   text-transform: uppercase
@@ -272,8 +283,8 @@ textarea
 
 #stepupload
   position: relative
-  height: 50px
-  margin-top: 10px
+  height: 60px
+  margin-top: 5px
   overflow: hidden
 
 #bildupload
@@ -312,17 +323,33 @@ textarea
   font-family: "PlutoCondensed"
   font-size: 14px
   line-height: 1.4em
+  width: 60%
+  height: 60px
+  display: block
+  overflow: hidden
+  img
+    width: 56px
+    height: 56px
+    border: 2px solid #fff
 
 .delete
   position: absolute
   right: 0
   color: #E2001A
+  font-size: 14px
+
+.file_uploads
+  font-family: "PlutoCondensed"
+  width: 60%
+  a
 
 label
   display: block
 
+
 #recipe_images
   margin-top: 50px
+  position: relative
 
 #information_user
   padding: 15px
