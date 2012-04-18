@@ -267,7 +267,7 @@ textarea
   margin-left: 5px
 
 .step
-  margin-top: 25px
+  margin-top: 30px
 
 .step_label
   font-family: Sanches-SemiBold
@@ -287,6 +287,21 @@ textarea
   height: 60px
   margin-top: 5px
   overflow: hidden
+
+  .delete
+    position: absolute
+    left: 72px
+    top: 0
+    width: 20px
+    height: 20px
+    background-image: url(image_path('delete_image.png'))
+    background-position: 0 0
+    background-repeat: no-repeat
+    text-indent: -2000000px
+
+  .delete:hover
+    background-image: url(image_path('delete_image_hover.png'))
+
 
 #bildupload
   display: block
@@ -334,8 +349,6 @@ textarea
     border: 2px solid #fff
 
 .delete
-  position: absolute
-  right: 0
   color: #E2001A
   font-size: 14px
 

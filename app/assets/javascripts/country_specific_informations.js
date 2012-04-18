@@ -24,14 +24,3 @@ var publish_csi = function(id, user_location) {
 
   return !error
 };
-
-$(document).ready(function(){
-  $("form", "#country_specific_information_tab").dirty_form({dynamic:true}).dirty(function(event, event_data){
-    var fields = $(".changed", "#country_specific_information_tab");
-
-    if(fields.size() > 0)
-      $("#aboutyourcountry").parent().addClass("form_valid")
-    else
-      $("#aboutyourcountry").parent().removeClass("form_valid")
-  });
-});

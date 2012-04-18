@@ -13,6 +13,8 @@ handleFieldValidation = (target) ->
           error_message = "It has to be an email address."
         when "numerical"
           error_message = "It has to be a number."
+        when "text"
+          error_message = "Only letters are allowed."
 
       $.fn.dirtyValidation "markAsInvalid", target, error_message
     else if target.attr("data-valid") and not fieldIsValid(target)
@@ -30,6 +32,9 @@ validateType = (input) ->
       return regex.test input.val()
     when "numerical"
       return not isNaN input.val()
+    when "text"
+      regex = /[^a-zA-Z\s]/
+      return not regex.test input.val()
 
 fieldIsValid = (input) ->
   input.attr("data-valid") is "true"
