@@ -4,7 +4,13 @@ class CountrySpecificInformationsController < ApplicationController
 
   def show
     @csi_set = CsiSet.find session[:csi_set_id]
-    render :layout => false
+    answered_csis = @csi_set.country_specific_informations.where(:answer.ne => "").entries
+
+    if answered_csis.count > 0
+      render :show, :layout => false
+    else
+      render :partial => "no_preview", :layout => false
+    end
   end
 
   def update
@@ -32,6 +38,8 @@ class CountrySpecificInformationsController < ApplicationController
       @csi_set = CsiSet.create
       session[:csi_set_id] = @csi_set.id
     end
+
+    params[:csi_set][:country_specific_informations_attributes].each{ |key,csi| csi[:answer] = "" if csi[:answer] == " " }
     
     if @csi_set.update_attributes params[:csi_set]
       render :new, :layout => false
