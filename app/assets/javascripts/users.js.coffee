@@ -39,30 +39,41 @@ window.prepare_user_map = ->
   autoCompleteInput.attr "data-valid", "false"
   autoCompleteInput.attr "data-error-message", "Location not found."
 
-  autoCompleteInput.change () ->
-    autoCompleteInput.attr "data-valid", "true"
+  requestlocation = () ->
+    console.log("changehandler!")
     address = autoCompleteInput.val()
+    console.log(address)
     geocoder = new google.maps.Geocoder()
     geocoder.geocode
       address: address, (results, status) ->
         if status is google.maps.GeocoderStatus.OK
-          
+          autoCompleteInput.attr "data-valid", "true"
           if results[0].address_components.length > 1
             city = results[0].address_components[0].long_name
             country = results[0].address_components[results[0].address_components.length-1].long_name
             setHiddenFields results[0].geometry.location.lat(), results[0].geometry.location.lng(), city, country 
             autoCompleteInput.val(city+", "+country)
+            console.log(city+", "+country)
           else
             city = null
             country = results[0].address_components[0].long_name
             setHiddenFields results[0].geometry.location.lat(), results[0].geometry.location.lng(), city, country
             autoCompleteInput.val(country)
+            console.log(country)
           setMarker new google.maps.LatLng(latInput.val(), lngInput.val())
         else
           console.log "Geocode was not successful for the following reason: " + status
           autoCompleteInput.attr "data-valid", "false"
           $('#user_tab form').dirtyValidation("validate", autoCompleteInput, false)
           autoCompleteInput.qtip("show")
+
+
+  autoCompleteInput.on "change", ()->
+    autoCompleteInput.attr "data-valid", "true"
+    clearTimeout autoCompleteInput.data('timeout')
+    timeout = setTimeout requestlocation, 100
+    autoCompleteInput.data timeout: timeout
+
 
   autocomplete = new google.maps.places.Autocomplete autoCompleteInput[0], { types: ['(regions)'] }
   autocomplete.bindTo('bounds', map)
@@ -128,19 +139,28 @@ window.prepare_user_map = ->
     autoCompleteInput.val cityInput.val() + ", " + countryInput.val()
 
   # location via user input
-  google.maps.event.addListener autocomplete, 'place_changed', ->
+  google.maps.event.addListener autocomplete, 'place_changed', () ->
+    
+    #autoCompleteInput.off "change", requestlocation
+    clearTimeout autoCompleteInput.data('timeout')
+    console.log "autocomplete handler"
+     
     place = autocomplete.getPlace()
 
     if !!place.geometry
       autoCompleteInput.attr "data-valid", "true"
-      console.log "autocomplete handler"
       setMarker place.geometry.location
       address = place.address_components
+      console.log(address)
       if address.length > 1
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, address[address.length-1].long_name
       else
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), null, address[0].long_name
     else
       autoCompleteInput.attr "data-valid", "false"
+
+    #autoCompleteInput.on "change", requestlocation
+
+
 
 
