@@ -60,7 +60,7 @@
 
       #title
         = f.label :name, "Name", id:"titel"
-        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe"
+        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text"
       #portions
         = f.label :portions, "Portions"
         = f.text_field :portions, "data-required" => true, "data-type" => "numerical", style:"display: inline;"
