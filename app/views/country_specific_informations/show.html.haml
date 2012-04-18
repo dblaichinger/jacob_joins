@@ -1,6 +1,9 @@
 - if @csi_set.user
-  %h2
-    = "Author: #{@csi_set.user.formatted_user_info}"
+  %p
+    Author:
+    %em
+      = @csi_set.user.formatted_user_info
+
 
 %ul
   - answered_csis = @csi_set.country_specific_informations.where(:answer.ne => "").entries

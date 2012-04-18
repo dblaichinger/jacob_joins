@@ -4,13 +4,14 @@
   $(document).ready(function(){
     $("form", "#user_tab").dirtyValidation();
 
-    if($("[selected]", "#user_gender").size() > 0)
+    if($("[selected]", "#user_gender").size() == 1 && $("[selected]", "#user_gender").first().val().length > 1){
       gender_icon($("#user_gender").val());
+    }
   });
 
 = form_for user, :html => { :class => "user_form" } do |f|
   #content
-    %h1.tellus
+    %h1
       Tell Jacob 
       %span something 
       %br
@@ -20,31 +21,27 @@
     
     %p
       Of course Jacob wants to get to know the person who shared a great recipe with him.   
-      But no worries. Your email-address is optional and only the first letter of your sirname will be shown online.  
+      But no worries. Your email-address is optional and only the first letter of your surname will be shown online.  
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
         = f.text_field :firstname, "data-required" => true, tabindex:"1"
 
-
-
-      - if request.location
-        - @location = request.location.data
-        - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
-        - @country = (session[:location][:country] if session[:location]) || @location[:country_name] || ""
-        - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
-        - @latitude = (session[:location][:latitude] if session[:location]) || @location[:latitude] || ""
-
+      %p
         = f.label :city, "City", id:"city"
-        = text_field_tag "address-search", nil, class:"address-search", "data-required" => true, tabindex:"3", value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
-
-        .map{"data-longitude" => "#{@longitude}", "data-latitude" => "#{@latitude}"}
+        - if request.location
+          - @location = request.location.data
+          - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
+          - @country = (session[:location][:country] if session[:location]) || @location[:country_name] || ""
+          - @longitude = (session[:location][:longitude] if session[:location]) || @location[:longitude] || ""
+          - @latitude = (session[:location][:latitude] if session[:location]) || @location[:latitude] || ""
 
 
         = hidden_field_tag :longitude, @longitude
         = hidden_field_tag :latitude, @latitude
         = hidden_field_tag :country, @country, :id => "country_hidden"
         = hidden_field_tag :city, @city, :id => "city_hidden"
+        .map{"data-longitude" => "#{@longitude}", "data-latitude" => "#{@latitude}"}
 
       %p
         = f.label :gender, "Gender"
@@ -66,17 +63,15 @@
         = f.label :heard_from, "How did you hear from Jacob Joins?"             
         = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
         = text_field_tag :heard_from_other
-      .genderage1
-        %p
-          = f.label :gender, "Gender"
-          = link_to image_tag("male_inactive.png", :class=>"male #{'selected' if user.gender == 'male'}"), "#", :id => "male_link", :onclick => "return gender_icon('male');"
-          = link_to image_tag("female_inactive.png", :class=>"female #{'selected' if user.gender == 'female'}"), "#", :id => "female_link", :onclick => "return gender_icon('female');"
-          = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true }
-      .genderage2
-        %p
-          = f.label :age, "Age"
-          = f.text_field :age, "data-required" => true, "data-type" => "numerical" 
-
-        
+      
+      %p.genderage1
+        = f.label :gender, "Gender"
+        = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
+        = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
+        = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true }
+    
+      %p.genderage2
+        = f.label :age, "Age"
+        = f.text_field :age, "data-required" => true, "data-type" => "numerical" 
       
     = link_to "", '#!/form/country_specific_information_tab', class:"next_tab"
