@@ -1,5 +1,24 @@
 - csi_set = session[:csi_set_id].present? ? CsiSet.find(session[:csi_set_id]) : CsiSet.new(:country_specific_informations => CsiSet.empty_set)
 
+:javascript
+  $(document).ready(function(){
+    $("form", "#country_specific_information_tab").dirty_form({dynamic:true}).dirty(function(event, event_data){
+      var fields = $(".changed", "#country_specific_information_tab");
+      var valid = false;
+
+      $("textarea", "#csi_slider").each(function(){
+        if($(this).val() != " " && $(this).val().length > 0){
+          valid = true;
+        }
+      });
+
+      if(valid)
+        $("#aboutyourcountry").parent().addClass("form_valid")
+      else
+        $("#aboutyourcountry").parent().removeClass("form_valid")
+    });
+  });
+
 #csi_information
   %h1 
     Give the world a pure impression of your
