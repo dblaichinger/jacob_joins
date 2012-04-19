@@ -8,8 +8,8 @@ class IngredientsController < ApplicationController
   def search
     @ingredients = Ingredient.search params[:search]
     respond_to do |format|
-      format.html { render ingredients_search_path, :locals => {:ingredients => @ingredients || nil}}
-      format.json { render ingredients_search_path, :locals => {:ingredients => @ingredients}, :layout => false}
+      format.json {render :json => @ingredients.to_json}
+      format.html
     end
   end
 end

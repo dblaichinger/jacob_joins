@@ -1,3 +1,4 @@
+###
 window.publish_user = ->
   return_value = false
 
@@ -161,6 +162,6 @@ window.prepare_user_map = ->
 
     #autoCompleteInput.on "change", requestlocation
 
-
+###
 
 

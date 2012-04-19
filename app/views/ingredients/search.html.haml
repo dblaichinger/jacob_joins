@@ -3,20 +3,15 @@
   %h1
     ***SEARCH FOR RECIPE***
 
-  = form_tag ingredients_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" } do
+  = form_tag ingredients_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" }, :id => "ingredients_search_form" do
     = text_field_tag :search, params[:search], :id => 'search_field'
     = submit_tag "Search", :name => nil 
 
   %h1
     ***SELECTION***
   #search_selection
-    test
 
   %h1
     ***RESULT***
   #search_result
-    %ul
-      - if ingredients
-        - ingredients.each do |i|
-          %li
-            = i.inspect.html_safe
+

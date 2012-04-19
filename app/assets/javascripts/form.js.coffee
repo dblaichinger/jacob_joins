@@ -1,3 +1,4 @@
+###
 window.prepare_recipe_step_upload = (currentFileInput) ->
   currentFileInput.fileupload
     dataType: 'json'
@@ -230,3 +231,4 @@ $ ->
   prepare_recipe_uploads()
   prepare_csi_slider()
   prepare_user_map()
+###
