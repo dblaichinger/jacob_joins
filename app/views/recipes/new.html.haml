@@ -120,6 +120,9 @@
                 .image_preview
                   = image_tag step.object.image(:small)
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
+              - else
+                .image_preview
+                = image_tag "", :class => "missing"
   
       #recipe_images
         %h1 
