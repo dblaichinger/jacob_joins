@@ -9,7 +9,7 @@
     }
   });
 
-= form_for user, :html => { :class => "user_form" } do |f|
+= form_for user, :html => { class:"user_form" } do |f|
   #content
     %h1
       Tell Jacob 
@@ -25,7 +25,7 @@
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
-        = f.text_field :firstname, "data-required" => true, tabindex:"1"
+        = f.text_field :firstname, "data-required" => true, "data-type" => "text", tabindex:"1"
 
       %p
         = f.label :city, "City", id:"city"
@@ -48,7 +48,7 @@
     .rechts    
       %p
         = f.label :lastname, "Last name"
-        = f.text_field :lastname, tabindex:"2", placeholder:"your last name"
+        = f.text_field :lastname, tabindex:"2", placeholder:"your last name", "data-type" => "text"
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
         = f.text_field :email, "data-type" => "email"
@@ -69,4 +69,4 @@
         = f.label :age, "Age"
         = f.text_field :age, "data-required" => true, "data-type" => "numerical" 
       
-    = link_to "", '#!/form/country_specific_information_tab', class:"next_tab"
+    = link_to "", '#!/form/preview_tab', class:"next_tab"
