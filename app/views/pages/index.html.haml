@@ -36,7 +36,7 @@
           and suddenly he had
         %p.welcome6
           a wonderful idea
-
+    .uebergang
     #story_2
       #text_2
         %p.idea1
@@ -72,7 +72,8 @@
           with people in the whole world according to the last
         %p.intention6 
           three remaining ingredients                    
-            
+    .uebergang2  
+      = image_tag 'pattern_uebergang2_mitte.jpg', class:"mitte_bildzeichen"
     #story_4
       #text_4
         %p.join1
@@ -87,7 +88,7 @@
           your country, your spicery and
         %p.join5
           your way of cooking    
-
+    .uebergang
     #story_5
       #text_5
         %p.sharing1
@@ -182,11 +183,7 @@
       %hr
 
       - unless session[:csi_set_id]
-        %p.no_csi_preview 
-          We would love to find out more about country specific traditions and different lifestyles. Maybe you want to answer a few questions 
-          %a 
-            = link_to 'here.'
-          Do it!
+        = render :template => "country_specific_informations/_no_preview"
       
       .csi
 

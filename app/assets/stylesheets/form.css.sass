@@ -24,7 +24,7 @@
 
 #wizard
   width: 1000px
-  margin: 150px auto
+  margin: 100px auto
   position: relative
   padding: 5px
 
@@ -121,6 +121,7 @@ textarea:focus, input:focus
       color: #E2001A
       font-size: 30px
       text-transform: none
+      padding-top: 3px
 
     h2
       font-size: 20px
@@ -168,6 +169,15 @@ textarea:focus, input:focus
         width: 100%
         margin-bottom: 20px
         overflow: hidden
+
+        img.missing
+          border: none
+          width: 70px
+          height: 70px
+          background-image: url(image_path('no_image_prev_steps.png'))
+          background-position: 0 0
+          background-repeat: no-repeat
+          text-indent: -3000px
 
         img
           width: 66px

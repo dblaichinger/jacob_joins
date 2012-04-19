@@ -46,6 +46,7 @@ body
     overflow: hidden
     h1
       display: none
+      overflow: visible
 
     h2
       font-family: "Sanches-Italic"
@@ -63,6 +64,7 @@ body
 
       h2
         margin-top: 1px
+        overflow: visible
 
       .post
         overflow: hidden
@@ -82,11 +84,12 @@ body
 
         .message
           font-size: 12px
+          margin-left: 60px
 
         .time
           font-size: 10px
           font-family: "Pluto-LightCondensed"
-          margin-top: 5px
+          margin: 5px 0 0 60px
 
     #entries
 
@@ -157,6 +160,7 @@ body
       text-transform: uppercase
       font-size: 40px
       margin: 20px 0 0 0
+      overflow: visible
 
     .scroll
       color: #E2001A
@@ -189,11 +193,27 @@ body
 #story_1, #story_2, #story_3, #story_4, #story_5
   min-height: 700px
 
+.uebergang
+  background-image: url(image_path('pattern_uebergang1.jpg'))
+  background-repeat: repeat-x
+  height: 116px
+
+
+.uebergang2
+  background-image: url(image_path('pattern_uebergang2.jpg'))
+  background-repeat: repeat-x
+  height: 140px
+
+.mitte_bildzeichen
+  margin: auto  
+  display: block
+
+
 #story_2, #story_5
-  background-image: url(image_path('pattern2.png'))
+  background-image: url(image_path('pattern2.jpg'))
 
 #story_3
-  background-image: url(image_path('pattern.png'))
+  background-image: url(image_path('pattern.jpg'))
 
 
 
