@@ -93,13 +93,20 @@ textarea:focus, input:focus
     overflow: hidden
 
     #img_preview
-      display: block
       width: 350px
       height: 230px
       float: left
       margin: 20px 20px 30px 0px
-      background-image: url(image_path('no_image_prev.png'))
-      background-repeat: no-repeat
+      text-align: center
+      vertical-align: middle
+      
+      .missing
+        width: 350px
+        height: 230px
+        display: block
+        background-image: url(image_path('no_image_prev.png'))
+        background-repeat: no-repeat
+        text-indent: -30000px
 
     #prev_recipe_info
       height: 200px
@@ -117,11 +124,11 @@ textarea:focus, input:focus
           margin: 0
 
     h1
-      font-family: "Pluto-Heavy"
+      font-family: "Pluto-Semibold"
       color: #E2001A
       font-size: 30px
       text-transform: none
-      padding-top: 3px
+      line-height: 1.2em
 
     h2
       font-size: 20px
@@ -129,8 +136,9 @@ textarea:focus, input:focus
       font-weight: normal
       color: #7C6259
       text-transform: uppercase
-      text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
+      text-shadow: 0 -1px 0 #531E09, 0 1px 0 #fff
       margin-bottom: 20px
+      padding-top: 3px
 
     em
       color: #E2001A
@@ -146,6 +154,17 @@ textarea:focus, input:focus
           font-family: "PlutoCondensed"
           font-size: 14px
           line-height: 1.4em
+
+        span
+          font-family: "PlutoCondensed"
+          font-size: 14px
+          line-height: 1.4em
+          color: #E2001A
+          width: 60px
+          display: inline-block
+
+        em
+          color: #531E09
 
     #prev_preparation
       width: 370px
