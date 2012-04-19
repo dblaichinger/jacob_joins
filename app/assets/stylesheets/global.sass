@@ -12,8 +12,8 @@
 +font-face("Pluto-LightCondensed", font-files("Pluto/203124_4_0.ttf", "Pluto/203124_4_0.woff"), "Pluto/203124_4_0.eot")
 +font-face("Pluto-Light", font-files("Pluto/203124_B_0.ttf", "Pluto/203124_B_0.woff"), "Pluto/203124_B_0.eot")
 +font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
++font-face("Pluto-Semibold", font-files("Pluto/203124_E_0.ttf", "Pluto/203124_E_0.woff"), "Pluto/203124_E_0.eot")
 +font-face("Pluto-CondensedItalic", font-files("Pluto-Italic/203125_9_0.ttf", "Pluto-Italic/203125_9_0.woff"), "Pluto-Italic/203125_9_0.eot")
-+font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
 +font-face("Pluto-Heavy", font-files("Pluto/203124_D_0.ttf", "Pluto/203124_D_0.woff"), "Pluto/203124_D_0.eot")
 +font-face("Pluto-HeavyCondensed", font-files("Pluto/203124_5_0.ttf", "Pluto/203124_5_0.woff"), "Pluto/203124_5_0.eot")
 +font-face("Pluto-LightItalic", font-files("Pluto-Italic/203125_1_0.ttf", "Pluto-Italic/203125_1_0.woff"), "Pluto-Italic/203125_1_0.eot")
@@ -46,6 +46,7 @@ body
     overflow: hidden
     h1
       display: none
+      overflow: visible
 
     h2
       font-family: "Sanches-Italic"
@@ -63,6 +64,7 @@ body
 
       h2
         margin-top: 1px
+        overflow: visible
 
       .post
         overflow: hidden
@@ -135,12 +137,11 @@ body
 
 
 #start
-  background-image: url(image_path('pattern1.png'))
-  background-repeat: repeat-x
+  
   #story_0
     width: 1024px
     min-height: 640px
-    margin: 45px auto 0 auto
+    margin: 0px auto 0 auto
     background-image: url(image_path('kuvert_bg.png'))
     background-repeat: no-repeat
     background-position: 0 center
@@ -158,6 +159,7 @@ body
       text-transform: uppercase
       font-size: 40px
       margin: 20px 0 0 0
+      overflow: visible
 
     .scroll
       color: #E2001A
@@ -172,11 +174,12 @@ body
 
     a
       display: block
-      margin-top: 15px
+      margin-top: 45px
       text-transform: uppercase
       font-family: "Pluto-CondensedItalic"
       text-decoration: none
       color: #531E09
+      font-size: 14px
 
     a:hover
       color: #E2001A
