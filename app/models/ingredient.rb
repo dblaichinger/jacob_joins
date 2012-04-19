@@ -14,8 +14,4 @@ class Ingredient
     end
     names
   end
-
-  def self.search(ingredient)
-    Ingredient.where("name" => ingredient)
-  end
 end
