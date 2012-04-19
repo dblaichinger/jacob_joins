@@ -14,6 +14,7 @@ JacobJoins::Application.routes.draw do
   match 'users/sync_wizard' => 'users#sync_wizard', :via => [:post, :put]
 
   get '/ingredients/names', :to => 'ingredients#names'
+  match '/ingredients/search' => 'ingredients#search', :via => [:get, :post]
   
   resources :recipes, :only => [:index, :show, :update]
   resources :users, :only => [:index, :show, :update]
