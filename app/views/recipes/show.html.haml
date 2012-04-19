@@ -34,7 +34,10 @@
   - recipe.ingredients_with_quantities.each do |ingredient|
     %ul
       %li
-        = "#{ingredient.quantity} #{ingredient.name}"
+        %span
+          = ingredient.quantity
+        %em
+          = ingredient.name
 
 %div#prev_preparation
   %h2
