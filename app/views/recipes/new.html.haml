@@ -118,8 +118,8 @@
 
               .image_preview
               - if step.object.image.present?
-                  = image_tag step.object.image(:small)
-                  = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
+                = image_tag step.object.image(:small)
+                = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
               - else
                 = image_tag "", :class => "missing"
   
