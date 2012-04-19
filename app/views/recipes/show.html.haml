@@ -1,8 +1,11 @@
 - recipe ||= @recipe
 
 %div#img_preview
-  - recipe.images.each do |image|
-    = image_tag image.attachment(:medium)
+  -if recipe.images.present?
+    - recipe.images.each do |image|
+      = image_tag image.attachment(:medium)
+  -else
+    = image_tag "", :class => "missing", :alt => "missing_image"
 
 %div#prev_recipe_info
   %h1
