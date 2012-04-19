@@ -75,6 +75,7 @@ class RecipesController < ApplicationController
     respond_with Recipe.where(:user_id=>{"$ne"=>nil}).order_by(:created_at => :desc).limit(5)
   end
 
+  
   private
   def get_or_create_recipe
     if session[:recipe_id].present?
