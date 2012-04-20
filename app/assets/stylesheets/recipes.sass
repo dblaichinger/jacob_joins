@@ -349,14 +349,30 @@ textarea
     height: 56px
     border: 2px solid #fff
 
-.delete
-  color: #E2001A
-  font-size: 14px
 
 .file_uploads
   font-family: "PlutoCondensed"
   width: 60%
-  a
+  position: relative
+
+  li
+    margin-top: 5px
+    img
+      border: 2px solid #fff
+
+    .delete
+      position: absolute
+      left: 112px
+      top: 0
+      width: 20px
+      height: 20px
+      background-image: url(image_path('delete_image.png'))
+      background-position: 0 0
+      background-repeat: no-repeat
+      text-indent: -2000000px
+
+    .delete:hover
+      background-image: url(image_path('delete_image_hover.png'))
 
 label
   display: block
@@ -365,6 +381,16 @@ label
 #recipe_images
   margin-top: 50px
   position: relative
+
+  imput
+    width: 300px
+    background-color: rgba(83,30,9,0.3)
+    border: 2px solid #fff
+    outline: 0px
+    color: #fff
+    font-family: "Pluto-Condensed"
+    font-size: 14px
+    padding: 5px
 
 #information_user
   padding: 15px
