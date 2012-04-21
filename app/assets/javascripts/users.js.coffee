@@ -39,14 +39,13 @@ window.prepare_user_map = ->
   autoCompleteInput.attr "data-valid", "false"
   autoCompleteInput.attr "data-error-message", "Location not found."
 
-  autoCompleteInput.change () ->
-    autoCompleteInput.attr "data-valid", "true"
+  requestlocation = () ->
     address = autoCompleteInput.val()
     geocoder = new google.maps.Geocoder()
     geocoder.geocode
       address: address, (results, status) ->
         if status is google.maps.GeocoderStatus.OK
-          
+          autoCompleteInput.attr "data-valid", "true"
           if results[0].address_components.length > 1
             city = results[0].address_components[0].long_name
             country = results[0].address_components[results[0].address_components.length-1].long_name
@@ -63,6 +62,14 @@ window.prepare_user_map = ->
           autoCompleteInput.attr "data-valid", "false"
           $('#user_tab form').dirtyValidation("validate", autoCompleteInput, false)
           autoCompleteInput.qtip("show")
+
+
+  autoCompleteInput.on "change", ()->
+    autoCompleteInput.attr "data-valid", "true"
+    clearTimeout autoCompleteInput.data('timeout')
+    timeout = setTimeout requestlocation, 100
+    autoCompleteInput.data timeout: timeout
+
 
   autocomplete = new google.maps.places.Autocomplete autoCompleteInput[0], { types: ['(regions)'] }
   autocomplete.bindTo('bounds', map)
@@ -128,12 +135,14 @@ window.prepare_user_map = ->
     autoCompleteInput.val cityInput.val() + ", " + countryInput.val()
 
   # location via user input
-  google.maps.event.addListener autocomplete, 'place_changed', ->
+  google.maps.event.addListener autocomplete, 'place_changed', () ->
+
+    clearTimeout autoCompleteInput.data('timeout')
+   
     place = autocomplete.getPlace()
 
     if !!place.geometry
       autoCompleteInput.attr "data-valid", "true"
-      console.log "autocomplete handler"
       setMarker place.geometry.location
       address = place.address_components
       if address.length > 1
@@ -142,5 +151,7 @@ window.prepare_user_map = ->
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), null, address[0].long_name
     else
       autoCompleteInput.attr "data-valid", "false"
+
+
 
 
