@@ -55,8 +55,8 @@ body
 
     #fb, #entries
       float: left
-      width: 255px
-      margin: 20px 10px 20px 0px
+      width: 300px
+      margin-top: 20px
 
     #fb
       height: 190px
@@ -84,7 +84,7 @@ body
 
         .message
           font-size: 12px
-          margin-left: 60px
+          margin: 0 10px 0 60px
 
         .time
           font-size: 10px
@@ -92,7 +92,7 @@ body
           margin: 5px 0 0 60px
 
     #entries
-
+      margin-left: 30px
 
     #last_entry
 
@@ -102,14 +102,11 @@ body
       margin: 20px 0
       height: 190px
 
-      h2
-        margin-left: 15px
-
       .text
         position: absolute
         bottom: 0
         font-family: "Pluto-CondensedItalic"
-        width: 100px
+        width: 70px
         text-align: center
 
       .display
@@ -137,12 +134,11 @@ body
 
 
 #start
-  background-image: url(image_path('pattern1.png'))
-  background-repeat: repeat-x
+  
   #story_0
     width: 1024px
     min-height: 640px
-    margin: 45px auto 0 auto
+    margin: 0px auto 0 auto
     background-image: url(image_path('kuvert_bg.png'))
     background-repeat: no-repeat
     background-position: 0 center
@@ -168,6 +164,7 @@ body
       font-family: "Pacifico"
       font-size: 26px
       font-weight: normal
+      margin-top: 10px
 
       img
         display: block
@@ -175,11 +172,12 @@ body
 
     a
       display: block
-      margin-top: 15px
+      margin-top: 45px
       text-transform: uppercase
       font-family: "Pluto-CondensedItalic"
       text-decoration: none
       color: #531E09
+      font-size: 14px
 
     a:hover
       color: #E2001A
@@ -196,7 +194,7 @@ body
 .uebergang
   background-image: url(image_path('pattern_uebergang1.jpg'))
   background-repeat: repeat-x
-  height: 116px
+  height: 113px
 
 
 .uebergang2
@@ -204,10 +202,28 @@ body
   background-repeat: repeat-x
   height: 140px
 
+.uebergang3
+  background-image: url(image_path('pattern_uebergang3.jpg'))
+  background-repeat: repeat-x
+  height: 113px
+
+.uebergang4
+  background-image: url(image_path('pattern_uebergang4.jpg'))
+  background-repeat: repeat-x
+  height: 116px
+
+.uebergang5
+  background-image: url(image_path('pattern_uebergang5.jpg'))
+  background-repeat: repeat-x
+  height: 113px
+
 .mitte_bildzeichen
   margin: auto  
   display: block
 
+#story_0
+  a
+    curser: pointer
 
 #story_2, #story_5
   background-image: url(image_path('pattern2.jpg'))
@@ -297,7 +313,7 @@ body
   letter-spacing: 13px
 
 .welcome6
-  +letterpress-braun-welcome(Sanches-Bold, 94pt)
+  +letterpress-braun-welcome(Sanches-Bold, 91pt)
 
 .idea1
   +weiß-shadow-idea(Pacifico, 62pt)
@@ -314,7 +330,7 @@ body
   padding-top: 10px
 
 .idea3
-  +letterpress-rot-idea(Sanches-Bold, 45pt)  
+  +letterpress-braun-idea(Sanches-Bold, 45pt)  
 
 .idea4
   +weiß-shadow-idea(Pluto, 25pt)
@@ -323,7 +339,13 @@ body
   padding-top: 20px
 
 .idea5
-  +letterpress-braun-idea(Sanches-Bold, 80pt)  
+  +letterpress-braun-idea(Sanches-Bold, 80pt) 
+
+.idea6
+  +weiß-shadow-idea(Pluto-LightItalic, 25pt)
+
+.idea7
+  +letterpress-rot-idea(Sanches-Bold, 68pt)     
 
 
 .intention1
@@ -353,7 +375,7 @@ body
   letter-spacing: 8px  
 
 .intention6
-  +letterpress-braun-intention(Sanches-Bold, 56pt)  
+  +letterpress-braun-intention(Sanches-Bold, 55pt)  
 
 .join1
   +weiß-shadow-idea(Pacifico, 63pt)
@@ -419,7 +441,7 @@ body
   +weiß-shadow-idea(Pluto-LightItalic, 36pt)  
 
 .sharing5
-  +letterpress-braun-idea(Sanches-Bold, 65pt)
+  +letterpress-braun-intention(Sanches-Bold, 65pt)
 
 .stories
   margin: auto  

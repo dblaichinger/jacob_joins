@@ -84,6 +84,18 @@ function slide_newsbar(){
   $('#clickandsee').click(function(e){
     return false;
   });
+
+  var event_set = false;
+  $(document).ready(function(){
+    $("#newsbar").hover(
+      function(){
+        if(event_set) { event_set = false; $("#clickandsee").stop(true, true).fadeIn(500); }
+      },
+      function(){
+        if(!event_set) { event_set = true; $("#clickandsee").stop(true, true).fadeOut(500); }
+      }
+    );
+  });
   
   $("#newsbar, .show_newsbar").click(function(e){
     var newsBar = $('#newsbar');
@@ -91,15 +103,15 @@ function slide_newsbar(){
     if(newsBar.hasClass('extended')){
       newsBar.stop().animate({
         top: "-215px"
-      }, 500);
+      }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
     } else {
       newsBar.stop().animate({
         top: "0"
-      }, 500);
+      }, 500).unbind('mouseenter').unbind('mouseleave');
     }
 
     $("#countdown", newsBar).fadeToggle(500);
-    $("#clickandsee", newsBar).fadeToggle(500);
+    $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
 
     $('#newsbar').toggleClass('extended');
 

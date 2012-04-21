@@ -1,10 +1,3 @@
-/ %h3
-/   = link_to "Fill in recipe with fake data", "#", :onclick => "fill_in_recipe(); return false;"
-/ %h3
-/   = link_to "Fill in CSI with fake data", "#", :onclick => "fill_in_csis(); return false;"
-/ %h3
-/   = link_to "Fill in about you with fake data", "#", :onclick => "fill_in_user(); return false;"
- 
 #jacobsstory
   #start
     #story_0
@@ -14,12 +7,9 @@
       %h3
         Who is Jacob?
 
-      %p.scroll
-        Scroll down
-        = image_tag 'pfeil.png'
+      = link_to 'Scroll down', "#story_1", class:"scroll"
 
-      %a
-        = link_to 'You already know the story? Just go on to the form!', "#!/form/recipe_tab"
+      = link_to 'You already know the story? Just go on to the form!', "#!/form/recipe_tab"
   .stories
     #story_1
       #text_1
@@ -35,7 +25,7 @@
         %p.welcome5
           and suddenly he had
         %p.welcome6
-          a wonderful idea
+          a wonderful idea.
     .uebergang
     #story_2
       #text_2
@@ -52,8 +42,12 @@
         %p.idea4
           was that it´s supposed to be a 
         %p.idea5
-          precious, old recipe
-
+          precious, old recipe.
+        %p.idea6
+          But only the following three ingredients where still readable:
+        %p.idea7  
+          potatoe, onion and egg.
+    .uebergang3
     #story_3
       #text_3
         %p.intention1
@@ -71,9 +65,8 @@
         %p.intention55  
           with people in the whole world according to the last
         %p.intention6 
-          three remaining ingredients                    
+          three remaining ingredients.                    
     .uebergang2  
-      = image_tag 'pattern_uebergang2_mitte.jpg', class:"mitte_bildzeichen"
     #story_4
       #text_4
         %p.join1
@@ -87,8 +80,8 @@
         %p.join4
           your country, your spicery and
         %p.join5
-          your way of cooking    
-    .uebergang
+          your way of cooking.    
+    .uebergang4
     #story_5
       #text_5
         %p.sharing1
@@ -106,8 +99,9 @@
         %p.sharing44
           money will be transfered from sponsores
         %p.sharing5
-          to a selected institution           
-
+          to a selected institution.
+    .uebergang5
+      = image_tag 'pattern_uebergang5_mitte.jpg', class:"mitte_bildzeichen"
     #share
       #text_5
         %p.share
@@ -158,15 +152,12 @@
         Jacob about
         %span your recipe
 
-      = button_to "", '#', class:"edit_recipe"
-
       %hr
 
       - unless session[:recipe_id]
         %p.no_recipe_preview 
           Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-          %a 
-            = link_to 'Post Your recipe.'
+          = link_to 'Post Your recipe.', "#!/form/recipe_tab"
 
       .recipe
 
@@ -178,8 +169,6 @@
         Jacob 
         %span about your country
 
-      = button_to "", '#', class:"edit_answers"
-
       %hr
 
       - unless session[:csi_set_id]
@@ -187,7 +176,7 @@
       
       .csi
 
-    = button_tag "Finish and Send", id:"send", disabled:"disabled"
+    = button_tag "Finish and Send", id:"send", disabled:"true"
 
 #footer
   .kastl
@@ -199,8 +188,7 @@
       project?
     %p.know
       Please let us know
-    %p.mailto
-      hello@jacobjoins.com 
+    = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
   %p.year
     2012 © jacobjoins
 

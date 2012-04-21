@@ -24,7 +24,7 @@ window.prepare_user_map = ->
   map = new google.maps.Map $('#user_tab .map')[0],
     center: new google.maps.LatLng(47.806357, 13.039623) # lat and lng of salzburg
     zoom: 6
-    mapTypeId: google.maps.MapTypeId.TERRAIN # ROADMAP is normal map
+    mapTypeId: google.maps.MapTypeId.ROADMAP # ROADMAP is normal map
     mapTypeControl: false
     overviewMapControl: false
     panControl: false
@@ -82,11 +82,11 @@ window.prepare_user_map = ->
   cityInput = $('#city_hidden')
   countryInput = $('#country_hidden')
 
-  setMarker = (latlng, imageUrl = "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png") ->
+  setMarker = (latlng, imageUrl = "/assets/google_marker.png") ->
     map.setCenter latlng
-    map.setZoom 8
+    map.setZoom 9
 
-    image = new google.maps.MarkerImage imageUrl, new google.maps.Size(71, 71), new google.maps.Point(0, 0), new google.maps.Point(17, 34), new google.maps.Size(35, 35)
+    image = new google.maps.MarkerImage imageUrl, new google.maps.Size(100, 100), new google.maps.Point(0, 0), new google.maps.Point(25, 55), new google.maps.Size(55, 55)
     marker.setIcon image
     marker.setPosition latlng
 
