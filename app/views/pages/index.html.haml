@@ -155,15 +155,14 @@
         Jacob about
         %span your recipe
 
-      = button_to "", '#', class:"edit_recipe"
+      = link_to "", "#!/form/recipe_tab", class:"edit_recipe"
 
       %hr
 
       - unless session[:recipe_id]
         %p.no_recipe_preview 
           Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-          %a 
-            = link_to 'Post Your recipe.'
+          = link_to 'Post Your recipe.', "#!/form/recipe_tab"
 
       .recipe
 
@@ -175,7 +174,7 @@
         Jacob 
         %span about your country
 
-      = button_to "", '#', class:"edit_answers"
+      = link_to "", "#!/form/country_specific_information_tab", class:"edit_answers"
 
       %hr
 
@@ -196,8 +195,7 @@
       project?
     %p.know
       Please let us know
-    %p.mailto
-      hello@jacobjoins.com 
+    = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
   %p.year
     2012 © jacobjoins
 
