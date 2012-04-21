@@ -118,6 +118,9 @@ window.reinitialize_tooltips = (context) ->
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
 $ ->
+  $(".scroll").click ->
+    $.scrollTo $('#story_1'), 800
+
   $("#wizard #send").click ->
       unless window.user?
         window.user = publish_user()
