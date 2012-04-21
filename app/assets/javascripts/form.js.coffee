@@ -207,7 +207,7 @@ $ ->
         no_preview_content = !!$(".no_recipe_preview")
 
         if no_preview_content
-          $(".no_recipe_preview").empty()
+          $(".no_recipe_preview").remove()
           $("#send").removeAttr "disabled"
 
         $("#preview_tab .recipe").empty()
@@ -220,11 +220,16 @@ $ ->
         no_preview_content = !!$(".no_csi_preview")
 
         if no_preview_content
-          $(".no_csi_preview").empty()
+          $(".no_csi_preview").remove()
           $("#send").removeAttr "disabled"
           
         $("#preview_tab .csi").empty()
         $(data).appendTo $("#preview_tab .csi")
+
+        if $(".no_csi_preview, .no_recipe_preview", "#preview_tab").size() < 2
+          $("#send").removeAttr "disabled"
+        else
+          $("#send").attr "disabled", true
 
   prepare_recipe_uploads()
   prepare_csi_slider()

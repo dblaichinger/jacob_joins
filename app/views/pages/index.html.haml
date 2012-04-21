@@ -152,8 +152,6 @@
         Jacob about
         %span your recipe
 
-      = link_to "", "#!/form/recipe_tab", class:"edit_recipe"
-
       %hr
 
       - unless session[:recipe_id]
@@ -171,8 +169,6 @@
         Jacob 
         %span about your country
 
-      = link_to "", "#!/form/country_specific_information_tab", class:"edit_answers"
-
       %hr
 
       - unless session[:csi_set_id]
@@ -180,7 +176,7 @@
       
       .csi
 
-    = button_tag "Finish and Send", id:"send", disabled:"disabled"
+    = button_tag "Finish and Send", id:"send", disabled:"true"
 
 #footer
   .kastl

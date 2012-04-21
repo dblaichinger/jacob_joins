@@ -1,3 +1,5 @@
+= link_to "", "#!/form/country_specific_information_tab", class:"edit_answers"
+
 - if @csi_set.user
   %p
     Author:
@@ -23,6 +25,4 @@
     %br
     = "#{answered_csis.count} of #{Question.count} questions"
 
-  %p.tell_more
-    %a
-      = link_to 'Do you want to tell us more about your country?' 
+  = link_to 'Do you want to tell us more about your country?', "#!/form/country_specific_information_tab", class:"tell_more"

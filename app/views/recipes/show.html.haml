@@ -1,5 +1,7 @@
 - recipe ||= @recipe
 
+= link_to "", "#!/form/recipe_tab", class:"edit_recipe"
+
 %div#img_preview
   -if recipe.images.present?
     - recipe.images.each do |image|
