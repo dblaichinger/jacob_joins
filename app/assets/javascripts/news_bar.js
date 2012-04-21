@@ -89,10 +89,10 @@ function slide_newsbar(){
   $(document).ready(function(){
     $("#newsbar").hover(
       function(){
-        if(event_set) { event_set = false; $("#clickandsee").fadeIn(500); }
+        if(event_set) { event_set = false; $("#clickandsee").stop(true, true).fadeIn(500); }
       },
       function(){
-        if(!event_set) { event_set = true; $("#clickandsee").fadeOut(500); }
+        if(!event_set) { event_set = true; $("#clickandsee").stop(true, true).fadeOut(500); }
       }
     );
   });
@@ -103,7 +103,7 @@ function slide_newsbar(){
     if(newsBar.hasClass('extended')){
       newsBar.stop().animate({
         top: "-215px"
-      }, 500).hover(function(){ $("#clickandsee").fadeIn(500); }, function(){ $("#clickandsee").fadeOut(500); });
+      }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
     } else {
       newsBar.stop().animate({
         top: "0"
@@ -111,7 +111,7 @@ function slide_newsbar(){
     }
 
     $("#countdown", newsBar).fadeToggle(500);
-    $("#clickandsee", newsBar).fadeOut(500);
+    $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
 
     $('#newsbar').toggleClass('extended');
 
