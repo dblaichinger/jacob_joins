@@ -48,7 +48,7 @@
 	height:70px;
 	background: url(/assets/counter_clock/bg_black_full.png) no-repeat left top;
 	position:absolute;
-	top:-1px;
+	top: 0;
 	left: 0;
 }
 
@@ -77,7 +77,7 @@
 .red .bg.left{	background:url(/assets/counter_clock/bg_red.png) no-repeat left top; }
 
 /* The right part of the background: */
-.clock .bg.right{ left:25px; }
+.clock .bg.right{ left:35px; }
 
 .white .bg.right{ background:url(/assets/counter_clock/bg_white.png) no-repeat right top; }
 .grey .bg.right{ background:url(/assets/counter_clock/bg_grey.png) no-repeat right top; }
