@@ -39,6 +39,31 @@ window.prepare_user_map = ->
   autoCompleteInput.attr "data-valid", "false"
   autoCompleteInput.attr "data-error-message", "Location not found."
 
+  autoCompleteInput.change () ->
+    autoCompleteInput.attr "data-valid", "true"
+    address = autoCompleteInput.val()
+    geocoder = new google.maps.Geocoder()
+    geocoder.geocode
+      address: address, (results, status) ->
+        if status is google.maps.GeocoderStatus.OK
+          
+          if results[0].address_components.length > 1
+            city = results[0].address_components[0].long_name
+            country = results[0].address_components[results[0].address_components.length-1].long_name
+            setHiddenFields results[0].geometry.location.lat(), results[0].geometry.location.lng(), city, country 
+            autoCompleteInput.val(city+", "+country)
+          else
+            city = null
+            country = results[0].address_components[0].long_name
+            setHiddenFields results[0].geometry.location.lat(), results[0].geometry.location.lng(), city, country
+            autoCompleteInput.val(country)
+          setMarker new google.maps.LatLng(latInput.val(), lngInput.val())
+        else
+          console.log "Geocode was not successful for the following reason: " + status
+          autoCompleteInput.attr "data-valid", "false"
+          $('#user_tab form').dirtyValidation("validate", autoCompleteInput, false)
+          autoCompleteInput.qtip("show")
+
   autocomplete = new google.maps.places.Autocomplete autoCompleteInput[0], { types: ['(regions)'] }
   autocomplete.bindTo('bounds', map)
 
@@ -47,8 +72,8 @@ window.prepare_user_map = ->
 
   latInput = $('#latitude')
   lngInput = $('#longitude')
-  cityInput = $('#city')
-  countryInput = $('#country')
+  cityInput = $('#city_hidden')
+  countryInput = $('#country_hidden')
 
   setMarker = (latlng, imageUrl = "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png") ->
     map.setCenter latlng
@@ -108,11 +133,14 @@ window.prepare_user_map = ->
 
     if !!place.geometry
       autoCompleteInput.attr "data-valid", "true"
-      autoCompleteInput.trigger "change"
+      console.log "autocomplete handler"
       setMarker place.geometry.location
-
       address = place.address_components
-      setHiddenFields place.geometry.location.Ya, place.geometry.location.Za, address[0].long_name, address[3].long_name
+      if address.length > 1
+        setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, address[address.length-1].long_name
+      else
+        setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), null, address[0].long_name
     else
       autoCompleteInput.attr "data-valid", "false"
+
 

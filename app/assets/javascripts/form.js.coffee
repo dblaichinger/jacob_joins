@@ -153,7 +153,10 @@ $ ->
   $('#wizard').tabs()
 
   $('#wizard').bind 'tabsshow', (event, ui) ->
-    $(".error:input, .error :input", ui.panel).qtip "show"
+    $(".error", ui.panel).qtip "show"
+    $(":input", ui.panel).filter (index) ->
+      return $(this).attr("visibility") isnt "hidden"
+    .parent().qtip "show"
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
     newHash = "#!/form/#{ui.tab.hash.slice 1}"

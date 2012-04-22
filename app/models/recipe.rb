@@ -35,10 +35,14 @@ class Recipe
     end
 
     state :published do
-      validates_presence_of :name, :portions, :duration, :city, :country, :latitude, :longitude
+      validates_presence_of :name, :portions, :duration, :country, :latitude, :longitude
       validates :portions, :duration, :numericality => { :only_integer => true }
       validates_associated :steps
     end
+  end
+
+  def formatted_portions
+    portions > 6 ? "more than six" : portions
   end
 
   private

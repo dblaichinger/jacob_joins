@@ -4,24 +4,27 @@ handleFieldValidation = (target) ->
   container = target.closest ".dirtyform"
   data = $(container).data "dirtyValidation"
 
-  $.fn.dirtyValidation "markAsValid", target
+  errorTarget = $(target.attr('data-error-target'))
+  errorTarget = target if errorTarget.length == 0
+
+  $.fn.dirtyValidation "markAsValid", errorTarget
 
   if target.val().length > 0 and target.val() isnt " "
     if target.attr("data-type") and not validateType(target)
       switch target.attr "data-type"
         when "email"
-          error_message = "It has to be a valid email address."
+          error_message = "It has to be a email address."
         when "numerical"
           error_message = "It has to be a number."
 
-      $.fn.dirtyValidation "markAsInvalid", target, error_message
+      $.fn.dirtyValidation "markAsInvalid", errorTarget, error_message
     else if target.attr("data-valid") and not fieldIsValid(target)
       error_message = target.attr("data-error-message")
       error_message ||= "Field is invalid."
-      $.fn.dirtyValidation "markAsInvalid", target, error_message
+      $.fn.dirtyValidation "markAsInvalid", errorTarget, error_message
 
   else
-    markIfRequired target
+    markIfRequired target, errorTarget
 
 validateType = (input) ->
   switch input.attr "data-type"
@@ -32,11 +35,11 @@ validateType = (input) ->
       return not isNaN input.val()
 
 fieldIsValid = (input) ->
-  console.log input.attr("data-valid") == "true"
-  input.attr("data-valid") == "true"
+  input.attr("data-valid") is "true"
 
-markIfRequired = (field) ->
-  $.fn.dirtyValidation "markAsInvalid", field, "This field is required." if field.attr("data-required") and not field.hasClass("error")
+markIfRequired = (field, errorTarget) ->
+  errorTarget ||= field
+  $.fn.dirtyValidation "markAsInvalid", errorTarget, "This field is required." if field.attr "data-required"
 
 publicMethods =
   init: (options) ->
@@ -60,7 +63,12 @@ publicMethods =
     data = field.closest(".dirtyform").data "dirtyValidation"
 
     if field.css("visibility") is "hidden"
-      field.parent().addClass data.errorClass
+      $("option", field).not (index) ->
+        return $(this).val().length is 0 or $(this).val() is " "
+      .each ->
+        $(".#{$(this).val()}", field.closest(".dirtyform")).addClass data.errorClass
+
+      field = field.parent()
     else
       field.addClass data.errorClass
 
@@ -82,7 +90,12 @@ publicMethods =
     data = field.closest(".dirtyform").data "dirtyValidation"
 
     if field.css("visibility") is "hidden"
-      field.parent().removeClass data.errorClass
+      $("option", field).not (index) ->
+        return $(this).val().length is 0 or $(this).val() is " "
+      .each ->
+        $(".#{$(this).val()}", field.closest(".dirtyform")).removeClass data.errorClass
+
+      field = field.parent()
     else
       field.removeClass data.errorClass
 
