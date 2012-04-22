@@ -9,7 +9,8 @@
 
 %ul
   - answered_csis = @csi_set.country_specific_informations.where(:answer.ne => "").entries
-  - answered_csis.each_with_index do |csi, index|
+  - answered_csis.each do |csi|
+    - index = @csi_set.country_specific_informations.index csi
     %li
       %p.question
         = "Question #{index + 1}"
