@@ -4,7 +4,10 @@ handleFieldValidation = (target) ->
   container = target.closest ".dirtyform"
   data = $(container).data "dirtyValidation"
 
-  $.fn.dirtyValidation "markAsValid", target
+  errorTarget = $(target.attr('data-error-target'))
+  errorTarget = target if errorTarget.length == 0
+
+  $.fn.dirtyValidation "markAsValid", errorTarget
 
   if target.val().length > 0 and target.val() isnt " "
     if target.attr("data-type") and not validateType(target)
@@ -14,14 +17,14 @@ handleFieldValidation = (target) ->
         when "numerical"
           error_message = "It has to be a number."
 
-      $.fn.dirtyValidation "markAsInvalid", target, error_message
+      $.fn.dirtyValidation "markAsInvalid", errorTarget, error_message
     else if target.attr("data-valid") and not fieldIsValid(target)
       error_message = target.attr("data-error-message")
       error_message ||= "Field is invalid."
-      $.fn.dirtyValidation "markAsInvalid", target, error_message
+      $.fn.dirtyValidation "markAsInvalid", errorTarget, error_message
 
   else
-    markIfRequired target
+    markIfRequired target, errorTarget
 
 validateType = (input) ->
   switch input.attr "data-type"
@@ -34,8 +37,9 @@ validateType = (input) ->
 fieldIsValid = (input) ->
   input.attr("data-valid") is "true"
 
-markIfRequired = (field) ->
-  $.fn.dirtyValidation "markAsInvalid", field, "This field is required." if field.attr "data-required"
+markIfRequired = (field, errorTarget) ->
+  errorTarget ||= field
+  $.fn.dirtyValidation "markAsInvalid", errorTarget, "This field is required." if field.attr "data-required"
 
 publicMethods =
   init: (options) ->
