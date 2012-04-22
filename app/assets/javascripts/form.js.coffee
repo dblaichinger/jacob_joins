@@ -68,8 +68,7 @@ prepare_recipe_uploads = () ->
         value: form.find('input[name="authenticity_token"]').attr('value')
       ]
     done: (e, data) ->
-      data.htmlElement.prepend('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '">')
-      data.htmlElement.append('<a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
+      data.htmlElement.html('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
