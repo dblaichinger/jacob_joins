@@ -41,13 +41,13 @@
     font-family: "Sanches-Light"
     text-transform: uppercase
     font-size: 20px
-    margin-bottom: 45px
-    height: 45px
+    margin-bottom: 25px
+    height: 40px
 
   #aboutyou
     font-family: "Pacifico"
     font-size: 28px
-    margin-bottom: 55px
+    margin-bottom: 45px
     font-weight: lighter
     height: 30px
 
@@ -55,7 +55,7 @@
     font-family: "Sanches-SemiBold"
     text-transform: uppercase
     font-size: 24px
-    height: 15px
+    height: 25px
 
   a
     text-decoration: none
@@ -154,8 +154,9 @@ hr
   padding: 1px 0 1px 0
 
 #preparation
-  margin-left: 20px
-  padding-top: 1px
+  padding: 37.5px
+  width: 300px
+  margin: 0px auto 0px auto
 
 textarea
   width: 95%
@@ -167,13 +168,16 @@ textarea
   overflow: hidden
 
 
-#information, #ingredients , #preparation
+#information, #ingredients
   padding: 37.5px
-  width: 300px
+  width: 305px
   margin: 0px auto 0px auto
 
   p
     text-align: justify
+
+.is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
+  margin-left: 232px
     
 #buttons
   clear: both
@@ -226,7 +230,7 @@ textarea
     background-position: left -68px
 
 #duration
-  overflow: hidden
+  overflow: visible
 
   #duration_label
     float: left
@@ -259,6 +263,7 @@ textarea
   
 #ingredients.active
   overflow: visible
+  position: absolute
   
 #ingredients.active:after
   content: ""
@@ -279,6 +284,9 @@ textarea
 .remove
   margin-left: 5px
 
+.step
+  margin-top: 30px
+
 .step_label
   font-family: Sanches-SemiBold
   text-transform: uppercase
@@ -294,9 +302,24 @@ textarea
 
 #stepupload
   position: relative
-  height: 50px
-  margin-top: 10px
+  height: 60px
+  margin-top: 5px
   overflow: hidden
+
+  .delete
+    position: absolute
+    left: 72px
+    top: 0
+    width: 20px
+    height: 20px
+    background-image: url(image_path('delete_image.png'))
+    background-position: 0 0
+    background-repeat: no-repeat
+    text-indent: -2000000px
+
+  .delete:hover
+    background-image: url(image_path('delete_image_hover.png'))
+
 
 #bildupload
   display: block
@@ -334,17 +357,57 @@ textarea
   font-family: "PlutoCondensed"
   font-size: 14px
   line-height: 1.4em
+  width: 60%
+  height: 60px
+  display: block
+  overflow: hidden
+  img
+    width: 56px
+    height: 56px
+    border: 2px solid #fff
 
-.delete
-  position: absolute
-  right: 0
-  color: #E2001A
+
+.file_uploads
+  font-family: "PlutoCondensed"
+  width: 60%
+  position: relative
+
+  li
+    margin-top: 5px
+    img
+      border: 2px solid #fff
+
+    .delete
+      position: absolute
+      left: 112px
+      top: 0
+      width: 20px
+      height: 20px
+      background-image: url(image_path('delete_image.png'))
+      background-position: 0 0
+      background-repeat: no-repeat
+      text-indent: -2000000px
+
+    .delete:hover
+      background-image: url(image_path('delete_image_hover.png'))
 
 label
   display: block
 
+
 #recipe_images
   margin-top: 50px
+  position: relative
+
+  imput
+    width: 300px
+    background-color: rgba(83,30,9,0.3)
+    border: 2px solid #fff
+    outline: 0px
+    color: #fff
+    font-family: "Pluto-Condensed"
+    font-size: 14px
+    padding: 5px
 
 #information_user
   padding: 15px

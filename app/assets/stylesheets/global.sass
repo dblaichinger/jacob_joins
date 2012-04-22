@@ -12,8 +12,8 @@
 +font-face("Pluto-LightCondensed", font-files("Pluto/203124_4_0.ttf", "Pluto/203124_4_0.woff"), "Pluto/203124_4_0.eot")
 +font-face("Pluto-Light", font-files("Pluto/203124_B_0.ttf", "Pluto/203124_B_0.woff"), "Pluto/203124_B_0.eot")
 +font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
++font-face("Pluto-Semibold", font-files("Pluto/203124_E_0.ttf", "Pluto/203124_E_0.woff"), "Pluto/203124_E_0.eot")
 +font-face("Pluto-CondensedItalic", font-files("Pluto-Italic/203125_9_0.ttf", "Pluto-Italic/203125_9_0.woff"), "Pluto-Italic/203125_9_0.eot")
-+font-face("Pluto", font-files("Pluto/203124_A_0.ttf", "Pluto/203124_A_0.woff"), "Pluto/203124_A_0.eot")
 +font-face("Pluto-Heavy", font-files("Pluto/203124_D_0.ttf", "Pluto/203124_D_0.woff"), "Pluto/203124_D_0.eot")
 +font-face("Pluto-HeavyCondensed", font-files("Pluto/203124_5_0.ttf", "Pluto/203124_5_0.woff"), "Pluto/203124_5_0.eot")
 +font-face("Pluto-LightItalic", font-files("Pluto-Italic/203125_1_0.ttf", "Pluto-Italic/203125_1_0.woff"), "Pluto-Italic/203125_1_0.eot")
@@ -46,6 +46,7 @@ body
     overflow: hidden
     h1
       display: none
+      overflow: visible
 
     h2
       font-family: "Sanches-Italic"
@@ -54,12 +55,16 @@ body
 
     #fb, #entries
       float: left
-      width: 255px
-      margin: 20px 10px 20px 0px
+      width: 300px
+      margin-top: 20px
 
     #fb
       height: 190px
       overflow: auto
+
+      h2
+        margin-top: 1px
+        overflow: visible
 
       .post
         overflow: hidden
@@ -79,14 +84,15 @@ body
 
         .message
           font-size: 12px
+          margin: 0 10px 0 60px
 
         .time
           font-size: 10px
           font-family: "Pluto-LightCondensed"
-          margin-top: 5px
+          margin: 5px 0 0 60px
 
     #entries
-
+      margin-left: 30px
 
     #last_entry
 
@@ -96,14 +102,11 @@ body
       margin: 20px 0
       height: 190px
 
-      h2
-        margin-left: 15px
-
       .text
         position: absolute
         bottom: 0
         font-family: "Pluto-CondensedItalic"
-        width: 100px
+        width: 70px
         text-align: center
 
       .display
@@ -131,12 +134,11 @@ body
 
 
 #start
-  background-image: url(image_path('pattern1.png'))
-  background-repeat: repeat-x
+  
   #story_0
     width: 1024px
     min-height: 640px
-    margin: 45px auto 0 auto
+    margin: 0px auto 0 auto
     background-image: url(image_path('kuvert_bg.png'))
     background-repeat: no-repeat
     background-position: 0 center
@@ -154,6 +156,7 @@ body
       text-transform: uppercase
       font-size: 40px
       margin: 20px 0 0 0
+      overflow: visible
 
     .scroll
       color: #E2001A
@@ -161,6 +164,7 @@ body
       font-family: "Pacifico"
       font-size: 26px
       font-weight: normal
+      margin-top: 10px
 
       img
         display: block
@@ -168,11 +172,15 @@ body
 
     a
       display: block
-      margin-top: 15px
+      margin-top: 45px
       text-transform: uppercase
       font-family: "Pluto-CondensedItalic"
       text-decoration: none
       color: #531E09
+      font-size: 14px
+
+    a:hover
+      color: #E2001A
 
 #text_1, #text_2, #text_3, #text_4, #text_5
   margin: auto
@@ -183,48 +191,47 @@ body
 #story_1, #story_2, #story_3, #story_4, #story_5
   min-height: 700px
 
+.uebergang
+  background-image: url(image_path('pattern_uebergang1.jpg'))
+  background-repeat: repeat-x
+  height: 113px
+
+
+.uebergang2
+  background-image: url(image_path('pattern_uebergang2.jpg'))
+  background-repeat: repeat-x
+  height: 140px
+
+.uebergang3
+  background-image: url(image_path('pattern_uebergang3.jpg'))
+  background-repeat: repeat-x
+  height: 113px
+
+.uebergang4
+  background-image: url(image_path('pattern_uebergang4.jpg'))
+  background-repeat: repeat-x
+  height: 116px
+
+.uebergang5
+  background-image: url(image_path('pattern_uebergang5.jpg'))
+  background-repeat: repeat-x
+  height: 113px
+
+.mitte_bildzeichen
+  margin: auto  
+  display: block
+
+#story_0
+  a
+    curser: pointer
+
 #story_2, #story_5
-  background-image: url(image_path('pattern2.png'))
+  background-image: url(image_path('pattern2.jpg'))
 
 #story_3
-  background-image: url(image_path('pattern.png'))
+  background-image: url(image_path('pattern.jpg'))
 
 
-.error
-  border: 2px solid #E2001A
-  float: none
-
-label.error
-  border: none
-  font-family: "Pluto-CondensedItalic" !important
-  font-size: 12px
-  color: #E2001A
-  float: none
-
-.ui-tooltip-default .ui-tooltip-titlebar, .ui-tooltip-default .ui-tooltip-content
-  width: 90px
-  height: 40px
-  background-image: url("error_bubble.png")
-  background-repeat: no-repeat
-  background-position: 0 0
-  padding: 6px 5px 4px 5px
-  text-align: center
-  font-family: "Pluto"
-  font-size: 10px
-  color: #E2001A
-  
-.form_valid
-  background-image: url("finished_form_tmp.png")
-  background-repeat: no-repeat
-  background-position: 98% 100%
-
-.form_not_valid
-  background-image: url("edit_form_tmp.png")
-  background-repeat: no-repeat
-  background-position: 95% 50%
-
-.ui-state-default, .ui-corner-top
-  min-height: 30px
 
 #footer
   background-image: url("footer_bg.png")
@@ -306,7 +313,7 @@ label.error
   letter-spacing: 13px
 
 .welcome6
-  +letterpress-braun-welcome(Sanches-Bold, 94pt)
+  +letterpress-braun-welcome(Sanches-Bold, 91pt)
 
 .idea1
   +weiß-shadow-idea(Pacifico, 62pt)
@@ -323,7 +330,7 @@ label.error
   padding-top: 10px
 
 .idea3
-  +letterpress-rot-idea(Sanches-Bold, 45pt)  
+  +letterpress-braun-idea(Sanches-Bold, 45pt)  
 
 .idea4
   +weiß-shadow-idea(Pluto, 25pt)
@@ -332,7 +339,13 @@ label.error
   padding-top: 20px
 
 .idea5
-  +letterpress-braun-idea(Sanches-Bold, 80pt)  
+  +letterpress-braun-idea(Sanches-Bold, 80pt) 
+
+.idea6
+  +weiß-shadow-idea(Pluto-LightItalic, 25pt)
+
+.idea7
+  +letterpress-rot-idea(Sanches-Bold, 68pt)     
 
 
 .intention1
@@ -362,7 +375,7 @@ label.error
   letter-spacing: 8px  
 
 .intention6
-  +letterpress-braun-intention(Sanches-Bold, 56pt)  
+  +letterpress-braun-intention(Sanches-Bold, 55pt)  
 
 .join1
   +weiß-shadow-idea(Pacifico, 63pt)
@@ -428,7 +441,7 @@ label.error
   +weiß-shadow-idea(Pluto-LightItalic, 36pt)  
 
 .sharing5
-  +letterpress-braun-idea(Sanches-Bold, 65pt)
+  +letterpress-braun-intention(Sanches-Bold, 65pt)
 
 .stories
   margin: auto  

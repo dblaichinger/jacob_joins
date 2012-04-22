@@ -79,7 +79,7 @@
 
       #title
         = f.label :name, "Name", id:"titel"
-        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe"
+        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text"
       #portions
         = f.label :portions, "Portions"
         = f.select :portions, ([nil] << (1..7).to_a).flatten, {}, {"data-required" => "true", "data-error-target" => "#portions .ui-rating"}
@@ -158,5 +158,6 @@
               = image_tag i.attachment(:small)
               = i.attachment_file_name
               = link_to "delete", recipes_delete_image_path(i.id), class:"delete"
+              
 
   = link_to "", '#!/form/country_specific_information_tab', class:"next_tab"

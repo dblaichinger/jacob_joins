@@ -70,13 +70,9 @@ prepare_recipe_uploads = () ->
     done: (e, data) ->
       data.htmlElement.prepend('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '">')
       data.htmlElement.append('<a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
-      data.htmlElement.css
-        backgroundColor: '#0f0'
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
-      data.htmlElement.css
-        backgroundColor: 'red'
 
     add: (e, data) ->
       $('ul.file_uploads').prepend (index, html) ->
@@ -122,6 +118,9 @@ window.reinitialize_tooltips = (context) ->
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
 $ ->
+  $(".scroll").click ->
+    $.scrollTo $('#story_1'), 800
+
   $("#wizard #send").click ->
       unless window.user?
         window.user = publish_user()
@@ -208,7 +207,7 @@ $ ->
         no_preview_content = !!$(".no_recipe_preview")
 
         if no_preview_content
-          $(".no_recipe_preview").empty()
+          $(".no_recipe_preview").remove()
           $("#send").removeAttr "disabled"
 
         $("#preview_tab .recipe").empty()
@@ -221,16 +220,16 @@ $ ->
         no_preview_content = !!$(".no_csi_preview")
 
         if no_preview_content
-          $(".no_csi_preview").empty()
+          $(".no_csi_preview").remove()
           $("#send").removeAttr "disabled"
           
         $("#preview_tab .csi").empty()
         $(data).appendTo $("#preview_tab .csi")
 
-  $('#wizard').on "click", ".next_tab", (e) ->
-    current = $(e.delegateTarget).tabs "option", "selected"
-    $(e.delegateTarget).tabs "select", current + 1
-    false
+        if $(".no_csi_preview, .no_recipe_preview", "#preview_tab").size() < 2
+          $("#send").removeAttr "disabled"
+        else
+          $("#send").attr "disabled", true
 
   prepare_recipe_uploads()
   prepare_csi_slider()

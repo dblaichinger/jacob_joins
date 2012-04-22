@@ -21,6 +21,7 @@
 //= require jquery.fileupload
 //= require jquery.tzineClock
 //= require jquery.dirtyform
+//= require jquery.scrollTo-1.4.2-min
 //= require path.min
 //= require jquery.rating
 //= require_tree .
