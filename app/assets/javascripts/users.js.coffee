@@ -122,13 +122,13 @@ window.prepare_user_map = ->
               autoCompleteInput.val(address)
               setMarker latlng
             else 
-              console.debug "Geocode was not successful for the following reason: " + status
+              console.log "Geocode was not successful for the following reason: " + status
 
         (error) ->
-          console.debug "HTML5 Geolocation not supported!"
+          console.log "HTML5 Geolocation not supported!"
       )
     else
-      console.debug "Geolocation is not supported by your browser!"
+      console.log "Geolocation is not supported by your browser!"
   else
     #location already set
     setMarker new google.maps.LatLng(latInput.val(), lngInput.val())
