@@ -16,13 +16,25 @@ class IngredientsController < ApplicationController
         end
         @ingredients = @ingredients.flatten
 
-        binding.pry
-        counter = 0
-        if @ingredient.length > 0
-          while counter <= @ingredients.length-1
-            ingredient = @ingredients[counter]
+        #binding.pry
+
+        if @ingredients.length > 1
+          @recipe_match = []
+          counter = 0
+          #Loop through every ingredient and get the recipe_ids
+          @ingredients.each do |ingredient|
             ingredient.recipe_ids.each do |id|
-              ingredient[counter] = 
+              
+              #Loop through all other recipes and compare
+              compare_counter = counter+1
+              @ingredients[compare_counter].recipe_ids.each do |compare_id|
+                if id == compare_id
+                  @recipe_match << id
+                  raise @recipe_match.inspect
+                end
+              end
+            end
+            counter+=1
           end
         end
 
