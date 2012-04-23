@@ -29,7 +29,7 @@
 
       %p
         = f.label :city, "City", id:"city"
-        = text_field_tag "address-search", nil, class:"address-search", "data-required" => true, tabindex:"3", value:"#{@city + ', ' if @city.present?}#{@country if @country.present?}"
+        = text_field_tag "address-search", params["address-search"], class:"address-search", "data-required" => true, tabindex:"3"
         - if request.location
           - @location = request.location.data
           - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
