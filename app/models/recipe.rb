@@ -42,7 +42,9 @@ class Recipe
   end
 
   def formatted_portions
-    portions > 6 ? "more than six" : portions
+    if portions
+      portions > 6 ? "more than six" : portions
+    end
   end
 
   private
