@@ -5,7 +5,7 @@ module RecipesHelper
     default_ingredients = [
       { :name => "Eggs", :quantity => "e.g.: 2 big" }, 
       { :name => "Onion", :quantity => "e.g.: 1 red" }, 
-      { :name => "Potatoes", :quantity => "e.g.: 3" }, 
+      { :name => "Potatoes", :quantity => "e.g.: 500g" }, 
       { :name => "your additional ingredient", :quantity => "quantity" }
     ] 
 

@@ -19,7 +19,7 @@
       about 
       %span yourself!
 
-      %hr
+    %hr
     
     %p
       Of course Jacob wants to get to know the person who shared a great recipe with him.   
@@ -54,8 +54,7 @@
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
         = f.text_field :email, "data-type" => "email"
-        .email
-          We just need your e-mail address to send you our final product!            
+                   
       %p
         = f.label :heard_from, "How did you hear from Jacob Joins?"             
         = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"

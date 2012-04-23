@@ -74,11 +74,10 @@
 
       %p
         Here is where you enter the name of your recipe.
-        %br
         By the way: All the entries on this form are not necessarily your final recipe. You forgot salt? No problem! You can adapt every step before you finally share your post on the preview page. 
 
       #title
-        = f.label :name, "Name", id:"titel"
+        = f.label :name, "Title", id:"titel"
         = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text"
       #portions
         = f.label :portions, "Portions"
@@ -144,7 +143,8 @@
         %h1 
           %strong 4
           Show Jacob your
-          %span meal
+          %span delicious 
+          meal
 
         %hr
         

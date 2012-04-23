@@ -83,13 +83,12 @@ textarea:focus, input:focus
   position: relative
 
   .no_recipe_preview, .no_csi_preview
-    font-family: "Sanches-Bold"
-    text-transform: uppercase
-    text-align: center
-    font-size: 16px
+    font-family: "PlutoCondensed"
 
     a
-      color: #E2001A  
+      color: #E2001A
+      text-transform: uppercase
+      font-family: "Pluto-CondensedItalic"  
 
   .recipe
     overflow: hidden
@@ -124,6 +123,12 @@ textarea:focus, input:focus
 
         p
           margin: 0
+          font-family: "Sanches-SemiBold"
+          text-transform: uppercase
+
+        em
+          font-family: "PlutoCondensed"
+          text-transform: none
 
     h1
       font-family: "Pluto-Semibold"
@@ -134,11 +139,11 @@ textarea:focus, input:focus
 
     h2
       font-size: 20px
-      font-family: "Sanches-Bold"
+      font-family: "Sanches-SemiBold"
       font-weight: normal
-      color: #7C6259
+      color: #531E09
       text-transform: uppercase
-      text-shadow: 0 -1px 0 #531E09, 0 1px 0 #fff
+      text-shadow: 1px 1px 0px #FFFFFF
       margin-bottom: 20px
       padding-top: 3px
 
@@ -161,9 +166,9 @@ textarea:focus, input:focus
           font-family: "PlutoCondensed"
           font-size: 14px
           line-height: 1.4em
-          color: #E2001A
           width: 60px
           display: inline-block
+          color: #531E09
 
         em
           color: #531E09
@@ -182,7 +187,7 @@ textarea:focus, input:focus
         background-color: #fff
 
       em
-        color: #E2001A
+        color: #531E09
         font-family: "Sanches-SemiBold"
         text-transform: uppercase
 
@@ -219,8 +224,15 @@ textarea:focus, input:focus
 
 
   .csi
+    p
+      font-family: "Sanches-SemiBold"
+      text-transform: uppercase
+
     em
       color: #E2001A
+      font-family: "PlutoCondensed"
+      text-transform: none
+
     ul
       margin: 20px auto
       li
@@ -231,9 +243,10 @@ textarea:focus, input:focus
           color: #E2001A
           font-family: "Sanches-SemiBold"
           text-transform: uppercase
+          margin-bottom: 10px
 
         h3
-          font-family: "Pluto-Heavy"
+          font-family: "Sanches-SemiBold"
           text-transform: uppercase
 
         p
@@ -241,6 +254,8 @@ textarea:focus, input:focus
 
         .answer
           width: 100%
+          font-family: "PlutoCondensed"
+          text-transform: none
 
   #answered
     margin: 20px auto
@@ -252,16 +267,20 @@ textarea:focus, input:focus
 
     .fragen
       font-size: 20px
-      font-family: "Sanches-Bold"
+      font-family: "Sanches-SemiBold"
       font-weight: normal
-      color: #7C6259
+      color: #531E09
       text-transform: uppercase
-      text-shadow: -1px -1px 0px #000, 1px 1px 0px #FFFFFF
+      text-shadow: 1px 1px 0px #FFFFFF
 
     .tell_more
       text-transform: uppercase
       color: #E2001A
       font-family: "Pluto-CondensedItalic"
+
+    .tell_more:hover
+      color: #531E09
+
 
   .edit_recipe
     width: 93px

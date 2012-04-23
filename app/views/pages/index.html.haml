@@ -84,23 +84,7 @@
           your way of cooking.    
     .uebergang4
     #story_5
-      #text_5
-        %p.sharing1
-          Sharing is caring
-        %p.sharing11
-          If the project keeps running  
-        %p.sharing2
-          until june and it has a chance to be successful,
-        %p.sharing22
-          Jacob is going to start a donation campaign. 
-        %p.sharing3
-          For each uploaded recipe 
-        %p.sharing4
-          an pre-defined amount of 
-        %p.sharing44
-          money will be transfered from sponsores
-        %p.sharing5
-          to a selected institution.
+      
     .uebergang5
       = image_tag 'pattern_uebergang5_mitte.jpg', class:"mitte_bildzeichen"
     #share
@@ -180,16 +164,37 @@
     = button_tag "Finish and Send", id:"send", disabled:"true"
 
 #footer
-  .kastl
-    = image_tag 'schleife2.png', class:"schleife" 
-    = image_tag 'bildzeichen_footer.png', id:"bildzeichen_footer"
-    %h1.likeproject
-      You like this 
-      %br
-      project?
-    %p.know
-      Please let us know
-    = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
-  %p.year
-    2012 © jacobjoins
+  #footercontent
+    %div.kastlcontent
+      .kastl
+        = image_tag 'sharing.png', class:"schleife" 
+
+        %p#text_donation
+          If the project keeps running  until june and it has a chance to be successful, Jacob is going to start a 
+          %span donation campaign.
+          %br
+          %br
+          For each uploaded recipe  an pre-defined amount of money will be transfered from sponsores  to a selected institution.
+      
+    #footer_information
+      %p.likeproject
+        You like this project?
+        Or have any questions? Feel free to contact us!
+     
+      
+      = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
+      
+
+      #subinformation
+        %p.fb_like
+          Join us on Facebook!
+
+        %p.adresse
+          Urstein Süd 1
+          %br
+          5412 Puch bei Hallein
+          %br
+          Austria
+
+        = image_tag 'fh.png', class:"fh_logo"
 

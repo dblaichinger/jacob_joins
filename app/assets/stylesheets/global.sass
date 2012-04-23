@@ -162,7 +162,7 @@ body
       color: #E2001A
       text-transform: none
       font-family: "Pacifico"
-      font-size: 26px
+      font-size: 30px
       font-weight: normal
       margin-top: 10px
 
@@ -206,7 +206,7 @@ body
   height: 140px
 
 .uebergang3
-  background-image: url(image_path('pattern_uebergang3_.jpg'))
+  background-image: url(image_path('pattern_uebergang3.jpg'))
   background-repeat: repeat-x
   height: 113px
 
@@ -232,65 +232,115 @@ body
   background-image: url(image_path('pattern2.jpg'))
 
 #story_3
-  background-image: url(image_path('pattern__.jpg'))
+  background-image: url(image_path('pattern_.jpg'))
 
 
 
 #footer
   background-image: url("footer_bg.png")
   background-repeat: repeat
-  height: 334px
+  height: 400px
   position: relative
   bottom: 0
   clear: both
 
+#footercontent
+  width: 1000px
+  margin: auto
+
+.kastlcontent
+  width: 200px
+  float: left
+  position: relative
+
 .kastl
   text-align: center
-  clear: both
+  float: left
   background-color: #FFF4E0
-  width: 202px
-  margin: auto
+  width: 200px
   padding: 0px 0 20px 0
-  top: 20px
+  top: 60px
   position: relative
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
   z-index: 1
 
+.year
+  text-transform: uppercase
+  font-size: 12px  
+  text-align: center
+  clear: both
+  width: 200px
+  position: absolute
+  bottom: 30px
 
 .know
-  font-size: 15px
-  font-family: Pluto-CondensedItalic
-  padding-bottom: 5px
-  text-transform: uppercase
+  font-family: PlutoCondensed
+  font-size: 18px
 
-.year
-  text-align: center
+#text_donation
+  margin: 30px 10px 10px 10px
+  position: relative
 
-#bildzeichen_footer
-  padding: 0 0 20px 0
+  span
+    font-family: "PlutoCondensed"
+    font-size: 14px
+
+#footer_information
+  float: right
+  width: 650px
+  position: relative
+  top: 40px
+  left: -75px
+  text-align: left
+  padding: 40px 0 0 0
+
+  .mailto
+    color: #531E09 
+    +braun-shadow-idea(Sanches-SemiBold, 64px) 
+    display: block
+    margin-top: 20px
+    text-decoration: none
+    text-align: left
+
+  .mailto:hover
+    color: #E2001A 
+
+#subinformation
+  text-align: left
+  overflow: hidden
+  margin-top: 100px
+
+  .fb_like, .adresse
+    float: left
+    margin-right: 30px
+    line-height: 1.2
+    font-size: 12px
+    font-family: "Pluto-CondensedItalic"
+
+  .fb_like
+    width: 200px
+
+  .adresse
+    width: 200px
+
+.bildzeichen_footer
+  display: block
+  margin: 30px 0 30px 0
 
 .schleife
   width: 270px
   display: block
   margin: auto
-  top: -10px
+  top: 20px
   z-index: 2  
   position: relative
   left: -34px
 
 .likeproject
-  font-size: 20px  
   line-height: 1.3
-  margin-bottom: 15px
-
-.mailto
-  color: #E2001A  
-  font-family: Pluto-CondensedItalic
-  font-size: 15px
-
-.year
+  margin-bottom: 10px
+  +letterpress-braun-like(Sanches-Bold, 24px)
   text-transform: uppercase
-  font-size: 12px  
 
 .welcome1
   +braun-shadow-idea(Pacifico, 62pt)
@@ -437,38 +487,6 @@ body
   text-align: center
   text-transform: uppercase
 
-.sharing1
-  +braun-shadow-idea(Pacifico, 34.8pt)
-  width: 400px
-  display: inline
-
-.sharing11  
-  +letterpress-rot-sharing(Pluto-HeavyCondensed, 15pt)
-  text-transform: uppercase
-  display: inline
-  letter-spacing: 1px
-
-.sharing2
-  +weiß-shadow-idea(Pluto-LightItalic, 22pt)
-  padding-top: 10px
-
-.sharing22
-  +weiß-shadow-idea(Pluto-LightItalic, 22.8pt)  
-
-.sharing3
-  +letterpress-rot-idea(Sanches-Bold, 42.2pt)
-
-.sharing4
-  +weiß-shadow-idea(Pluto, 26.6pt) 
-  text-transform: uppercase
-  letter-spacing: 5px
-
-.sharing44
-  +weiß-shadow-idea(Pluto-LightItalic, 24.8pt)  
-  padding-top: 8px
-
-.sharing5
-  +letterpress-braun-sharing(Sanches-Bold, 44.6pt)
 
 .stories
   margin: auto  
