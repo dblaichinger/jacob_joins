@@ -12,12 +12,14 @@
 = form_for user, :html => { class:"user_form" } do |f|
   #content
     %h1.tellus
+      Who are you and where are you from? 
+      %br
       Tell Jacob 
       %span something 
-      %br
-      about yourself!
+      about 
+      %span yourself!
 
-    %hr
+      %hr
     
     %p
       Of course Jacob wants to get to know the person who shared a great recipe with him.   
@@ -48,7 +50,7 @@
     .rechts    
       %p
         = f.label :lastname, "Last name"
-        = f.text_field :lastname, tabindex:"2", placeholder:"your last name", "data-type" => "text"
+        = f.text_field :lastname, tabindex:"2", "data-type" => "text"
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
         = f.text_field :email, "data-type" => "email"
