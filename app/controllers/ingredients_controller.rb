@@ -18,6 +18,7 @@ class IngredientsController < ApplicationController
 
         #binding.pry
 
+        #Compare recipe_ids with each other
         if @ingredients.length > 1
           @recipe_match = []
           counter = 0
@@ -40,7 +41,7 @@ class IngredientsController < ApplicationController
 
         
         
-        #todo: order the recipes and find the first 10? from the ordered array
+
         @recipes = []
         @ingredients.each do |ingredient|
           @recipes << Recipe.find(ingredient.recipe_ids[0])
