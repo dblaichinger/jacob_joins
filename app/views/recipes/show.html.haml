@@ -7,7 +7,7 @@
     - recipe.images.each do |image|
       = image_tag image.attachment(:medium)
   -else
-    = image_tag "", :class => "missing", :alt => "missing_image"
+    = image_tag asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"
 
 %div#prev_recipe_info
   %h1
@@ -17,18 +17,17 @@
     %p
       Portions:
       %em 
-        = recipe.formatted_portions
+        = recipe.portions.present? ? recipe.formatted_portions : "Please provide the amount of portions."
 
     %p
       Preparation time: 
       %em
         = recipe.duration.present? ? "#{recipe.duration} min" : "your preparation time"
 
-    - if recipe.user
-      %p
-        Cooked by: 
-        %em
-          = recipe.user.formatted_user_info
+    %p
+      Cooked by: 
+      %em
+        = recipe.user.present? ? recipe.user.formatted_user_info : "Your name is a required information."
 
 %div#prev_ingredients
   %h2 
@@ -51,7 +50,7 @@
       - if step.image.present?
         = image_tag step.image(:medium)
       - else
-        = image_tag "", :class => "missing", :alt => "missing_image"
+        = image_tag asset_path("no_image_prev_steps.png"), :class => "missing", :alt => "missing_image"
       %p
         %em
           = "Step #{index + 1}:" 
