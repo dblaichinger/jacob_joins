@@ -51,7 +51,7 @@
       = image_tag 'pattern_uebergang3_mitte.jpg', class:"mitte_bildzeichen"
     #share
       #text_4
-        %p.share
+        %h3.share
           Share your favourite recipe 
           %br
           with Jacob and the world!
@@ -78,7 +78,7 @@
     = image_tag 'formnav_endimg.png', id:"endimg"
 
     #general
-      If there´s an ! at one point in the navigation make sure you filled in the form correctly.
+      If there´s an exclamationmark "!" at one point in the navigation make sure you filled in the form correctly.
 
   #recipe_tab
     - session[:recipe_id] = nil
@@ -126,16 +126,37 @@
     = button_tag "Finish and Send", id:"send", disabled:"true"
 
 #footer
-  .kastl
-    = image_tag 'schleife2.png', class:"schleife" 
-    = image_tag 'bildzeichen_footer.png', id:"bildzeichen_footer"
-    %h1.likeproject
-      You like this 
-      %br
-      project?
-    %p.know
-      Please let us know
-    = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
-  %p.year
-    2012 © jacobjoins
+  #footercontent
+    %div.kastlcontent
+      .kastl
+        = image_tag 'sharing.png', class:"schleife" 
+
+        %p#text_donation
+          If the project keeps running  until june and it has a chance to be successful, Jacob is going to start a 
+          %span donation campaign.
+          %br
+          %br
+          For each uploaded recipe  an pre-defined amount of money will be transfered from sponsores  to a selected institution.
+      
+    #footer_information
+      %p.likeproject
+        You like this project?
+        Or have any questions? Feel free to contact us!
+     
+      
+      = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
+      
+
+      #subinformation
+        %p.fb_like
+          Join us on Facebook!
+
+        %p.adresse
+          Urstein Süd 1
+          %br
+          5412 Puch bei Hallein
+          %br
+          Austria
+
+        = image_tag 'fh.png', class:"fh_logo"
 

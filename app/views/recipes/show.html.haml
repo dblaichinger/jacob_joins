@@ -11,23 +11,23 @@
 
 %div#prev_recipe_info
   %h1
-    = recipe.name.blank? ? "The title of your recipe" : recipe.name
+    = recipe.name.blank? ? "Unknown title of your recipe" : recipe.name
 
   %div#p_prev
     %p
       Portions:
       %em 
-        = recipe.portions.present? ? recipe.formatted_portions : "Please provide the amount of portions."
+        = recipe.portions.present? ? recipe.formatted_portions : "unknown"
 
     %p
       Preparation time: 
       %em
-        = recipe.duration.present? ? "#{recipe.duration} min" : "your preparation time"
+        = recipe.duration.present? ? "#{recipe.duration} min" : "unknown"
 
     %p
       Cooked by: 
       %em
-        = recipe.user.present? ? recipe.user.formatted_user_info : "Your name is a required information."
+        = recipe.user.present? ? recipe.user.formatted_user_info : "Your name is required."
 
 %div#prev_ingredients
   %h2 
@@ -53,7 +53,7 @@
         = image_tag asset_path("no_image_prev_steps.png"), :class => "missing", :alt => "missing_image"
       %p
         %em
-          = "Step #{index + 1}:" 
+          = "Step #{index + 1}" 
         %br
         = step.description
 
