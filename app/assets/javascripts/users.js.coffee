@@ -7,7 +7,7 @@ window.publish_user = ->
     data: { _method: "PUT" }
     async: false
     success: (data, textStatus, jqXHR) -> 
-      return_value = data
+      return_value = data.responseText
     statusCode:
       400: ->
         return_value = false

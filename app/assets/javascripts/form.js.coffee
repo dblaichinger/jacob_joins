@@ -122,16 +122,39 @@ $ ->
 
   $("#wizard #send").click ->
       unless window.user?
-        window.user = publish_user()
+        empty_user_form = publish_user() if $('#aboutyou').parent().hasClass('form_valid')
+        window.user = 
+          id: $('#user_tab form').attr('action').split('/')[2]
+          location:
+            longitude: $('#longitude').val()
+            latitude: $('#latitude').val()
+            city: $('#city_hidden').val()
+            country: $('#country_hidden').val()
 
       if window.user
-        recipe = publish_recipe window.user.id, window.user.location
-        csi = publish_csi window.user.id, window.user.location
+        empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
+        empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
 
-        $("#preview_tab .success").remove()
-        
-        if recipe and csi
-          $('#preview_tab').prepend '<p class="success">Saved successfully</p>'
+        if empty_recipe_form or empty_csi_form
+          $.ajax
+            url: "/pages/drafts_saved"
+            success: (data, textStatus, jqXHR) ->
+              if empty_recipe_form?
+                $('#recipe_tab').html(empty_recipe_form)
+                prepare_recipe_uploads()
+
+              if empty_csi_form?
+                $('#country_specific_information_tab').html(empty_csi_form) 
+                prepare_csi_slider()
+
+              if empty_user_form?
+                $('#user_tab').html(empty_user_form)
+                prepare_user_map()
+
+              $('#preview_tab').html(data)
+
+            error: (jqXHR, textStatus, errorThrown) ->
+              alert "Error loading success page!"
         else
           alert "Failed to save the draft(s)!"
       else
