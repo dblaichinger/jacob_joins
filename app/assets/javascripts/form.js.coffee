@@ -198,37 +198,37 @@ $ ->
           400: ->
             console.log "Unable to save changes"
 
-    if ui.index is $('#wizard').tabs('length') - 1
-      $.get "recipes/draft", (data, textStatus) ->
-        if textStatus is "Gone"
-          return
-          
-        no_preview_content = !!$(".no_recipe_preview")
-
-        if no_preview_content
-          $(".no_recipe_preview").remove()
-          $("#send").removeAttr "disabled"
-
-        $("#preview_tab .recipe").empty()
-        $(data).appendTo $("#preview_tab .recipe")
-
-      $.get "country_specific_informations/draft", (data, textStatus) ->
-        if textStatus is "Gone"
-          return
-
-        no_preview_content = !!$(".no_csi_preview")
-
-        if no_preview_content
-          $(".no_csi_preview").remove()
-          $("#send").removeAttr "disabled"
-          
-        $("#preview_tab .csi").empty()
-        $(data).appendTo $("#preview_tab .csi")
-
-        if $(".no_csi_preview, .no_recipe_preview", "#preview_tab").size() < 2
-          $("#send").removeAttr "disabled"
-        else
-          $("#send").attr "disabled", true
+#    if ui.index is $('#wizard').tabs('length') - 1
+#      $.get "recipes/draft", (data, textStatus) ->
+#        if textStatus is "Gone"
+#          return
+#          
+#        no_preview_content = !!$(".no_recipe_preview")
+#
+#        if no_preview_content
+#          $(".no_recipe_preview").remove()
+#          $("#send").removeAttr "disabled"
+#
+#        $("#preview_tab .recipe").empty()
+#        $(data).appendTo $("#preview_tab .recipe")
+#
+#      $.get "country_specific_informations/draft", (data, textStatus) ->
+#        if textStatus is "Gone"
+#          return
+#
+#        no_preview_content = !!$(".no_csi_preview")
+#
+#        if no_preview_content
+#          $(".no_csi_preview").remove()
+#          $("#send").removeAttr "disabled"
+#         
+#        $("#preview_tab .csi").empty()
+#        $(data).appendTo $("#preview_tab .csi")
+#
+#        if $(".no_csi_preview, .no_recipe_preview", "#preview_tab").size() < 2
+#          $("#send").removeAttr "disabled"
+#        else
+#          $("#send").attr "disabled", true
 
   prepare_recipe_uploads()
   prepare_csi_slider()

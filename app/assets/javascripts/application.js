@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.8.18.custom.min
+//= require knockout-2.0.0
 //= require jquery.qtip
 //= require jquery.livequery
 //= require jquery.placeholder
