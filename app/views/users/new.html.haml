@@ -60,13 +60,14 @@
         = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
         = text_field_tag :heard_from_other
       
-      %p.genderage1
+      .genderage1
         = f.label :gender, "Gender"
-        = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
-        = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
-        = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true }
+        #gendericons
+          = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
+          = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
+        = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true, "data-error-target" => "#gendericons" }
     
-      %p.genderage2
+      .genderage2
         = f.label :age, "Age"
         = f.text_field :age, "data-required" => true, "data-type" => "numerical" 
       
