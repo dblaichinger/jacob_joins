@@ -65,7 +65,7 @@ textarea:focus, input:focus
   right: 0
 
 .next_tab:hover
-  background-image: url(image_path('next_tab_hover.png'))
+  background-position: 0 -30px
    
 .ui-tabs
   .ui-tabs-hide
@@ -78,6 +78,19 @@ textarea:focus, input:focus
   padding: 37.5px
   width: 685px
   margin-left: 240px
+
+#send
+  display: block
+  width: 142px
+  height: 142px
+  background-image: url(image_path('finish.png'))
+  background-repeat: no-repeat
+  background-position: 0 0
+  position: absolute
+  right: 0
+
+#send:hover
+  background-position: 0 -142px
 
 #prev_recipe, #prev_csi
   position: relative
@@ -290,7 +303,7 @@ textarea:focus, input:focus
     background-repeat: no-repeat  
 
   .edit_recipe:hover
-    background-image: url(image_path('btn_edit_recipe_hover.png'))
+    background-position: 0 -30px 
 
   .edit_answers
     width: 106px
@@ -300,7 +313,7 @@ textarea:focus, input:focus
     background-repeat: no-repeat  
 
   .edit_answers:hover
-    background-image: url(image_path('btn_edit_answers_hover.png'))
+    background-position: 0 -30px
 
   .edit_recipe, .edit_answers
     float: right
