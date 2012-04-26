@@ -41,6 +41,10 @@ class Recipe
     end
   end
 
+  def self.search_by_ingredient(name)
+    Recipe.where({"ingredients_with_quantities.name" => name})
+  end
+
   private
   def save_ingredients
     ingredients_with_quantities.each do |ingredient_with_quantity|
