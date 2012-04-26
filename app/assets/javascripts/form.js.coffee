@@ -30,6 +30,7 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
         uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
 
       uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
+      $(this).addClass "changed"
 
     add: (e, data) ->
       data.submit()
@@ -55,6 +56,7 @@ prepare_recipe_uploads = () ->
           display: 'block'
 
         imagePreview.remove()
+        $(":input", uploadWrapper).addClass "changed"
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
     false
@@ -69,6 +71,7 @@ prepare_recipe_uploads = () ->
       ]
     done: (e, data) ->
       data.htmlElement.html('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
+      $(this).addClass "changed"
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
@@ -90,6 +93,8 @@ prepare_recipe_uploads = () ->
         _method: "DELETE"
       success: (data, textStatus, jqXHR) ->
         clicked_link.parent('li').remove()
+        $(":input", "#recipe_images").addClass "changed"
+
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
     false
