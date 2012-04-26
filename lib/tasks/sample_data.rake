@@ -2,6 +2,9 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     
+    Ingredient.delete_all
+
+
     NUMBER_OF_INGREDIENTS = 10
     NUMBER_OF_RECIPES = 10
 
@@ -22,7 +25,7 @@ namespace :db do
         #Rake::Task['db:reset'].invoke
         ingredients.each do |i|
           ingredients_with_quantities << IngredientWithQuantity.new(:name => i, :quantity => (1+rand(9)))
-          Ingredient.create(:name => i) if Ingredient.where(:name => i).count == 0
+          Ingredient.create(:name => i) #if Ingredient.where(:name => i).count == 0
         end
 
         #Create new steps, which is also embedded in Recipe
