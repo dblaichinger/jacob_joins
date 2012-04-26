@@ -11,6 +11,11 @@
           source: '/ingredients/names',
           minLength: 2
         });
+
+        $(":input", this).addClass("changed");
+      },
+      onRemoveElement: function(context){
+        $(":input", "#ingredients .dynamicElement:first").addClass("changed");
       }
     });
 
@@ -33,7 +38,11 @@
         var count;
         count = $(this).siblings('.step').length + 1;
         $(this).find('label[for=*"description"] span').html(count);
+        $(":input", this).addClass("changed");
         return prepare_recipe_step_upload($(this).find('input[type="file"]:first'));
+      },
+      onRemoveElement: function(context){
+        $(":input", ".steps .dynamicElement:first").addClass("changed");
       }
     });
 
