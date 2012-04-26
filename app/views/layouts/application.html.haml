@@ -13,6 +13,7 @@
         get_facebook_stream();
         slide_newsbar();
         $("#newsbar").visibleAfter($(".stories"));
+        $("#twilightzone").visibleAfter($("#skipstory"));
       });
         
     
@@ -50,6 +51,8 @@
 
       #clickandsee
         = link_to "", "#", class:"show_newsbar"
+
+    #twilightzone
 
     = yield
 

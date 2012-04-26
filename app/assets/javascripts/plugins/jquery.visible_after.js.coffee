@@ -7,9 +7,11 @@ publicMethods =
 
       $(window).scroll (event) ->
         if $(window).scrollTop() >= checkPointCharlie.position().top
-          element.stop(true, true).fadeIn 500
+          element.fadeIn 500, ->
+            $(this).stop true, true
         else
-          element.stop(true, true).fadeOut 500
+          element.fadeOut 500, ->
+            $(this).stop true, true
 
   destroy: ->
     this.each ->
