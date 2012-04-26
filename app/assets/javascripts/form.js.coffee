@@ -120,22 +120,27 @@ $ ->
   $(".scroll").click ->
     $.scrollTo $('#story_1'), 800
 
-  $("#wizard #send").click ->
-      unless window.user?
-        window.user = publish_user()
+  $("#wizard #send").click (event) ->
+    event.preventDefault()
 
-      if window.user
-        recipe = publish_recipe window.user.id, window.user.location
-        csi = publish_csi window.user.id, window.user.location
+    if $(this).attr("disabled")
+      return false
 
-        $("#preview_tab .success").remove()
-        
-        if recipe and csi
-          $('#preview_tab').prepend '<p class="success">Saved successfully</p>'
-        else
-          alert "Failed to save the draft(s)!"
+    unless window.user?
+      window.user = publish_user()
+
+    if window.user
+      recipe = publish_recipe window.user.id, window.user.location
+      csi = publish_csi window.user.id, window.user.location
+
+      $("#preview_tab .success").remove()
+      
+      if recipe and csi
+        $('#preview_tab').prepend '<p class="success">Saved successfully</p>'
       else
-        alert "Unable to save user information (maybe not provided)."
+        alert "Failed to save the draft(s)!"
+    else
+      alert "Unable to save user information (maybe not provided)."
 
   $("#wizard").bind "validated.dirtyValidation", (event, data) ->
     tabs = $(".dirtyform", "#wizard")
