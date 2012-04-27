@@ -4,7 +4,7 @@ class Recipe
   include Mongoid::Slug
   include Mongoid::Paperclip
 
-  before_save :save_ingredients
+  #before_save :save_ingredients
 
   slug :name
 

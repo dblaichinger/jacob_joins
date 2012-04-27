@@ -3,9 +3,11 @@
   %h1
     ***SEARCH FOR RECIPE***
 
-  = form_tag ingredients_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" }, :id => "ingredients_search_form" do
-    = text_field_tag 'ingredients[search]', nil, :id => 'search_field'
-    = submit_tag "Search", :name => nil 
+    = form_tag ingredients_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" }, :id => "ingredients_search_form" do
+      = text_field_tag 'ingredients[search]', nil, :id => 'search_field'
+      #search_hidden
+      = submit_tag "Search", :name => nil 
+
 
   %h1
     ***SELECTION***
