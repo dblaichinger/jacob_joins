@@ -1,5 +1,5 @@
 - recipe = session[:recipe_id].present? ? Recipe.find(session[:recipe_id]) : Recipe.new
-- (3 - recipe.steps.count).times { recipe.steps.build }
+- recipe.steps.build
 - recipe.ingredients_with_quantities.build
 
 :javascript
@@ -20,15 +20,6 @@
       display: 'block'
     });
     elementTemplate = $('<div>').append(elementTemplate).html();
-    $('#recipe_tab .steps').elementOnDemand({
-      element: elementTemplate,
-      onAddElement: function(context) {
-        var count;
-        count = $(this).siblings('.step').length + 1;
-        $(this).find('label[for=*"description"] span').html(count);
-        return prepare_recipe_step_upload($(this).find('input[type="file"]:first'));
-      }
-    });
 
     $('#recipe_portions').rating({
       startValue: null,
@@ -93,12 +84,12 @@
       = f.fields_for :ingredients_with_quantities do |ingredient_with_quantity|
         <!-- ko foreach: ingredients -->
         %p.dynamicElement
-          = ingredient_with_quantity.text_field :quantity, "data-bind" => "value: $data.quantity, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][quantity]' }", placeholder:"quantity", class:"menge"
-          = ingredient_with_quantity.text_field :name, "data-bind" => "value: $data.name, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][name]' }", placeholder:"your additional ingredient", class:"zutat"
+          = ingredient_with_quantity.text_field :quantity, "data-bind" => "value: quantity, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][quantity]' }", placeholder:"quantity", class:"menge"
+          = ingredient_with_quantity.text_field :name, "data-bind" => "value: name, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][name]' }", placeholder:"your additional ingredient", class:"zutat"
         <!-- /ko -->
-        .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
-          = image_tag asset_path("add_icon.png"), class:"add", "data-bind" => "click: addIngredient"
-          = image_tag asset_path("delete_icon.png"), class:"remove", "data-bind" => "click: removeIngredient"
+      .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
+        = image_tag asset_path("add_icon.png"), class:"add", "data-bind" => "click: addIngredient"
+        = image_tag asset_path("delete_icon.png"), class:"remove", "data-bind" => "click: removeIngredient"
 
   #right
     #preparation.part-3
@@ -115,26 +106,16 @@
         Again you can add or delete steps as required. Plus: He loves pictures!
 
       .steps
-        - counter = 0
         = f.fields_for :steps do |step|
+          <!-- ko foreach: steps -->
           .step.dynamicElement
-            = step.label :description, "Step <span>#{counter + 1}</span>".html_safe, class:"step_label"
-            - if counter == 0
-              = step.text_area :description, "data-required" => true
-            - else
-              = step.text_area :description
-            - counter += 1
-            #stepupload
-              = step.hidden_field :id unless step.object.new_record?
+            = step.label :description, "", class:"step_label", "data-bind" => "text: 'Step ' + (steps.indexOf($data) + 1)"
+            = step.text_area :description, "data-bind" => "value: $data.description, attr: { name: 'recipe[steps_attributes][' + steps.indexOf($data) + '][description]' }"
+          <!-- /ko -->
 
-              .upload_wrapper{:style => "#{ 'display: none;' if step.object.image.present? }"}
-                %p 
-                = step.file_field :image
-
-              - if step.object.image.present?
-                .image_preview
-                  = image_tag step.object.image(:small)
-                  = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
+        .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
+          = image_tag asset_path("add_icon.png"), class:"add", "data-bind" => "click: addStep"
+          = image_tag asset_path("delete_icon.png"), class:"remove", "data-bind" => "click: removeStep"
   
       #recipe_images
         %h1 

@@ -101,12 +101,46 @@
 
       %hr
 
-      - unless session[:recipe_id]
-        %p.no_recipe_preview 
-          Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-          = link_to 'Post Your recipe.', "#!/form/recipe_tab"
-
       .recipe
+        = link_to "", "#!/form/recipe_tab", class:"edit_recipe"
+
+        %div#img_preview
+          = image_tag asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"
+
+        %div#prev_recipe_info
+          %h1{ "data-bind" => "text: title" }
+
+          %div#p_prev
+            %p
+              Portions:
+              %em{ "data-bind" => "text: portions" }
+
+            %p
+              Preparation time: 
+              %em{ "data-bind" => "text: formattedDuration" }
+
+            %p
+              Cooked by: 
+              %em{ "data-bind" => "text: cook" }
+
+        %div#prev_ingredients
+          %h2 
+            = "your ingredients"
+          %ul{ "data-bind" => "foreach: ingredients"}
+            %li
+              %span{ "data-bind" => "text: quantity" }
+              %em{ "data-bind" => "text: name" }
+
+        %div#prev_preparation
+          %h2
+            = "how to prepare your meal"
+
+          <!-- ko foreach: steps -->
+          %div.prev_preparatoin_step
+            %div
+              %em{ "data-bind" => "text: 'Step ' + (steps.indexOf($data) + 1)" }
+              %p{ "data-bind" => "text: description" }
+          <!-- /ko -->
 
     #prev_csi
       %h1#abyc_preview

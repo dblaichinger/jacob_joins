@@ -27,7 +27,7 @@
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
-        = f.text_field :firstname, "data-required" => true, "data-type" => "text", tabindex:"1"
+        = f.text_field :firstname, "data-required" => true, "data-type" => "text", "data-bind" => "value: cook", tabindex:"1"
 
       %p
         = f.label :city, "City", id:"city"
