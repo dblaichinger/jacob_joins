@@ -2,6 +2,8 @@
 
 :javascript
   $(document).ready(function(){
+    prepare_csi_slider()
+    
     $("form", "#country_specific_information_tab").dirty_form({dynamic:true}).dirty(function(event, event_data){
       var fields = $(".changed", "#country_specific_information_tab");
       var valid = false;
@@ -28,7 +30,7 @@
     and
     %span yourself
 
-    %hr
+  %hr
 
   %p
     Jacob would love to find out more about your country and your traditions. Give him an impression by answering some of the following questions. 

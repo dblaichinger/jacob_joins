@@ -8,8 +8,8 @@ class UsersController < ApplicationController
 
   def update
     if @user.publish
-      render :json => { id: session[:user_id], location: session[:location] }.to_json
       session[:user_id] = session[:location] = nil
+      render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"
     end

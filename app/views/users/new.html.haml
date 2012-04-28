@@ -2,6 +2,8 @@
 
 :javascript
   $(document).ready(function(){
+    prepare_user_map();
+
     $("form", "#user_tab").dirtyValidation();
 
     if($("[selected]", "#user_gender").size() == 1 && $("[selected]", "#user_gender").first().val().length > 1){
@@ -17,9 +19,9 @@
       Tell Jacob 
       %span something 
       about 
-      %span yourself!
+      %span yourself
 
-      %hr
+    %hr
     
     %p
       Of course Jacob wants to get to know the person who shared a great recipe with him.   
@@ -53,21 +55,21 @@
         = f.text_field :lastname, tabindex:"2", "data-type" => "text"
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
-        = f.text_field :email, "data-type" => "email"
-        .email
-          We just need your e-mail address to send you our final product!            
+        = f.text_field :email, tabindex:"4", "data-type" => "email"
+                   
       %p
         = f.label :heard_from, "How did you hear from Jacob Joins?"             
-        = f.select :heard_from, options_for_select([['Internet', 'internet'], ['Letter', 'letter'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
+        = f.select :heard_from, options_for_select([['Letter', 'letter'], ['Friends', 'friends'], ['Email', 'email'], ['Facebook', 'facebook'], ['Pling.de', 'pling.de'], ['Poster', 'poster'], ['Flyer', 'flyer'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
         = text_field_tag :heard_from_other
       
-      %p.genderage1
+      .genderage1
         = f.label :gender, "Gender"
-        = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
-        = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
-        = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true }
+        #gendericons
+          = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
+          = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
+        = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true, "data-error-target" => "#gendericons" }
     
-      %p.genderage2
+      .genderage2
         = f.label :age, "Age"
         = f.text_field :age, "data-required" => true, "data-type" => "numerical" 
       

@@ -139,10 +139,10 @@
 			if(minutes < 10) minutes = "0"+minutes;
 			if(seconds < 10) seconds = "0"+seconds;
 
-			$('#days').html(days+" :");
-			$('#hours').html(hours+" :");
-			$('#minutes').html(minutes+" :");
-			$('#seconds').html(seconds);
+			$('#days').html(days+" d :");
+			$('#hours').html(hours+" h :");
+			$('#minutes').html(minutes+" m :");
+			$('#seconds').html(seconds+" s");
 				
 		},1000);
 	}

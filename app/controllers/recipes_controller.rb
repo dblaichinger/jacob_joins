@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
 
     if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
       session[:recipe_id] = nil
-      render :status => 200, :text => "OK"
+      render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"
     end

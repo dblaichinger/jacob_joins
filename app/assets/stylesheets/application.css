@@ -12,5 +12,6 @@
  *= require jquery.tzineClock
  *= require jquery.qtip
  *= require jquery.rating
+ *= <!--[if lte IE 8]>require ie<![endif]-->
  *= require_tree .
 */

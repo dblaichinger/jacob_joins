@@ -1,13 +1,43 @@
-@mixin letterpress-braun-welcome ($font, $size)
-  text-shadow: 0 -2px 0px #531E09, 0 2px 1px white
-  font-family: $font
-  color: #7C6259  
-  font-size: $size
+$braun: #531E09
+$rot: #E2001A
+$bege: #FFF4E0 
+$hellbraun: #D4AB71
+$weiss: #FFFFFF
+$schwarz: #000000
+$dunkelrot: #ad0014
 
-@mixin weiß-shadow-welcome ($font, $size)
-  font-family: $font
-  font-size: $size
-  text-shadow: 0 2px 0 white
+
+
+@mixin pluto-italic ($color, $shadow)
+  font-family: Pluto-LightItalic
+  color: $color
+  font-size: 25px
+  text-shadow: 0 1px 0 $shadow
+  text-align: center
+
+@mixin pluto-spacing ($color)
+  font-family: Pluto
+  text-transform: uppercase
+  letter-spacing: 5px
+  color: $color
+  font-size: 33px
+  text-shadow: 0 -1px 0 #000000, 0 1px 0px #fff 
+  text-align: center  
+
+@mixin sanches-bold-gross ($color, $shadow)
+  font-family: Sanches-Bold
+  color: $color
+  font-size: 79px
+  text-shadow: 0 -2px 0 #000000, 0 1px 0px $shadow 
+  text-align: center 
+
+@mixin sanches-bold-klein ($color)
+  font-family: Sanches-Bold
+  color: $color
+  font-size: 64px
+  text-shadow: 0 -2px 0 #000000, 0 1px 0px #fff 
+  text-align: center  
+
 
 @mixin letterpress-rot-welcome ($font, $size)
   text-shadow: 0 -2px 0px #531E09, 0 2px 1px white
@@ -41,9 +71,16 @@
 
 
 @mixin letterpress-braun-intention ($font, $size)
+
   text-shadow: 0 -2px 1px #531E09, 0 0.5px 0.5px #EFD8BB
   font-family: $font
   color: #EFD8BB 
+  font-size: $size
+
+@mixin letterpress-braun-like ($font, $size)
+  text-shadow: -0.5px -1px 0px #531E09
+  font-family: $font
+  color: #FFF4E0 
   font-size: $size
 
 @mixin weiß-shadow-intention ($font, $size)

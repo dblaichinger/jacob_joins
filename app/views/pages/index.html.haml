@@ -5,7 +5,7 @@
       = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen"
       
       %h3
-        Who is Jacob?
+        = link_to 'Who is Jacob?', "#story_1", class:"scroll", id:"who"  
 
       = link_to 'Scroll down', "#story_1", class:"scroll"
 
@@ -14,98 +14,44 @@
     #story_1
       #text_1
         %p.welcome1
-          Welcome 
-        %p.welcome11
-          Here’s what it’s all about 
-        %p.welcome2
           There is this young bookseller from the beautiful
-        %p.welcome22  
-          city Salzburg in the little european country Austria.
+          %br
+          city Salzburg in the european country Austria and
+        %p.welcome2
+          his name is Jacob.
+        %p.welcome3
+          One day he suddenly found
         %p.welcome4
-          his name is jacob
-        %p.welcome5
-          and suddenly he had
-        %p.welcome6
-          a wonderful idea.
-    .uebergang
+          a message in a bottle.
+    .uebergang1
     #story_2
       #text_2
-        %p.idea1
-          How did he come up 
-        %p.idea11
-          with his idea?
-        %p.idea2
-          While strolling Jacob found a message in a 
-        %p.idea22
-          bottle, which was probably really, really old.
-        %p.idea3
-          The only thing he could figure out 
-        %p.idea4
-          was that it´s supposed to be a 
-        %p.idea5
-          precious, old recipe.
-        %p.idea6
-          But only the following three ingredients where still readable:
-        %p.idea7  
-          potatoe, onion and egg.
-    .uebergang3
+        %p.ingredients1
+          Inside this old bottle was
+        %p.ingredients2
+          a precious recipe.
+        %p.ingredients3
+          But only these three ingredients were still readable:
+        %p.ingredients4 
+          potato, onion and egg.
+    .uebergang2
     #story_3
       #text_3
-        %p.intention1
-          What is his intention?
-        %p.intention2
-          The person who dropped the message will never know 
-        %p.intention22
-          who found it, but Jacob loved this pleasant idea of 
-        %p.intention3
-          sharing a little secret
-        %p.intention4
-          with somebody no matter who it is.
-        %p.intention5
-          So he would like you to share your little culinary secrets
-        %p.intention55  
-          with people in the whole world according to the last
-        %p.intention6 
-          three remaining ingredients.                    
-    .uebergang2  
-    #story_4
-      #text_4
-        %p.join1
-          Why should you join Jacob?
-        %p.join2
-          Food is a part of your culture, your lifestyle & yourself.
-        %p.join3
-          Give the world 
-        %p.join33
-          a pure impression of
-        %p.join4
-          your country, your spicery and
-        %p.join5
-          your way of cooking.    
-    .uebergang4
-    #story_5
-      #text_5
         %p.sharing1
-          Sharing is caring
-        %p.sharing11
-          If the project keeps running  
+          Jacob loved this idea of
         %p.sharing2
-          until june and it has a chance to be successful,
-        %p.sharing22
-          Jacob is going to start a donation campaign. 
+          sharing a recipe. 
         %p.sharing3
-          For each uploaded recipe 
+          So he would like you to share your little culinary 
+          %br
+          secrets and give the world a pure impression of
         %p.sharing4
-          an pre-defined amount of 
-        %p.sharing44
-          money will be transfered from sponsores
-        %p.sharing5
-          to a selected institution.
-    .uebergang5
-      = image_tag 'pattern_uebergang5_mitte.jpg', class:"mitte_bildzeichen"
+          your cooking habits.                   
+    .uebergang3
+      = image_tag 'pattern_uebergang3_mitte.jpg', class:"mitte_bildzeichen"
     #share
-      #text_6
-        %p.share
+      #text_4
+        %h3.share
           Share your favourite recipe 
           %br
           with Jacob and the world!
@@ -132,7 +78,7 @@
     = image_tag 'formnav_endimg.png', id:"endimg"
 
     #general
-      If there´s an ! at one point in the navigation make sure you filled in the form correctly.
+      If there´s an exclamationmark "!" at one point in the navigation make sure you filled in the form correctly.
 
   #recipe_tab
     - session[:recipe_id] = nil
@@ -145,51 +91,46 @@
     - session[:location] = nil
     = render :template => "users/new"
   #preview_tab
-    #prev_recipe
-      %h1
-        %strong 1
-        Here is what you told 
-        %br
-        Jacob about
-        %span your recipe
+    = render :template => "pages/preview"
 
-      %hr
+  #wizard-loader{style:"display:none;"}
+    .loader
+      = image_tag 'ajax-loader.gif'
+      %h1 loading ...
 
-      - unless session[:recipe_id]
-        %p.no_recipe_preview 
-          Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-          = link_to 'Post Your recipe.', "#!/form/recipe_tab"
-
-      .recipe
-
-    #prev_csi
-      %h1#abyc_preview
-        %strong 2
-        That’s what you told 
-        %br
-        Jacob 
-        %span about your country
-
-      %hr
-
-      - unless session[:csi_set_id]
-        = render :template => "country_specific_informations/_no_preview"
-      
-      .csi
-
-    = button_tag "Finish and Send", id:"send", disabled:"true"
 
 #footer
-  .kastl
-    = image_tag 'schleife2.png', class:"schleife" 
-    = image_tag 'bildzeichen_footer.png', id:"bildzeichen_footer"
-    %h1.likeproject
-      You like this 
-      %br
-      project?
-    %p.know
-      Please let us know
-    = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
-  %p.year
-    2012 © jacobjoins
+  #footercontent
+    %div.kastlcontent
+      .kastl
+        = image_tag 'sharing.png', class:"schleife" 
+
+        %p#text_donation
+          If the project keeps running  until june and it has a chance to be successful, Jacob is going to start a 
+          %span donation campaign.
+          %br
+          %br
+          For each uploaded recipe  an pre-defined amount of money will be transfered from sponsores  to a selected institution.
+      
+    #footer_information
+      %p.likeproject
+        You like this project?
+        Or have any questions? Feel free to contact us!
+     
+      
+      = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
+      
+
+      #subinformation
+        %p.fb_like
+          = link_to "Join us on Facebook!", "https://www.facebook.com/jacobjoins", class:"fb"
+
+        %p.adresse
+          Urstein Süd 1
+          %br
+          5412 Puch bei Hallein
+          %br
+          Austria
+
+        = link_to "", "http://www.fh-salzburg.ac.at/", class:"fh_logo"
 
