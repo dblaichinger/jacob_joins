@@ -11,6 +11,11 @@
           source: '/ingredients/names',
           minLength: 2
         });
+
+        $(":input", this).addClass("changed");
+      },
+      onRemoveElement: function(context){
+        $(":input", "#ingredients .dynamicElement:first").addClass("changed");
       }
     });
 
@@ -33,7 +38,11 @@
         var count;
         count = $(this).siblings('.step').length + 1;
         $(this).find('label[for=*"description"] span').html(count);
+        $(":input", this).addClass("changed");
         return prepare_recipe_step_upload($(this).find('input[type="file"]:first'));
+      },
+      onRemoveElement: function(context){
+        $(":input", ".steps .dynamicElement:first").addClass("changed");
       }
     });
 
@@ -74,11 +83,10 @@
 
       %p
         Here is where you enter the name of your recipe.
-        %br
         By the way: All the entries on this form are not necessarily your final recipe. You forgot salt? No problem! You can adapt every step before you finally share your post on the preview page. 
 
       #title
-        = f.label :name, "Name", id:"titel"
+        = f.label :name, "Title", id:"titel"
         = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text"
       #portions
         = f.label :portions, "Portions"
@@ -108,9 +116,8 @@
     #preparation.part-3
       %h1
         %strong 3 
-        Tell Jacob how to 
-        %span prepare 
-        meal
+        Tell Jacob your 
+        %span way of preparation 
 
       %hr
 
@@ -143,8 +150,9 @@
       #recipe_images
         %h1 
           %strong 4
-          Show Jacob your
-          %span meal
+          Show him your
+          %span delicious 
+          meal
 
         %hr
         

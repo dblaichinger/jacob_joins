@@ -2,7 +2,7 @@
 
 - if @csi_set.user
   %p
-    Author:
+    Answered by:
     %em
       = @csi_set.user.formatted_user_info
 
@@ -16,7 +16,7 @@
         = "Question #{index + 1}"
       %h3
         = csi.question
-      %p
+      %p.answer
         = csi.answer
 
 %div#answered

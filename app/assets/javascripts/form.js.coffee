@@ -30,6 +30,7 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
         uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
 
       uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
+      $(this).addClass "changed"
 
     add: (e, data) ->
       data.submit()
@@ -55,6 +56,7 @@ prepare_recipe_uploads = () ->
           display: 'block'
 
         imagePreview.remove()
+        $(":input", uploadWrapper).addClass "changed"
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
     false
@@ -69,6 +71,7 @@ prepare_recipe_uploads = () ->
       ]
     done: (e, data) ->
       data.htmlElement.html('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
+      $(this).addClass "changed"
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
@@ -90,6 +93,8 @@ prepare_recipe_uploads = () ->
         _method: "DELETE"
       success: (data, textStatus, jqXHR) ->
         clicked_link.parent('li').remove()
+        $(":input", "#recipe_images").addClass "changed"
+
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
     false
@@ -118,9 +123,18 @@ window.reinitialize_tooltips = (context) ->
 
 $ ->
   $(".scroll").click ->
-    $.scrollTo $('#story_1'), 800
+    $("#newsbar").visibleAfter "destroy"
+    $.scrollTo $('#story_1'), 800,
+      onAfter: ->
+        $("#newsbar").visibleAfter $("#start")
+        element.fadeIn 50
 
   $("#wizard").on 'click', "#send", (e) ->
+    event.preventDefault()
+
+    if $(this).hasClass("disabled")
+      return false
+
     unless window.user?
       if $('#aboutyou').parent().hasClass('form_valid')
         empty_user_form = publish_user()
@@ -163,6 +177,7 @@ $ ->
 
           error: (jqXHR, textStatus, errorThrown) ->
             alert "Error loading success page!"
+
       else
         alert "Failed to save the draft(s)!"
     else
@@ -230,10 +245,13 @@ $ ->
             console.log "Unable to save changes"
 
     if ui.index is $('#wizard').tabs('length') - 1
-      console.debug "in"
       #TODO: ajax loader einbauen
       $.get "pages/preview", (data, textStatus) ->
+        #TODO: ajax loader ausblenden
         $('#preview_tab').html(data)
+
+        if $('#aboutyou').partent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
+          $('#send').removeClass('disabled')
 
   prepare_recipe_uploads()
   prepare_csi_slider()
