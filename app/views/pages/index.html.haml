@@ -93,6 +93,12 @@
   #preview_tab
     = render :template => "pages/preview"
 
+  #wizard-loader{style:"display:none;"}
+    .loader
+      = image_tag 'ajax-loader.gif'
+      %h1 loading ...
+
+
 #footer
   #footercontent
     %div.kastlcontent

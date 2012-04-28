@@ -1,3 +1,9 @@
+showWizardLoader = () ->
+  $('#wizard-loader').stop().fadeIn 500
+
+hideWizardLoader = () ->
+  $('#wizard-loader').stop().fadeOut 500
+
 window.prepare_recipe_step_upload = (currentFileInput) ->
   currentFileInput.fileupload
     dataType: 'json'
@@ -245,12 +251,15 @@ $ ->
             console.log "Unable to save changes"
 
     if ui.index is $('#wizard').tabs('length') - 1
-      #TODO: ajax loader einbauen
-      $.get "pages/preview", (data, textStatus) ->
-        #TODO: ajax loader ausblenden
-        $('#preview_tab').html(data)
+      showWizardLoader()
 
-        if $('#aboutyou').partent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
+      $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
+        $(this).animate
+          opacity: 1
+        , 200
+        hideWizardLoader()
+
+        if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
           $('#send').removeClass('disabled')
 
   prepare_recipe_uploads()
