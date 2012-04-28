@@ -6,12 +6,12 @@ publicMethods =
       element = $(this)
 
       $(window).scroll (event) ->
-        if $(window).scrollTop() >= checkPointCharlie.position().top
-          element.fadeIn 500, ->
-            $(this).stop true, true
+        if $(window).scrollTop() >= (checkPointCharlie.position().top + checkPointCharlie.height())
+          if element.is ":hidden"
+            element.fadeIn 500
         else
-          element.fadeOut 500, ->
-            $(this).stop true, true
+          if element.is ":visible"
+            element.fadeOut 500
 
   destroy: ->
     this.each ->

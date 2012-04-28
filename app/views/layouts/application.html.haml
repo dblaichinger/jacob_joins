@@ -12,8 +12,7 @@
         $('#fancy_counter').tzineClock();
         get_facebook_stream();
         slide_newsbar();
-        $("#newsbar").visibleAfter($(".stories"));
-        $("#twilightzone").visibleAfter($("#skipstory"));
+        $("#newsbar").visibleAfter($("#start"));
       });
         
     
@@ -41,6 +40,8 @@
             Countdown to release on 4 june '12
 
         #countdown
+          %h4.countdown_kl
+            Countdown to release:
           #days
           #hours
           #minutes
@@ -51,8 +52,6 @@
 
       #clickandsee
         = link_to "", "#", class:"show_newsbar"
-
-    #twilightzone
 
     = yield
 
