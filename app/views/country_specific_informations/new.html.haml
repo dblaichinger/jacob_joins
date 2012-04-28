@@ -2,6 +2,8 @@
 
 :javascript
   $(document).ready(function(){
+    prepare_csi_slider()
+    
     $("form", "#country_specific_information_tab").dirty_form({dynamic:true}).dirty(function(event, event_data){
       var fields = $(".changed", "#country_specific_information_tab");
       var valid = false;

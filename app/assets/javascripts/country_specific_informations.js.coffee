@@ -24,3 +24,13 @@ window.publish_csi = (id, user_location) ->
         return_value = false
 
   return_value
+
+window.prepare_csi_slider = () ->
+  csi_slider = $('#csi_slider').bxSlider
+    pager: true
+    infiniteLoop: false
+    hideControlOnEnd: true
+    mode: 'fade'
+  $('#csi_slider_navigation').on "click", "a", (e) ->
+    csi_slider.goToSlide $('#csi_slider_navigation a').index(this)
+    false

@@ -2,6 +2,8 @@
 
 :javascript
   $(document).ready(function(){
+    prepare_user_map();
+
     $("form", "#user_tab").dirtyValidation();
 
     if($("[selected]", "#user_gender").size() == 1 && $("[selected]", "#user_gender").first().val().length > 1){

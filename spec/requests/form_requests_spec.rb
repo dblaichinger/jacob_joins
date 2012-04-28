@@ -85,7 +85,7 @@ describe "form submit" do
       #within '.user' do
       #end
 
-      click_button "Finish and Send"
+      click_link "send"
       page.should have_css('h1', :text => "Drafts saved, thank you".upcase)
     end
   end

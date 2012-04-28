@@ -4,117 +4,6 @@ showWizardLoader = () ->
 hideWizardLoader = () ->
   $('#wizard-loader').stop().fadeOut 500
 
-window.prepare_recipe_step_upload = (currentFileInput) ->
-  currentFileInput.fileupload
-    dataType: 'json'
-    url: '/recipes/upload_step_image'
-    formData: (form) ->
-      stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
-      stepIdInputElement = form.find('#' + stepIdInputId)
-      data = [
-        name: "authenticity_token"
-        value: form.find('input[name="authenticity_token"]').attr('value')
-      ]
-
-      if stepIdInputElement.length > 0
-        data.push 
-          name: stepIdInputElement.attr 'name'
-          value: stepIdInputElement.attr 'value'
-      data
-
-    done: (e, data) ->
-      image = data.result[0]
-      stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
-      stepIdInputName = currentFileInput.attr('name').replace 'image', 'id'
-      uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
-      stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
-
-      uploadWrapper.css
-        display: 'none'
-
-      if stepIdInputElement.length == 0
-        uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
-
-      uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
-      $(this).addClass "changed"
-
-    add: (e, data) ->
-      data.submit()
-    fail: (e, data) ->
-      alert "fail"
-
-prepare_recipe_uploads = () ->
-  $('.steps .step input[type="file"]').each (index) ->
-    prepare_recipe_step_upload $(this)
-
-  $('.step').on 'click', 'a.delete', (e) ->
-    clicked_link = $(this)
-    $.ajax
-      url: clicked_link.attr('href')
-      type: 'POST'
-      data:
-        _method: "DELETE"
-      success: (data, textStatus, jqXHR) ->
-        imagePreview = clicked_link.parent()
-        uploadWrapper = imagePreview.prev('.upload_wrapper')
-
-        uploadWrapper.css
-          display: 'block'
-
-        imagePreview.remove()
-        $(":input", uploadWrapper).addClass "changed"
-      failure: (jqXHR, textStatus, errorThrown) ->
-        alert 'Image delete failed!'
-    false
-
-  $('#recipe_images input[type="file"]').fileupload
-    url: '/recipes/upload_image'
-    type: 'POST'
-    formData: (form) ->
-      [
-        name: "authenticity_token"
-        value: form.find('input[name="authenticity_token"]').attr('value')
-      ]
-    done: (e, data) ->
-      data.htmlElement.html('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
-      $(this).addClass "changed"
-
-    fail: (e, data) ->
-      alert 'Upload of "' + data.files[0].name + '" failed!'
-
-    add: (e, data) ->
-      $('ul.file_uploads').prepend (index, html) ->
-        file = $('<li>' + data.files[0].name + '</li>')
-        data.htmlElement = file
-        file
-
-      data.submit()
-
-  $('ul.file_uploads').on 'click', 'a.delete', (e) ->
-    clicked_link = $(this)
-    $.ajax
-      url: clicked_link.attr('href')
-      type: 'POST'
-      data:
-        _method: "DELETE"
-      success: (data, textStatus, jqXHR) ->
-        clicked_link.parent('li').remove()
-        $(":input", "#recipe_images").addClass "changed"
-
-      failure: (jqXHR, textStatus, errorThrown) ->
-        alert 'Image delete failed!'
-    false
-
-prepare_csi_slider = () ->
-  csi_slider = $('#csi_slider').bxSlider
-    pager: true
-    infiniteLoop: false
-    hideControlOnEnd: true
-    mode: 'fade'
-  $('#csi_slider_navigation').on "click", "a", (e) ->
-    csi_slider.goToSlide $('#csi_slider_navigation a').index(this)
-    false
-
 window.reinitialize_tooltips = (context) ->
   $("[data-tooltip]", context).each ->
     $(this).qtip
@@ -163,18 +52,16 @@ $ ->
           success: (data, textStatus, jqXHR) ->
             if empty_recipe_form?
               $('#recipe_tab').html(empty_recipe_form)
-              prepare_recipe_uploads()
               $('#yourrecipe').parent().removeClass('form_valid')
 
             if empty_csi_form?
-              $('#country_specific_information_tab').html(empty_csi_form) 
-              prepare_csi_slider()
+              $('#country_specific_information_tab').html(empty_csi_form)
               $('#aboutyourcountry').parent().removeClass('form_valid')
 
             if empty_user_form?
               $('#user_tab').html(empty_user_form)
-              prepare_user_map()
               $('#aboutyou').parent().removeClass('form_valid')
+              window.user = undefined
 
             $('#preview_tab').html(data)
             $.scrollTo "#wizard", 800
@@ -237,15 +124,7 @@ $ ->
 
           oldTab.css
             display: "block"
-          oldTab.attr "style", ""
-
-          switch oldTab.attr('id')
-            when "recipe_tab"
-              prepare_recipe_uploads()
-            when "country_specific_information_tab"
-              prepare_csi_slider()
-            when "user_tab"
-              prepare_user_map()         
+          oldTab.attr "style", ""     
         statusCode:
           400: ->
             console.log "Unable to save changes"
@@ -257,11 +136,8 @@ $ ->
         $(this).animate
           opacity: 1
         , 200
+
         hideWizardLoader()
 
         if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
           $('#send').removeClass('disabled')
-
-  prepare_recipe_uploads()
-  prepare_csi_slider()
-  prepare_user_map()

@@ -36,7 +36,11 @@ window.prepare_user_map = ->
   autoCompleteInput.keydown (e) ->
     if e.which == 13
       e.preventDefault()
-  autoCompleteInput.attr "data-valid", "false"
+
+  if $('#longitude').val() != "" and $('#latitude').val() != "" and $('#country_hidden').val() != "" and $('#city_hidden').val() != ""
+    autoCompleteInput.attr "data-valid", "true"
+  else
+    autoCompleteInput.attr "data-valid", "false"
   autoCompleteInput.attr "data-error-message", "Location not found."
 
   requestlocation = () ->
@@ -143,6 +147,7 @@ window.prepare_user_map = ->
 
     if !!place.geometry
       autoCompleteInput.attr "data-valid", "true"
+      $('#user_tab form').dirtyValidation("validate", autoCompleteInput, false)
       setMarker place.geometry.location
       address = place.address_components
       if address.length > 1
