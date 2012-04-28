@@ -145,39 +145,7 @@
     - session[:location] = nil
     = render :template => "users/new"
   #preview_tab
-    #prev_recipe
-      %h1
-        %strong 1
-        Here is what you told 
-        %br
-        Jacob about
-        %span your recipe
-
-      %hr
-
-      - unless session[:recipe_id]
-        %p.no_recipe_preview 
-          Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-          = link_to 'Post Your recipe.', "#!/form/recipe_tab"
-
-      .recipe
-
-    #prev_csi
-      %h1#abyc_preview
-        %strong 2
-        That’s what you told 
-        %br
-        Jacob 
-        %span about your country
-
-      %hr
-
-      - unless session[:csi_set_id]
-        = render :template => "country_specific_informations/_no_preview"
-      
-      .csi
-
-    = button_tag "Finish and Send", id:"send", disabled:"true"
+    = render :template => "pages/preview"
 
 #footer
   .kastl

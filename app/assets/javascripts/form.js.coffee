@@ -120,9 +120,11 @@ $ ->
   $(".scroll").click ->
     $.scrollTo $('#story_1'), 800
 
-  $("#wizard #send").click ->
-      unless window.user?
-        empty_user_form = publish_user() if $('#aboutyou').parent().hasClass('form_valid')
+  $("#wizard").on 'click', "#send", (e) ->
+    unless window.user?
+      if $('#aboutyou').parent().hasClass('form_valid')
+        empty_user_form = publish_user()
+        
         window.user = 
           id: $('#user_tab form').attr('action').split('/')[2]
           location:
@@ -130,35 +132,41 @@ $ ->
             latitude: $('#latitude').val()
             city: $('#city_hidden').val()
             country: $('#country_hidden').val()
+            
+    if window.user
+      empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
+      empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
 
-      if window.user
-        empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
-        empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
+      if empty_recipe_form or empty_csi_form
+        $.ajax
+          url: "/pages/drafts_saved"
+          success: (data, textStatus, jqXHR) ->
+            if empty_recipe_form?
+              $('#recipe_tab').html(empty_recipe_form)
+              prepare_recipe_uploads()
+              $('#yourrecipe').parent().removeClass('form_valid')
 
-        if empty_recipe_form or empty_csi_form
-          $.ajax
-            url: "/pages/drafts_saved"
-            success: (data, textStatus, jqXHR) ->
-              if empty_recipe_form?
-                $('#recipe_tab').html(empty_recipe_form)
-                prepare_recipe_uploads()
+            if empty_csi_form?
+              $('#country_specific_information_tab').html(empty_csi_form) 
+              prepare_csi_slider()
+              $('#aboutyourcountry').parent().removeClass('form_valid')
 
-              if empty_csi_form?
-                $('#country_specific_information_tab').html(empty_csi_form) 
-                prepare_csi_slider()
+            if empty_user_form?
+              $('#user_tab').html(empty_user_form)
+              prepare_user_map()
+              $('#aboutyou').parent().removeClass('form_valid')
 
-              if empty_user_form?
-                $('#user_tab').html(empty_user_form)
-                prepare_user_map()
+            $('#preview_tab').html(data)
+            $.scrollTo "#wizard", 800
+              offset:
+                top: -70
 
-              $('#preview_tab').html(data)
-
-            error: (jqXHR, textStatus, errorThrown) ->
-              alert "Error loading success page!"
-        else
-          alert "Failed to save the draft(s)!"
+          error: (jqXHR, textStatus, errorThrown) ->
+            alert "Error loading success page!"
       else
-        alert "Unable to save user information (maybe not provided)."
+        alert "Failed to save the draft(s)!"
+    else
+      alert "Unable to save user information (maybe not provided)."
 
   $("#wizard").bind "validated.dirtyValidation", (event, data) ->
     tabs = $(".dirtyform", "#wizard")
@@ -222,36 +230,10 @@ $ ->
             console.log "Unable to save changes"
 
     if ui.index is $('#wizard').tabs('length') - 1
-      $.get "recipes/draft", (data, textStatus) ->
-        if textStatus is "Gone"
-          return
-          
-        no_preview_content = !!$(".no_recipe_preview")
-
-        if no_preview_content
-          $(".no_recipe_preview").remove()
-          $("#send").removeAttr "disabled"
-
-        $("#preview_tab .recipe").empty()
-        $(data).appendTo $("#preview_tab .recipe")
-
-      $.get "country_specific_informations/draft", (data, textStatus) ->
-        if textStatus is "Gone"
-          return
-
-        no_preview_content = !!$(".no_csi_preview")
-
-        if no_preview_content
-          $(".no_csi_preview").remove()
-          $("#send").removeAttr "disabled"
-          
-        $("#preview_tab .csi").empty()
-        $(data).appendTo $("#preview_tab .csi")
-
-        if $(".no_csi_preview, .no_recipe_preview", "#preview_tab").size() < 2
-          $("#send").removeAttr "disabled"
-        else
-          $("#send").attr "disabled", true
+      console.debug "in"
+      #TODO: ajax loader einbauen
+      $.get "pages/preview", (data, textStatus) ->
+        $('#preview_tab').html(data)
 
   prepare_recipe_uploads()
   prepare_csi_slider()

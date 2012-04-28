@@ -1,0 +1,35 @@
+#prev_recipe
+  %h1
+    %strong 1
+    Here is what you told 
+    %br
+    Jacob about
+    %span your recipe
+
+  %hr
+
+  - if @recipe.present?
+    .recipe
+      = render :template => 'recipes/show'
+  - else
+    %p.no_recipe_preview 
+      Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
+      = link_to 'Post Your recipe.', "#!/form/recipe_tab"
+
+#prev_csi
+  %h1#abyc_preview
+    %strong 2
+    That’s what you told 
+    %br
+    Jacob 
+    %span about your country
+
+  %hr
+
+  - if @csi_set.present?
+    .csi
+      = render :template => 'country_specific_informations/show'
+  - else
+    = render :partial => "country_specific_informations/no_preview"
+
+= button_tag "Finish and Send", id:"send"
