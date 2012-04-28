@@ -24,5 +24,7 @@
 //= require jquery.scrollTo-1.4.2-min
 //= require path.min
 //= require jquery.rating
+//= <!--[if lte IE 8]>require ie/html5<![endif]-->
+//= <!--[if lte IE 8]>require ie/pngfix<![endif]-->
 //= require_tree .
  
