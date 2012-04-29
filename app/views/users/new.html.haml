@@ -1,5 +1,3 @@
-- user = session[:user_id].present? ? User.find(session[:user_id]) : User.new
-
 :javascript
   $(document).ready(function(){
     prepare_user_map();
@@ -11,7 +9,7 @@
     }
   });
 
-= form_for user, :html => { class:"user_form" } do |f|
+= form_for @user, :html => { class:"user_form" } do |f|
   #content
     %h1.tellus
       Who are you and where are you from? 

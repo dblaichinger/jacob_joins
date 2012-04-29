@@ -1,5 +1,3 @@
-- csi_set = session[:csi_set_id].present? ? CsiSet.find(session[:csi_set_id]) : CsiSet.new(:country_specific_informations => CsiSet.empty_set)
-
 :javascript
   $(document).ready(function(){
     prepare_csi_slider()
@@ -38,7 +36,7 @@
   %p.wichtig
     It´s up to you how many and which questions you choose!
 
-= form_for csi_set, :url => country_specific_informations_path do |f|
+= form_for @csi_set, :url => country_specific_informations_path do |f|
   %ul#csi_slider
     = f.fields_for :country_specific_informations do |csi|
       %li  

@@ -4,18 +4,21 @@
     %meta{:charset => "utf-8"}
 
   %body
-    - provided = @recipe.present? ? "recipe" : "info"
+    - provided = (@recipe.present? ? "recipe" : "info")
 
-    %p Thank you for your contribution!
+    %p
+      Thank you for your contribution!
 
     %p
       = "Your #{provided} will be shown online on 4th of june 2012 together with all the other great #{provided}s from all over the world"
 
-    %p We are looking forward to presenting you a special collection of recipes that have been submitted to Jacob Joins. So stay tuned - and check your mail for hello@jacobjoins.com!
+    %p
+      We are looking forward to presenting you a special collection of recipes that have been submitted to Jacob Joins. So stay tuned - and check your mail for hello@jacobjoins.com!
 
-    %p You enjoyed the challenge? Don’t hesitate to tell your friends and family about it, maybe they would also like to be a part of Jacob Joins.
+    %p
+      You enjoyed the challenge? Don’t hesitate to tell your friends and family about it, maybe they would also like to be a part of Jacob Joins.
 
     %p
       For further information follow 
-      %a{:href => "http://www.facebook.com/jacobjoins"} Jacob Joins on Facebook
-      ! There you can check out the current state of the project, including some nice pictures
+      %a{:href => "http://www.facebook.com/jacobjoins"} Jacob Joins on Facebook!
+      There you can check out the current state of the project, including some nice pictures

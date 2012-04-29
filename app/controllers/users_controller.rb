@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.publish
+      @user = User.new
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"

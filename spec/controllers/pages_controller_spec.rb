@@ -3,6 +3,8 @@ require 'spec_helper'
 describe PagesController do
 
   describe "GET 'show' with id 'drafts_saved'" do
+    render_views
+    
     it "should be successful" do
       user = FactoryGirl.create :user
       session[:user_id] = user.id

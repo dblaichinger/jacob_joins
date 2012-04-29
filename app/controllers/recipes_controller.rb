@@ -18,6 +18,7 @@ class RecipesController < ApplicationController
     user = User.find params[:user_id]
 
     if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
+      @recipe = Recipe.new
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"

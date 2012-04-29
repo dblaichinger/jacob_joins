@@ -3,13 +3,17 @@ class PagesController < HighVoltage::PagesController
 
   before_filter do |controller|
     case params[:id]
+    when 'index'
+      @user = User.new
+      @csi_set = CsiSet.new(:country_specific_informations => CsiSet.empty_set)
+      @recipe = Recipe.new
     when 'drafts_saved'
       if session[:user_id].present?
         @user = User.find session[:user_id]
         @recipe = Recipe.find session[:recipe_id] if session[:recipe_id].present?
         @csi_set = CsiSet.find session[:csi_set_id] if session[:csi_set_id].present?
 
-        #UserMailer.thank_you_wizard(@user, @recipe, @csi_set).deliver
+        UserMailer.thank_you_wizard(@user, @recipe, @csi_set).deliver
       end
     when 'preview'
       @recipe = Recipe.find session[:recipe_id] if session[:recipe_id].present?

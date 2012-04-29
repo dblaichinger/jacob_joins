@@ -1,6 +1,5 @@
-- recipe = session[:recipe_id].present? ? Recipe.find(session[:recipe_id]) : Recipe.new
-- if recipe.steps.count == 0
-  - 3.times { recipe.steps.build }
+- if @recipe.steps.count == 0
+  - 3.times { @recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
@@ -71,8 +70,8 @@
   });
 
 
-= form_for recipe do |f|
-  = handle_error_messages(recipe).html_safe if recipe.errors.any?
+= form_for @recipe do |f|
+  = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
   #left
     #information.part-1
       %h1
@@ -109,10 +108,10 @@
       %p
         Just press the + button to add the ingredients which make your recipe special and worth trying. You don´t have or just don´t like one of our 3 already selected ingredients? Just replace it by another one.  Of course you can split the ingredients in two or three courses by explaining the preparation step by step (3). Everybody loves a dessert.
 
-      - if recipe.errors.any?
-        = prefill_ingredient_fields(f, recipe).html_safe
+      - if @recipe.errors.any?
+        = prefill_ingredient_fields(f, @recipe).html_safe
       - else
-        = render_default_ingredient_fields(f, recipe).html_safe
+        = render_default_ingredient_fields(f, @recipe).html_safe
 
   #right
     #preparation.part-3
