@@ -18,11 +18,15 @@ window.reinitialize_tooltips = (context) ->
 
 $ ->
   $(".scroll").click ->
-    $("#newsbar").visibleAfter "destroy"
+    newsbar = $("#newsbar")
+    newsbar.visibleAfter "destroy"
     $.scrollTo $('#story_1'), 800,
       onAfter: ->
-        $("#newsbar").visibleAfter $("#start")
-        element.fadeIn 50
+        newsbar.visibleAfter $("#start")
+        newsbar.fadeIn 500
+
+  $("#gotoform").click ->
+    $.scrollTo $('#skipstory'), 800
 
   $("#wizard").on 'click', "#send", (e) ->
     event.preventDefault()

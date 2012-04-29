@@ -5,5 +5,5 @@
 
 = form.fields_for :ingredients_with_quantities, data do |ingredient_with_quantity|
   %p.dynamicElement
-    = ingredient_with_quantity.text_field :quantity, value:quantity, placeholder:quantity_placeholder, class:"menge"
-    = ingredient_with_quantity.text_field :name, value:ingredient, placeholder:ingredient_placeholder, class:"zutat"
+    = ingredient_with_quantity.text_field :quantity, value:quantity, placeholder:quantity_placeholder, class:"menge", tabindex:"3"
+    = ingredient_with_quantity.text_field :name, value:ingredient, placeholder:ingredient_placeholder, class:"zutat", tabindex:"3"

@@ -88,13 +88,13 @@
 
       #title
         = f.label :name, "Title", id:"titel"
-        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text"
+        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text", tabindex:"1"
       #portions
         = f.label :portions, "Portions"
         = f.select :portions, ([nil] << (1..7).to_a).flatten, {}, {"data-required" => "true", "data-error-target" => "#portions .ui-rating"}
       #duration
         = f.label :duration, "Preparation", id:"duration_label"
-        = f.text_field :duration, "data-required" => true, "data-type" => "numerical", placeholder:"minutes"
+        = f.text_field :duration, "data-required" => true, "data-type" => "numerical", placeholder:"minutes", tabindex:"2"
 
     #ingredients.part-2
       %h1 
@@ -132,9 +132,9 @@
           .step.dynamicElement
             = step.label :description, "Step <span>#{counter + 1}</span>".html_safe, class:"step_label"
             - if counter == 0
-              = step.text_area :description, "data-required" => true
+              = step.text_area :description, "data-required" => true, tabindex:"4"
             - else
-              = step.text_area :description
+              = step.text_area :description, tabindex:"4"
             - counter += 1
             #stepupload
               = step.hidden_field :id unless step.object.new_record?
