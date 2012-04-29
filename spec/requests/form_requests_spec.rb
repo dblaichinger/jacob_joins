@@ -86,7 +86,7 @@ describe "form submit" do
       #end
 
       click_link "send"
-      page.should have_css('h1', :text => "Drafts saved, thank you".upcase)
+      page.should have_css('h1', :text => "Thank you for your post!".upcase)
     end
   end
 end

@@ -4,6 +4,10 @@
     %meta{:charset => "utf-8"}
 
   %body
-    %h1 Thank you for your recipe/csis
+    - provided = @recipe.present? ? "recipe" : "info"
 
-    %p We are so glad blabla bla blabla blabla blablablabla
+    %h1 Thank you for your post!
+    %p
+      = "Your #{provided} will be shown online on 4th of june together with all the other great #{provided}s from all over the world!"
+    %p We are looking forward to present you our special edition recipe collection- SOON! Check your mail for hello@jacobjoins.com
+
