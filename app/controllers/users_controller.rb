@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.publish
-      session[:user_id] = session[:location] = nil
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"
