@@ -28,7 +28,7 @@ $ ->
   $("#gotoform").click ->
     $.scrollTo $('#skipstory'), 800
 
-  $("#wizard").on 'click', "#send", (e) ->
+  $("#wizard").on 'click', "#send", (event) ->
     event.preventDefault()
 
     if $(this).hasClass("disabled")
