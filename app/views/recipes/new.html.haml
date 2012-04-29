@@ -12,6 +12,8 @@
       minLength: 2
     });
 
+    $("#ingredients").elementOnDemand();
+
     var elementTemplate;
     elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
     elementTemplate.children('.image_preview').remove();
@@ -61,13 +63,13 @@
 
       #title
         = f.label :name, "Title", id:"titel"
-        = f.text_field :name, "data-bind" => "value: title", placeholder:"tell us the name of your recipe" , size:"40"
+        = f.text_field :name, placeholder:"tell us the name of your recipe" , size:"40"
       #portions
         = f.label :portions, "Portions"
-        = f.select :portions, ([nil] << (1..7).to_a).flatten, {}, {"data-bind" => "value: portions", "data-required" => "true", "data-error-target" => "#portions .ui-rating"}
+        = f.select :portions, ([nil] << (1..7).to_a).flatten, {}, { "data-required" => "true", "data-error-target" => "#portions .ui-rating" }
       #duration
         = f.label :duration, "Preparation", id:"duration_label"
-        = f.text_field :duration, "data-required" => true, "data-bind" => "value: duration", "data-type" => "numerical", placeholder:"minutes"
+        = f.text_field :duration, "data-required" => true, "data-type" => "numerical", placeholder:"minutes"
 
     #ingredients.part-2
       %h1 
@@ -84,12 +86,8 @@
       = f.fields_for :ingredients_with_quantities do |ingredient_with_quantity|
         <!-- ko foreach: ingredients -->
         %p.dynamicElement
-          = ingredient_with_quantity.text_field :quantity, "data-bind" => "value: quantity, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][quantity]' }", placeholder:"quantity", class:"menge"
-          = ingredient_with_quantity.text_field :name, "data-bind" => "value: name, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][name]' }", placeholder:"your additional ingredient", class:"zutat"
-        <!-- /ko -->
-      .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
-        = image_tag asset_path("add_icon.png"), class:"add", "data-bind" => "click: addIngredient"
-        = image_tag asset_path("delete_icon.png"), class:"remove", "data-bind" => "click: removeIngredient"
+          = ingredient_with_quantity.text_field :quantity, placeholder:"quantity", class:"menge"
+          = ingredient_with_quantity.text_field :name, placeholder:"your additional ingredient", name:"recipe[ingredients_name]", class:"zutat"
 
   #right
     #preparation.part-3
