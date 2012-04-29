@@ -1,2 +1,7 @@
-%h1 Drafts saved, thank you
-%p edit me in "/app/views/pages/drafts_saved.html.haml"
+- provided = @recipe.present? ? "recipe" : "info"
+
+%h1 Thank you for your post!
+%p
+  = "Your #{provided} will be shown online on 4th of june together with all the other great #{provided}s from all over the world!"
+%p If you would like to receive our special edition recipe-collection feel free to share your email address with Jacob!
+

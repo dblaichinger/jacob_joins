@@ -18,7 +18,6 @@ class RecipesController < ApplicationController
     user = User.find params[:user_id]
 
     if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
-      session[:recipe_id] = nil
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"
@@ -28,7 +27,15 @@ class RecipesController < ApplicationController
   def sync_wizard
     render :status => 410, :text => "Gone" and return if @recipe.published?
 
-    params[:recipe][:ingredients_with_quantities_attributes].reject!{ |index,ingredient| ingredient[:name].blank? && ingredient[:quantity].blank? }
+    params[:recipe][:ingredients_with_quantities_attributes].each do |index,ingredient|
+      next if ingredient[:name].present? || ingredient[:quantity].present?
+      ingredient[:_destroy] = true
+    end
+
+    params[:recipe][:steps_attributes].each do |index,step|
+      next if step[:description].present?
+      step[:_destroy] = true
+    end
 
     if @recipe.update_attributes params[:recipe]
       render :new, :layout => false

@@ -9,7 +9,7 @@ describe RecipesController do
       fill_in "recipe_name", :with => recipe.name
       click_link 'preview'
 
-      page.should have_css('#preview_tab h1', :text => recipe.name.upcase)
+      page.should have_css('#preview_tab h1', :text => recipe.name)
     end
   end
 end

@@ -24,7 +24,6 @@ class CountrySpecificInformationsController < ApplicationController
     csi_set.user = user
 
     if csi_set.publish
-      session[:csi_set_id] = nil
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"

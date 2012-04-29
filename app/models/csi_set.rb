@@ -10,8 +10,8 @@ class CsiSet
     country_specific_informations.where(:state.ne => "published").and(:answer.ne => "").entries.each do |csi|
       worked &&= csi.publish
     end
-    
-    worked ? self.destroy : false
+
+    worked
   end
 
   def self.empty_set
