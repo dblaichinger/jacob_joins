@@ -1,7 +1,10 @@
 - provided = @recipe.present? ? "recipe" : "info"
 
-%h1 Thank you for your post!
+%h1 Thank you for your contribution!
 %p
   = "Your #{provided} will be shown online on 4th of june together with all the other great #{provided}s from all over the world!"
-%p If you would like to receive our special edition recipe-collection feel free to share your email address with Jacob!
+%p You want to post another recipe? Click
+  = link_to 'here', "#!/form/recipe_tab"  
+  to continue!
 
+%p You enjoyed the challenge? Don’t hesitate to tell your friends and family about it, maybe they would also like to be a part of Jacob Joins.
