@@ -10,13 +10,13 @@ questions = [
   {text: "What do you eat for breakfast?"},
   {text: "What time do you usually eat dinner?"},
   {text: "What are your favourite spices?"},
-  {text: "What’s the traditional food in your country?"},
+  {text: "What's the traditional food in your country?"},
   {text: "What is your favourite meal?"},
   {text: "Do you know any typical austrian dishes?"},
   {text: "Do you have a food tradition in your family?"},
   {text: "What do you usually eat at New Years Eve?"},
-  {text: "What’s the typical drink of your country?"},
-  {text: "What's your favourite birthday dessert?"},
+  {text: "What's the typical drink of your country?"},
+  {text: "What's your favourite birthday dessert?"}
 ]
 
 Question.delete_all
