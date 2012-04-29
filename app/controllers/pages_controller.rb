@@ -1,7 +1,7 @@
 class PagesController < HighVoltage::PagesController
   layout :select_layout
 
-  before_filter do |controller| #:prerequisite
+  before_filter do |controller|
     case params[:id]
     when 'drafts_saved'
       if session[:user_id].present?
