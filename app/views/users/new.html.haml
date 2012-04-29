@@ -30,11 +30,11 @@
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
-        = f.text_field :firstname, "data-required" => true, "data-type" => "text", tabindex:"1"
+        = f.text_field :firstname, "data-required" => true, "data-type" => "text", tabindex:"5"
 
       %p
         = f.label :city, "City", id:"city"
-        = text_field_tag "address-search", params["address-search"], class:"address-search", "data-required" => true, tabindex:"3"
+        = text_field_tag "address-search", params["address-search"], class:"address-search", "data-required" => true, tabindex:"7"
         - if request.location
           - @location = request.location.data
           - @city = (session[:location][:city] if session[:location]) || @location[:city] || ""
@@ -53,10 +53,10 @@
     .rechts    
       %p
         = f.label :lastname, "Last name"
-        = f.text_field :lastname, tabindex:"2", "data-type" => "text"
+        = f.text_field :lastname, tabindex:"6", "data-type" => "text"
       %p.youremailmargin
         = f.label :email, "Your E-mail address"
-        = f.text_field :email, tabindex:"4", "data-type" => "email"
+        = f.text_field :email, tabindex:"8", "data-type" => "email"
                    
       %p
         = f.label :heard_from, "How did you hear from Jacob Joins?"             
@@ -72,6 +72,6 @@
     
       .genderage2
         = f.label :age, "Age"
-        = f.text_field :age, "data-required" => true, "data-type" => "numerical" 
+        = f.text_field :age, "data-required" => true, "data-type" => "numerical", tabindex:"9"
       
     = link_to "", '#!/form/preview_tab', class:"next_tab"
