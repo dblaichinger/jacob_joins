@@ -1,5 +1,6 @@
 - recipe = session[:recipe_id].present? ? Recipe.find(session[:recipe_id]) : Recipe.new
-- (3 - recipe.steps.count).times { recipe.steps.build }
+- if recipe.steps.count == 0
+  - 3.times { recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
@@ -137,7 +138,6 @@
               = step.text_area :description, tabindex:"4"
             - counter += 1
             #stepupload
-              = step.hidden_field :id unless step.object.new_record?
 
               .upload_wrapper{:style => "#{ 'display: none;' if step.object.image.present? }"}
                 %p 
@@ -148,6 +148,8 @@
                   = image_tag step.object.image(:small)
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
   
+          = step.hidden_field :id unless step.object.new_record?
+      
       #recipe_images
         %h1 
           %strong 4
