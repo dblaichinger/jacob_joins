@@ -28,9 +28,9 @@ namespace :deploy do
   end
 
   task :copy_config do
-    run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
-    run "ln -nfs #{shared_path}/config/mailers.yml #{release_path}/config/mailers.yml"
-    run "ln -nfs #{shared_path}/config/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+    run "ln -fs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
+    run "ln -fs #{shared_path}/config/mailers.yml #{release_path}/config/mailers.yml"
+    run "ln -fs #{shared_path}/config/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
   end
 end
 
