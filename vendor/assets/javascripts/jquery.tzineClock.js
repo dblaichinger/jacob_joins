@@ -191,8 +191,11 @@
 	{
 		// Rotating the element, depending on the browser:
 		var rotate = 'rotate('+angle+'deg)';
-		
-		if(element.css('MozTransform')!=undefined)
+
+		if(element.css('MsTransform')!=undefined)
+			element.css({msTransform: rotate});
+
+		else if(element.css('MozTransform')!=undefined)
 			element.css('MozTransform',rotate);
 			
 		else if(element.css('WebkitTransform')!=undefined)
@@ -206,8 +209,8 @@
 			
 			element.css("filter","progid:DXImageTransform.Microsoft.Matrix(M11="+cos+",M12=-"+sin+",M21="+sin+",M22="+cos+",SizingMethod='auto expand',FilterType='nearest neighbor')");
 	
-			element.css("left",-Math.floor((element.width()-200)/2));
-			element.css("top",-Math.floor((element.height()-200)/2));
+			element.css("left",-Math.floor((element.width()-70)/2));
+			element.css("top",-Math.floor((element.height()-70)/2));
 		}
 	
 	}
