@@ -34,7 +34,7 @@ function get_facebook_stream(){
           current_post.append("<p class='message'>"+value.message+"</p>");
           current_post.append("<p class='time'>"+ prettyDate(value.created_time) +"</p>");
           current_post.append("</div>");
-          $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "no", 0);  
+          $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);  
         }, "json");
 
         counter++;
@@ -98,23 +98,28 @@ function slide_newsbar(){
   });
   
   $("#newsbar, .show_newsbar").click(function(e){
-    var newsBar = $('#newsbar');
+    if($(e.target).is($("#newsbar")) || $(e.target).is($(".show_newsbar"))){
+      var newsBar = $('#newsbar');
 
-    if(newsBar.hasClass('extended')){
-      newsBar.stop().animate({
-        top: "-215px"
-      }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
-    } else {
-      newsBar.stop().animate({
-        top: "0"
-      }, 500).unbind('mouseenter').unbind('mouseleave');
+      if(newsBar.hasClass('extended')){
+        newsBar.stop().animate({
+          top: "-215px"
+        }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
+      } else {
+        newsBar.stop().animate({
+          top: "0"
+        }, 500).unbind('mouseenter').unbind('mouseleave');
+      }
+
+      $("#countdown", newsBar).fadeToggle(500);
+      $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
+
+      $('#newsbar').toggleClass('extended');
+
+      return false;
     }
-
-    $("#countdown", newsBar).fadeToggle(500);
-    $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
-
-    $('#newsbar').toggleClass('extended');
-
-    return false;
+    else{
+      return false;
+    }
   });
 }
