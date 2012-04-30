@@ -16,7 +16,6 @@ function get_latest_recipe(){
   }, "json");
 }
 
-
 function get_facebook_stream(){
   var token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
@@ -25,7 +24,7 @@ function get_facebook_stream(){
       if(value.message && counter <= 4){
         $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
           if($('#newsbar #fb .post').length <= 0)
-            $('#newsbar #fb h2').after("<div class='post'>");
+            $('#newsbar #fb .content').append("<div class='post'>");
           else
             $('#newsbar #fb .post:last').after("<div class='post'>");
 
@@ -33,8 +32,9 @@ function get_facebook_stream(){
           current_post.append("<img src='"+data.picture+"' alt='profile_picture' />");
           current_post.append("<h5>"+value.from.name+"</h5>");
           current_post.append("<p class='message'>"+value.message+"</p>");
-          current_post.append("<p class='time'>"+prettyDate(value.created_time) +"</p>");
-          current_post.append("</div>");      
+          current_post.append("<p class='time'>"+ prettyDate(value.created_time) +"</p>");
+          current_post.append("</div>");
+          $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);  
         }, "json");
 
         counter++;
@@ -98,23 +98,28 @@ function slide_newsbar(){
   });
   
   $("#newsbar, .show_newsbar").click(function(e){
-    var newsBar = $('#newsbar');
+    if($(e.target).is($("#newsbar")) || $(e.target).is($(".show_newsbar"))){
+      var newsBar = $('#newsbar');
 
-    if(newsBar.hasClass('extended')){
-      newsBar.stop().animate({
-        top: "-215px"
-      }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
-    } else {
-      newsBar.stop().animate({
-        top: "0"
-      }, 500).unbind('mouseenter').unbind('mouseleave');
+      if(newsBar.hasClass('extended')){
+        newsBar.stop().animate({
+          top: "-215px"
+        }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
+      } else {
+        newsBar.stop().animate({
+          top: "0"
+        }, 500).unbind('mouseenter').unbind('mouseleave');
+      }
+
+      $("#countdown", newsBar).fadeToggle(500);
+      $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
+
+      $('#newsbar').toggleClass('extended');
+
+      return false;
     }
-
-    $("#countdown", newsBar).fadeToggle(500);
-    $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
-
-    $('#newsbar').toggleClass('extended');
-
-    return false;
+    else{
+      return false;
+    }
   });
 }
