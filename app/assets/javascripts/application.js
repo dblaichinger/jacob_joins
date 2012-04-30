@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.8.18.custom.min
+//= require jquery-ui-1.8.19.custom.min
+//= require jquery.easing.1.3
+//= require jquery.mousewheel.min
 //= require jquery.qtip
 //= require jquery.livequery
 //= require jquery.placeholder
@@ -24,6 +26,7 @@
 //= require jquery.scrollTo-1.4.2-min
 //= require path.min
 //= require jquery.rating
+//= require jquery.mCustomScrollbar
 //= <!--[if lte IE 8]>require ie/html5<![endif]-->
 //= <!--[if lte IE 8]>require ie/pngfix<![endif]-->
 //= require_tree .

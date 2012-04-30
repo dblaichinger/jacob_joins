@@ -12,6 +12,7 @@
  *= require jquery.tzineClock
  *= require jquery.qtip
  *= require jquery.rating
+ *= require jquery.mCustomScrollbar
  *= <!--[if lte IE 8]>require ie<![endif]-->
  *= require_tree .
 */

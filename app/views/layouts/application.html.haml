@@ -10,12 +10,14 @@
       $(document).ready(function(){
         get_latest_recipe();
         $('#fancy_counter').tzineClock();
-        get_facebook_stream();
         slide_newsbar();
         $("#newsbar").visibleAfter($("#start"));
       });
-        
-    
+
+      $(window).load(function(){
+        get_facebook_stream();
+      });
+
     = csrf_meta_tags
     %meta{:charset => "utf-8"}
 
@@ -29,7 +31,16 @@
         #fb
           %h2
             Join us on Facebook
-          
+
+          #mcs_container
+            .customScrollBox
+              .container
+                .content
+              .dragger_container
+                .dragger
+            = link_to "", "#", class:"scrollUpBtn"
+            = link_to "", "#", class:"scrollDownBtn"
+
         #entries
           %h2
             What happened so far  
