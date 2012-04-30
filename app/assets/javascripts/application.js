@@ -26,5 +26,6 @@
 //= require jquery.scrollTo-1.4.2-min
 //= require path.min
 //= require jquery.rating
+//= require jquery.mCustomScrollbar
 //= require_tree .
  
