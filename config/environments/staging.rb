@@ -51,6 +51,20 @@ JacobJoins::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.delivery_method = :smtp
+
+    MAILERS = YAML.load_file("#{Rails.root}/config/mailers.yml")
+
+    config.action_mailer.smtp_settings = {
+      :address => MAILERS["gmail"]["address"],
+      :port => MAILERS["gmail"]["port"],
+      :domain => MAILERS["gmail"]["domain"],
+      :authentication => MAILERS["gmail"]["authentication"],
+      :user_name => MAILERS["gmail"]["user_name"],
+      :password => MAILERS["gmail"]["password"]
+    }
+
   # Enable threaded mode
   # config.threadsafe!
 
