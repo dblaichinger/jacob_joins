@@ -14,6 +14,8 @@ function get_latest_recipe(){
       }
       if(user_name && recipe.city)
         $('#last_entry').append("<p>Jacob joins "+user_name+" from "+recipe.city+"</p>");
+      else
+        $('#last_entry').append("<p>Jacob joins an anonymous user from an unknown city</p>");
     });
   }, "json");
 }
@@ -25,7 +27,7 @@ function get_facebook_stream(){
     $.each(data.data, function(key, value){
       if(value.message && counter <= 4){
         if($('#newsbar #fb .post').length <= 0)
-          $('#newsbar #fb .content').append("<div class='post'>");
+          $('#newsbar #fb .content').append("<div class='post'></div>");
         else
           $('#newsbar #fb .post:last').after("<div class='post'></div>");
 
