@@ -1,7 +1,5 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-    console.debug(data);
-    console.debug(textstatus);
     $.each(data, function(key, value){
       var recipe = value;
       if(recipe.user_id != null){
@@ -14,10 +12,10 @@ function get_latest_recipe(){
       else {
         var user_name = "an anonymous user"
       }
-      console.debug(user_name);
-      console.debug(recipe.city);
       if(user_name && recipe.city)
         $('#last_entry').append("<p>Jacob joins "+user_name+" from "+recipe.city+"</p>");
+      else
+        $('#last_entry').append("<p>Jacob joins an anonymous user from an unknown city</p>");
     });
   }, "json");
 }
