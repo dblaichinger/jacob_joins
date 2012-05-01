@@ -12,8 +12,6 @@
       minLength: 2
     });
 
-    $("#ingredients").elementOnDemand();
-
     var elementTemplate;
     elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
     elementTemplate.children('.image_preview').remove();
@@ -84,10 +82,13 @@
         Just press the + button to add the ingredients which make your recipe special and worth trying. You don´t have or just don´t like one of our 3 already selected ingredients? Just replace it by another one.  Of course you can split the ingredients in two or three courses by explaining the preparation step by step (3). Everybody loves a dessert.
 
       = f.fields_for :ingredients_with_quantities do |ingredient_with_quantity|
-        <!-- ko foreach: ingredients -->
         %p.dynamicElement
-          = ingredient_with_quantity.text_field :quantity, placeholder:"quantity", class:"menge"
-          = ingredient_with_quantity.text_field :name, placeholder:"your additional ingredient", name:"recipe[ingredients_name]", class:"zutat"
+          = ingredient_with_quantity.text_field :quantity, placeholder:"quantity", name:"recipe[ingredients]", class:"menge"
+          = ingredient_with_quantity.text_field :name, placeholder:"your additional ingredient", name:"recipe[ingredients]", class:"zutat"
+
+        .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
+          = image_tag image_path("add_icon.png"), class:"add"
+          = image_tag image_path("delete_icon.png"), class:"remove"
 
   #right
     #preparation.part-3
@@ -105,15 +106,13 @@
 
       .steps
         = f.fields_for :steps do |step|
-          <!-- ko foreach: steps -->
           .step.dynamicElement
-            = step.label :description, "", class:"step_label", "data-bind" => "text: 'Step ' + (steps.indexOf($data) + 1)"
-            = step.text_area :description, "data-bind" => "value: $data.description, attr: { name: 'recipe[steps_attributes][' + steps.indexOf($data) + '][description]' }"
-          <!-- /ko -->
+            = step.label :description, "Step 1", class:"step_label"
+            = step.text_area :description, name:"recipe[steps]"
 
         .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
-          = image_tag asset_path("add_icon.png"), class:"add", "data-bind" => "click: addStep"
-          = image_tag asset_path("delete_icon.png"), class:"remove", "data-bind" => "click: removeStep"
+          = image_tag image_path("add_icon.png"), class:"add"
+          = image_tag image_path("delete_icon.png"), class:"remove"
   
       #recipe_images
         %h1 

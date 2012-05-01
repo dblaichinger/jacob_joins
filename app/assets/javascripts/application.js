@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui-1.8.18.custom.min
 //= require jquery.datalink
+//= require jquery.tmpl.min
 //= require jquery.qtip
 //= require jquery.livequery
 //= require jquery.placeholder
