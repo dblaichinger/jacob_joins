@@ -21,8 +21,10 @@ function get_latest_recipe(){
 function get_facebook_stream(){
   var token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
+
     var counter = 0;
     $.each(data.data, function(key, value){
+      console.debug(value);
       if(value.message && counter <= 4){
         if($('#newsbar #fb .post').length <= 0)
           $('#newsbar #fb .content').append("<div class='post'>");
