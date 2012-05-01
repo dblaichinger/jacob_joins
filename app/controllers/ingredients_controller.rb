@@ -41,7 +41,7 @@ class IngredientsController < ApplicationController
               @recipe_match << recipe if recipe["count"] != nil
             end
             #Sort the array regarding the count number
-            @recipe_match.sort! {|a,b| a["count"] <=> b["count"]}
+            @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
 
             # If recipe_match contains less than 10 recipes, get some recipes without any count
             counter = 0
