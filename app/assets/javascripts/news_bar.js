@@ -22,27 +22,32 @@ function get_facebook_stream(){
     var counter = 0;
     $.each(data.data, function(key, value){
       if(value.message && counter <= 4){
-        $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
-          if($('#newsbar #fb .post').length <= 0)
-            $('#newsbar #fb .content').append("<div class='post'>");
-          else
-            $('#newsbar #fb .post:last').after("<div class='post'>");
+        if($('#newsbar #fb .post').length <= 0)
+          $('#newsbar #fb .content').append("<div class='post'>");
+        else
+          $('#newsbar #fb .post:last').after("<div class='post'></div>");
 
-          var current_post = $('#newsbar #fb .post:last');
-          current_post.append("<img src='"+data.picture+"' alt='profile_picture' />");
-          current_post.append("<h5>"+value.from.name+"</h5>");
-          current_post.append("<p class='message'>"+value.message+"</p>");
-          current_post.append("<p class='time'>"+ prettyDate(value.created_time) +"</p>");
-          current_post.append("</div>");
-          $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);  
-        }, "json");
-
+        var current_post = $('#newsbar #fb .post:last');
+        get_facebook_picture(value, current_post);
         counter++;
       }
     });
   }, "json");
 }
 
+function get_facebook_picture(post, current_post){  
+  $.get('https://graph.facebook.com/'+post.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
+    show_facebook_posts(post, current_post, data);
+  }, "json");
+}
+
+function show_facebook_posts(post, current_post, pic){
+  current_post.append("<img src='"+pic.picture+"' alt='profile_picture' />");
+  current_post.append("<h5>"+post.from.name+"</h5>");
+  current_post.append("<p class='message'>"+post.message+"</p>");
+  current_post.append("<p class='time'>"+ prettyDate(post.created_time) +"</p>");
+  $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
+}
 
 /*
  * JavaScript Pretty Date
