@@ -13,9 +13,9 @@ function get_latest_recipe(){
         var user_name = "an anonymous user"
       }
       if(user_name && recipe.city)
-        $('#last_entry').append("<p>Jacob joins "+user_name+" from "+recipe.city+"</p>");
+        $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span> from <span>"+recipe.city+"</span> vor 2 Stunden </p>");
       else
-        $('#last_entry').append("<p>Jacob joins an anonymous user from an unknown city</p>");
+        $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span> from <span>an unknown city</span> </p>");
     });
   }, "json");
 }
