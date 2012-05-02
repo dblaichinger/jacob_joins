@@ -28,11 +28,12 @@ namespace :deploy do
   end
 
   task :copy_config do
-    run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
-    run "ln -nfs #{shared_path}/config/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+    run "ln -nfs #{shared_path}/config/mongoid.yml #{latest_release}/config/mongoid.yml"
+    run "ln -nfs #{shared_path}/config/mailers.yml #{latest_release}/config/mailers.yml"
+    run "ln -nfs #{shared_path}/config/secret_token.rb #{latest_release}/config/initializers/secret_token.rb"
   end
 end
 
 require "bundler/capistrano"
 
-after "deploy:update_code", "deploy:copy_config"
+before "deploy:assets:precompile", "deploy:copy_config"

@@ -2,20 +2,23 @@ function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
     $.each(data, function(key, value){
       var recipe = value;
-      if(recipe && recipe.user_id){
+      if(recipe.user_id != null){
         var id = {"id": recipe.user_id};
         //Get the user, which created the recipe
         $.post('/users/find_user', id, function(data, textstatus, jqxhr){
-          var user = data;
-
-          if(user.name && recipe.city)
-            $('#last_entry').append("<p>Jacob joins "+user.name+" from "+recipe.city+"</p>");
+          var user_name = data.name;
         }, "json");
       }
+      else {
+        var user_name = "an anonymous user"
+      }
+      if(user_name && recipe.city)
+        $('#last_entry').append("<p>Jacob joins "+user_name+" from "+recipe.city+"</p>");
+      else
+        $('#last_entry').append("<p>Jacob joins an anonymous user from an unknown city</p>");
     });
   }, "json");
 }
-
 
 function get_facebook_stream(){
   var token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs";
@@ -23,24 +26,31 @@ function get_facebook_stream(){
     var counter = 0;
     $.each(data.data, function(key, value){
       if(value.message && counter <= 4){
-        $.get('https://graph.facebook.com/'+value.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
-          if($('#newsbar #fb .post').length <= 0)
-            $('#newsbar #fb h2').after("<div class='post'>");
-          else
-            $('#newsbar #fb .post:last').after("<div class='post'>");
+        if($('#newsbar #fb .post').length <= 0)
+          $('#newsbar #fb .content').append("<div class='post'></div>");
+        else
+          $('#newsbar #fb .post:last').after("<div class='post'></div>");
 
-          var current_post = $('#newsbar #fb .post:last');
-          current_post.append("<img src='"+data.picture+"' alt='profile_picture' />");
-          current_post.append("<h5>"+value.from.name+"</h5>");
-          current_post.append("<p class='message'>"+value.message+"</p>");
-          current_post.append("<p class='time'>"+prettyDate(value.created_time) +"</p>");
-          current_post.append("</div>");      
-        }, "json");
-
+        var current_post = $('#newsbar #fb .post:last');
+        get_facebook_picture(value, current_post);
         counter++;
       }
     });
   }, "json");
+}
+
+function get_facebook_picture(post, current_post){  
+  $.get('https://graph.facebook.com/'+post.from.id+'?fields=picture&type=square', function(data, textstatus, jqxhr){
+    show_facebook_posts(post, current_post, data);
+  }, "json");
+}
+
+function show_facebook_posts(post, current_post, pic){
+  current_post.append("<img src='"+pic.picture+"' alt='profile_picture' />");
+  current_post.append("<h5>"+post.from.name+"</h5>");
+  current_post.append("<p class='message'>"+post.message+"</p>");
+  current_post.append("<p class='time'>"+ prettyDate(post.created_time) +"</p>");
+  $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
 }
 
 /*
@@ -98,23 +108,28 @@ function slide_newsbar(){
   });
   
   $("#newsbar, .show_newsbar").click(function(e){
-    var newsBar = $('#newsbar');
+    if($(e.target).is($("#newsbar")) || $(e.target).is($(".show_newsbar"))){
+      var newsBar = $('#newsbar');
 
-    if(newsBar.hasClass('extended')){
-      newsBar.stop().animate({
-        top: "-215px"
-      }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
-    } else {
-      newsBar.stop().animate({
-        top: "0"
-      }, 500).unbind('mouseenter').unbind('mouseleave');
+      if(newsBar.hasClass('extended')){
+        newsBar.stop().animate({
+          top: "-215px"
+        }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
+      } else {
+        newsBar.stop().animate({
+          top: "0"
+        }, 500).unbind('mouseenter').unbind('mouseleave');
+      }
+
+      $("#countdown", newsBar).fadeToggle(500);
+      $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
+
+      $('#newsbar').toggleClass('extended');
+
+      return false;
     }
-
-    $("#countdown", newsBar).fadeToggle(500);
-    $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
-
-    $('#newsbar').toggleClass('extended');
-
-    return false;
+    else{
+      return false;
+    }
   });
 }

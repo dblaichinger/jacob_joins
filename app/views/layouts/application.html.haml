@@ -4,18 +4,32 @@
     %title JacobJoins
     %link{ :href => "favicon.png", :rel => "icon", :type => "image/png" }
     = stylesheet_link_tag "application", :media => "all"
+    /[if IE 7]
+      = stylesheet_link_tag "ie/ie7", :media => "all"
+    /[if IE 8]
+      = stylesheet_link_tag "ie/ie8", :media => "all"
+    /[if IE 9]
+      = stylesheet_link_tag "ie/ie9", :media => "all"
+
+    /[if lte IE 8]
+      = javascript_include_tag "ie/html5"
+    /[if lte IE 6]
+      = javascript_include_tag "ie/pngfix"
+
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
     = javascript_include_tag "application"
     :javascript
       $(document).ready(function(){
         get_latest_recipe();
         $('#fancy_counter').tzineClock();
-        get_facebook_stream();
         slide_newsbar();
         $("#newsbar").visibleAfter($("#start"));
       });
-        
-    
+
+      $(window).load(function(){
+        get_facebook_stream();
+      });
+
     = csrf_meta_tags
     %meta{:charset => "utf-8"}
 
@@ -29,7 +43,16 @@
         #fb
           %h2
             Join us on Facebook
-          
+
+          #mcs_container
+            .customScrollBox
+              .container
+                .content
+              .dragger_container
+                .dragger
+            = link_to "", "#", class:"scrollUpBtn"
+            = link_to "", "#", class:"scrollDownBtn"
+
         #entries
           %h2
             What happened so far  
@@ -46,7 +69,7 @@
           #hours
           #minutes
           #seconds
-       
+        
         #logo
           = image_tag "logo.png"
 
