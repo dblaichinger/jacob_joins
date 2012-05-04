@@ -195,10 +195,10 @@
 		if(element.css('MsTransform')!=undefined)
 			element.css({msTransform: rotate});
 
-		else if(element.css('MozTransform')!=undefined)
+		if(element.css('MozTransform')!=undefined)
 			element.css('MozTransform',rotate);
 			
-		else if(element.css('WebkitTransform')!=undefined)
+		if(element.css('WebkitTransform')!=undefined)
 			element.css('WebkitTransform',rotate);
 	
 		// A version for internet explorer using filters, works but is a bit buggy (no surprise here):
