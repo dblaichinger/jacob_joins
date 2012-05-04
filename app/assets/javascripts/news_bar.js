@@ -19,10 +19,14 @@ function get_latest_recipe(){
       else {
         user_name = "an anonymous user";
       }
-      if(user_name && recipe.country)
-        $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span>from <span>"+recipe.country+"</span> "+prettyDate(recipe.created_at)+"</p>");
+      if(user_name && recipe.country){
+        $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span>from <span>"+recipe.country+"</span></p>");
+        $('#last_entry').append("<p class='time'>"+prettyDate(recipe.created_at)+"</p>");
+      }
       else
         $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>");
+    
+      $("#last_entry_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
     });
   }, "json");
 }

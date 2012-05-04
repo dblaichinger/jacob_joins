@@ -44,7 +44,7 @@
           %h2
             Join us on Facebook
 
-          #mcs_container
+          .mcs_container
             .customScrollBox
               .container
                 .content
@@ -56,7 +56,15 @@
         #entries
           %h2
             What happened so far  
-          #last_entry
+          .mcs_container
+            .customScrollBox
+              .container
+                .content#last_entry
+              .dragger_container
+                .dragger
+            = link_to "", "#", class:"scrollUpBtn"
+            = link_to "", "#", class:"scrollDownBtn"
+          
 
         #fancy_counter
           %h2
