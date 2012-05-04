@@ -80,7 +80,7 @@ class RecipesController < ApplicationController
   end
 
   def last
-    respond_with Recipe.where(:user_id=>{"$ne"=>nil}).order_by(:created_at => :desc).limit(5)
+    respond_with Recipe.where(:user_id => {"$ne"=>nil}, :state => "published").order_by(:created_at => :desc).limit(5)
   end
 
   
