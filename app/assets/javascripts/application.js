@@ -27,6 +27,6 @@
 //= require path.min
 //= require jquery.rating
 //= require jquery.mCustomScrollbar
-
+//= require modernizr
 //= require_tree .
  
