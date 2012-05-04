@@ -42,7 +42,7 @@
       #newsbar_content
         #fb
           %h2
-            Join us on Facebook
+            = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fb-like"
 
           #mcs_container
             .customScrollBox
@@ -74,6 +74,7 @@
           = image_tag "logo.png"
 
         #beta
+        #fb-like-button
 
       #clickandsee
         = link_to "", "#", class:"show_newsbar"
