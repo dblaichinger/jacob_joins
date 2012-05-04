@@ -22,6 +22,7 @@ class Recipe
 
   embeds_many :ingredients_with_quantities
   accepts_nested_attributes_for :ingredients_with_quantities, :allow_destroy => true, :reject_if => :all_blank
+  index "ingredients_with_quantities.name"
 
   embeds_many :steps, :validate => false, :cascade_callbacks => true
   accepts_nested_attributes_for :steps, :allow_destroy => true, :reject_if => :all_blank

@@ -8,48 +8,59 @@ class IngredientsController < ApplicationController
   def search
     respond_to do |format|
       format.json {
+        puts params.inspect
         # Store ingredients which 
         @ingredients = params[:ingredients]
+        raise params[:ingredients].inspect
         @recipes = []
         startTime = Time.now
         puts("------------------------------------------------")
         Benchmark.bm do |bench|
-          bench.report{
+          
             @ingredients.each do |key, value|
               #Get all recipes which includes the ingredient
-              query = Recipe.search_by_ingredient(value)
-
-              query.entries.each do |entry|
-                #If the same recipe was found, insert to the recipe an counter or increase counter
-                if @recipes.include?(entry)
-                  index = @recipes.index(entry)
-                  if @recipes[index]["count"].nil?
-                    @recipes[index]["count"] = 2
+              bench.report("query:"){
+                @query = Recipe.search_by_ingredient(value)
+              }
+              bench.report("match_recipes:"){
+                @query.entries.each do |entry|
+                  #If the same recipe was found, insert to the recipe an counter or increase counter
+                  if @recipes.include?(entry)
+                    binding.pry
+                    index = @recipes.index(entry)
+                    if @recipes[index]["count"].nil?
+                      @recipes[index]["count"] = 2
+                    else
+                      @recipes[index]["count"] += 1
+                    end
+                  # Else put the recipe as a new entry in the recipe array
                   else
-                    @recipes[index]["count"] += 1
-                  end
-                # Else put the recipe as a new entry in the recipe array
-                else
-                  @recipes << entry
+                    @recipes << entry
+                  end              
                 end
-              end
+              }
             end
+            
+            #puts(@recipes.length)
 
+            bench.report("match2:"){
             @recipe_match = []
             @recipes.each do |recipe|
               #Get all recipes which have a count attribute
               @recipe_match << recipe if recipe["count"] != nil
             end
+            }
+            bench.report("sort:"){
             #Sort the array regarding the count number
             @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
-
+            }
             # If recipe_match contains less than 10 recipes, get some recipes without any count
             counter = 0
-            while @recipe_match.count < 10
+            while @recipe_match.length < 10
               @recipe_match << @recipes[counter]
               counter+=1
             end
-          }
+          
         end
 
         endTime = Time.now

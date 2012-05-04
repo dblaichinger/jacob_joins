@@ -1,4 +1,8 @@
 .search
+  %h1
+    ***TESTING***
+  = text_field_tag "search_times", nil, :id => "search_times"
+  = button_tag "test", :onclick => "runSearchTest();"
 
   %h1
     ***SEARCH FOR RECIPE***
@@ -18,5 +22,3 @@
   #search_result
   = @recipe.inspect if @recipe
 
-  %h1
-    ***MATCH***
