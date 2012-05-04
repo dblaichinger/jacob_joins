@@ -3,7 +3,6 @@ function get_latest_recipe(){
 
     $.each(data, function(key, recipe){
       var user_name;
-      console.debug(recipe);
       if(recipe.user_id != null){
         var id = {"id": recipe.user_id};
         //Get the user, which created the recipe
@@ -13,7 +12,6 @@ function get_latest_recipe(){
           data: id,
           async: false,
           success: function(data, textStatus, jqXHR){
-            console.debug(data);
             user_name = data.firstname;
           }
         }, "json");
@@ -21,10 +19,11 @@ function get_latest_recipe(){
       else {
         user_name = "an anonymous user";
       }
-      if(user_name && recipe.city)
-        $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span>from <span>"+recipe.city+"</span>vor 2 Stunden </p>");
+
+      if(user_name && recipe.country)
+        $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span>from <span>"+recipe.country+"</span> "+prettyDate(recipe.created_at)+"</p>");
       else
-        $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span>from an <span>unknown city</span></p>");
+        $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>");
     });
   }, "json");
 }
@@ -70,7 +69,7 @@ function show_facebook_posts(post, current_post, pic){
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
 function prettyDate(time){
-  var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+  var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ").replace(/\+/g," +")),
     diff = (((new Date()).getTime() - date.getTime()) / 1000),
     day_diff = Math.floor(diff / 86400);
       
