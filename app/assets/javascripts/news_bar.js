@@ -119,7 +119,7 @@ function slide_newsbar(){
   });
   
   $("#newsbar, .show_newsbar").click(function(e){
-    if($(e.target).is($("#newsbar, .show_newsbar, #newsbar_content"))){
+    if($(e.target).is($("#newsbar, .show_newsbar, #newsbar_content, #logo img"))){
       var newsBar = $('#newsbar');
 
       if(newsBar.hasClass('extended')){
