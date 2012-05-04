@@ -20,13 +20,13 @@
     = javascript_include_tag "application"
     :javascript
       $(document).ready(function(){
-        get_latest_recipe();
         $('#fancy_counter').tzineClock();
         slide_newsbar();
         $("#newsbar").visibleAfter($("#start"));
       });
 
       $(window).load(function(){
+        get_latest_recipe();
         get_facebook_stream();
       });
 
@@ -44,7 +44,7 @@
           %h2
             = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fb-like"
 
-          .mcs_container
+          .mcs_container#fb_stream
             .customScrollBox
               .container
                 .content
@@ -56,7 +56,7 @@
         #entries
           %h2
             What happened so far  
-          .mcs_container
+          .mcs_container#jj_stream
             .customScrollBox
               .container
                 .content#last_entry

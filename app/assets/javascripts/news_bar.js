@@ -26,7 +26,7 @@ function get_latest_recipe(){
       else
         $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>");
     
-      $("#last_entry_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
+      $("#jj_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
     });
   }, "json");
 }
@@ -61,7 +61,7 @@ function show_facebook_posts(post, current_post, pic){
   current_post.append("<h5>"+post.from.name+"</h5>");
   current_post.append("<p class='message'>"+post.message+"</p>");
   current_post.append("<p class='time'>"+ prettyDate(post.created_time) +"</p>");
-  $("#mcs_container").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
+  $("#fb_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
 }
 
 /*
