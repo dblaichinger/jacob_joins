@@ -1,16 +1,25 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-    $.each(data, function(key, value){
-      var recipe = value;
+
+    $.each(data, function(key, recipe){
+      var user_name;
+      console.debug(recipe);
       if(recipe.user_id != null){
         var id = {"id": recipe.user_id};
         //Get the user, which created the recipe
-        $.post('/users/find_user', id, function(data, textstatus, jqxhr){
-          var user_name = data.name;
+        $.ajax({
+          url: '/users/find_user',
+          type: "POST",
+          data: id,
+          async: false,
+          success: function(data, textStatus, jqXHR){
+            console.debug(data);
+            user_name = data.firstname;
+          }
         }, "json");
       }
       else {
-        var user_name = "an anonymous user"
+        user_name = "an anonymous user";
       }
       if(user_name && recipe.city)
         $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span> from <span>"+recipe.city+"</span> vor 2 Stunden </p>");
