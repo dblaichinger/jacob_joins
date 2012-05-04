@@ -72,9 +72,18 @@ function show_facebook_posts(post, current_post, pic){
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
 function prettyDate(time){
-  var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ").replace(/\+/g," +")),
-    diff = (((new Date()).getTime() - date.getTime()) / 1000),
-    day_diff = Math.floor(diff / 86400);
+  console.log(typeof(time));
+  var date = (time || "").replace(/-/g,"/").replace(/[TZ]/g," ").replace(/\+/g," +");
+  var index = date.lastIndexOf(":");
+  if (index > 20){
+    first = date.substr(0, index)
+    second = date.substr(index+1, date.length)
+    date = first + second;
+  }
+  date = new Date(date);
+
+  var diff = (((new Date()).getTime() - date.getTime()) / 1000);
+  var day_diff = Math.floor(diff / 86400);
       
   if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
     return;
@@ -100,6 +109,9 @@ if ( typeof jQuery != "undefined" )
     });
   };
 
+function replaceAt(string, index, char) {
+  return string.substr(0, index) + char + string.substr(index+char.length);
+}
 
 function slide_newsbar(){
   $('#clickandsee').click(function(e){
