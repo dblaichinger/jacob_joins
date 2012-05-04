@@ -122,7 +122,6 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.7.1)
     mime-types (1.18)
-    modernizr-rails (2.0.6)
     mongo (1.6.1)
       bson (~> 1.6.1)
     mongoid (2.4.7)
@@ -259,7 +258,6 @@ DEPENDENCIES
   jasmine-rails
   jquery-rails
   launchy
-  modernizr-rails
   mongoid
   mongoid-paperclip
   mongoid-rspec
