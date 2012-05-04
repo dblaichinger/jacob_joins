@@ -47,12 +47,19 @@ $ ->
             country: $('#country_hidden').val()
             
     if window.user
+      showWizardLoader()
+
+      $("#preview_tab").animate
+        opacity: 0
+      , 200
+
       empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
       empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
 
       if empty_recipe_form or empty_csi_form
         $.ajax
           url: "/pages/drafts_saved"
+          async: false
           success: (data, textStatus, jqXHR) ->
             if empty_recipe_form?
               $('#recipe_tab').html(empty_recipe_form)
@@ -73,10 +80,16 @@ $ ->
                 top: -70
 
           error: (jqXHR, textStatus, errorThrown) ->
-            alert "Error loading success page!"
+            alert "Failed to save the draft(s)!"
 
       else
         alert "Failed to save the draft(s)!"
+
+      $("#preview_tab").animate
+        opacity: 1
+      , 200
+
+      hideWizardLoader()
     else
       alert "Unable to save user information (maybe not provided)."
 
