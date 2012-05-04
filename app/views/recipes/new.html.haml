@@ -136,7 +136,7 @@
             - else
               = step.text_area :description, tabindex:"4"
             - counter += 1
-            #stepupload
+            .image_upload
 
               .upload_wrapper{:style => "#{ 'display: none;' if step.object.image.present? }"}
                 %p 
@@ -161,7 +161,10 @@
         %p
           You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see a picture of your creation together with your written recipe!
 
-        = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
+        .image_upload
+          .upload_wrapper
+            = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
+
         %ul.file_uploads
           - f.object.images.each do |i|
             %li
