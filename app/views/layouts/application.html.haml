@@ -42,7 +42,7 @@
       #newsbar_content
         #fb
           %h2
-            = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fb-like"
+            = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fblike"
 
           .mcs_container#fb_stream
             .customScrollBox
@@ -52,7 +52,8 @@
                 .dragger
             = link_to "", "#", class:"scrollUpBtn"
             = link_to "", "#", class:"scrollDownBtn"
-          #fb-like-button
+
+          /.fb-like{"data-href"=>"http://www.facebook.com/jacobjoins", "data-send"=>"false", "data-layout"=>"button_count", "data-width"=>"150", "data-show-faces"=>"false"}
 
         #entries
           %h2
@@ -83,7 +84,6 @@
           = image_tag "logo.png"
 
         #beta
-        
 
       #clickandsee
         = link_to "", "#", class:"show_newsbar"

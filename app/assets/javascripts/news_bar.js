@@ -1,6 +1,5 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-
     $.each(data, function(key, recipe){
       var user_name;
       if(recipe.user_id != null){
@@ -25,8 +24,8 @@ function get_latest_recipe(){
       }
       else
         $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>");
-    
       $("#jj_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
+
     });
   }, "json");
 }
@@ -144,3 +143,5 @@ function slide_newsbar(){
     }
   });
 }
+
+
