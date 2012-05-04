@@ -34,6 +34,10 @@ function get_latest_recipe(){
 function get_facebook_stream(){
   var token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs";
   $.get('https://graph.facebook.com/111627842294635/feed?access_token='+token, function(data, textstatus, jqxhr){
+    if(data){
+      $("#fb_error").css("display", "none");
+      $("#fb .mcs_container").css("display", "block");
+    }
     var counter = 0;
     $.each(data.data, function(key, value){
       if(value.message && counter <= 4){
@@ -72,7 +76,6 @@ function show_facebook_posts(post, current_post, pic){
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
 function prettyDate(time){
-  console.log(typeof(time));
   var date = (time || "").replace(/-/g,"/").replace(/[TZ]/g," ").replace(/\+/g," +");
   var index = date.lastIndexOf(":");
   if (index > 20){
