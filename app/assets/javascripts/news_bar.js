@@ -19,10 +19,16 @@ function get_latest_recipe(){
       else {
         user_name = "an anonymous user";
       }
+<<<<<<< HEAD
       if(user_name && recipe.country){
         $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span>from <span>"+recipe.country+"</span></p>");
         $('#last_entry').append("<p class='time'>"+prettyDate(recipe.created_at)+"</p>");
       }
+=======
+
+      if(user_name && recipe.country)
+        $('#last_entry').append("<p>Jacob joins <span>"+user_name+"</span>from <span>"+recipe.country+"</span> "+prettyDate(recipe.created_at)+"</p>");
+>>>>>>> 4cb8d9fdb672a80f1ae035bc74cef17d539741fb
       else
         $('#last_entry').append("<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>");
     
