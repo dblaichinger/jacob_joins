@@ -13,7 +13,7 @@ class PagesController < HighVoltage::PagesController
         @recipe = Recipe.find session[:recipe_id] if session[:recipe_id].present?
         @csi_set = CsiSet.find session[:csi_set_id] if session[:csi_set_id].present?
 
-        UserMailer.thank_you_wizard(@user, @recipe, @csi_set).deliver
+        UserMailer.thank_you_wizard(@user, @recipe, @csi_set).deliver if @user.email.present?
       end
     when 'preview'
       @recipe = Recipe.find session[:recipe_id] if session[:recipe_id].present?
