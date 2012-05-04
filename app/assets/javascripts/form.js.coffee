@@ -34,6 +34,10 @@ $ ->
     if $(this).hasClass("disabled")
       return false
 
+    showWizardLoader()
+
+    $("#preview_tab").fadeOut 200
+
     unless window.user?
       if $('#aboutyou').parent().hasClass('form_valid')
         empty_user_form = publish_user()
@@ -47,12 +51,6 @@ $ ->
             country: $('#country_hidden').val()
             
     if window.user
-      showWizardLoader()
-
-      $("#preview_tab").animate
-        opacity: 0
-      , 200
-
       empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
       empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
 
@@ -84,14 +82,12 @@ $ ->
 
       else
         alert "Failed to save the draft(s)!"
-
-      $("#preview_tab").animate
-        opacity: 1
-      , 200
-
-      hideWizardLoader()
     else
       alert "Unable to save user information (maybe not provided)."
+
+    $("#preview_tab").fadeIn 200
+
+    hideWizardLoader()
 
   $("#wizard").bind "validated.dirtyValidation", (event, data) ->
     tabs = $(".dirtyform", "#wizard")
