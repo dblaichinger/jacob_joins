@@ -69,8 +69,8 @@ body
       margin-top: 20px
 
     #fb
-      height: 190px
-      overflow: hidden
+      height: 230px
+      position: relative
 
       h2
         margin-top: 1px
@@ -85,6 +85,15 @@ body
 
       .fb-like:hover
         color: $rot
+
+      #fb-like-button
+        width: 150px
+        height: 30px
+        background-image: url(image_path('fb-like-button.png'))
+        background-position: left center
+        position: absolute
+        bottom: 0px
+        right: 30px
 
       .post
         overflow: hidden
@@ -110,15 +119,6 @@ body
           font-size: 10px
           font-family: "Pluto-LightCondensed"
           margin: 5px 0 0 60px
-
-    #fb-like-button
-      width: 150px
-      height: 30px
-      background-image: url(image_path('fb-like-button.png'))
-      background-position: left center
-      position: absolute
-      bottom: 30px
-      left: 130px
 
     #entries
       margin-left: 30px
