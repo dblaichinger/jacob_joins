@@ -117,16 +117,9 @@
 		    var diff = diff /1000;
 		    
 		    days = Math.floor( diff/(60*60*24) );
-		    //if(days < 10) days = "0"+days;
-		    
 		    hours = Math.floor( (diff - days*24*60*60)/(60*60) );
-		    //if(hours < 10) hours = "0"+hours;
-		    
 		    minutes = Math.floor( (diff - days*24*60*60 - hours*60*60)/60);
-		    //if(minutes < 10) minutes = "0"+minutes;
-		    
 		    seconds = Math.floor( diff - days*24*60*60 - hours*60*60 - minutes*60);
-		    //if(seconds < 10) seconds = "0"+seconds;
 		  }
 
 			animation(gVars.red, days, 100);	
@@ -158,7 +151,8 @@
 		{
 			// Hiding the right half of the background:
 			clock.rotateRight.hide();
-			
+
+			console.log("rotateRightHide: " +clock.rotateRight.css('display'));
 			// Resetting the rotation of the left part:
 			rotateElement(clock.rotateLeft,0);
 		}
@@ -166,6 +160,7 @@
 		if(angle<=180)
 		{
 			clock.rotateRight.hide();
+			console.log("rotateRightHide: " +clock.rotateRight.css('display'));
 			// The left part is rotated, and the right is currently hidden:
 			element = clock.rotateLeft;
 		}
@@ -175,6 +170,8 @@
 			clock.rotateRight.show();
 			clock.rotateLeft.show();
 			
+			console.log("Bothshow: " +clock.rotateRight.css('display') +","+ clock.rotateLeft.css('display'));
+
 			rotateElement(clock.rotateLeft,180);
 			
 			element = clock.rotateRight;
