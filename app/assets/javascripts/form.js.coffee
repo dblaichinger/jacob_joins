@@ -1,8 +1,8 @@
 showWizardLoader = (callback) ->
-  $('#wizard-loader').stop().fadeIn 500, callback
+  $('#wizard-loader').stop(true, true).fadeIn 500, callback
 
-hideWizardLoader = () ->
-  $('#wizard-loader').stop().fadeOut 500
+hideWizardLoader = (callback) ->
+  $('#wizard-loader').stop(true, true).fadeOut 500, callback
 
 window.reinitialize_tooltips = (context) ->
   $("[data-tooltip]", context).each ->
@@ -28,61 +28,63 @@ $ ->
   $("#gotoform").click ->
     $.scrollTo $('#skipstory'), 800
 
-
   $("#send").live 'click', (event) ->
     if $(this).hasClass("disabled")
       return false
 
+    $("#send").addClass "disabled"
+
+    $.scrollTo "#wizard", 800
+      offset:
+        top: -70
+
     showWizardLoader ->
-      $("#send").addClass "disabled"
-      unless window.user?
-        if $('#aboutyou').parent().hasClass('form_valid')
-          empty_user_form = publish_user()
-          
-          window.user = 
-            id: $('#user_tab form').attr('action').split('/')[2]
-            location:
-              longitude: $('#longitude').val()
-              latitude: $('#latitude').val()
-              city: $('#city_hidden').val()
-              country: $('#country_hidden').val()
-              
-      if window.user
-        empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
-        empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
+      $("#preview_tab").stop(true, true).fadeOut 200, ->
+        unless window.user?
+          if $('#aboutyou').parent().hasClass('form_valid')
+            empty_user_form = publish_user()
+            
+            window.user = 
+              id: $('#user_tab form').attr('action').split('/')[2]
+              location:
+                longitude: $('#longitude').val()
+                latitude: $('#latitude').val()
+                city: $('#city_hidden').val()
+                country: $('#country_hidden').val()
+                
+        if window.user
+          empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
+          empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
 
-        if empty_recipe_form or empty_csi_form
-          $.ajax
-            url: "/pages/drafts_saved"
-            async: false
-            success: (data, textStatus, jqXHR) ->
-              if empty_recipe_form?
-                $('#recipe_tab').html(empty_recipe_form)
-                $('#yourrecipe').parent().removeClass('form_valid')
+          if empty_recipe_form or empty_csi_form
+            $.ajax
+              url: "/pages/drafts_saved"
+              async: false
+              success: (data, textStatus, jqXHR) ->
+                if empty_recipe_form?
+                  $('#recipe_tab').html(empty_recipe_form)
+                  $('#yourrecipe').parent().removeClass('form_valid')
 
-              if empty_csi_form?
-                $('#country_specific_information_tab').html(empty_csi_form)
-                $('#aboutyourcountry').parent().removeClass('form_valid')
+                if empty_csi_form?
+                  $('#country_specific_information_tab').html(empty_csi_form)
+                  $('#aboutyourcountry').parent().removeClass('form_valid')
 
-              if empty_user_form?
-                $('#user_tab').html(empty_user_form)
-                $('#aboutyou').parent().removeClass('form_valid')
-                window.user = undefined
+                if empty_user_form?
+                  $('#user_tab').html(empty_user_form)
+                  $('#aboutyou').parent().removeClass('form_valid')
+                  window.user = undefined
 
-              $('#preview_tab').html(data)
-              $.scrollTo "#wizard", 800
-                offset:
-                  top: -70
+                $('#preview_tab').html(data)
 
-            error: (jqXHR, textStatus, errorThrown) ->
-              alert "Failed to save the draft(s)!"
+              error: (jqXHR, textStatus, errorThrown) ->
+                alert "Failed to save the draft(s)!"
 
+          else
+            alert "Failed to save the draft(s)!"
         else
-          alert "Failed to save the draft(s)!"
-      else
-        alert "Unable to save user information (maybe not provided)."
+          alert "Unable to save user information (maybe not provided)."
 
-      hideWizardLoader()
+        $("#preview_tab").stop(true, true).fadeIn 200, hideWizardLoader
 
     false
 

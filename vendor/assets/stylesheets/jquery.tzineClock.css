@@ -43,6 +43,11 @@
 	z-index:11;
 }
 
+.rotate.left{
+	z-index:9;
+}
+
+
 .clock .bg, .clock .front{
 	width:35px;
 	height:70px;
