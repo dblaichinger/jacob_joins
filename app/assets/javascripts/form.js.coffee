@@ -34,6 +34,10 @@ $ ->
 
     $("#send").addClass "disabled"
 
+    $.scrollTo "#wizard", 800
+      offset:
+        top: -70
+
     showWizardLoader ->
       $("#preview_tab").stop(true, true).fadeOut 200, ->
         unless window.user?
@@ -71,9 +75,6 @@ $ ->
                   window.user = undefined
 
                 $('#preview_tab').html(data)
-                $.scrollTo "#wizard", 800
-                  offset:
-                    top: -70
 
               error: (jqXHR, textStatus, errorThrown) ->
                 alert "Failed to save the draft(s)!"
