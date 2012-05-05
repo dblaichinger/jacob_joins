@@ -202,7 +202,7 @@
 			element.css('WebkitTransform',rotate);
 	
 		// A version for internet explorer using filters, works but is a bit buggy (no surprise here):
-		if(element.css("filter")!=undefined)
+		else if(element.css("filter")!=undefined)
 		{
 			var cos = Math.cos(Math.PI * 2 / 360 * angle);
 			var sin = Math.sin(Math.PI * 2 / 360 * angle);
