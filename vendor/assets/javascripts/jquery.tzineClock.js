@@ -151,8 +151,7 @@
 		{
 			// Hiding the right half of the background:
 			clock.rotateRight.hide();
-
-			console.log("rotateRightHide: " +clock.rotateRight.css('display'));
+			
 			// Resetting the rotation of the left part:
 			rotateElement(clock.rotateLeft,0);
 		}
@@ -160,7 +159,6 @@
 		if(angle<=180)
 		{
 			clock.rotateRight.hide();
-			console.log("rotateRightHide: " +clock.rotateRight.css('display'));
 			// The left part is rotated, and the right is currently hidden:
 			element = clock.rotateLeft;
 		}
@@ -170,8 +168,6 @@
 			clock.rotateRight.show();
 			clock.rotateLeft.show();
 			
-			console.log("Bothshow: " +clock.rotateRight.css('display') +","+ clock.rotateLeft.css('display'));
-
 			rotateElement(clock.rotateLeft,180);
 			
 			element = clock.rotateRight;
