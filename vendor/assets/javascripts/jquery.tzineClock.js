@@ -197,7 +197,10 @@
 
 		if(element.css('MozTransform')!=undefined)
 			element.css('MozTransform',rotate);
-			
+	
+		if(element.css('OTransform')!=undefined)
+			element.css('OTransform',rotate);
+
 		if(element.css('WebkitTransform')!=undefined)
 			element.css('WebkitTransform',rotate);
 	
