@@ -1,0 +1,173 @@
+- if @recipe.steps.count == 0
+  - 3.times { @recipe.steps.build }
+
+:javascript
+  $(document).ready(function(){
+    $(":input[placeholder]", "#recipe_tab").placeholder();
+    $("form", "#recipe_tab").stepHighlighting().dirtyValidation();
+    $("#ingredients").elementOnDemand({
+      onAddElement: function(context){
+        $(this).find('.zutat').autocomplete({
+          source: '/ingredients/names',
+          minLength: 2
+        });
+
+        $(":input", this).addClass("changed");
+      },
+      onRemoveElement: function(context){
+        $(":input", "#ingredients .dynamicElement:first").addClass("changed");
+      }
+    });
+
+    $('#wizard #recipe_tab .zutat').autocomplete({
+      source: '/ingredients/names',
+      minLength: 2
+    });
+
+    var elementTemplate;
+    elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
+    elementTemplate.children('.image_preview').remove();
+    elementTemplate.children('input[type="hidden"]').remove();
+    elementTemplate.children('.upload_wrapper').css({
+      display: 'block'
+    });
+    elementTemplate = $('<div>').append(elementTemplate).html();
+    $('#recipe_tab .steps').elementOnDemand({
+      element: elementTemplate,
+      onAddElement: function(context) {
+        var count;
+        count = $(this).siblings('.step').length + 1;
+        $(this).find('label[for=*"description"] span').html(count);
+        $(":input", this).addClass("changed");
+        return prepare_recipe_step_upload($(this).find('input[type="file"]:first'));
+      },
+      onRemoveElement: function(context){
+        $(":input", ".steps .dynamicElement:first").addClass("changed");
+      }
+    });
+
+    $('#recipe_portions').rating({
+      startValue: null,
+      showCancel: false
+    });
+
+    var plusRating = $('#recipe_tab .ui-rating .ui-rating-star:last');
+    $(plusRating).qtip({
+      content: "more than six",
+      position: {
+        target: plusRating,
+        my: 'bottom left',
+        at: 'center center',
+        adjust: {
+          x: -12,
+          y: -8
+        }
+      }
+    });
+
+    prepare_recipe_uploads();
+    reinitialize_tooltips($("#recipe_tab"));
+  });
+
+
+= form_for @recipe do |f|
+  = handle_error_messages(@recipe).html_safe if @recipe.errors.any?
+  #left
+    #information.part-1
+      %h1
+        %strong 1 
+        What’s really 
+        %span going on 
+        here
+
+      %hr
+
+      %p
+        Here is where you enter the basic information of your recipe. By the way: This will not necessarily be your final entry. You forgot something? No problem! You can adapt every step on the preview page before you finally share your recipe with Jacob. 
+
+      #title
+        = f.label :name, "Title", id:"titel"
+        = f.text_field :name, "data-required" => true, size:"40", placeholder:"tell us the name of your recipe", "data-type" => "text", tabindex:"1"
+      #portions
+        = f.label :portions, "Portions"
+        = f.select :portions, ([nil] << (1..7).to_a).flatten, {}, {"data-required" => "true", "data-error-target" => "#portions .ui-rating"}
+      #duration
+        = f.label :duration, "Preparation", id:"duration_label"
+        = f.text_field :duration, "data-required" => true, "data-type" => "numerical", placeholder:"minutes", tabindex:"2"
+
+    #ingredients.part-2
+      %h1 
+        %strong 2 
+        Add your tasty 
+        %span ingredients 
+        here
+
+      %hr
+
+      %p
+        Press the "+/-" button to add or remove ingredients. You don’t need one of our three already selected ingredients? Just replace it by another one. Of course you can also split the ingredients in two or three courses by explaining the preparation step by step (3).
+
+      - if @recipe.errors.any?
+        = prefill_ingredient_fields(f, @recipe).html_safe
+      - else
+        = render_default_ingredient_fields(f, @recipe).html_safe
+
+  #right
+    #preparation.part-3
+      %h1
+        %strong 3 
+        Tell Jacob your 
+        %span way of preparation 
+
+      %hr
+
+      %p
+        Give Jacob a step by step instruction to make it easier for him to try your recipe at home. Again you can add or delete steps as required. Plus: He loves pictures!
+
+      .steps
+        - counter = 0
+        = f.fields_for :steps do |step|
+          .step.dynamicElement
+            = step.label :description, "Step <span>#{counter + 1}</span>".html_safe, class:"step_label"
+            - if counter == 0
+              = step.text_area :description, "data-required" => true, tabindex:"4"
+            - else
+              = step.text_area :description, tabindex:"4"
+            - counter += 1
+            .image_upload
+
+              .upload_wrapper{:style => "#{ 'display: none;' if step.object.image.present? }"}
+                %p 
+                = step.file_field :image
+
+              - if step.object.image.present?
+                .image_preview
+                  = image_tag step.object.image(:small)
+                  = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
+  
+          = step.hidden_field :id unless step.object.new_record?
+      
+      #recipe_images
+        %h1 
+          %strong 4
+          Show him your
+          %span delicious 
+          meal
+
+        %hr
+        
+        %p
+          You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see a picture of you and your final meal!
+
+        .image_upload
+          .upload_wrapper
+            = file_field_tag "recipe[images_attributes][0][attachment]", :multiple => true
+
+        %ul.file_uploads
+          - f.object.images.each do |i|
+            %li
+              = image_tag i.attachment(:small)
+              = link_to "delete", recipes_delete_image_path(i.id), class:"delete"
+              
+
+  = link_to "", '#!/form/country_specific_information_tab', class:"next_tab"

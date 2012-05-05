@@ -1,0 +1,7 @@
+%a{:href => recipe_upload_index_path} neu
+
+%ul
+  - @recipes.each do |r|
+    %li
+      %a{:href => recipe_path(r)}
+        = r.name

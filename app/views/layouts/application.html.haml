@@ -1,0 +1,93 @@
+!!! html5
+%html
+  %head
+    %title Jacob Joins - Global Cooking
+    %link{ :href => "favicon.png", :rel => "icon", :type => "image/png" }
+    = stylesheet_link_tag "application", :media => "all"
+    /[if IE 7]
+      = stylesheet_link_tag "ie/ie7", :media => "all"
+    /[if IE 8]
+      = stylesheet_link_tag "ie/ie8", :media => "all"
+    /[if IE 9]
+      = stylesheet_link_tag "ie/ie9", :media => "all"
+
+    /[if lte IE 6]
+      = javascript_include_tag "ie/pngfix"
+
+    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
+    = javascript_include_tag "application"
+    :javascript
+      $(document).ready(function(){
+        $('#fancy_counter').tzineClock();
+        slide_newsbar();
+        $("#newsbar").visibleAfter($("#start"));
+      });
+
+      $(window).load(function(){
+        get_latest_recipe();
+        get_facebook_stream();
+      });
+
+    = csrf_meta_tags
+    %meta{:charset => "utf-8"}
+
+  %body
+    %section
+      - flash.each do |key, value|
+        %div{ class:"flash_#{key}"}
+          = value      
+    %section#newsbar
+      #newsbar_content
+        #fb
+          %h2
+            = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fblike", :target => "_blank"
+
+          %p#fb_error 
+            ="Sorry, Facebook news are not available!"
+          .mcs_container#fb_stream
+            .customScrollBox
+              .container
+                .content
+              .dragger_container
+                .dragger
+            = link_to "", "#", class:"scrollUpBtn"
+            = link_to "", "#", class:"scrollDownBtn"
+
+          .fb-like{"data-href"=>"http://www.facebook.com/jacobjoins", "data-send"=>"false", "data-layout"=>"button_count", "data-width"=>"150", "data-show-faces"=>"false"}
+
+        #entries
+          %h2
+            What happened so far  
+          .mcs_container#jj_stream
+            .customScrollBox
+              .container
+                .content#last_entry
+              .dragger_container
+                .dragger
+            = link_to "", "#", class:"scrollUpBtn"
+            = link_to "", "#", class:"scrollDownBtn"
+          
+
+        #fancy_counter
+          %h2
+            Countdown to release on 4 june '12
+
+        #countdown
+          %h4.countdown_kl
+            Countdown to release:
+          #days
+          #hours
+          #minutes
+          #seconds
+        
+        #logo
+          = image_tag "logo.png"
+
+        #beta
+
+      #clickandsee
+        = link_to "", "#", class:"show_newsbar"
+
+    = yield
+
+    

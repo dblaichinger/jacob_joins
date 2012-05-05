@@ -16,5 +16,11 @@
 
 #Own config
 /config/mongoid.yml
+/config/mailers.yml
 /config/initializers/secret_token.rb
 /.rvmrc
+/public/system
+/.jhw-cache/
+.DS_Store
+
+/public/assets

@@ -1,0 +1,96 @@
+#fancyClock{
+	margin:40px auto;
+	height:200px;
+	border:1px solid #111111;
+	width:300px;
+}
+
+.clock{
+	/* The .clock div. Created dynamically by jQuery */
+	height:100px;
+	width:70px;
+	margin: 30px 0 0 0;
+	position:relative;
+	overflow:hidden;
+	float:left;
+	background: url(/assets/counter_clock/bg_black_full.png) no-repeat left top;
+}
+
+.red {
+	margin-left: 10px !important;
+}
+
+.brown, .grey, .white {
+	margin-left: 15px;
+}
+
+.clock .text{
+	color: #FFF;
+	z-index: 100;
+}
+
+.clock .rotate{
+	/* There are two .rotate divs - one for each half of the background */
+	position:absolute;
+	width:70px;
+	height:70px;
+	top:0;
+	left:0;
+}
+
+.rotate.right{
+	display:none;
+	z-index:11;
+}
+
+.rotate.left{
+	z-index:9;
+}
+
+
+.clock .bg, .clock .front{
+	width:35px;
+	height:70px;
+	background: url(/assets/counter_clock/bg_black_full.png) no-repeat left top;
+	position:absolute;
+	top: 0;
+	left: 0;
+}
+
+.clock .display{
+	/* Holds the number of seconds, minutes or hours respectfully */
+	position:absolute;
+	width:70px;
+	z-index:20;
+	color:#F5F5F5;
+	font-size:22px;
+	text-align:center;
+	top:25px;
+	left:0;
+	
+	/* CSS3 text shadow: */
+}
+
+/* The left part of the background: */
+
+.clock .bg.left{ left:0; }
+
+/* Individual styles for each color: */
+.white .bg.left{ background:url(/assets/counter_clock/bg_white.png) no-repeat left top; }
+.grey .bg.left{ background:url(/assets/counter_clock/bg_grey.png) no-repeat left top; }
+.brown .bg.left{	background:url(/assets/counter_clock/bg_brown.png) no-repeat left top; }
+.red .bg.left{	background:url(/assets/counter_clock/bg_red.png) no-repeat left top; }
+
+/* The right part of the background: */
+.clock .bg.right{ left:35px; }
+
+.white .bg.right{ background:url(/assets/counter_clock/bg_white.png) no-repeat right top; }
+.grey .bg.right{ background:url(/assets/counter_clock/bg_grey.png) no-repeat right top; }
+.brown .bg.right{ background:url(/assets/counter_clock/bg_brown.png) no-repeat right top; }
+.red .bg.right{ background:url(/assets/counter_clock/bg_red.png) no-repeat right top; }
+
+
+.clock .front.left{
+	left:0;
+	z-index:10;
+}
