@@ -4,7 +4,8 @@ window.publish_user = ->
   $.ajax
     url: "users/draft"
     type: "POST"
-    data: { _method: "PUT" }
+    data:
+      _method: "PUT"
     async: false
     success: (data, textStatus, jqXHR) -> 
       return_value = data
