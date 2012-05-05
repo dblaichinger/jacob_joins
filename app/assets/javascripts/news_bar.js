@@ -155,7 +155,7 @@ function slide_newsbar(){
       return false;
     }
     else{
-      return false;
+      return true;
     }
   });
 }

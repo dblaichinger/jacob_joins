@@ -83,8 +83,7 @@
       %hr
 
       %p
-        Here is where you enter the name of your recipe.
-        By the way: All the entries on this form are not necessarily your final recipe. You forgot salt? No problem! You can adapt every step before you finally share your post on the preview page. 
+        Here is where you enter the basic information of your recipe. By the way: This will not necessarily be your final entry. You forgot something? No problem! You can adapt every step on the preview page before you finally share your recipe with Jacob. 
 
       #title
         = f.label :name, "Title", id:"titel"
@@ -106,7 +105,7 @@
       %hr
 
       %p
-        Just press the + button to add the ingredients which make your recipe special and worth trying. You don´t have or just don´t like one of our 3 already selected ingredients? Just replace it by another one.  Of course you can split the ingredients in two or three courses by explaining the preparation step by step (3). Everybody loves a dessert.
+        Press the "+/-" button to add or remove ingredients. You don’t need one of our three already selected ingredients? Just replace it by another one. Of course you can also split the ingredients in two or three courses by explaining the preparation step by step (3).
 
       - if @recipe.errors.any?
         = prefill_ingredient_fields(f, @recipe).html_safe
@@ -123,8 +122,7 @@
       %hr
 
       %p
-        Jacob wants to know how to do it. Maybe you want to give him a step-by-step instruction to make it easier for him to try your recipe at home. 
-        Again you can add or delete steps as required. Plus: He loves pictures!
+        Give Jacob a step by step instruction to make it easier for him to try your recipe at home. Again you can add or delete steps as required. Plus: He loves pictures!
 
       .steps
         - counter = 0
@@ -159,7 +157,7 @@
         %hr
         
         %p
-          You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see a picture of your creation together with your written recipe!
+          You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see a picture of you and your final meal!
 
         .image_upload
           .upload_wrapper
