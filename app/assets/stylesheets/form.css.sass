@@ -147,11 +147,12 @@ textarea:focus, input:focus
 
     #img_preview
       width: 350px
-      height: 230px
+      min-height: 230px
       float: left
       margin: 20px 20px 30px 0px
       text-align: center
       vertical-align: middle
+      overflow: hidden
       
       .missing
         width: 350px
@@ -162,7 +163,7 @@ textarea:focus, input:focus
         text-indent: -30000px
 
     #prev_recipe_info
-      height: 225px
+      min-height: 225px
       width: 300px
       margin: 0 0 30px 0
       padding: 0 0 15px 0
@@ -334,10 +335,7 @@ textarea:focus, input:focus
 
     .tell_more:hover
       color: #531E09
-
-
-//PREVIEW EDIT BUTTONS 
-
+      
   .edit_recipe
     width: 93px
     height: 30px
