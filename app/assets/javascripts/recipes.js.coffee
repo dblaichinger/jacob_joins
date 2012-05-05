@@ -27,6 +27,26 @@ window.publish_recipe = (id, user_location) ->
 
 
 window.prepare_recipe_step_upload = (currentFileInput) ->
+  $('.step').on 'click', 'a.delete', (e) ->
+    clicked_link = $(this)
+    $.ajax
+      url: clicked_link.attr('href')
+      type: 'POST'
+      data:
+        _method: "DELETE"
+      success: (data, textStatus, jqXHR) ->
+        imagePreview = clicked_link.parent()
+        uploadWrapper = imagePreview.prev('.upload_wrapper')
+
+        uploadWrapper.css
+          display: 'block'
+
+        imagePreview.remove()
+        $(":input", uploadWrapper).addClass "changed"
+      failure: (jqXHR, textStatus, errorThrown) ->
+        alert 'Image delete failed!'
+    false
+
   currentFileInput.fileupload
     dataType: 'json'
     url: '/recipes/upload_step_image'
