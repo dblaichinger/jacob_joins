@@ -192,7 +192,7 @@
 		// Rotating the element, depending on the browser:
 		var rotate = 'rotate('+angle+'deg)';
 
-		if(element.css('MsTransform')!=undefined)
+		if(element.css('msTransform')!=undefined)
 			element.css({msTransform: rotate});
 
 		if(element.css('MozTransform')!=undefined)
@@ -202,7 +202,7 @@
 			element.css('WebkitTransform',rotate);
 	
 		// A version for internet explorer using filters, works but is a bit buggy (no surprise here):
-		else if(element.css("filter")!=undefined)
+		if(element.css("filter")!=undefined)
 		{
 			var cos = Math.cos(Math.PI * 2 / 360 * angle);
 			var sin = Math.sin(Math.PI * 2 / 360 * angle);
