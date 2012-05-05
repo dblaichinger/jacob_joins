@@ -209,8 +209,8 @@
 			
 			element.css("filter","progid:DXImageTransform.Microsoft.Matrix(M11="+cos+",M12=-"+sin+",M21="+sin+",M22="+cos+",SizingMethod='auto expand',FilterType='nearest neighbor')");
 	
-			element.css("left",-Math.floor((element.width()-70)/2));
-			element.css("top",-Math.floor((element.height()-70)/2));
+			element.css("left",(-Math.floor((element.width()-70)/2))+"px");
+			element.css("top",(-Math.floor((element.height()-70)/2))+"px");
 		}
 	
 	}
