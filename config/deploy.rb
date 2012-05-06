@@ -10,7 +10,6 @@ set :application, "jacob_joins"
 
 set :scm, :git
 set :repository,  "git@github.com:dblaichinger/jacob_joins.git"
-set :deploy_via, :remote_cache
 default_run_options[:pty] = true
 
 set :user, "cpf_deploy"
