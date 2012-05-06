@@ -16,8 +16,7 @@
         = "Question #{index + 1}"
       %h3
         = csi.question
-      %p.answer
-        = csi.answer
+      = simple_format csi.answer, class:"answer"
 
 %div#answered
   = image_tag 'herz.png', class:"herz"

@@ -3,6 +3,7 @@ class Step
   include Mongoid::Paperclip
 
   field :description, :type => String
+  field :number, :type => Integer
 
   embedded_in :recipe, :inverse_of => :steps
   

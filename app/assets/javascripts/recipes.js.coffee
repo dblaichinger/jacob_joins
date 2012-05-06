@@ -51,6 +51,12 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
     dataType: 'json'
     url: '/recipes/upload_step_image'
     formData: (form) ->
+      uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
+      uploadWrapper.css
+        display: 'none'
+
+      uploadWrapper.after '<div class="image_preview"><img src="/assets/ajax-loader.gif" alt="loading" width="42px" height="42px"></div>'
+
       stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
       stepIdInputElement = form.find('#' + stepIdInputId)
       data = [
@@ -71,19 +77,21 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
       stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
 
-      uploadWrapper.css
-        display: 'none'
-
       if stepIdInputElement.length == 0
         uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
 
-      uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
+      uploadImage = uploadWrapper.next().find "img"
+      uploadImage.attr "src", image.thumbnail_url
+      uploadImage.attr "alt", image.name
+      uploadImage.attr "height", "56px"
+      uploadImage.attr "width", "56px"
+      $('<a href="' + image.delete_url + '" class="delete">delete</a>').insertAfter uploadImage
       $(this).addClass "changed"
 
     add: (e, data) ->
       data.submit()
     fail: (e, data) ->
-      alert "fail"
+      alert "Couldn't upload image"
 
 window.prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
@@ -113,19 +121,23 @@ window.prepare_recipe_uploads = () ->
     url: '/recipes/upload_image'
     type: 'POST'
     formData: (form) ->
+      $('ul.file_uploads').append '<li><img src="/assets/ajax-loader.gif" alt="loading"></li>'
+
       [
         name: "authenticity_token"
         value: form.find('input[name="authenticity_token"]').attr('value')
       ]
     done: (e, data) ->
-      data.htmlElement.html('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
+      data.htmlElement.empty()
+      $('ul.file_uploads li:last').empty()
+      $('ul.file_uploads li:last').append('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
       $(this).addClass "changed"
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
 
     add: (e, data) ->
-      $('ul.file_uploads').prepend (index, html) ->
+      $('ul.file_uploads').append (index, html) ->
         file = $('<li>' + data.files[0].name + '</li>')
         data.htmlElement = file
         file

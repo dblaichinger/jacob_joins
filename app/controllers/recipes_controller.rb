@@ -34,11 +34,16 @@ class RecipesController < ApplicationController
     end
 
     params[:recipe][:steps_attributes].each do |index,step|
-      next if step[:description].present?
+      if step[:description].present? || (step[:id] && @recipe.steps.find(step[:id]).image.present?)
+        step[:number] = index
+        next
+      end
+
       step[:_destroy] = true
     end
 
     if @recipe.update_attributes params[:recipe]
+      @recipe.steps.sort! { |a,b| a.number <=> b.number }
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'

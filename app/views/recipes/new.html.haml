@@ -26,9 +26,10 @@
 
     var elementTemplate;
     elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
-    elementTemplate.children('.image_preview').remove();
-    elementTemplate.children('input[type="hidden"]').remove();
-    elementTemplate.children('.upload_wrapper').css({
+    elementTemplate.find('.image_preview').remove();
+    elementTemplate.find('input[type="hidden"]').remove();
+    elementTemplate.find('textarea').text("");
+    elementTemplate.find('.upload_wrapper').css({
       display: 'block'
     });
     elementTemplate = $('<div>').append(elementTemplate).html();
@@ -142,7 +143,7 @@
 
               - if step.object.image.present?
                 .image_preview
-                  = image_tag step.object.image(:small)
+                  = image_tag step.object.image(:small), width:"56px", height:"56px"
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
   
           = step.hidden_field :id unless step.object.new_record?
@@ -157,7 +158,7 @@
         %hr
         
         %p
-          You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see a picture of you and your final meal!
+          You filled in the form and can’t wait to see your post on www.jacobjoins.com? There is one last thing: Jacob would love to see some pictures of you and your final meal!
 
         .image_upload
           .upload_wrapper

@@ -25,7 +25,7 @@ $ ->
         newsbar.visibleAfter $("#start")
         newsbar.fadeIn 500
 
-   $(".next_tab").click ->
+  $(".next_tab").live "click", ->
     $.scrollTo $('#skipstory'), 800
 
   $("#gotoform").click ->

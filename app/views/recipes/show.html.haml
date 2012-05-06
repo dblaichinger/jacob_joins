@@ -1,3 +1,5 @@
+- @recipe.steps.sort! { |a,b| a.number <=> b.number }
+
 = link_to "", "#!/form/recipe_tab", class:"edit_recipe"
 
 %div#img_preview
@@ -42,17 +44,16 @@
   %h2
     = "how to prepare your meal"
 
-  
   - @recipe.steps.each_with_index do |step, index|
     %div.prev_preparatoin_step
       - if step.image.present?
         = image_tag step.image(:medium)
       - else
-        = image_tag asset_path("no_image_prev_steps.png"), :class => "missing", :alt => "missing_image"
+        = image_tag asset_path("no_image_prev_steps.png"), class:"missing", alt:"missing_image"
       %p
         %em
-          = "Step #{index + 1}" 
+          = "Step #{index + 1}"
         %br
-        = step.description
+        = sanitize step.description.gsub(/\n/, '<br/>'), :tags => %w(br)
 
   
