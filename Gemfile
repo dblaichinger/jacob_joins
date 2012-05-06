@@ -1,20 +1,22 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
-gem 'mongoid'
-gem 'bson_ext'
-gem 'mongoid_slug'
-gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
-gem 'state_machine'
-gem 'high_voltage'
-gem 'haml'
-gem 'jquery-rails'
-gem 'geocoder'
-gem 'launchy'
-gem 'rails3-jquery-autocomplete'
-gem 'nifty-generators'
-gem 'capistrano'
-gem "capistrano-ext"
+group :production, :staging, :development, :test do
+  gem 'rails', '3.2.1'
+  gem 'mongoid'
+  gem 'bson_ext'
+  gem 'mongoid_slug'
+  gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
+  gem 'state_machine'
+  gem 'high_voltage'
+  gem 'haml'
+  gem 'jquery-rails'
+  gem 'geocoder'
+  gem 'launchy'
+  gem 'rails3-jquery-autocomplete'
+  gem 'nifty-generators'
+  gem 'capistrano'
+  gem "capistrano-ext"
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
