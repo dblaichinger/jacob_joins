@@ -146,6 +146,12 @@ GEM
       net-ssh (>= 1.99.1)
     nifty-generators (0.4.6)
     nokogiri (1.5.2)
+    paperclip (3.0.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (>= 0.0.2)
+      mime-types
     polyglot (0.3.3)
     pry (0.9.8.4)
       coderay (~> 1.0.5)
@@ -253,7 +259,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mongoid
-  mongoid-paperclip (= 0.0.7)
+  mongoid-paperclip
   mongoid-rspec
   mongoid_slug
   nifty-generators
