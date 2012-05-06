@@ -1,5 +1,5 @@
 - @recipe.steps.sort! { |a,b| a.number <=> b.number }
-  
+
 = link_to "", "#!/form/recipe_tab", class:"edit_recipe"
 
 %div#img_preview
@@ -54,6 +54,6 @@
         %em
           = "Step #{index + 1}"
         %br
-        = step.description
+        = sanitize step.description.gsub(/\n/, '<br/>'), :tags => %w(br)
 
   
