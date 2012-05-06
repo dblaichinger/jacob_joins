@@ -2,7 +2,7 @@ class Recipe
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
-  #include Mongoid::Paperclip
+  include Mongoid::Paperclip
 
   before_save :save_ingredients
 

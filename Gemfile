@@ -4,7 +4,7 @@ gem 'rails', '3.2.1'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'mongoid_slug'
-#gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
+gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'state_machine'
 gem 'high_voltage'
 gem 'haml'
@@ -15,7 +15,6 @@ gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
 gem 'capistrano'
 gem "capistrano-ext"
-#gem 'modernizr-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
