@@ -154,5 +154,5 @@ $ ->
 
         hideWizardLoader()
 
-        if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
+        if ($('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid')) or $('#aboutyourcountry').parent().hasClass('form_valid') )
           $('#send').removeClass('disabled')
