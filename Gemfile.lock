@@ -259,11 +259,10 @@ DEPENDENCIES
   jquery-rails
   launchy
   mongoid
-  mongoid-paperclip
+  mongoid-paperclip (= 0.0.7)
   mongoid-rspec
   mongoid_slug
   nifty-generators
-  paperclip (= 3.0.0)
   pry
   rails (= 3.2.1)
   rails3-jquery-autocomplete
