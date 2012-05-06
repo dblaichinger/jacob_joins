@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find session[:recipe_id]
+    @recipe.steps.sort! { |a,b| a.number <=> b.number }
     render :layout => false
   end
 
@@ -34,7 +35,7 @@ class RecipesController < ApplicationController
     end
 
     params[:recipe][:steps_attributes].each do |index,step|
-      next if step[:description].present?
+      step[:number] = index && next if step[:description].present?
       step[:_destroy] = true
     end
 
@@ -88,6 +89,7 @@ class RecipesController < ApplicationController
   def get_or_create_recipe
     if session[:recipe_id].present?
       @recipe = Recipe.find session[:recipe_id]
+      @recipe.steps.sort! { |a,b| a.number <=> b.number }
     else
       @recipe = Recipe.create
       session[:recipe_id] = @recipe.id
