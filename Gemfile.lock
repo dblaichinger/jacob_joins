@@ -263,6 +263,7 @@ DEPENDENCIES
   mongoid-rspec
   mongoid_slug
   nifty-generators
+  paperclip (= 3.0.0)
   pry
   rails (= 3.2.1)
   rails3-jquery-autocomplete
