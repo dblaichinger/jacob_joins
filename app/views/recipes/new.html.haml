@@ -26,9 +26,10 @@
 
     var elementTemplate;
     elementTemplate = $('#recipe_tab .steps .step:last').clone(true, true);
-    elementTemplate.children('.image_preview').remove();
-    elementTemplate.children('input[type="hidden"]').remove();
-    elementTemplate.children('.upload_wrapper').css({
+    elementTemplate.find('.image_preview').remove();
+    elementTemplate.find('input[type="hidden"]').remove();
+    elementTemplate.find('textarea').text("");
+    elementTemplate.find('.upload_wrapper').css({
       display: 'block'
     });
     elementTemplate = $('<div>').append(elementTemplate).html();
