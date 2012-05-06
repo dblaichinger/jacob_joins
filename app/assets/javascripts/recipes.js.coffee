@@ -55,7 +55,7 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       uploadWrapper.css
         display: 'none'
 
-      uploadWrapper.after '<div class="image_preview"><img src="/assets/ajax-loader.gif" alt="loading"></div>'
+      uploadWrapper.after '<div class="image_preview"><img src="/assets/ajax-loader.gif" alt="loading" width="42px" height="42px"></div>'
 
       stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
       stepIdInputElement = form.find('#' + stepIdInputId)
@@ -83,6 +83,8 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       uploadImage = uploadWrapper.next().find "img"
       uploadImage.attr "src", image.thumbnail_url
       uploadImage.attr "alt", image.name
+      uploadImage.attr "height", "56px"
+      uploadImage.attr "width", "56px"
       $('<a href="' + image.delete_url + '" class="delete">delete</a>').insertAfter uploadImage
       $(this).addClass "changed"
 
