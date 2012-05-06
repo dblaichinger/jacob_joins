@@ -7,7 +7,6 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find session[:recipe_id]
-    @recipe.steps.sort! { |a,b| a.number <=> b.number }
     render :layout => false
   end
 
@@ -35,11 +34,16 @@ class RecipesController < ApplicationController
     end
 
     params[:recipe][:steps_attributes].each do |index,step|
-      step[:number] = index && next if step[:description].present?
+      if step[:description].present? || (step[:id] && @recipe.steps.find(step[:id]).image.present?)
+        step[:number] = index
+        next
+      end
+
       step[:_destroy] = true
     end
 
     if @recipe.update_attributes params[:recipe]
+      @recipe.steps.sort! { |a,b| a.number <=> b.number }
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
@@ -89,7 +93,6 @@ class RecipesController < ApplicationController
   def get_or_create_recipe
     if session[:recipe_id].present?
       @recipe = Recipe.find session[:recipe_id]
-      @recipe.steps.sort! { |a,b| a.number <=> b.number }
     else
       @recipe = Recipe.create
       session[:recipe_id] = @recipe.id
