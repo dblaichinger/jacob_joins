@@ -143,7 +143,7 @@
 
               - if step.object.image.present?
                 .image_preview
-                  = image_tag step.object.image(:small)
+                  = image_tag step.object.image(:small), width:"56px", height:"56px"
                   = link_to "delete", recipes_delete_step_image_path(step.object.id), class:"delete"
   
           = step.hidden_field :id unless step.object.new_record?
