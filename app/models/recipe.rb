@@ -43,7 +43,9 @@ class Recipe
   end
 
   def self.search_by_ingredient(name)
-    Recipe.where({"ingredients_with_quantities.name" => name})
+    ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
+      Recipe.where({"ingredients_with_quantities.name" => name})
+    end
   end
 
   private
