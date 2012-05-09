@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  require 'benchmark'
+  include Benchmark
 
   respond_to :json, :except => :index
   append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
@@ -75,7 +77,58 @@ class RecipesController < ApplicationController
     respond_with Recipe.where(:user_id=>{"$ne"=>nil}).order_by(:created_at => :desc).limit(5)
   end
 
-  
+  def search
+    respond_to do |format|
+      format.json {
+        @ingredients = params[:ingredients]
+        @recipes = []
+        Benchmark.benchmark(CAPTION, 7, nil, ">total:") do |x|
+          
+          @ingredients.each do |key, value|
+            @query = Recipe.search_by_ingredient(value)
+
+            @tm = x.report("Recipe_match:"){
+              if @recipes.empty?
+                @recipes = @query.entries
+              else
+                @query.entries.each do |entry|
+                  if @recipes.include?(entry)
+                    index = @recipes.index(entry)
+                    if @recipes[index]["count"].nil?
+                      @recipes[index]["count"] = 2
+                    else
+                      @recipes[index]["count"] += 1
+                    end
+                  else
+                    @recipes << entry
+                  end
+                end              
+              end
+            }
+          end
+          @ts = x.report("Recipe_sort:"){
+            @recipe_match = []
+            @recipes.each do |recipe|
+              @recipe_match << recipe if recipe["count"] != nil
+            end
+
+            @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
+
+            counter = 0
+            while @recipe_match.length < 10
+              @recipe_match << @recipes[counter]
+              counter+=1
+            end
+          }
+        [@tm+@ts]
+        end
+        render :json => {:ingredients => @ingredients, :recipes => @recipe_match.take(10)}
+      }
+      format.html
+    end
+  end
+
+
   private
   def get_or_create_recipe
     if session[:recipe_id].present?

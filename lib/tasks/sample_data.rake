@@ -5,8 +5,8 @@ namespace :db do
     Ingredient.delete_all
     Recipe.delete_all
 
-    NUMBER_OF_INGREDIENTS = 1000
-    NUMBER_OF_RECIPES = 100000
+    NUMBER_OF_INGREDIENTS = 100
+    NUMBER_OF_RECIPES = 1000
 
     require 'benchmark'
     include Benchmark
