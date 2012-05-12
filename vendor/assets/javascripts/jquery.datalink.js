@@ -172,8 +172,8 @@ $.extend($.fn, {
 							$.setField( this, "val", newvalue );
 						}
 					});
+					window.afterUpdate = new Date().getTime()
 				}
-
 			};
 		if ( mapping ) {
 			$.each(mapping, function(n, v) {

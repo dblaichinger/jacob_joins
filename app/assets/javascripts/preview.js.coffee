@@ -24,6 +24,9 @@ $ ->
         markup = "<h1>${name}</h1>"
         $.tmpl(markup, { name: value }).prependTo "#prev_recipe_info"
         value
+      convertBack: (value, source, target) ->
+        window.beforeUpdate = new Date().getTime()
+        value
     portions:
       name: "recipe[portions]"
       convert: (value, source, target) ->
