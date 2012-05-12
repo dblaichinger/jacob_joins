@@ -6,10 +6,6 @@ Recipe = (cook, title, portions, duration, ingredients, steps) ->
   window.ingredients = ko.observableArray ko.utils.arrayMap(ingredients, (ingredient) -> { name: ko.observable(ingredient.name), quantity: ko.observable(ingredient.quantity)} )
   window.steps = ko.observableArray ko.utils.arrayMap(steps, (step) -> { description: ko.observable(step.description)} )
 
-  window.formattedDuration = ko.computed
-    read: ->
-      window.duration() + " min"
-
   window.addStep = ->
     window.steps.push { description : ko.observable("") }
 
