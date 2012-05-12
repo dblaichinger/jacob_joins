@@ -61,7 +61,7 @@
 
       #title
         = f.label :name, "Title", id:"titel"
-        = f.text_field :name, "data-bind" => "value: title", placeholder:"tell us the name of your recipe" , size:"40"
+        = f.text_field :name, "data-bind" => "yourBindingName: 'derp', value: title", placeholder:"tell us the name of your recipe" , size:"40"
       #portions
         = f.label :portions, "Portions"
         = f.select :portions, ([nil] << (1..7).to_a).flatten, {}, {"data-bind" => "value: portions", "data-required" => "true", "data-error-target" => "#portions .ui-rating"}

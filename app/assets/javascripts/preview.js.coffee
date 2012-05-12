@@ -1,6 +1,6 @@
 Recipe = (cook, title, portions, duration, ingredients, steps) ->
   window.cook = ko.observable cook
-  window.title = ko.observable title
+  window.title = ko.observable(title).extend({logChange: "title"});
   window.portions = ko.observable portions
   window.duration = ko.observable duration
   window.ingredients = ko.observableArray ko.utils.arrayMap(ingredients, (ingredient) -> { name: ko.observable(ingredient.name), quantity: ko.observable(ingredient.quantity)} )
@@ -17,6 +17,15 @@ Recipe = (cook, title, portions, duration, ingredients, steps) ->
 
   window.removeIngredient = (ingredient) ->
     window.ingredients.pop() if window.ingredients().length > 1
+
+ko.bindingHandlers.yourBindingName =
+  update: (element, valueAccessor, allBindingsAccessor, viewModel) ->
+    window.afterUpdate = new Date().getTime()
+
+ko.extenders.logChange = (target, option) ->
+  target.subscribe (newValue) ->
+    window.beforeUpdate = new Date().getTime()
+  target
 
 $ ->
   ko.applyBindings new Recipe "", "", "", "", [ {name : "Eggs"}, {name : "Onion"}, {name : "Potatoes"} ], [ {description : ""} ]
