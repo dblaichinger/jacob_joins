@@ -82,7 +82,7 @@
         Just press the + button to add the ingredients which make your recipe special and worth trying. You don´t have or just don´t like one of our 3 already selected ingredients? Just replace it by another one.  Of course you can split the ingredients in two or three courses by explaining the preparation step by step (3). Everybody loves a dessert.
 
       = f.fields_for :ingredients_with_quantities do |ingredient_with_quantity|
-        <!-- ko foreach: ingredients -->
+        <!-- ko foreach: { data:ingredients, afterRender:afterRenderHandler } -->
         %p.dynamicElement
           = ingredient_with_quantity.text_field :quantity, "data-bind" => "value: quantity, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][quantity]' }", placeholder:"quantity", class:"menge"
           = ingredient_with_quantity.text_field :name, "data-bind" => "value: name, attr: { name: '[ingredients_with_quantities_attributes][' + ingredients.indexOf($data) + '][name]' }", placeholder:"your additional ingredient", class:"zutat"
