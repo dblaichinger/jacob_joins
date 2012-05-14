@@ -20,10 +20,11 @@ $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar")
     newsbar.visibleAfter "destroy"
-    $.scrollTo $('#story_1'), 800,
+    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800#,
       onAfter: ->
         newsbar.visibleAfter $("#start")
         newsbar.fadeIn 500
+    false
 
   $(".next_tab").live "click", ->
     $.scrollTo $('#skipstory'), 800
