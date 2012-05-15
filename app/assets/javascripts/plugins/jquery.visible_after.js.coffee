@@ -5,7 +5,7 @@ publicMethods =
     this.each ->
       element = $(this)
 
-      $(window).scroll (event) ->
+      $(window).bind 'scroll.visibleAfter', (event) ->
         if $(window).scrollTop() >= (checkPointCharlie.position().top + checkPointCharlie.height())
           if element.is ":hidden"
             element.fadeIn 500
@@ -15,7 +15,7 @@ publicMethods =
 
   destroy: ->
     this.each ->
-      $(window).unbind "scroll"
+      $(window).unbind "scroll.visibleAfter"
 
 $.fn.visibleAfter = (method) ->
   if publicMethods[method]

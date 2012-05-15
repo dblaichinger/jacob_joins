@@ -62,11 +62,11 @@ publicMethods =
         firstZIndex: 5
       , options)
 
-      $(window).scroll
+      $(window).bind 'scroll.fancyStoryEffect',
         pluginElement: element
       , fancyStoryScrollHandler
 
-      $(window).resize
+      $(window).bind 'resize.fancyStoryEffect',
         pluginElement: element
         settings: settings
       , fancyStoryResizeHandler
@@ -93,7 +93,7 @@ publicMethods =
 
   destroy: ->
     this.each ->
-      console.log "destroy"
+      $(window).unbind 'scroll.fancyStoryEffect'
 
 $.fn.fancyStoryEffect = (method) ->
   if publicMethods[method]
