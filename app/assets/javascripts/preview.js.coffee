@@ -18,13 +18,21 @@ Recipe = (cook, title, portions, duration, ingredients, steps) ->
   window.removeIngredient = (ingredient) ->
     window.ingredients.pop() if window.ingredients().length > 1
 
-  window.afterRenderHandler = (elements, data) ->
-    window.afterUpdate = new Date().getTime()
+  window.afterRenderIngredientHandler = (elements, data) ->
+    window.afterRenderIngredient = new Date().getTime()
 
-ko.bindingHandlers.yourBindingName =
+  window.afterRenderIngredientPreviewHandler = (elements, data) ->
+    window.afterRenderIngredientPreview = new Date().getTime()
+    
+ko.bindingHandlers.afterUpdateInputField =
   update: (element, valueAccessor, allBindingsAccessor, viewModel) ->
     ko.bindingHandlers.template.update element, valueAccessor, allBindingsAccessor, viewModel
-    window.afterUpdate = new Date().getTime()
+    window.afterUpdateInputField = new Date().getTime()
+
+ko.bindingHandlers.afterUpdateTitlePreview =
+  update: (element, valueAccessor, allBindingsAccessor, viewModel) ->
+    ko.bindingHandlers.template.update element, valueAccessor, allBindingsAccessor, viewModel
+    window.afterUpdateTitlePreview = new Date().getTime()
 
 ko.extenders.logChange = (target, option) ->
   target.subscribe (newValue) ->
@@ -32,4 +40,4 @@ ko.extenders.logChange = (target, option) ->
   target
 
 $ ->
-  ko.applyBindings new Recipe "", "", "", "", [ {name : "Eggs"}, {name : "Onion"}, {name : "Potatoes"} ], [ {description : ""} ]
+  ko.applyBindings new Recipe "", "", "", "", [], [ {description : ""} ]

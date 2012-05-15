@@ -108,7 +108,7 @@
           = image_tag asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"
 
         %div#prev_recipe_info
-          %h1{ "data-bind" => "text: title" }
+          %h1#title{ "data-bind" => "afterUpdateTitlePreview:'recipe_name', text: title" }
 
           %div#p_prev
             %p
@@ -126,7 +126,7 @@
         %div#prev_ingredients
           %h2 
             = "your ingredients"
-          %ul{ "data-bind" => "foreach: ingredients"}
+          %ul{ "data-bind" => "foreach: { data:ingredients, afterRender:afterRenderIngredientPreviewHandler }"}
             %li
               %span{ "data-bind" => "text: quantity" }
               %em{ "data-bind" => "text: name" }
