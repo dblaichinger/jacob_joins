@@ -18,7 +18,7 @@ function heard_from(option){
 $(document).ready(function(){
   $(".female, .male").live("mouseenter", function(){
     var classname = $(this).hasClass("male") ? "male" : "female"
-    $(this).attr("src", "/assets/" + classname + "_active.png");
+    $(this).attr("src", "/assets/" + classname + "_inactive.png");
   });
 
   $(".female, .male").live("mouseleave", function(){
