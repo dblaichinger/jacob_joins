@@ -20,12 +20,11 @@ $ ->
     name:
       name: "recipe[name]"
       convert: (value, source, target) ->
+        window.beforeNamePreviewUpdate = new Date().getTime()
         $("#prev_recipe_info h1").remove()
         markup = "<h1>${name}</h1>"
         $.tmpl(markup, { name: value }).prependTo "#prev_recipe_info"
-        value
-      convertBack: (value, source, target) ->
-        window.beforeUpdate = new Date().getTime()
+        window.beforeNameUpdate = new Date().getTime()
         value
     portions:
       name: "recipe[portions]"
@@ -44,19 +43,29 @@ $ ->
     ingredients:
       name: "recipe[ingredients]"
       convert: (value, source, target) ->
-        if $(".zutat[name='recipe[ingredients]']").is source
+        window.beforeIngredientPreviewUpdate = new Date().getTime()
+        if $(source).hasClass "zutat"
           i = $(".zutat[name='recipe[ingredients]']").index source
-          recipe.ingredients[i] = { name: "", quantity: "" } unless recipe.ingredients[i]
-          recipe.ingredients[i].name = value
         else
           i = $(".menge[name='recipe[ingredients]']").index source
-          recipe.ingredients[i] = { name: "", quantity: "" } unless recipe.ingredients[i]
+           
+        recipe.ingredients[i] = { name: "", quantity: "" } unless recipe.ingredients[i]
+
+        if $(source).hasClass "zutat"
+          recipe.ingredients[i].name = value
+        else
           recipe.ingredients[i].quantity = value
 
-        $("#prev_ingredients li").remove()
+        $("#prev_ingredients li:nth(#{i})").remove()
         markup = "<li><span>${quantity}</span><em>${name}</em></li>"
-        $.tmpl(markup, recipe.ingredients).appendTo "#prev_ingredients ul"
+        template = $.tmpl(markup, recipe.ingredients[i])
 
+        if i is 0
+          template.prependTo "#prev_ingredients ul"
+        else
+          template.insertAfter "#prev_ingredients li:nth-child(#{i})"
+        
+        window.afterIngredientPreviewUpdate = new Date().getTime()
         recipe.ingredients
       convertBack: (value, source, target) ->
     steps:
@@ -67,22 +76,30 @@ $ ->
         recipe.steps[i].description = value
         recipe.steps[i].stepCount = i + 1
 
-        $(".prev_preparatoin_step").remove()
+        $(".prev_preparatoin_step:nth-child(#{i + 1})").remove()
         markup = "<div class='prev_preparatoin_step'><p><em>Step ${stepCount}</em><br/>${description}</p></div>"
-        $.tmpl(markup, recipe.steps).insertAfter "#prev_preparation h2"
+        template = $.tmpl(markup, recipe.steps[i])
+
+        if i is 0
+          template.prependTo "#prev_preparation h2"
+        else
+          template.insertAfter ".prev_preparatoin_step:nth-child(#{i})"
 
         recipe.steps
       convertBack: (value, source, target) ->
 
   $("#ingredients .add").click (event) ->
+    window.beforeInputAdd = new Date().getTime()
     markup = "<p class='dynamicElement'><input class='menge' name='recipe[ingredients]' placeholder='quantity' size='30' type='text'><input class='zutat' name='recipe[ingredients]' placeholder='your additional ingredient' size='30' type='text'></p>";
     $(markup).insertAfter "#ingredients .dynamicElement:last"
+    window.afterInputAdd = new Date().getTime()
 
   $("#ingredients .remove").click (event) ->
     if $("#ingredients .dynamicElement").size() == 1
       return false
 
     $("#ingredients .dynamicElement:last").remove()
+    $("#prev_ingredients li:last").remove()
     recipe.ingredients.pop()
 
   $(".steps .add").click (event) ->
@@ -95,4 +112,5 @@ $ ->
       return false
 
     $(".steps .dynamicElement:last").remove()
+    $(".prev_preparatoin_step:last").remove()
     recipe.steps.pop()
