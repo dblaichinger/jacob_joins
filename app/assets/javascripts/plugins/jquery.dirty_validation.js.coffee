@@ -89,6 +89,8 @@ publicMethods =
         event: false
       show:
         event: false
+      style:
+        classes: "validation"
     .qtip('option', 'content.text', error_message)
 
   markAsValid: (field) ->

@@ -14,6 +14,8 @@ window.reinitialize_tooltips = (context) ->
         my: "bottom left"
         at: "top center"
         target: $(this)
+      style:
+        classes: "validation"
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
 $ ->
