@@ -1,6 +1,7 @@
 :javascript
   $(function(){
-    $('.stories').fancyStoryEffect();
+    if(!$('html').hasClass('ie7'))
+      $('.stories').fancyStoryEffect();
   });
 
 #jacobsstory
