@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
 
   def upload_step_image
     if @recipe.update_attributes params[:recipe]
-      render :json => [@recipe.steps.where(:image_updated_at.exists => true).desc(:image_updated_at).first.to_jq_upload].to_json
+      render :json => [@recipe.steps.where(:image_updated_at.exists => true).desc(:image_updated_at).first.to_jq_upload].to_json, :content_type => "text/html" #IE want's to download application/json content-type from iframes
     else
       render :status => 400, :text => 'Bad Request'
     end
@@ -70,7 +70,7 @@ class RecipesController < ApplicationController
 
   def upload_image
     if @recipe.update_attributes params[:recipe]
-      render :json => [@recipe.images.where(:attachment_updated_at.exists => true).desc(:attachment_updated_at).first.to_jq_upload].to_json
+      render :json => [@recipe.images.where(:attachment_updated_at.exists => true).desc(:attachment_updated_at).first.to_jq_upload].to_json, :content_type => "text/html" #IE want's to download application/json content-type from iframes
     else
       render :status => 400, :text => 'Bad Request'
     end
