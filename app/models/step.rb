@@ -16,6 +16,7 @@ class Step
       :medium   => ['250x250',    :jpg],
       :large    => ['500x500>',   :jpg]
     }
+  validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
 
   validates_presence_of :description
 

@@ -13,6 +13,8 @@ class Image
       :medium   => ['250x250',    :jpg],
       :large    => ['500x500>',   :jpg]
     }
+    
+  validates_attachment_content_type :attachment, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
 
   def to_jq_upload
     if self.attachment.present?
