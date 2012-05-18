@@ -16,6 +16,7 @@ gem 'nifty-generators'
 gem 'capistrano'
 gem "capistrano-ext"
 #gem 'modernizr-rails'
+gem 'rails_admin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -42,3 +43,5 @@ group :test do
   gem 'pry'
   gem 'jasmine-rails'
 end
+
+gem "devise"

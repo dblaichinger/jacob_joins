@@ -1,4 +1,8 @@
 JacobJoins::Application.routes.draw do
+  mount RailsAdmin::Engine => '/adminpanel', :as => 'rails_admin'
+
+  devise_for :admin_users
+
   root :to => 'pages#show', :id => "index"
 
   get "/pages/preview" => 'pages#show', :as => :page, :format => false, :id => "preview"

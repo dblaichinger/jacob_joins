@@ -1,0 +1,46 @@
+@import "compass/css3/border-radius"
+
+.ui-tooltip.jgrowl
+  background-color: black
+  background-color: rgba(0, 0, 0, 0.8)
+  background-image: none
+  border: none
+  +border-radius(5px)
+  color: white
+  width: 200px
+  padding: 5px
+  margin: 5px
+  position: fixed
+  left: auto
+  right: 0
+  top: 0
+  bottom: auto
+  font-family: "PlutoCondensed"
+  font-size: 12px
+  line-height: 1em
+  letter-spacing: 0px
+
+  .ui-tooltip-titlebar, .ui-tooltip-content
+    background: none
+    border: none
+    color: white
+    width: auto
+    height: auto
+    text-align: left
+
+  .ui-tooltip-titlebar
+    position: relative
+    padding: 5px
+
+    a
+      left: auto
+      top: -3px
+      right: -5px
+      bottom: auto
+      color: white
+
+      span
+        text-indent: 0px
+
+  .ui-tooltip-content
+    padding: 0 5px 5px 
