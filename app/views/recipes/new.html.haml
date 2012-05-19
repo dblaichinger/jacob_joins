@@ -1,5 +1,5 @@
-- if @recipe.steps.count == 0
-  - 3.times { @recipe.steps.build }
+- if (build_steps_count = 3 - @recipe.steps.count) > 0
+  - build_steps_count.times { @recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
@@ -53,6 +53,7 @@
     });
 
     var plusRating = $('#recipe_tab .ui-rating .ui-rating-star:last');
+    plusRating.css('background-image', 'url(/assets/portions_plus.png)');
     $(plusRating).qtip({
       content: "more than six",
       position: {
