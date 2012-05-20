@@ -29,4 +29,6 @@
 //= require jquery.rating
 //= require jquery.mCustomScrollbar
 //= require modernizr
+//= require jquery.validate.pack
+//= require jquery.contactable
 //= require_tree .

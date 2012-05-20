@@ -2,6 +2,11 @@
   $(function(){
     if(!$('html').hasClass('ie7'))
       $('.stories').fancyStoryEffect();
+
+     $('#contactable').contactable({
+      subject: 'A Feeback Message',
+      url: '/feedback'
+     });
   });
 
 #jacobsstory
@@ -117,8 +122,10 @@
       = image_tag 'ajax-loader.gif'
       %h1 loading ...
 
-#feedback
-  = link_to "", "mailto:hello@jacobjoins.com", class:"feedback"
+#contactable
+  %div{ style:"margin:0;padding:0;display:inline"}
+    = hidden_field_tag "utf8", "✓"
+    = hidden_field_tag "authenticity_token", form_authenticity_token
 
 #footer
   #footercontent
