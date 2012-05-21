@@ -1,4 +1,4 @@
-Path.map("#!/form/:tab").to () ->
+Path.map("#!/:tab").to () ->
   $('#wizard').tabs 'select', '#' + this.params['tab']
 $ ->
   Path.listen()

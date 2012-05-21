@@ -114,7 +114,7 @@ $ ->
     .parent().qtip "show"
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
-    newHash = "#!/form/#{ui.tab.hash.slice 1}"
+    newHash = "#!/#{ui.tab.hash.slice 1}"
     window.location.hash = newHash if window.location.hash isnt newHash
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'

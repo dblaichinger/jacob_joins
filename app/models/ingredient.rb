@@ -2,6 +2,7 @@ class Ingredient
   include Mongoid::Document
 
   field :name, :type => String
+  index "name"
 
   has_and_belongs_to_many :recipes
 
@@ -14,4 +15,9 @@ class Ingredient
     end
     names
   end
+
+  def self.search_by_name(ingredient)
+    Ingredient.where("name" => ingredient)
+  end
+
 end

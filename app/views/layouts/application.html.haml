@@ -12,7 +12,6 @@
       = stylesheet_link_tag "ie/ie8", :media => "all"
     /[if IE 9]
       = stylesheet_link_tag "ie/ie9", :media => "all"
-
     /[if lte IE 6]
       = javascript_include_tag "ie/pngfix"
 
@@ -21,6 +20,7 @@
 
     :javascript
       $(document).ready(function(){
+        get_latest_recipe();
         $('#fancy_counter').tzineClock();
         slide_newsbar();
         $("#newsbar").visibleAfter($("#start"));
@@ -78,13 +78,16 @@
           %h2
             Countdown to release on 4 June '12
 
-        #countdown
-          %h4.countdown_kl
-            Countdown to release:
-          #days
-          #hours
-          #minutes
-          #seconds
+        - if Rails.env == "production"
+          #countdown
+            %h4.countdown_kl
+              Countdown to release:
+            #days
+            #hours
+            #minutes
+            #seconds 
+        - else
+          = render_navigation
         
         #logo
           = image_tag "logo.png"

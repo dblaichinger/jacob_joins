@@ -1,7 +1,47 @@
-%a{:href => recipe_upload_index_path} neu
 
-%ul
-  - @recipes.each do |r|
-    %li
-      %a{:href => recipe_path(r)}
-        = r.name
+#wrapper-haupt
+
+  #left-haupt
+    
+    #map
+      <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=5020+salzburg&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=42.85226,88.330078&amp;ie=UTF8&amp;hq=&amp;hnear=5020,+Salzburg,+%C3%96sterreich&amp;t=m&amp;z=12&amp;ll=47.805139,13.038069&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=de&amp;geocode=&amp;q=5020+salzburg&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=42.85226,88.330078&amp;ie=UTF8&amp;hq=&amp;hnear=5020,+Salzburg,+%C3%96sterreich&amp;t=m&amp;z=12&amp;ll=47.805139,13.038069" style="color:#0000FF;text-align:left">Größere Kartenansicht</a></small>
+
+  #right-haupt
+    .uebergang-seitenleiste
+      .seitenleiste
+        = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
+
+        %p
+          This project wants to 
+          %em 
+            give a pure impression of the different eating habits 
+          and cultures all over the world. 
+          %em 
+            The aim is to collect international recipes. 
+
+        #jacob-who
+          = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
+                
+          %h3
+            = link_to 'Who is Jacob?', "#story_1", class:"who"
+          %p
+            = link_to 'Click to get introduced to the story.', "#story_1"
+
+        %hr
+
+        .postedrecipe
+          = image_tag 'google_marker.png', class:"marker-info"
+          %h4
+            Posted recipe
+          %p
+            These markers point out that there is a recipe to look up bla bla bla bla lorem ipsum das ist ein Text.
+
+        .postedcsi
+          = image_tag 'google_marker.png', class:"marker-info"
+          %h4
+            Information about culinary habits
+          %p
+            These markers point out that there is a recipe to look up bla bla bla bla lorem ipsum das ist ein Text.
+
+        %p.gotoform
+          = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
