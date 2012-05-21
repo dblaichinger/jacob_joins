@@ -3,10 +3,6 @@ class PagesController < HighVoltage::PagesController
 
   before_filter do |controller|
     case params[:id]
-    when 'index'
-      @user = User.new
-      @csi_set = CsiSet.new(:country_specific_informations => CsiSet.empty_set)
-      @recipe = Recipe.new
     when 'drafts_saved'
       if session[:user_id].present?
         @user = User.find session[:user_id]

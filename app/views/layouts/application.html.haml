@@ -78,13 +78,16 @@
           %h2
             Countdown to release on 4 june '12
 
-        #countdown
-          %h4.countdown_kl
-            Countdown to release:
-          #days
-          #hours
-          #minutes
-          #seconds
+        - if Rails.env == "production"
+          #countdown
+            %h4.countdown_kl
+              Countdown to release:
+            #days
+            #hours
+            #minutes
+            #seconds 
+        - else
+          = render_navigation
         
         #logo
           = image_tag "logo.png"
