@@ -49,8 +49,14 @@
   font-size: 14px;
 	margin-bottom:15px;
 	margin-top: -5px;
-	color: #531E09;
+	color: #fff;
 }
+
+#contactable form#contactForm input:focus, textarea:focus {
+	border: 2px solid #531E09;
+}
+
+
 
 textarea#message{
 	width: 325px;
@@ -118,6 +124,7 @@ textarea#message{
   text-transform: uppercase;
 }
 
+div.holder p label.error {display: none !important;}
 
 #contactable form#contactForm p#fields_required{
 	font-size: 14px;
@@ -131,6 +138,11 @@ textarea#message{
   color: #531E09;
   font-size: 14px;
 }
+
+#contactable form#contactForm p#error_feedback {
+	padding-top: 20px;
+}
+
 
 #contactable form#contactForm #loading {
 	background: url(contactable/ajax-loader.gif) no-repeat;
