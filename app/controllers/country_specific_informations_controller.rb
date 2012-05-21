@@ -14,17 +14,17 @@ class CountrySpecificInformationsController < ApplicationController
   end
 
   def update
-    csi_set = CsiSet.find session[:csi_set_id]
+    @csi_set = CsiSet.find session[:csi_set_id]
     user = User.find params[:user_id]
 
-    csi_set.latitude = params[:location][:latitude]
-    csi_set.longitude = params[:location][:longitude]
-    csi_set.city = params[:location][:city]
-    csi_set.country = params[:location][:country]
-    csi_set.user = user
+    @csi_set.latitude = params[:location][:latitude]
+    @csi_set.longitude = params[:location][:longitude]
+    @csi_set.city = params[:location][:city]
+    @csi_set.country = params[:location][:country]
+    @csi_set.user = user
 
-    if csi_set.publish
-      session[:csi_set_id] = nil
+    if @csi_set.publish
+      @csi_set = CsiSet.new(:country_specific_informations => CsiSet.empty_set)
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"

@@ -22,6 +22,9 @@
   &.placeholder
     +input-placeholder
 
+
+//NAVI ================================================================
+
 #formnav
   float: left
   width: 200px
@@ -38,16 +41,16 @@
     font-size: 24px
 
   #aboutyourcountry
-    font-family: "Sanches-Light"
+    font-family: "Sanches-Italic"
     text-transform: uppercase
     font-size: 20px
-    margin-bottom: 45px
-    height: 45px
+    margin-bottom: 25px
+    height: 40px
 
   #aboutyou
     font-family: "Pacifico"
     font-size: 28px
-    margin-bottom: 55px
+    margin-bottom: 45px
     font-weight: lighter
     height: 30px
 
@@ -55,7 +58,7 @@
     font-family: "Sanches-SemiBold"
     text-transform: uppercase
     font-size: 24px
-    height: 15px
+    height: 25px
 
   a
     text-decoration: none
@@ -102,14 +105,16 @@
     line-height: 1.3em
     margin: 90px auto 0 auto
 
+// ================================================================
+
 h1
   margin: 0 0 20px 0
   font-size: 24px
   font-family: "Sanches-Bold"
   font-weight: normal
-  color: #7C6259
+  color: #531E09
   text-transform: uppercase
-  text-shadow: 0 -1px 0px #531E09, 0 1px 0px #FFFFFF
+  text-shadow: 0 1px 0px #FFFFFF
   overflow: visible
 
 strong
@@ -119,8 +124,8 @@ strong
   font-family: "Sanches-Bold"
   font-weight: normal
   margin: -3px 12px 0px 0px
-  color: #7C6259
-  text-shadow: 0 -1px 0px #531E09, 0 1px 0px #FFFFFF
+  color: #531E09
+  text-shadow: 0 1px 0px #FFFFFF
   vertical-align: text-top
 
 span
@@ -139,6 +144,16 @@ hr
   background-color: #fff
   height: 0.5px
 
+
+//FORMULAR BREITE + POSITION ================================================================
+
+#new_recipe, .edit_recipe, #new_user, .edit_user, .user_form, #preview, #country_specific_information_tab,  
+  width: 760px
+  margin-left: 240px
+  overflow: hidden
+
+//RECIPE ================================================================
+
 #right 
   padding: 1px 0 1px 0
   overflow: hidden
@@ -154,26 +169,21 @@ hr
   padding: 1px 0 1px 0
 
 #preparation
-  margin-left: 20px
-  padding-top: 1px
+  padding: 37.5px
+  width: 300px
+  margin: 0px auto 0px auto
 
 textarea
   width: 95%
-  height: 150px
-
-#new_recipe, .edit_recipe, #new_user, .edit_user, .user_form, #preview, #country_specific_information_tab,  
-  width: 760px
-  margin-left: 240px
-  overflow: hidden
+  height: 90px
 
 
-#information, #ingredients , #preparation
+#information, #ingredients
   padding: 37.5px
   width: 305px
   margin: 0px auto 0px auto
 
   p
-    text-align: justify
 
 .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
   margin-left: 232px
@@ -194,9 +204,12 @@ textarea
   font-family: "Sanches-SemiBold"
   text-transform: uppercase
 
+  label
+    font-size: 14px
+
 #title
   input
-    width: 95%
+    width: 293px
 
 #portions, #duration
   margin-top: 35px
@@ -208,8 +221,26 @@ textarea
   float: left
   margin-right: 40px
 
-  input
-    width: 10px
+  .ui-rating
+    overflow: hidden
+    margin-top: -2px
+    
+    .ui-rating-star, .ui-rating-cancel
+      width: 18px
+      height: 33px
+      background-image: url(/assets/portions.png)
+
+      &:last-child
+        background-image: url(/assets/portions_plus.png)
+
+  .ui-rating-full
+    background-position: left top
+
+  .ui-rating-empty
+    background-position: left -33px
+
+  .ui-rating-hover
+    background-position: left -68px
 
 #duration
   overflow: visible
@@ -218,7 +249,7 @@ textarea
     float: left
 
   input
-    width: 60px
+    width: 120px
 
 .menge
   width: 65px
@@ -273,7 +304,8 @@ textarea
   font-family: Sanches-SemiBold
   text-transform: uppercase
   margin-bottom: 5px
-  color: #E2001A
+  color: #531E09
+  font-size: 14px
 
   span
     color: inherit
@@ -282,7 +314,7 @@ textarea
     font-weight: inherit
     margin-right: inherit
 
-#stepupload
+.image_upload
   position: relative
   height: 60px
   margin-top: 5px
@@ -302,7 +334,6 @@ textarea
   .delete:hover
     background-image: url(image_path('delete_image_hover.png'))
 
-
 #bildupload
   display: block
   float: left
@@ -311,7 +342,7 @@ textarea
   background-image: url(image_path('btn_upload_image.png'))
   background-position: 0 0
   background-repeat: no-repeat  
-  width: 80px
+  width: 82px
   height: 30px
   position: absolute
   right: 0
@@ -320,7 +351,7 @@ textarea
   overflow: hidden
 
   input
-    width: 80px
+    width: 82px
     position: absolute
     right: 0
     top: 0
@@ -332,7 +363,7 @@ textarea
     margin: 0 !important
 
 .upload_wrapper:hover
-  background-image: url(image_path('btn_upload_image_hover.png'))
+  background-position: 0 -30px
   cursor: pointer
 
 .image_preview
@@ -348,22 +379,48 @@ textarea
     height: 56px
     border: 2px solid #fff
 
-.delete
-  color: #E2001A
-  font-size: 14px
-
 .file_uploads
   font-family: "PlutoCondensed"
   width: 60%
-  a
+  position: relative
+
+  li
+    margin-top: 5px
+    position: relative
+    img
+      border: 2px solid #fff
+
+    .delete
+      position: absolute
+      left: 112px
+      top: 0
+      width: 20px
+      height: 20px
+      background-image: url(image_path('delete_image.png'))
+      background-position: 0 0
+      background-repeat: no-repeat
+      text-indent: -2000000px
+
+    .delete:hover
+      background-image: url(image_path('delete_image_hover.png'))
 
 label
   display: block
 
-
 #recipe_images
   margin-top: 50px
   position: relative
+
+  imput
+    width: 300px
+    background-color: rgba(83,30,9,0.3)
+    border: 2px solid #fff
+    outline: 0px
+    color: #fff
+    font-family: "Pluto-Condensed"
+    font-size: 14px
+    padding: 5px
+
 
 #information_user
   padding: 15px

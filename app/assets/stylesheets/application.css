@@ -11,5 +11,7 @@
  *= require_self
  *= require jquery.tzineClock
  *= require jquery.qtip
- *= require_tree .
+ *= require jquery.rating
+ *= require jquery.mCustomScrollbar
+ *= require_directory .
 */

@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.8.18.custom.min
+//= require jquery-ui-1.8.19.custom.min
+//= require jquery.easing.1.3
+//= require jquery.mousewheel.min
 //= require jquery.qtip
 //= require jquery.livequery
 //= require jquery.placeholder
@@ -23,5 +25,8 @@
 //= require jquery.dirtyform
 //= require jquery.scrollTo-1.4.2-min
 //= require path.min
+//= require jquery.rating
+//= require jquery.mCustomScrollbar
+//= require modernizr
 //= require_tree .
  

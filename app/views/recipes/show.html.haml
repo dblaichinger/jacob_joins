@@ -1,55 +1,57 @@
-- recipe ||= @recipe
+= link_to "", "#!/form/recipe_tab", class:"edit_recipe"
 
 %div#img_preview
-  -if recipe.images.present?
-    - recipe.images.each do |image|
+  -if @recipe.images.present?
+    - @recipe.images.each do |image|
       = image_tag image.attachment(:medium)
   -else
-    = image_tag "", :class => "missing", :alt => "missing_image"
+    = image_tag asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"
 
 %div#prev_recipe_info
   %h1
-    = recipe.name.blank? ? "The title of your recipe" : recipe.name
+    = @recipe.name.blank? ? "Unknown title of your recipe" : @recipe.name
 
   %div#p_prev
     %p
       Portions:
       %em 
-        = recipe.portions
+        = @recipe.portions.present? ? @recipe.formatted_portions : "unknown"
 
     %p
       Preparation time: 
       %em
-        = recipe.duration.present? ? "#{recipe.duration} min" : "your preparation time"
+        = @recipe.duration.present? ? "#{@recipe.duration} min" : "unknown"
 
-    - if recipe.user
-      %p
-        Cooked by: 
-        %em
-          = recipe.user.formatted_user_info
+    %p
+      Cooked by: 
+      %em
+        = @recipe.user.present? ? @recipe.user.formatted_user_info : "Your name is required."
 
 %div#prev_ingredients
   %h2 
     = "your ingredients"
-  - recipe.ingredients_with_quantities.each do |ingredient|
+  - @recipe.ingredients_with_quantities.each do |ingredient|
     %ul
       %li
-        = "#{ingredient.quantity} #{ingredient.name}"
+        %span
+          = ingredient.quantity
+        %em
+          = ingredient.name
 
 %div#prev_preparation
   %h2
     = "how to prepare your meal"
 
   
-  - recipe.steps.each_with_index do |step, index|
+  - @recipe.steps.each_with_index do |step, index|
     %div.prev_preparatoin_step
       - if step.image.present?
         = image_tag step.image(:medium)
       - else
-        = image_tag "", :class => "missing", :alt => "missing_image"
+        = image_tag asset_path("no_image_prev_steps.png"), :class => "missing", :alt => "missing_image"
       %p
         %em
-          = "Step #{index + 1}:" 
+          = "Step #{index + 1}" 
         %br
         = step.description
 

@@ -19,8 +19,8 @@ class RecipesController < ApplicationController
     user = User.find params[:user_id]
 
     if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
-      session[:recipe_id] = nil
-      render :status => 200, :text => "OK"
+      @recipe = Recipe.new
+      render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"
     end
@@ -29,7 +29,15 @@ class RecipesController < ApplicationController
   def sync_wizard
     render :status => 410, :text => "Gone" and return if @recipe.published?
 
-    params[:recipe][:ingredients_with_quantities_attributes].reject!{ |index,ingredient| ingredient[:name].blank? && ingredient[:quantity].blank? }
+    params[:recipe][:ingredients_with_quantities_attributes].each do |index,ingredient|
+      next if ingredient[:name].present? || ingredient[:quantity].present?
+      ingredient[:_destroy] = true
+    end
+
+    params[:recipe][:steps_attributes].each do |index,step|
+      next if step[:description].present?
+      step[:_destroy] = true
+    end
 
     if @recipe.update_attributes params[:recipe]
       render :new, :layout => false
@@ -73,7 +81,7 @@ class RecipesController < ApplicationController
   end
 
   def last
-    respond_with Recipe.where(:user_id=>{"$ne"=>nil}).order_by(:created_at => :desc).limit(5)
+    respond_with Recipe.where(:user_id => {"$ne"=>nil}, :state => "published").order_by(:created_at => :desc).limit(5)
   end
 
 def search
@@ -89,7 +97,6 @@ def search
         else
           @query = Recipe.search_by_ingredient(value)
           @objects = @query.entries
-          binding.pry
           Rails.cache.write(value.to_s, @query.entries.to_json)   
         end
         if @recipes.empty?

@@ -1,19 +1,22 @@
+= link_to "", "#!/form/country_specific_information_tab", class:"edit_answers"
+
 - if @csi_set.user
   %p
-    Author:
+    Answered by:
     %em
       = @csi_set.user.formatted_user_info
 
 
 %ul
   - answered_csis = @csi_set.country_specific_informations.where(:answer.ne => "").entries
-  - answered_csis.each_with_index do |csi, index|
+  - answered_csis.each do |csi|
+    - index = @csi_set.country_specific_informations.index csi
     %li
       %p.question
         = "Question #{index + 1}"
       %h3
         = csi.question
-      %p
+      %p.answer
         = csi.answer
 
 %div#answered
@@ -23,6 +26,4 @@
     %br
     = "#{answered_csis.count} of #{Question.count} questions"
 
-  %p.tell_more
-    %a
-      = link_to 'Do you want to tell us more about your country?' 
+  = link_to 'Do you want to tell us more about your country?', "#!/form/country_specific_information_tab", class:"tell_more"

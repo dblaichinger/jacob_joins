@@ -10,7 +10,7 @@ describe "form submit" do
 
     within '#recipe_tab' do
       fill_in "recipe_name", :with => recipe.name
-      fill_in "recipe_portions", :with => recipe.portions
+      page.find("#portions .ui-rating .ui-rating-star:nth-child(#{recipe.portions})").click
       fill_in "recipe_duration", :with => recipe.duration
 
       recipe.ingredients_with_quantities.each_with_index do |iwq, index| 
@@ -49,8 +49,8 @@ describe "form submit" do
       fill_in "user_age", :with => user.age
       fill_in "user_email", :with => user.email
       select user.heard_from, :from => "user_heard_from"
-      page.find('#country').set(recipe.country)
-      page.find('#city').set(recipe.city)
+      page.find('#country_hidden').set(recipe.country)
+      page.find('#city_hidden').set(recipe.city)
       page.find('#latitude').set(recipe.latitude)
       page.find('#longitude').set(recipe.longitude)
     end
@@ -59,7 +59,7 @@ describe "form submit" do
 
     within '#preview_tab' do
       within '.recipe' do
-        page.should have_css('h1', :text => recipe.name.upcase)
+        page.should have_css('h1', :text => recipe.name)
         page.should have_content(recipe.portions)
         page.should have_content(recipe.duration)
 
@@ -85,8 +85,8 @@ describe "form submit" do
       #within '.user' do
       #end
 
-      click_button "Finish and Send"
-      page.should have_css('p.success', :text => "Saved successfully")
+      click_link "send"
+      page.should have_css('h1', :text => "Thank you for your contribution!".upcase)
     end
   end
 end

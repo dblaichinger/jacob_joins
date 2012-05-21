@@ -19,4 +19,5 @@ class Ingredient
   def self.search_by_name(ingredient)
     Ingredient.where("name" => ingredient)
   end
+
 end

@@ -117,16 +117,9 @@
 		    var diff = diff /1000;
 		    
 		    days = Math.floor( diff/(60*60*24) );
-		    //if(days < 10) days = "0"+days;
-		    
 		    hours = Math.floor( (diff - days*24*60*60)/(60*60) );
-		    //if(hours < 10) hours = "0"+hours;
-		    
 		    minutes = Math.floor( (diff - days*24*60*60 - hours*60*60)/60);
-		    //if(minutes < 10) minutes = "0"+minutes;
-		    
 		    seconds = Math.floor( diff - days*24*60*60 - hours*60*60 - minutes*60);
-		    //if(seconds < 10) seconds = "0"+seconds;
 		  }
 
 			animation(gVars.red, days, 100);	
@@ -139,10 +132,10 @@
 			if(minutes < 10) minutes = "0"+minutes;
 			if(seconds < 10) seconds = "0"+seconds;
 
-			$('#days').html(days+" :");
-			$('#hours').html(hours+" :");
-			$('#minutes').html(minutes+" :");
-			$('#seconds').html(seconds);
+			$('#days').html(days+"d :");
+			$('#hours').html(hours+"h :");
+			$('#minutes').html(minutes+"m :");
+			$('#seconds').html(seconds+"s");
 				
 		},1000);
 	}
@@ -191,11 +184,17 @@
 	{
 		// Rotating the element, depending on the browser:
 		var rotate = 'rotate('+angle+'deg)';
-		
+
+		if(element.css('msTransform')!=undefined)
+			element.css({msTransform: rotate});
+
 		if(element.css('MozTransform')!=undefined)
 			element.css('MozTransform',rotate);
-			
-		else if(element.css('WebkitTransform')!=undefined)
+	
+		if(element.css('OTransform')!=undefined)
+			element.css('OTransform',rotate);
+
+		if(element.css('WebkitTransform')!=undefined)
 			element.css('WebkitTransform',rotate);
 	
 		// A version for internet explorer using filters, works but is a bit buggy (no surprise here):
@@ -206,8 +205,8 @@
 			
 			element.css("filter","progid:DXImageTransform.Microsoft.Matrix(M11="+cos+",M12=-"+sin+",M21="+sin+",M22="+cos+",SizingMethod='auto expand',FilterType='nearest neighbor')");
 	
-			element.css("left",-Math.floor((element.width()-200)/2));
-			element.css("top",-Math.floor((element.height()-200)/2));
+			element.css("left",(-Math.floor((element.width()-70)/2))+"px");
+			element.css("top",(-Math.floor((element.height()-70)/2))+"px");
 		}
 	
 	}

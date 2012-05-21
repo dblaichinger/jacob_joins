@@ -1,7 +1,7 @@
-- csi_set = session[:csi_set_id].present? ? CsiSet.find(session[:csi_set_id]) : CsiSet.new(:country_specific_informations => CsiSet.empty_set)
-
 :javascript
   $(document).ready(function(){
+    prepare_csi_slider()
+    
     $("form", "#country_specific_information_tab").dirty_form({dynamic:true}).dirty(function(event, event_data){
       var fields = $(".changed", "#country_specific_information_tab");
       var valid = false;
@@ -28,7 +28,7 @@
     and
     %span yourself
 
-    %hr
+  %hr
 
   %p
     Jacob would love to find out more about your country and your traditions. Give him an impression by answering some of the following questions. 
@@ -36,7 +36,7 @@
   %p.wichtig
     It´s up to you how many and which questions you choose!
 
-= form_for csi_set, :url => country_specific_informations_path do |f|
+= form_for @csi_set, :url => country_specific_informations_path do |f|
   %ul#csi_slider
     = f.fields_for :country_specific_informations do |csi|
       %li  

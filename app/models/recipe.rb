@@ -3,8 +3,8 @@ class Recipe
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Paperclip
-  cache
-  #before_save :save_ingredients
+
+  before_save :save_ingredients
 
   slug :name
 
@@ -46,6 +46,14 @@ class Recipe
   def self.search_by_ingredient(name)
     ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
       Recipe.where({"ingredients_with_quantities.name" => name}).cache
+    end
+  end
+
+  def formatted_portions
+    if portions.present?
+      portions > 6 ? "more than six" : portions
+    else
+      "your portion count"
     end
   end
 

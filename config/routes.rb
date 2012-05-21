@@ -1,5 +1,8 @@
 JacobJoins::Application.routes.draw do
-  root :to => 'high_voltage/pages#show', :id => "index"
+  root :to => 'pages#show', :id => "index"
+
+  get "/pages/preview" => 'pages#show', :as => :page, :format => false, :id => "preview"
+  get "/pages/drafts_saved" => 'pages#show', :as => :page, :format => false, :id => "drafts_saved"
   
   get '/recipes/last', :to => 'recipes#last'
   post '/users/find_user', :to => 'users#find_user'
