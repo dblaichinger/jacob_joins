@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   $('#ingredients_search_form').bind("ajax:success", function(evt, data, status, xhr){
-    console.debug(data);
+    //console.debug(data);
     printResults(data);   
   })
   .bind("ajax:error", function(evt, xhr, status, error){
@@ -21,8 +21,7 @@ function runSearchTest(){
       search_data.ingredients["ingredient["+val+"]"] = val;//("{ingredient["+val+"]: "+val+"}");
     });
     ingredient_arr.push(search_ingredient);
-
-    console.debug(search_data);
+    //console.debug(search_data);
 
     $.ajax({
       url: 'search',

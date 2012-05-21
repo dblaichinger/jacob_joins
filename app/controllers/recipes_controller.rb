@@ -4,7 +4,6 @@ class RecipesController < ApplicationController
   append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
   before_filter :check_recipe_id_presence, :only => :show
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
-  caches_action :search => { :ttl => 5.minutes, :content_type => 'json'}
 
   def show
     @recipe = Recipe.find session[:recipe_id]
