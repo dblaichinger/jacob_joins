@@ -15,7 +15,7 @@ gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
 gem 'capistrano'
 gem "capistrano-ext"
-#gem 'modernizr-rails'
+gem 'simple-navigation'
 gem 'rails_admin'
 
 gem 'mongo'

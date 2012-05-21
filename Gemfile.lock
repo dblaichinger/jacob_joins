@@ -256,6 +256,8 @@ GEM
       ffi (~> 1.0)
       multi_json (~> 1.0)
       rubyzip
+    simple-navigation (3.7.0)
+      activesupport (>= 2.3.2)
     slop (2.4.4)
     sprockets (2.1.2)
       hike (~> 1.2)
@@ -312,5 +314,6 @@ DEPENDENCIES
   rspec-rails
   ruby-debug19
   sass-rails (~> 3.2.3)
+  simple-navigation
   state_machine
   uglifier (>= 1.0.3)

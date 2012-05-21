@@ -3,7 +3,7 @@ JacobJoins::Application.routes.draw do
 
   devise_for :admin_users
 
-  root :to => 'pages#show', :id => "index"
+  root :to => 'pages#show', :id => 'form'
 
   post "/feedback" => "feedback#create"
 
