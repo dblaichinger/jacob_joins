@@ -16,6 +16,8 @@ gem 'nifty-generators'
 gem 'capistrano'
 gem "capistrano-ext"
 
+gem 'mongo'
+gem 'mongo_store'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -1,11 +1,10 @@
 class RecipesController < ApplicationController
-  require 'benchmark'
-  include Benchmark
 
   respond_to :json, :except => :index
   append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
   before_filter :check_recipe_id_presence, :only => :show
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
+  caches_action :search => { :ttl => 5.minutes, :content_type => 'json'}
 
   def show
     @recipe = Recipe.find session[:recipe_id]
@@ -77,56 +76,58 @@ class RecipesController < ApplicationController
     respond_with Recipe.where(:user_id=>{"$ne"=>nil}).order_by(:created_at => :desc).limit(5)
   end
 
-  def search
-    respond_to do |format|
-      format.json {
-        @ingredients = params[:ingredients]
-        @recipes = []
-        Benchmark.benchmark(CAPTION, 7, nil, ">total:") do |x|
-          
-          @ingredients.each do |key, value|
-            @query = Recipe.search_by_ingredient(value)
+def search
+  respond_to do |format|
+    format.json {
+      @ingredients = params[:ingredients]
+      @recipes = []
 
-            @tm = x.report("Recipe_match:"){
-              if @recipes.empty?
-                @recipes = @query.entries
-              else
-                @query.entries.each do |entry|
-                  if @recipes.include?(entry)
-                    index = @recipes.index(entry)
-                    if @recipes[index]["count"].nil?
-                      @recipes[index]["count"] = 2
-                    else
-                      @recipes[index]["count"] += 1
-                    end
-                  else
-                    @recipes << entry
-                  end
-                end              
-              end
-            }
-          end
-          @ts = x.report("Recipe_sort:"){
-            @recipe_match = []
-            @recipes.each do |recipe|
-              @recipe_match << recipe if recipe["count"] != nil
-            end
-
-            @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
-
-            counter = 0
-            while @recipe_match.length < 10
-              @recipe_match << @recipes[counter]
-              counter+=1
-            end
-          }
-        [@tm+@ts]
+      @ingredients.each do |key, value|
+        if Rails.cache.read(value.to_s)
+          cache = JSON.parse(Rails.cache.read(value.to_s))
+          @objects = cache
+        else
+          @query = Recipe.search_by_ingredient(value)
+          @objects = @query.entries
+          binding.pry
+          Rails.cache.write(value.to_s, @query.entries.to_json)   
         end
-        render :json => {:ingredients => @ingredients, :recipes => @recipe_match.take(10)}
-      }
-      format.html
-    end
+        if @recipes.empty?
+          @recipes = cache || @query.entries
+        else
+          @objects.each do |entry|
+            if @recipes.include?(entry)
+              index = @recipes.index(entry)
+              if @recipes[index]["count"].nil?
+                @recipes[index]["count"] = 2
+              else
+                @recipes[index]["count"] += 1
+              end
+            else
+              @recipes << entry
+            end
+          end              
+        end
+      end
+
+      @recipe_match = []
+      @recipes.each do |recipe|
+        @recipe_match << recipe if recipe["count"] != nil
+      end
+
+      @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
+
+      counter = 0
+      while @recipe_match.count < 10
+        @recipe_match << @recipes[counter]
+        counter+=1
+      end
+      render :json => {:ingredients => @ingredients, :recipes => @recipe_match.take(10)}
+    }
+    format.html
   end
+end
+
 
 
   private

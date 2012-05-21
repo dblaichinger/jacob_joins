@@ -3,7 +3,7 @@ class Recipe
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Paperclip
-
+  cache
   #before_save :save_ingredients
 
   slug :name
@@ -15,6 +15,7 @@ class Recipe
   field :country, :type => String
   field :latitude, :type => Float
   field :longitude, :type => Float
+  index "ingredient_with_quantities.name"
 
   belongs_to :user
 
@@ -22,7 +23,7 @@ class Recipe
 
   embeds_many :ingredients_with_quantities
   accepts_nested_attributes_for :ingredients_with_quantities, :allow_destroy => true, :reject_if => :all_blank
-  index "ingredients_with_quantities.name"
+  
 
   embeds_many :steps, :validate => false, :cascade_callbacks => true
   accepts_nested_attributes_for :steps, :allow_destroy => true, :reject_if => :all_blank
@@ -44,7 +45,7 @@ class Recipe
 
   def self.search_by_ingredient(name)
     ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
-      Recipe.where({"ingredients_with_quantities.name" => name})
+      Recipe.where({"ingredients_with_quantities.name" => name}).cache
     end
   end
 
