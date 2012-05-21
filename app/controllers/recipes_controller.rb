@@ -34,11 +34,16 @@ class RecipesController < ApplicationController
     end
 
     params[:recipe][:steps_attributes].each do |index,step|
-      next if step[:description].present?
+      if step[:description].present? || (step[:id] && @recipe.steps.find(step[:id]).image.present?)
+        step[:number] = index
+        next
+      end
+
       step[:_destroy] = true
     end
 
     if @recipe.update_attributes params[:recipe]
+      @recipe.steps.sort! { |a,b| a.number <=> b.number }
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
@@ -47,7 +52,7 @@ class RecipesController < ApplicationController
 
   def upload_step_image
     if @recipe.update_attributes params[:recipe]
-      render :json => [@recipe.steps.where(:image_updated_at.exists => true).desc(:image_updated_at).first.to_jq_upload].to_json
+      render :json => [@recipe.steps.where(:image_updated_at.exists => true).desc(:image_updated_at).first.to_jq_upload].to_json, :content_type => "text/html" #IE want's to download application/json content-type from iframes
     else
       render :status => 400, :text => 'Bad Request'
     end
@@ -65,7 +70,7 @@ class RecipesController < ApplicationController
 
   def upload_image
     if @recipe.update_attributes params[:recipe]
-      render :json => [@recipe.images.where(:attachment_updated_at.exists => true).desc(:attachment_updated_at).first.to_jq_upload].to_json
+      render :json => [@recipe.images.where(:attachment_updated_at.exists => true).desc(:attachment_updated_at).first.to_jq_upload].to_json, :content_type => "text/html" #IE want's to download application/json content-type from iframes
     else
       render :status => 400, :text => 'Bad Request'
     end

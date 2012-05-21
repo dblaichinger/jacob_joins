@@ -1,64 +1,89 @@
+:javascript
+  $(function(){
+    if(!$('html').hasClass('ie7'))
+      $('.stories').fancyStoryEffect();
+
+     $('#contactable').contactable({
+      subject: 'A Feeback Message',
+      url: '/feedback'
+     });
+  });
+
 #jacobsstory
-  #start
-    #story_0
-      = image_tag 'Logo_start.png', id:"Logo_start"
-      = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen"
-      
-      %h3
-        = link_to 'Who is Jacob?', "#story_1", class:"scroll", id:"who"  
+  %ol.stories
+    %li
+      #start
+        #story_0
+          = image_tag 'Logo_start.png', id:"Logo_start"
+          = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen"
+          
+          %h3
+            = link_to 'Who is Jacob?', "#story_1", class:"scroll", id:"who"  
 
-      = link_to 'Scroll down', "#story_1", class:"scroll"
+          = link_to 'Scroll down', "#story_1", class:"scroll"
 
-      = link_to 'You already know the story? Just go on to the form!', "#!/form/recipe_tab", id:"gotoform"
-  .stories
-    #story_1
-      #text_1
-        %p.welcome1
-          There is this young bookseller from the beautiful
-          %br
-          city Salzburg in the european country Austria and
-        %p.welcome2
-          his name is Jacob.
-        %p.welcome3
-          One day he suddenly found
-        %p.welcome4
-          a message in a bottle.
-    .uebergang1
-    #story_2
-      #text_2
-        %p.ingredients1
-          Inside this old bottle was
-        %p.ingredients2
-          a precious recipe.
-        %p.ingredients3
-          But only these three ingredients were still readable:
-        %p.ingredients4 
-          potato, onion and egg.
-    .uebergang2
-    #story_3
-      #text_3
-        %p.sharing1
-          Jacob loved this idea of
-        %p.sharing2
-          sharing a recipe. 
-        %p.sharing3
-          So he would like you to share your little culinary 
-          %br
-          secrets and give the world a pure impression of
-        %p.sharing4
-          your cooking habits.                   
-    .uebergang3
-      = image_tag 'pattern_uebergang3_mitte.jpg', class:"mitte_bildzeichen"
-    #share
-      #text_4
-        %h3.share
-          Share your favourite recipe 
-          %br
-          with Jacob and the world!
-        %p.share2
-          There you go, fill in our lovely form!  
+          = link_to 'You already know the story? Just go on to the form!', "#!/form/recipe_tab", id:"gotoform"
+    %li
+      #story_1
+        #text_1
+          %p.welcome1
+            There is this young bookseller from the beautiful
+            %br
+            city Salzburg in the European country Austria and
+          %p.welcome2
+            his name is Jacob.
+          %p.welcome3
+            One day he suddenly found
+          %p.welcome4
+            a message in a bottle.
+      .uebergang1
+    %li
+      #story_2
+        #text_2
+          %p.ingredients1
+            Inside this old bottle was
+          %p.ingredients2
+            a precious recipe.
+          %p.ingredients3
+            But only these three ingredients were still readable:
+          %p.ingredients4 
+            potato, onion and egg.
+      .uebergang2
+    %li
+      #story_3
+        #text_3
+          %p.sharing1
+            Jacob loved this idea of
+          %p.sharing2
+            sharing a recipe. 
+          %p.sharing3
+            So he would like you to share your little culinary 
+            %br
+            secrets and give the world a pure impression of
+          %p.sharing4
+            your cooking habits.                   
+      .uebergang3
+        = image_tag 'pattern_uebergang3_mitte.jpg', class:"mitte_bildzeichen"
+  #share
+    #text_4
+      %h3.share
+        Share your favourite recipe 
+        %br
+        with Jacob and the world!
+      %p.share2
+        There you go, fill in our lovely form!  
+      %p.share3
+        %span Note: 
+        This is only a temporary website - its purpose is to collect lots of recipes. All recipes will be shown online on the 
+        %span 4th of june, 
+        when the final Jacob Joins website will be released.    
+      #days
+      #hours
+      #minutes
+      #seconds
 
-    #story_6
+
+  #story_6
 
 #skipstory
 
@@ -97,8 +122,10 @@
       = image_tag 'ajax-loader.gif'
       %h1 loading ...
 
-#feedback
-  = link_to "", "mailto:hello@jacobjoins.com", class:"feedback"
+#contactable
+  %div{ style:"margin:0;padding:0;display:inline"}
+    = hidden_field_tag "utf8", "✓"
+    = hidden_field_tag "authenticity_token", form_authenticity_token
 
 #footer
   #footercontent
@@ -107,11 +134,11 @@
         = image_tag 'sharing.png', class:"schleife" 
 
         %p#text_donation
-          If the project keeps running  until june and it has a chance to be successful, Jacob is going to start a 
+          If the project keeps running until June and it has a chance to be successful, Jacob is going to start a 
           %span donation campaign.
           %br
           %br
-          For each uploaded recipe  an pre-defined amount of money will be transfered from sponsores  to a selected institution.
+          For each uploaded recipe  a predefined amount of money will be transferred from sponsores  to a selected institution.
       
     #footer_information
       %p.likeproject

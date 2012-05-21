@@ -1,8 +1,15 @@
 JacobJoins::Application.routes.draw do
+  mount RailsAdmin::Engine => '/adminpanel', :as => 'rails_admin'
+
+  devise_for :admin_users
+
   root :to => 'pages#show', :id => "index"
+
+  post "/feedback" => "feedback#create"
 
   get "/pages/preview" => 'pages#show', :as => :page, :format => false, :id => "preview"
   get "/pages/drafts_saved" => 'pages#show', :as => :page, :format => false, :id => "drafts_saved"
+  match "/pages/fb_channel" => 'pages#show', :as => :page, :format => false, :id => "fb_channel"
   
   get '/recipes/last', :to => 'recipes#last'
   post '/users/find_user', :to => 'users#find_user'

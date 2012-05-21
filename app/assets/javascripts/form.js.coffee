@@ -14,18 +14,21 @@ window.reinitialize_tooltips = (context) ->
         my: "bottom left"
         at: "top center"
         target: $(this)
+      style:
+        classes: "validation"
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
 $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar")
     newsbar.visibleAfter "destroy"
-    $.scrollTo $('#story_1'), 800,
+    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800#,
       onAfter: ->
         newsbar.visibleAfter $("#start")
         newsbar.fadeIn 500
+    false
 
-   $(".next_tab").click ->
+  $(".next_tab").live "click", ->
     $.scrollTo $('#skipstory'), 800
 
   $("#gotoform").click ->

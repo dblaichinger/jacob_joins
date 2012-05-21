@@ -202,7 +202,7 @@ body
     width: 1024px
     min-height: 640px
     margin: 0px auto 0 auto
-    background-image: url(image_path('kuvert.jpg'))
+    background-image: url(image_path('kuvert.png'))
     background-repeat: no-repeat
     background-position: 0 center
     text-align: center
@@ -258,20 +258,28 @@ body
 
 #story_1, #story_2, #story_3
   height: auto
+  display: table
+  width: 100%
+
+#text_1, #text_2, #text_3
+  display: table-cell
+  vertical-align: middle
+  //width: 100%
 
 #story_1
-  padding-top: 75px  
+  padding-top: 75px
+  background: url(image_path('bg4.jpg'))
 
 .uebergang1
-  background-image: url(image_path('pattern_uebergang1.jpg'))
+  background-image: url(image_path('pattern_uebergang1.png'))
   background-repeat: repeat-x
-  height: 113px
+  height: 67px
 
 
 .uebergang2
-  background-image: url(image_path('pattern_uebergang2.jpg'))
+  background-image: url(image_path('pattern_uebergang2.png'))
   background-repeat: repeat-x
-  height: 113px
+  height: 70px
 
 .uebergang3
   background-image: url(image_path('pattern_uebergang3.jpg'))
@@ -313,7 +321,7 @@ body
   +sanches-bold-gross($rot, $weiss)
 
 .ingredients4
-  +sanches-bold-klein($braun) 
+  +sanches-bold-klein($bege) 
   padding-top: 5px 
 
 
@@ -347,6 +355,20 @@ body
   padding-top: 15px
   text-shadow: 0 -1px 0 #000, 0 1px 0px #FFFFFF
 
+.share3
+  width: 690px  
+  +pluto-italic($braun, $bege)
+  margin: auto
+  padding-top: 40px
+
+  span
+    font-family: Pluto-Semibold
+    font-size: 30px
+    color: $rot
+    text-align: center
+    padding-top: 15px
+    text-shadow: 0 -1px 0 #000, 0 1px 0px #FFFFFF
+
 
 .stories
   margin: auto  
@@ -362,6 +384,7 @@ body
   position: fixed
   right: 0px
   top: 40%
+  z-index: 2000
 
   .feedback
     display: block
@@ -507,7 +530,7 @@ body
   top: 20px
   z-index: 2  
   position: relative
-  left: -34px
+  left: -32.5px
 
 .likeproject
   line-height: 1.3

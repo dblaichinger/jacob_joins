@@ -27,10 +27,36 @@ window.publish_recipe = (id, user_location) ->
 
 
 window.prepare_recipe_step_upload = (currentFileInput) ->
+  $('.step').on 'click', 'a.delete', (e) ->
+    clicked_link = $(this)
+    $.ajax
+      url: clicked_link.attr('href')
+      type: 'POST'
+      data:
+        _method: "DELETE"
+      success: (data, textStatus, jqXHR) ->
+        imagePreview = clicked_link.parent()
+        uploadWrapper = imagePreview.prev('.upload_wrapper')
+
+        uploadWrapper.css
+          display: 'block'
+
+        imagePreview.remove()
+        $(":input", uploadWrapper).addClass "changed"
+      failure: (jqXHR, textStatus, errorThrown) ->
+        alert 'Image delete failed!'
+    false
+
   currentFileInput.fileupload
     dataType: 'json'
     url: '/recipes/upload_step_image'
     formData: (form) ->
+      uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
+      uploadWrapper.css
+        display: 'none'
+
+      uploadWrapper.after '<div class="image_preview"><img src="/assets/ajax-loader.gif" alt="loading" width="42px" height="42px"></div>'
+
       stepIdInputId = currentFileInput.attr('id').replace 'image', 'id'
       stepIdInputElement = form.find('#' + stepIdInputId)
       data = [
@@ -51,19 +77,21 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       uploadWrapper = $('#' + currentFileInput.attr('id')).parent()
       stepIdInputElement = uploadWrapper.prev('#' + stepIdInputId)
 
-      uploadWrapper.css
-        display: 'none'
-
       if stepIdInputElement.length == 0
         uploadWrapper.before '<input type="hidden" id="' + stepIdInputId + '" name="' + stepIdInputName + '" value="' + image.step_id + '">'
 
-      uploadWrapper.after '<div class="image_preview"><img src="' + image.thumbnail_url + '" alt="' + image.name + '"><a href="' + image.delete_url + '" class="delete">delete</a></div>'
+      uploadImage = uploadWrapper.next().find "img"
+      uploadImage.attr "src", image.thumbnail_url
+      uploadImage.attr "alt", image.name
+      uploadImage.attr "height", "56px"
+      uploadImage.attr "width", "56px"
+      $('<a href="' + image.delete_url + '" class="delete">delete</a>').insertAfter uploadImage
       $(this).addClass "changed"
 
     add: (e, data) ->
       data.submit()
     fail: (e, data) ->
-      alert "fail"
+      alert "Couldn't upload image"
 
 window.prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
@@ -90,6 +118,7 @@ window.prepare_recipe_uploads = () ->
     false
 
   $('#recipe_images input[type="file"]').fileupload
+    dataType: 'json'
     url: '/recipes/upload_image'
     type: 'POST'
     formData: (form) ->
@@ -98,15 +127,16 @@ window.prepare_recipe_uploads = () ->
         value: form.find('input[name="authenticity_token"]').attr('value')
       ]
     done: (e, data) ->
-      data.htmlElement.html('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
+      data.htmlElement.empty()
+      data.htmlElement.append('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
       $(this).addClass "changed"
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
 
     add: (e, data) ->
-      $('ul.file_uploads').prepend (index, html) ->
-        file = $('<li>' + data.files[0].name + '</li>')
+      $('ul.file_uploads').append (index, html) ->
+        file = $('<li><img src="/assets/ajax-loader.gif" alt="loading"><br>' + data.files[0].name + '</li>')
         data.htmlElement = file
         file
 

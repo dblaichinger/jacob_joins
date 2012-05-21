@@ -6,6 +6,8 @@
     = stylesheet_link_tag "application", :media => "all"
     /[if IE 7]
       = stylesheet_link_tag "ie/ie7", :media => "all"
+      :javascript
+        document.childNodes[1].className += " ie7"
     /[if IE 8]
       = stylesheet_link_tag "ie/ie8", :media => "all"
     /[if IE 9]
@@ -15,12 +17,16 @@
 
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
     = javascript_include_tag "application"
+
     :javascript
       $(document).ready(function(){
         get_latest_recipe();
         $('#fancy_counter').tzineClock();
         slide_newsbar();
         $("#newsbar").visibleAfter($("#start"));
+
+        #{growl_flash_messages}
+
       });
 
       $(window).load(function(){
@@ -32,10 +38,10 @@
     %meta{:charset => "utf-8"}
 
   %body
-    %section
+    %section.flash_notifications
       - flash.each do |key, value|
         %div{ class:"flash_#{key}"}
-          = value      
+          = value 
     %section#newsbar
       #newsbar_content
         #fb

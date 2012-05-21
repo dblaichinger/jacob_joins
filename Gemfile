@@ -16,6 +16,7 @@ gem 'nifty-generators'
 gem 'capistrano'
 gem "capistrano-ext"
 #gem 'modernizr-rails'
+gem 'rails_admin'
 
 gem 'mongo'
 gem 'mongo_store'
@@ -45,3 +46,5 @@ group :test do
   gem 'pry'
   gem 'jasmine-rails'
 end
+
+gem "devise"

@@ -33,7 +33,7 @@ class PagesController < HighVoltage::PagesController
   protected
   def select_layout
     case params[:id]
-    when 'drafts_saved', 'preview'
+    when 'drafts_saved', 'preview', 'fb_channel'
       false
     else
       'application'
