@@ -38,7 +38,7 @@
 }
 
 #contactable form#contactForm input, textarea {
-	background: rgba(83, 30, 9, 0.3)
+  background: rgba(83, 30, 9, 0.3);
 	outline-style:none;
 	width:325px;
 	padding:5px;
