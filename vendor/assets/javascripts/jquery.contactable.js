@@ -18,12 +18,12 @@
 		var defaults = {
 			url: 'http://YourServerHere.com/contactable/mail.php',
 			name: 'Name',
-			email: 'Email',
+			email: 'E-Mail',
 			message : 'Message',
 			subject : 'A contactable message',
 			submit : 'SEND',
 			recievedMsg : '<h3>Thank you for your interest in our project!</h3> <br> <p>We appreciate all your comments and concerns. </p><p> Best wishes,</p> <span>Jacob</span>',
-			notRecievedMsg : '<h3>Sorry but your message could not be sent, try again later</h3>',
+			notRecievedMsg : '<span>Sorry,</span><br /><p id="error_feedback">your message could not be sent, try again later</p>',
 			disclaimer: '<p id="fields_required">All fields are required.</p><p>You have questions or feedback? We appreciate all your comments and concerns.</p>',
 			hideOnSubmit: false
 
