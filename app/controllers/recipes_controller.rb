@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+    @location = Recipe.all.to_gmaps4rails
   end
 
   def update

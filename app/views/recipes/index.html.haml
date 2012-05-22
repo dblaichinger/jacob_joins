@@ -1,10 +1,10 @@
+#start
 
 #wrapper-haupt
 
   #left-haupt
-    
-    #map
-      <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=5020+salzburg&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=42.85226,88.330078&amp;ie=UTF8&amp;hq=&amp;hnear=5020,+Salzburg,+%C3%96sterreich&amp;t=m&amp;z=12&amp;ll=47.805139,13.038069&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=de&amp;geocode=&amp;q=5020+salzburg&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=42.85226,88.330078&amp;ie=UTF8&amp;hq=&amp;hnear=5020,+Salzburg,+%C3%96sterreich&amp;t=m&amp;z=12&amp;ll=47.805139,13.038069" style="color:#0000FF;text-align:left">Größere Kartenansicht</a></small>
+    = #@location
+    = gmaps4rails(@location)
 
   #right-haupt
     .uebergang-seitenleiste
@@ -45,3 +45,6 @@
 
         %p.gotoform
           = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
+
+
+

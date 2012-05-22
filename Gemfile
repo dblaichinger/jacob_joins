@@ -17,6 +17,7 @@ gem 'capistrano'
 gem "capistrano-ext"
 gem 'simple-navigation'
 gem 'rails_admin'
+gem 'gmaps4rails', '~> 1.5.2'
 
 gem 'mongo'
 gem 'mongo_store'
