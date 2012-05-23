@@ -23,7 +23,7 @@ class Recipe
   #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   #geo_index :location
   field :gmaps, :type => Boolean
-  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country
+  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes
 
   index "ingredient_with_quantities.name"
 
