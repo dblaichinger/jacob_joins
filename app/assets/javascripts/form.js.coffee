@@ -102,8 +102,30 @@ $ ->
 
     if data.valid
       referring_link.removeClass("form_not_valid").addClass("form_valid")
+
+      qapi = referring_link.qtip('api')
+      unless qapi == undefined
+        tooltip = $(qapi.elements.tooltip)
+        referring_link.removeData('qtip')
+        tooltip.remove()
+        
     else
       referring_link.removeClass("form_valid").addClass("form_not_valid")
+      referring_link.qtip
+        overwrite: false
+        content:
+          text: "not yet filled out correctly"
+        position:
+          my: "bottom left"
+          at: "top right"
+          target: referring_link
+        hide:
+          event: false
+        show:
+          event: false
+        style:
+          classes: "tip-brown"
+      .qtip('show')
 
   $('#wizard').tabs()
 
