@@ -43,6 +43,7 @@ $ ->
       return false
 
     $("#send").addClass "disabled"
+    $('.disabled-send-button-text').show()
 
     $.scrollTo "#wizard", 800
       offset:
@@ -187,3 +188,6 @@ $ ->
 
         if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
           $('#send').removeClass('disabled')
+          $('.disabled-send-button-text').hide()
+
+
