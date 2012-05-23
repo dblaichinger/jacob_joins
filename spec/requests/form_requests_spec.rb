@@ -62,7 +62,6 @@ describe "form submit" do
       sleep 1
 
       within '.recipe' do
-        #binding.pry
         page.should have_css('h1', :text => recipe.name)
         page.should have_content(recipe.portions)
         page.should have_content(recipe.duration)

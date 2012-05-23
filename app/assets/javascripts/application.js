@@ -31,4 +31,5 @@
 //= require modernizr
 //= require jquery.validate.pack
 //= require jquery.contactable
+//= require jquery.loadmask.min
 //= require_tree .

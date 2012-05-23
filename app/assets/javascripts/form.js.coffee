@@ -22,6 +22,8 @@ window.reinitialize_tooltips = (context) ->
         classes: "validation"
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
+loaderMsg = '<img alt="Ajax-loader" src="/assets/ajax-loader.gif"><h1>Loading...</h1>'
+
 $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar")
@@ -136,6 +138,7 @@ $ ->
       .qtip('show')
 
   $('#wizard').tabs()
+  $('#wizard').data('activeRequests', 0)
 
   $('#wizard').bind 'tabsshow', (event, ui) ->
     $(".error", ui.panel).qtip "show"
@@ -164,8 +167,16 @@ $ ->
       $.ajax
         url: url
         type: 'POST'
-        async: false
+        async: true
         data: params
+        beforeSend: ->
+          activeRequests = $('#wizard').data('activeRequests')
+          $('#wizard').data('activeRequests', ++activeRequests)
+          oldTab.mask(loaderMsg)
+        complete: ->
+          activeRequests = $('#wizard').data('activeRequests')
+          $('#wizard').data('activeRequests', --activeRequests)
+          oldTab.unmask()
         success: (data, textStatus, jqXHR) ->
           oldTab.html data
           $(".dirtyform", oldTab).dirtyValidation "validate", $(":input", oldTab).not("[type='hidden']")
@@ -174,23 +185,28 @@ $ ->
 
           oldTab.css
             display: "block"
-          oldTab.attr "style", ""     
+          oldTab.attr "style", ""
         statusCode:
           400: ->
             console.log "Unable to save changes"
 
+
     if ui.index is $('#wizard').tabs('length') - 1
-      showWizardLoader()
+      $(ui.panel).mask(loaderMsg)
 
-      $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
-        $(this).animate
-          opacity: 1
-        , 200
+      loadPreview = ->
+        if $('#wizard').data('activeRequests') is 0
+          $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
+            $(this).animate
+              opacity: 1
+            , 200
 
-        hideWizardLoader()
+            if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
+              $('#send').removeClass('disabled')
+              $('.disabled-send-button-text').hide()
+        else
+          window.setTimeout(loadPreview, 100)
 
-        if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
-          $('#send').removeClass('disabled')
-          $('.disabled-send-button-text').hide()
+      loadPreview()
 
 
