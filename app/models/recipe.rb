@@ -6,7 +6,7 @@ class Recipe
   #include Mongoid::Spacial::Document
   include Gmaps4rails::ActsAsGmappable
   
-  acts_as_gmappable #:lat => :latitude, :lng => :longitude, :process_geocoding => false, :check_process => false, :validation => false
+  acts_as_gmappable :validation => false, :check_process => false #:lat => :latitude, :lng => :longitude, :process_geocoding => false, :check_process => false, :validation => false
 
   before_save :save_ingredients#, :save_location
 
@@ -23,7 +23,7 @@ class Recipe
   #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   #geo_index :location
   field :gmaps, :type => Boolean
-  attr_accessible :latitude, :longitude, :city, :country
+  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country
 
   index "ingredient_with_quantities.name"
 
