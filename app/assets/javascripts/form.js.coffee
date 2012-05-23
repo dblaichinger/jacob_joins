@@ -114,17 +114,20 @@ $ ->
       referring_link.qtip
         overwrite: false
         content:
-          text: "not yet filled out correctly"
+          text: "Check your entries!"
         position:
           my: "bottom left"
           at: "top right"
           target: referring_link
+          adjust:
+            x: -20
+            y: 0
         hide:
           event: false
         show:
           event: false
         style:
-          classes: "tip-brown"
+          classes: "tip-brown rufezeichen"
       .qtip('show')
 
   $('#wizard').tabs()
