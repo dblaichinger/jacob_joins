@@ -78,7 +78,7 @@
           %h2
             Countdown to release on 4 June '12
 
-        - if Rails.env == "production"
+        - if Rails.env.production?
           #countdown
             %h4.countdown_kl
               Countdown to release:
