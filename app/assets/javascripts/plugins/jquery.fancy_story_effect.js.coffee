@@ -37,7 +37,8 @@ prepareStories = (container, settings) ->
     $(divsInLi[0]).css
       height: 'auto'
 
-    footbridgeHeight = if divsInLi[1] then $(divsInLi[1]).height() else 0
+    #footbridgeHeight = if divsInLi[1] then $(divsInLi[1]).height() else 0
+    footbridgeHeight = 0
     storyHeight = if (windowHeight - footbridgeHeight) < currentLi.height() then currentLi.height() else windowHeight - footbridgeHeight
 
     $(divsInLi[0]).css
