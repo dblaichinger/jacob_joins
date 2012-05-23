@@ -38,9 +38,9 @@ body
 
 #newsbar
   height: 280px
-  background-image: url(image_path('newsbar_offen2.png')), url(image_path('newsbar_offen_repeat.png'))
-  background-position: top center, top center
-  background-repeat: no-repeat, repeat-x
+  background-image: url(image_path('newsbar_offen_repeat.png'))
+  background-position: top center
+  background-repeat: repeat-x
   color: #fff
   position: fixed
   width: 100%
@@ -50,7 +50,10 @@ body
   display: none
 
   #newsbar_content
+    background-image: url(image_path('newsbar_offen2.png'))
+    background-position: top center
     width: 1000px
+    height: 280px
     margin: 0 auto
     overflow: hidden
     cursor: pointer
@@ -177,12 +180,11 @@ body
 
   #logo
     clear: both
-    position: absolute
-    bottom: 30px
-    left: 46%
 
     img
       display: block
+      position: relative
+      top: -25px
       margin: 0 auto 0 auto
 
 
@@ -197,7 +199,8 @@ body
 //STORY ================================================================
 
 #start
-  
+  background-image: url(image_path('bg4.jpg'))
+
   #story_0
     width: 1024px
     min-height: 640px
