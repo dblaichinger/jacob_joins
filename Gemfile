@@ -18,7 +18,8 @@ gem "capistrano-ext"
 gem 'simple-navigation'
 gem 'rails_admin'
 gem 'gmaps4rails', '~> 1.5.2'
-
+gem "airbrake"
+gem "devise"
 gem 'mongo'
 gem 'mongo_store'
 
@@ -47,5 +48,3 @@ group :test do
   gem 'pry'
   gem 'jasmine-rails'
 end
-
-gem "devise"
