@@ -37,3 +37,5 @@ end
 require "bundler/capistrano"
 
 before "deploy:assets:precompile", "deploy:copy_config"
+        require './config/boot'
+        require 'airbrake/capistrano'
