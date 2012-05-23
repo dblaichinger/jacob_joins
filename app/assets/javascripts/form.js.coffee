@@ -1,3 +1,7 @@
+###deactivatePlaceholders = (parent) ->
+  parent.find('.placeholder').each ->
+    $(this).val("") if $(this).val() is $(this).attr("placeholder")###
+
 showWizardLoader = (callback) ->
   $('#wizard-loader').stop(true, true).fadeIn 500, callback
 
@@ -108,7 +112,7 @@ $ ->
         tooltip = $(qapi.elements.tooltip)
         referring_link.removeData('qtip')
         tooltip.remove()
-        
+
     else
       referring_link.removeClass("form_valid").addClass("form_not_valid")
       referring_link.qtip
@@ -141,6 +145,8 @@ $ ->
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
+
+    $(ui.tab).parent().qtip 'hide'
 
     $("[aria-describedby]", oldTab).qtip "hide"
 
