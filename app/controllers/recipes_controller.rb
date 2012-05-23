@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+    @location = Recipe.all.to_gmaps4rails
   end
 
   def update
@@ -88,7 +89,59 @@ class RecipesController < ApplicationController
     respond_with Recipe.where(:user_id => {"$ne"=>nil}, :state => "published").order_by(:created_at => :desc).limit(5)
   end
 
-  
+def search
+  respond_to do |format|
+    format.json {
+      @ingredients = params[:ingredients]
+      @recipes = []
+
+      @ingredients.each do |key, value|
+        if Rails.cache.read(value.to_s)
+          cache = JSON.parse(Rails.cache.read(value.to_s))
+          @objects = cache
+        else
+          @query = Recipe.search_by_ingredient(value)
+          @objects = @query.entries
+          Rails.cache.write(value.to_s, @query.entries.to_json)   
+        end
+        if @recipes.empty?
+          @recipes = cache || @query.entries
+        else
+          @objects.each do |entry|
+            if @recipes.include?(entry)
+              index = @recipes.index(entry)
+              if @recipes[index]["count"].nil?
+                @recipes[index]["count"] = 2
+              else
+                @recipes[index]["count"] += 1
+              end
+            else
+              @recipes << entry
+            end
+          end              
+        end
+      end
+
+      @recipe_match = []
+      @recipes.each do |recipe|
+        @recipe_match << recipe if recipe["count"] != nil
+      end
+
+      @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
+
+      counter = 0
+      while @recipe_match.count < 10
+        @recipe_match << @recipes[counter]
+        counter+=1
+      end
+      render :json => {:ingredients => @ingredients, :recipes => @recipe_match.take(10)}
+    }
+    format.html
+  end
+end
+
+
+
   private
   def get_or_create_recipe
     if session[:recipe_id].present?

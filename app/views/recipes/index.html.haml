@@ -1,7 +1,50 @@
-%a{:href => recipe_upload_index_path} neu
+#start
 
-%ul
-  - @recipes.each do |r|
-    %li
-      %a{:href => recipe_path(r)}
-        = r.name
+#wrapper-haupt
+
+  #left-haupt
+    = #@location
+    = gmaps4rails(@location)
+
+  #right-haupt
+    .uebergang-seitenleiste
+      .seitenleiste
+        = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
+
+        %p
+          This project wants to 
+          %em 
+            give a pure impression of the different eating habits 
+          and cultures all over the world. 
+          %em 
+            The aim is to collect international recipes. 
+
+        #jacob-who
+          = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
+                
+          %h3
+            = link_to 'Who is Jacob?', "#story_1", class:"who"
+          %p
+            = link_to 'Click to get introduced to the story.', "#story_1"
+
+        %hr
+
+        .postedrecipe
+          = image_tag 'google_marker.png', class:"marker-info"
+          %h4
+            Posted recipe
+          %p
+            These markers point out that there is a recipe to look up bla bla bla bla lorem ipsum das ist ein Text.
+
+        .postedcsi
+          = image_tag 'google_marker.png', class:"marker-info"
+          %h4
+            Information about culinary habits
+          %p
+            These markers point out that there is a recipe to look up bla bla bla bla lorem ipsum das ist ein Text.
+
+        %p.gotoform
+          = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
+
+
+

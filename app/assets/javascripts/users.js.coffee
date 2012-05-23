@@ -1,3 +1,4 @@
+
 window.publish_user = ->
   return_value = false
 
@@ -157,6 +158,9 @@ window.prepare_user_map = ->
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), null, address[0].long_name
     else
       autoCompleteInput.attr "data-valid", "false"
+
+
+
 
 
 

@@ -22,7 +22,7 @@
 
           = link_to 'Scroll down', "#story_1", class:"scroll"
 
-          = link_to 'You already know the story? Just go on to the form!', "#!/form/recipe_tab", id:"gotoform"
+          = link_to 'You already know the story? Just go on to the form!', "#!/recipe_tab", id:"gotoform"
     %li
       #story_1
         #text_1
@@ -77,11 +77,6 @@
         This is only a temporary website - its purpose is to collect lots of recipes. All recipes will be shown online on the 
         %span 4th of june, 
         when the final Jacob Joins website will be released.    
-      #days
-      #hours
-      #minutes
-      #seconds
-
 
   #story_6
 
@@ -107,13 +102,16 @@
 
   #recipe_tab
     - session[:recipe_id] = nil
+    - @recipe = Recipe.new
     = render :template => "recipes/new"
   #country_specific_information_tab
     - session[:csi_set_id] = nil
+    - @csi_set = CsiSet.new :country_specific_informations => CsiSet.empty_set
     = render :template => "country_specific_informations/new"
   #user_tab
     - session[:user_id] = nil
     - session[:location] = nil
+    - @user = User.new
     = render :template => "users/new"
   #preview_tab
 

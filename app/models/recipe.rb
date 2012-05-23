@@ -3,8 +3,12 @@ class Recipe
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Paperclip
+  #include Mongoid::Spacial::Document
+  include Gmaps4rails::ActsAsGmappable
+  
+  acts_as_gmappable #:lat => :latitude, :lng => :longitude, :process_geocoding => false, :check_process => false, :validation => false
 
-  before_save :save_ingredients
+  before_save :save_ingredients#, :save_location
 
   slug :name
 
@@ -15,6 +19,13 @@ class Recipe
   field :country, :type => String
   field :latitude, :type => Float
   field :longitude, :type => Float
+  #field :location, type: Array, spacial: {lat: :latitude, lng: :longitude, return_array: true }
+  #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
+  #geo_index :location
+  field :gmaps, :type => Boolean
+  attr_accessible :latitude, :longitude, :city, :country
+
+  index "ingredient_with_quantities.name"
 
   belongs_to :user
 
@@ -22,13 +33,14 @@ class Recipe
 
   embeds_many :ingredients_with_quantities
   accepts_nested_attributes_for :ingredients_with_quantities, :allow_destroy => true, :reject_if => :all_blank
-
+  
   embeds_many :steps, :cascade_callbacks => true
   accepts_nested_attributes_for :steps, :allow_destroy => true, :reject_if => :all_blank
 
   embeds_many :images, :cascade_callbacks => true
   accepts_nested_attributes_for :images, :allow_destroy => true
-  
+
+
   state_machine :initial => :draft do
     before_transition :draft => :published, :do => :publish_embedded_steps
     after_failure :on => :publish, :do => :unpublish_embedded_steps
@@ -39,9 +51,15 @@ class Recipe
 
     state :published do
       validates :name, :portions, :duration, :country, :latitude, :longitude, :presence => true
-      validates :portions, :duration, :numericality => { :only_integer => true }
+      validates_numericality_of :portions, :duration
     end
 
+  end
+
+  def self.search_by_ingredient(name)
+    ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
+      Recipe.where({"ingredients_with_quantities.name" => name}).cache
+    end
   end
 
   def formatted_portions
@@ -50,6 +68,11 @@ class Recipe
     else
       "your portion count"
     end
+  end
+
+  #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+  def gmaps4rails_address
+   "#{self.city}, #{self.country}" 
   end
 
   private
@@ -65,5 +88,9 @@ class Recipe
 
   def unpublish_embedded_steps
     steps.where(:state => "published").each {|step| step.unpublish}
+  end
+
+  def save_location
+    self.location = {:lat => self.latitude, :lng => self.longitude}
   end
 end
