@@ -128,6 +128,20 @@ function replaceAt(string, index, char) {
   return string.substr(0, index) + char + string.substr(index+char.length);
 }
 
+function hideClickAndSee(){
+  if($('html').hasClass('ie7') || $('html').hasClass('ie8'))
+    $("#clickandsee").hide();
+  else
+    $("#clickandsee").stop(true, true).fadeOut(500);
+}
+
+function showClickAndSee(){
+  if($('html').hasClass('ie7') || $('html').hasClass('ie8'))
+    $("#clickandsee").show();
+  else
+    $("#clickandsee").stop(true, true).fadeIn(500);
+}
+
 function slide_newsbar(){
   $('#clickandsee').click(function(e){
     return false;
@@ -137,10 +151,10 @@ function slide_newsbar(){
   $(document).ready(function(){
     $("#newsbar").hover(
       function(){
-        if(event_set) { event_set = false; $("#clickandsee").stop(true, true).fadeIn(500); }
+        if(event_set) { event_set = false; showClickAndSee(); }
       },
       function(){
-        if(!event_set) { event_set = true; $("#clickandsee").stop(true, true).fadeOut(500); }
+        if(!event_set) { event_set = true; hideClickAndSee(); }
       }
     );
   });
@@ -152,7 +166,7 @@ function slide_newsbar(){
       if(newsBar.hasClass('extended')){
         newsBar.stop().animate({
           top: "-215px"
-        }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
+        }, 500).hover(function(){ showClickAndSee(); }, function(){ hideClickAndSee(); });
       } else {
         newsBar.stop().animate({
           top: "0"
@@ -160,7 +174,7 @@ function slide_newsbar(){
       }
 
       $("#countdown", newsBar).fadeToggle(500);
-      $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
+      hideClickAndSee();
 
       $('#newsbar').toggleClass('extended');
 
