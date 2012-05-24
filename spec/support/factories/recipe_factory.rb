@@ -9,6 +9,10 @@ FactoryGirl.define do
   factory :step do |f|
     f.description "lorem ipsum dolor und so weiter..."
   end
+
+  factory :another_step, :class => "Step" do |f|
+    f.description "another step description..." 
+  end
 end
 
 FactoryGirl.define do

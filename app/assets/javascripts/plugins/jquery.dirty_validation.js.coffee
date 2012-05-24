@@ -89,6 +89,8 @@ publicMethods =
         event: false
       show:
         event: false
+      style:
+        classes: "validation"
     .qtip('option', 'content.text', error_message)
 
   markAsValid: (field) ->
@@ -105,7 +107,12 @@ publicMethods =
       field.removeClass data.errorClass
 
     field.removeClass data.errorClass
-    field.qtip "destroy"
+    
+    qapi = field.qtip('api')
+    unless qapi == undefined
+      tooltip = $(qapi.elements.tooltip)
+      field.removeData('qtip')
+      tooltip.remove()
 
   destroy: ->
     this.each ->

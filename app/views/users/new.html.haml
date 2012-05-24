@@ -24,7 +24,7 @@
     %p
       Of course Jacob wants to get to know the person who shared a great recipe with him. If you want to receive our special edition recipe-collection feel free to share your e-mail address with Jacob! 
     %p.wichtig
-      But no worries. Your e-mail address is optional and only the first letter of your surname will be shown online.  
+      But no worries. Your e-mail address is optional and only the first letter of your last name will be shown online.  
     .links
       %p
         = f.label :firstname, "First name", id:"vorname"
@@ -72,4 +72,4 @@
         = f.label :age, "Age"
         = f.text_field :age, "data-required" => true, "data-type" => "numerical", tabindex:"9"
       
-    = link_to "", '#!/form/preview_tab', class:"next_tab"
+    = link_to "", '#!/preview_tab', class:"next_tab"

@@ -1,6 +1,7 @@
 @import compass/reset
 @import compass/css3/font-face
 @import mixins
+@import compass/typography/text/force-wrap
 
 
  
@@ -38,9 +39,9 @@ body
 
 #newsbar
   height: 280px
-  background-image: url(image_path('newsbar_offen2.png')), url(image_path('newsbar_offen_repeat.png'))
-  background-position: top center, top center
-  background-repeat: no-repeat, repeat-x
+  background-image: url(image_path('newsbar_offen_repeat.png'))
+  background-position: top center
+  background-repeat: repeat-x
   color: #fff
   position: fixed
   width: 100%
@@ -50,7 +51,10 @@ body
   display: none
 
   #newsbar_content
+    background-image: url(image_path('newsbar_offen2.png'))
+    background-position: top center
     width: 1000px
+    height: 280px
     margin: 0 auto
     overflow: hidden
     cursor: pointer
@@ -119,6 +123,7 @@ body
         .message
           font-size: 12px
           margin: 0 10px 0 60px
+          +force-wrap()
 
         .time
           font-size: 10px
@@ -174,15 +179,17 @@ body
       .countdown_kl
         margin-right: 10px
         font-family: "Sanches-Italic"
+        font-size: 16px
+        color: #fff
+        text-transform: none
 
   #logo
     clear: both
-    position: absolute
-    bottom: 30px
-    left: 46%
 
     img
       display: block
+      position: relative
+      top: -25px
       margin: 0 auto 0 auto
 
 
@@ -197,7 +204,8 @@ body
 //STORY ================================================================
 
 #start
-  
+  background-image: url(image_path('bg4.jpg'))
+
   #story_0
     width: 1024px
     min-height: 640px
@@ -258,20 +266,28 @@ body
 
 #story_1, #story_2, #story_3
   height: auto
+  display: table
+  width: 100%
+
+#text_1, #text_2, #text_3
+  display: table-cell
+  vertical-align: middle
+  //width: 100%
 
 #story_1
-  padding-top: 75px  
+  padding-top: 75px
+  background: url(image_path('bg4.jpg'))
 
 .uebergang1
-  background-image: url(image_path('pattern_uebergang1.jpg'))
+  background-image: url(image_path('pattern_uebergang1.png'))
   background-repeat: repeat-x
-  height: 113px
+  height: 67px
 
 
 .uebergang2
-  background-image: url(image_path('pattern_uebergang2.jpg'))
+  background-image: url(image_path('pattern_uebergang2.png'))
   background-repeat: repeat-x
-  height: 113px
+  height: 70px
 
 .uebergang3
   background-image: url(image_path('pattern_uebergang3.jpg'))
@@ -347,34 +363,26 @@ body
   padding-top: 15px
   text-shadow: 0 -1px 0 #000, 0 1px 0px #FFFFFF
 
+.share3
+  width: 690px  
+  +pluto-italic($braun, $bege)
+  margin: auto
+  padding-top: 40px
+
+  span
+    font-family: Pluto-Semibold
+    font-size: 30px
+    color: $rot
+    text-align: center
+    padding-top: 15px
+    text-shadow: 0 -1px 0 #000, 0 1px 0px #FFFFFF
+
 
 .stories
   margin: auto  
 
 #text_4
   width: 1024px
-
-// FEEDBACK ===============================================================
-
-#feedback
-  width: 25px
-  height: 80px
-  position: fixed
-  right: 0px
-  top: 40%
-  z-index: 2000
-
-  .feedback
-    display: block
-    width: 25px
-    height: 80px
-    background-image: url("feedback.jpg")
-    background-repeat: repeat
-    background-position: 0 0
-
-  .feedback:hover
-    background-position: 0 -80px
-
 
 // FOOTER ===============================================================
 

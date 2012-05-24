@@ -16,8 +16,22 @@ class Step
       :medium   => ['250x250',    :jpg],
       :large    => ['500x500>',   :jpg]
     }
+    
+  validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
 
-  validates_presence_of :description
+  state_machine :initial => :draft do
+    event :publish do
+      transition :draft => :published
+    end
+
+    event :unpublish do
+      transition :published => :draft
+    end
+
+    state :published do
+      validates_presence_of :description
+    end
+  end
 
   def to_jq_upload
     if self.image.present?

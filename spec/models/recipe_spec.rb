@@ -48,5 +48,28 @@ describe Recipe do
     it "should change to state published if validations succeed" do
       @recipe.publish.should == true
     end
+
+    it "should publish all its steps on publish" do
+      @recipe.steps << FactoryGirl.build(:another_step)
+      @recipe.publish.should == true
+      @recipe.steps.each do |step|
+        step.state.should == "published"
+      end
+    end
+
+    it "should not publish the recipe if a step is invalid" do
+      @recipe.steps.first.description = ""
+      @recipe.publish.should == false
+    end
+
+    it "should unpublish embedded steps if publish of recipe failed" do
+      @recipe.steps << FactoryGirl.build(:another_step)
+      @recipe.name = ""
+      @recipe.save
+      @recipe.publish.should == false
+      @recipe.steps.each do |step|
+        step.state.should == "draft"
+      end
+    end
   end
 end

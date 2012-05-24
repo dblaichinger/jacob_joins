@@ -15,6 +15,13 @@ gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
 gem 'capistrano'
 gem "capistrano-ext"
+gem 'simple-navigation'
+gem 'rails_admin'
+gem 'gmaps4rails', '~> 1.5.2'
+gem "airbrake"
+gem "devise"
+gem 'mongo'
+gem 'mongo_store'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

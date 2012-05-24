@@ -1,4 +1,8 @@
-#prev_recipe
+#prev_recipe  
+  %p.wichtig
+    These are your final entries, make sure everything is perfect and ready to be sent! 
+    But don’t forget to press the final "finish and send" button - otherwise your information will be lost!  
+
   %h1
     %strong 1
     Here is what you told 
@@ -14,7 +18,7 @@
   - else
     %p.no_recipe_preview 
       Of course we would be happy about a new recipe in our collection. Maybe you have a few minutes left.
-      = link_to 'Post Your recipe.', "#!/form/recipe_tab"
+      = link_to 'Post Your recipe.', "#!/recipe_tab"
 
 #prev_csi
   %h1#abyc_preview
@@ -32,4 +36,7 @@
   - else
     = render :partial => "country_specific_informations/no_preview"
 
+
+%p.disabled-send-button-text
+  The button is still inactive! Please check the form for missing entries (»!«) and make sure you also completed the about you section.
 = link_to "", "#", id:"send", class:"disabled"

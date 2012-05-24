@@ -118,19 +118,17 @@ window.prepare_recipe_uploads = () ->
     false
 
   $('#recipe_images input[type="file"]').fileupload
+    dataType: 'json'
     url: '/recipes/upload_image'
     type: 'POST'
     formData: (form) ->
-      $('ul.file_uploads').append '<li><img src="/assets/ajax-loader.gif" alt="loading"></li>'
-
       [
         name: "authenticity_token"
         value: form.find('input[name="authenticity_token"]').attr('value')
       ]
     done: (e, data) ->
       data.htmlElement.empty()
-      $('ul.file_uploads li:last').empty()
-      $('ul.file_uploads li:last').append('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
+      data.htmlElement.append('<img src="' + data.result[0].thumbnail_url + '" alt="' + data.result[0].name + '"><a href="' + data.result[0].delete_url + '" class="delete">delete</a>')
       $(this).addClass "changed"
 
     fail: (e, data) ->
@@ -138,7 +136,7 @@ window.prepare_recipe_uploads = () ->
 
     add: (e, data) ->
       $('ul.file_uploads').append (index, html) ->
-        file = $('<li>' + data.files[0].name + '</li>')
+        file = $('<li><img src="/assets/ajax-loader.gif" alt="loading"><br>' + data.files[0].name + '</li>')
         data.htmlElement = file
         file
 

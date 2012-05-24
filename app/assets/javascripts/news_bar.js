@@ -1,11 +1,11 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-
+    $("#last_entry").empty()
     $.each(data, function(key, recipe){
       var user_name;
       if(recipe.user_id != null){
         var id = {"id": recipe.user_id};
-        //Get the user, which created the recipe
+        //Get the user, who created the recipe
         $.ajax({
           url: '/users/find_user',
           type: "POST",
@@ -61,8 +61,20 @@ function get_facebook_picture(post, current_post){
 }
 
 function show_facebook_posts(post, current_post, pic){
+  var tmp_message = "";
+  var links_in_message = post.message.match(/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?(\?[;&a-z\d%_.~+=-]*)?/gi);
+  
   current_post.append("<img src='"+pic.picture+"' alt='profile_picture' />");
   current_post.append("<h5>"+post.from.name+"</h5>");
+  
+  for(var i=0;links_in_message && i<links_in_message.length;i++){
+    var link_start_pos = post.message.indexOf(links_in_message[i]);
+    tmp_message = post.message.substring(0, link_start_pos);
+    tmp_message += links_in_message[i].link(links_in_message[i]);
+    tmp_message += post.message.substring(link_start_pos + links_in_message[i].length);
+    post.message = tmp_message;
+  }
+  
   current_post.append("<p class='message'>"+post.message+"</p>");
   current_post.append("<p class='time'>"+ prettyDate(post.created_time) +"</p>");
   $("#fb_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
@@ -161,10 +173,22 @@ function slide_newsbar(){
 }
 
 //Facebook JS SDK
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+if(!$('html').hasClass('ie7')){
+  window.fbAsyncInit = function() {
+    FB.init({
+      channelUrl : 'http://www.jacobjoins.com/pages/fb_channel', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    // Additional initialization code here
+  };
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+}

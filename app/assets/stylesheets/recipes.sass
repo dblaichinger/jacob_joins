@@ -30,6 +30,7 @@
   width: 200px
   height: 450px
   position: relative
+  z-index: 1
   background-image: url(image_path('formnav.png'))
   border-radius: 5px
   +box-shadow(0 0 5px 2px rgba(0,0,0,0.5))
@@ -234,13 +235,13 @@ textarea
         background-image: url(/assets/portions_plus.png)
 
   .ui-rating-full
-    background-position: left top
+    background-position: left bottom
 
   .ui-rating-empty
-    background-position: left -33px
+    background-position: left top
 
   .ui-rating-hover
-    background-position: left -68px
+    background-position: left bottom
 
 #duration
   overflow: visible
@@ -249,7 +250,13 @@ textarea
     float: left
 
   input
-    width: 120px
+    width: 60px
+
+  p
+    width: 58px
+    float: right
+    text-transform: lowercase
+    margin-top: 7px !important
 
 .menge
   width: 65px
@@ -303,7 +310,7 @@ textarea
 .step_label
   font-family: Sanches-SemiBold
   text-transform: uppercase
-  margin-bottom: 5px
+  margin-bottom: 10px
   color: #531E09
   font-size: 14px
 

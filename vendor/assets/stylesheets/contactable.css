@@ -1,0 +1,188 @@
+#contactable #contactable_inner {
+	color:#FFFFFF;
+	cursor:pointer;
+	left:0;
+	margin-left:-5px; 
+	*margin-left:-5px; 
+	overflow:hidden;
+	position:fixed;
+	*position:absolute;
+	text-indent:-100000px;
+	top:270px;
+	*margin-top:10px;
+	z-index:100000;
+	width: 40px;
+  height: 80px;
+  background-image: url("feedback.jpg");
+  background-repeat: repeat;
+  background-position: 0 0;
+}
+
+#contactable #contactForm {
+	background-image: url("pattern_beige.jpg");
+	border:2px solid #fff;
+	color:#FFFFFF;
+	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+	height:450px;
+	left:0;
+	margin-left:-400px;
+	*margin-left:-434px;
+	margin-top:-160px;
+	overflow:hidden;
+	padding-left:30px;
+	position:fixed;
+	top:250px;
+	width:360px;
+	*width:394px;
+	z-index:99;
+}
+
+#contactable form#contactForm input, textarea {
+  background: rgba(83, 30, 9, 0.3);
+	outline-style:none;
+	width:325px;
+	padding:5px;
+  border: 2px solid #fff;
+  padding: 5px;
+  color: #fff;
+  font-family: "PlutoCondensed";
+  font-size: 14px;
+	margin-bottom:15px;
+	margin-top: -5px;
+	color: #fff;
+}
+
+#contactable form#contactForm input:focus, textarea:focus {
+	border: 2px solid #531E09;
+}
+
+
+
+textarea#message{
+	width: 325px;
+}
+
+#contactable form#contactForm .submit {
+	background-image: url("btn_send.jpg");
+	width:93px;
+	padding:5px;
+	font-size:1em;
+	cursor:pointer;
+	color:#FFF;
+	font-family: "PlutoCondensed";
+	text-transform: lowercase;
+	font-weight: normal;
+	margin-top:10px;
+	outline-style:none;
+	border: none;
+}
+
+#contactable form#contactForm .submit:hover {
+	background-position: bottom;
+}
+
+#contactable form#contactForm p {
+	width:325px;
+	font-size:0.9em;
+	color: #531E09;
+}
+
+#contactable form#contactForm .disclaimer {
+	*margin-left:20px;
+}
+
+#contactable #contactForm .red {
+	color:	#E2001A;
+	font-size: 16px;
+	margin-left: 0px !important;
+}
+
+#contactable #overlay {
+	background-color:#666666;
+	display:none;
+	height:100%;
+	left:0;
+	margin:0;
+	padding:0;
+	position:absolute;
+	top:0;
+	width:100%;
+	z-index:0;
+} 
+#contactable .error { border-color: #E2001A; }
+
+#contactable #name.error { border-color: #E2001A; } 
+#contactable #email.error { border-color: #E2001A; }
+#contactable #comment.error { border-color: #E2001A; }
+
+#contactable form#contactForm label{
+	*margin-left:20px;
+  color: #531E09;
+  font-size: 14px;
+  padding-bottom: 5px;
+  font-family: "Sanches-SemiBold";
+  text-transform: uppercase;
+}
+
+div.holder p label.error {display: none !important;}
+
+#contactable form#contactForm p#fields_required{
+	font-size: 14px;
+	color: #E2001A;
+	padding-bottom: 10px;
+}
+
+#contactable form#contactForm p{
+
+  font-family: "PlutoCondensed";
+  color: #531E09;
+  font-size: 14px;
+}
+
+#contactable form#contactForm p#error_feedback {
+	padding-top: 20px;
+}
+
+
+#contactable form#contactForm #loading {
+	background: url(contactable/ajax-loader.gif) no-repeat;
+	width:55px;
+	height:55px;
+	margin: 180px auto;
+	display:none;
+}
+
+#callback {
+	position: relative;
+	left: -10px;
+	width: 245px;
+}
+
+
+#callback h3 {
+	text-transform: uppercase;
+	font-size: 24px;
+	line-height: 1.2em;
+}
+
+#callback span{
+	position: relative;
+	left: -12px;
+	top: 5px;
+}
+
+#contactable #callback {
+	font-family: Sanches-SemiBold;
+	font-size:1.1em;
+	color: #531E09;
+	width:345px;
+	margin: 100px auto;	
+	display:none;
+}
+
+
+#contactable .holder {
+	margin:0 auto;
+	*margin-left:20px;
+	padding-top:20px;	
+}	

@@ -13,5 +13,7 @@
  *= require jquery.qtip
  *= require jquery.rating
  *= require jquery.mCustomScrollbar
+ *= require contactable
+ *= require jquery.lightbox-0.5
  *= require_directory .
 */

@@ -13,9 +13,9 @@
     left: 500px
     width: 210px
     text-align: center
-    background: white
-    border: 3px solid #531E09
+    background: #FFFFFF
     padding: 20px
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
 
     h1 
       margin: 10px 0 0 0
@@ -30,18 +30,17 @@
 
   a
     display: inline-block
-    margin-right: 110px
-    height: 85px
-    width: 155px
-    background-image: url(image_path('clickandsee.png'))
+    margin: 0 auto
+    height: 160px
+    width: 101px
+    margin-top: 8px !important
+    background-image: url(image_path('clickandsee_blob.png'))
     background-repeat: no-repeat
-    background-position: left center
     cursor: pointer
 
     &:hover
-      background-image: url(image_path('clickandsee_hover.png'))
+      background-image: url(image_path('clickandsee_blob.png'))
       background-repeat: no-repeat
-      background-position: left center
 
 #wizard
   width: 1000px
@@ -51,6 +50,33 @@
 
   p
     margin: 20px 0px
+
+  .loadmask
+    position: absolute
+    top: 0
+    left: 240px
+    right: 0
+    bottom: 0
+
+  .loadmask-msg
+    position: absolute
+    position: absolute
+    top: 150px !important
+    left: 500px !important
+    width: 210px
+    text-align: center
+    background: #FFFFFF
+    padding: 20px
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
+
+    h1 
+      margin: 10px 0 0 0
+
+  #preview_tab
+    .loadmask
+      left: 0 !important
+    .loadmask-msg
+      left: 260px !important
 
 =input-placeholder
   color: #fff
@@ -88,10 +114,19 @@ textarea:focus, input:focus
   background-position: 0 -30px
    
 .ui-tabs
-  .ui-tabs-hide
-    position: absolute
-    left: -10000px
-    top: -10000px
+  .ui-tabs-panel
+    position: relative
+
+    &.ui-tabs-hide
+      position: absolute
+      left: -10000px
+      top: -10000px
+
+// force ie7 to rerender
+.ie7
+  .ui-tabs
+    .ui-tabs-hide
+      filter: alpha(opacity = 50)
 
 
 //PREVIEW ================================================================
@@ -107,6 +142,10 @@ textarea:focus, input:focus
     color: #E2001A
     text-transform: uppercase
     font-family: "Pluto-CondensedItalic"
+
+  .wichtig
+    margin: 0 auto 50px auto
+    text-align: center
 
 
 //FINISH BUTTON
@@ -128,6 +167,14 @@ textarea:focus, input:focus
   background-position: 0 -284px
   cursor: default
 
+.disabled-send-button-text
+  width: 315px
+  position: absolute
+  bottom: -80px
+  right: 155px
+  font-family: Pluto-CondensedItalic
+  font-size: 12px
+  text-align: right
 
 //PREVIEW RECIPE
 
@@ -262,19 +309,27 @@ textarea:focus, input:focus
           background-repeat: no-repeat
           text-indent: -3000px
 
-        img
+        .image_preparation_show
           width: 66px
           height: 66px
           float: left
           overflow: hidden
           margin: 0 10px 0px 0px
           border: 2px solid #fff
+          text-align: center
+
+          img
+            width: 66px
+            height: 66px
+
+
 
         p
           margin: 0
           float: right
           width: 280px
           text-align: justify
+
         
   #abyc_preview
     margin-top: 150px
@@ -362,10 +417,15 @@ textarea:focus, input:focus
     float: right
     margin: 0px
     position: absolute
-    top: 0
     right: 0
     border: none
     cursor: pointer
+
+  .edit_recipe 
+    top: 105px
+
+  .edit_answers
+    top: 0
 
 //AFTER FINISH ================================================================
 

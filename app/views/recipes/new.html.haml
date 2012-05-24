@@ -1,5 +1,5 @@
-- if @recipe.steps.count == 0
-  - 3.times { @recipe.steps.build }
+- if (build_steps_count = 3 - @recipe.steps.count) > 0
+  - build_steps_count.times { @recipe.steps.build }
 
 :javascript
   $(document).ready(function(){
@@ -53,6 +53,7 @@
     });
 
     var plusRating = $('#recipe_tab .ui-rating .ui-rating-star:last');
+    plusRating.css('background-image', 'url(/assets/portions_plus.png)');
     $(plusRating).qtip({
       content: "more than six",
       position: {
@@ -63,6 +64,9 @@
           x: -12,
           y: -8
         }
+      },
+      style: {
+        classes: 'tip-brown'
       }
     });
 
@@ -95,6 +99,8 @@
       #duration
         = f.label :duration, "Preparation", id:"duration_label"
         = f.text_field :duration, "data-required" => true, "data-type" => "numerical", placeholder:"minutes", tabindex:"2"
+        %p
+          minutes
 
     #ingredients.part-2
       %h1 
@@ -171,4 +177,4 @@
               = link_to "delete", recipes_delete_image_path(i.id), class:"delete"
               
 
-  = link_to "", '#!/form/country_specific_information_tab', class:"next_tab"
+  = link_to "", '#!/country_specific_information_tab', class:"next_tab"

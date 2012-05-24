@@ -1,4 +1,4 @@
-= link_to "", "#!/form/country_specific_information_tab", class:"edit_answers"
+= link_to "", "#!/country_specific_information_tab", class:"edit_answers"
 
 - if @csi_set.user
   %p
@@ -26,4 +26,4 @@
     = "#{answered_csis.count} of #{Question.count} questions"
 
   - if answered_csis.count < @csi_set.country_specific_informations.count
-    = link_to 'Do you want to tell us more about your country?', "#!/form/country_specific_information_tab", class:"tell_more"
+    = link_to 'Do you want to tell us more about your country?', "#!/country_specific_information_tab", class:"tell_more"

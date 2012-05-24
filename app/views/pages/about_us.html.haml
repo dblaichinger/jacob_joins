@@ -1,0 +1,104 @@
+:javascript
+  $(function() {
+    $('a.lightbox.brief').lightBox({
+      overlayBgColor: '#FFF',
+      overlayOpacity: 0.6,
+      imageLoading: '#{image_path("ajax-loader.gif")}',
+      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
+      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
+      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
+      imageBlank: '#{image_path("lightbox/blank.gif")}',
+      containerResizeSpeed: 350,
+      txtImage: 'Imagem',
+      txtOf: 'de'
+    });
+  });
+
+= render "newsbar_new"
+
+.aboutcontent
+  #teamvorstellung
+    %h1
+      It´s a pleasure to introduce you to our 
+      %span
+        great team! 
+    %hr
+
+    #teamfoto
+      %ul
+        %li#isi
+          .member
+            %h5
+              Ismail Hanli
+            %p
+              Webdeveloper
+        %li#marta
+          .member
+            %h5
+              Marta Janosz
+            %p
+              Webdeveloper
+        %li#alex
+          .member
+            %h5
+              Alexander Flatscher
+            %p
+              Webdeveloper
+        %li#martina
+          .member
+            %h5
+              Martina Edelhofer
+            %p
+              Webdeveloper
+        %li#doris
+          .member
+            %h5
+              Doris Wimmer
+            %p
+              Webdeveloper
+        %li#tina
+          .member
+            %h5
+              Kristina Fallenegger
+            %p
+              Webdeveloper
+        %li#daniel
+          .member
+            %h5
+              Daniel Blaichinger
+            %p
+              Webdeveloper
+        %li#daniela
+          .member
+            %h5
+              Daniela Rieser
+            %p
+              Webdeveloper
+
+    %p.aboutteam
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+
+
+#projektteile
+  %h1
+    Here you see project bla bla bla 
+    %span
+        
+  %hr
+
+  = image_tag 'Slider_JacobJoins.jpg', class:"jj-lettering"
+
+  %ul#projektarbeiten
+    %li.brief
+      %h4
+        100 Letters
+      %p
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+      #lightbox_brief
+        = link_to image_tag('briefe/02-tisch.jpg'), image_path('daniela.jpg'), class:"lightbox brief"
+        = link_to "", image_path('isi.jpg'), class:"lightbox brief"
+        = link_to "", image_path('doris.jpg'), class:"lightbox brief"
+  
+
+= render "footer"
