@@ -70,7 +70,7 @@ function show_facebook_posts(post, current_post, pic){
   for(var i=0;links_in_message && i<links_in_message.length;i++){
     var link_start_pos = post.message.indexOf(links_in_message[i]);
     tmp_message = post.message.substring(0, link_start_pos);
-    tmp_message += "<a class='hyphenate' href='" + links_in_message[i] + "'>" + links_in_message[i] + "</a>";
+    tmp_message += links_in_message[i].link(links_in_message[i]);
     tmp_message += post.message.substring(link_start_pos + links_in_message[i].length);
     post.message = tmp_message;
   }
