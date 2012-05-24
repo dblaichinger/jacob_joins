@@ -32,4 +32,5 @@
 //= require jquery.validate.pack
 //= require jquery.contactable
 //= require jquery.loadmask.min
+//= require jquery.lightbox-0.5.pack
 //= require_tree .
