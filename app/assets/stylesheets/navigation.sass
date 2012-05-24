@@ -1,3 +1,5 @@
+@import "mixins"
+
 #newsbar
   height: 280px
   background-image: url(image_path('newsbar_offen_repeat.png'))
@@ -11,7 +13,7 @@
   cursor: pointer
   display: none
 
-  #newsbar_content
+  #newsbar_content_
     background-image: url(image_path('newsbar_offen2.png'))
     background-position: top center
     width: 1000px
@@ -28,12 +30,12 @@
       font-size: 20px
       overflow: visible
 
-    #fb, #entries
+    #fb_, #entries_
       float: left
       width: 300px
       margin-top: 20px
 
-    #fb
+    #fb_
       height: 230px
       position: relative
       cursor: default
@@ -42,30 +44,30 @@
         margin-top: 1px
         overflow: visible
 
-      .mcs_container
+      .mcs_container_
         display: none
-      #fb_error
+      #fb_error_
         margin-top: 10px
         font-size: 12px
 
-      .fblike
+      .fblike_
         text-decoration: none
         color: #fff
         display: block
         width: 280px
         height: 20px
 
-      .fblike:hover
+      .fblike_:hover
         color: $rot
 
-      .fb-like
+      .fb-like_
         width: 150px
         height: 25px
         position: absolute
         bottom: 0px
         right: 30px
 
-      .post
+      .post_
         overflow: hidden
         margin: 10px 0px
         padding-top: 5px
@@ -81,22 +83,22 @@
           margin-bottom: 5px
           font-size: 14px
 
-        .message
+        .message_
           font-size: 12px
           margin: 0 10px 0 60px
 
-        .time
+        .time_
           font-size: 10px
           font-family: "Pluto-LightCondensed"
           margin: 5px 0 0 60px
 
-    #entries
+    #entries_
       margin-left: 30px
       height: 190px
       overflow: hidden
       cursor: default
 
-      #last_entry
+      #last_entry_
         padding-top: 10px
         
         p
@@ -110,37 +112,37 @@
           font-family: "Pluto-LightCondensed"
           margin-bottom: 10px
 
-    #fancy_counter
+    #fancy_counter_
       float: right
       margin: 20px 0
       height: 190px
       cursor: default
 
-      .text
+      .text_
         position: absolute
         bottom: 0
         font-family: "Pluto-CondensedItalic"
         width: 70px
         text-align: center
 
-      .display
+      .display_
         font-family: "Sanches-Bold"
 
-    #countdown
+    #countdown_
       position: absolute
       bottom: 35px
       right: 15px
       font-family: "Sanches-Semibold"
 
-      .countdown_kl, #days, #hours, #minutes, #seconds
+      .countdown_kl_, #days_, #hours_, #minutes_, #seconds_
         float: left
         margin-right: 5px
 
-      .countdown_kl
+      .countdown_kl_
         margin-right: 10px
         font-family: "Sanches-Italic"
 
-  #logo
+  #logo_
     clear: both
 
     img
@@ -150,7 +152,7 @@
       margin: 0 auto 0 auto
 
 
-  #beta
+  #beta_
     background-image: url(image_path('beta.png'))
     width: 48px
     height: 48px
