@@ -32,7 +32,7 @@ $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar")
     newsbar.visibleAfter "destroy"
-    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800#,
+    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
       onAfter: ->
         newsbar.visibleAfter $("#start")
         newsbar.fadeIn 500
@@ -102,6 +102,7 @@ $ ->
           alert "Unable to save user information (maybe not provided)."
 
         $("#preview_tab").stop(true, true).fadeIn 200, hideWizardLoader
+        get_latest_recipe()
 
     false
 
