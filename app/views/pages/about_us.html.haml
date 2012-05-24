@@ -1,3 +1,21 @@
+:javascript
+  $(function() {
+    $('a.lightbox.team').lightBox({
+      overlayBgColor: '#FFF',
+      overlayOpacity: 0.6,
+      imageLoading: '#{image_path("ajax-loader.gif")}',
+      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
+      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
+      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
+      imageBlank: '#{image_path("lightbox/blank.gif")}',
+      containerResizeSpeed: 350,
+      txtImage: 'Imagem',
+      txtOf: 'de'
+    });
+  });
+
+= render "newsbar_new"
+
 .aboutcontent
   #teamvorstellung
     %h1
@@ -69,4 +87,13 @@
         
   %hr
 
-#footer
+  = link_to image_tag('team.jpg'), image_path('daniela.jpg'), class:"lightbox team"
+  = link_to "", image_path('isi.jpg'), class:"lightbox team"
+  = link_to "", image_path('doris.jpg'), class:"lightbox team"
+  = link_to "", image_path('marta.jpg'), class:"lightbox team"
+  = link_to "", image_path('martina.jpg'), class:"lightbox team"
+  = link_to "", image_path('daniel.jpg'), class:"lightbox team"
+  = link_to "", image_path('tina.jpg'), class:"lightbox team"
+  = link_to "", image_path('alex.jpg'), class:"lightbox team"
+
+= render "footer"
