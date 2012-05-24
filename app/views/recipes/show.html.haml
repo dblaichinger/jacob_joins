@@ -7,7 +7,7 @@
     - @recipe.images.each do |image|
       = image_tag image.attachment(:medium)
   -else
-    = image_tag asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"
+    = link_to image_tag(asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"), "#!/recipe_tab"
 
 %div#prev_recipe_info
   %h1
@@ -50,7 +50,7 @@
         - if step.image.present?
           = image_tag step.image(:small)
         - else
-          = image_tag asset_path("no_image_prev_steps.png"), class:"missing", alt:"missing_image"
+          = image_tag asset_path("no_image_prev_steps.png"), class:"missing", alt:"missing_image", :size => "66x66"
       %p
         %em
           = "Step #{index + 1}"
