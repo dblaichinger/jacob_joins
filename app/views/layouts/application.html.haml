@@ -19,6 +19,7 @@
     = javascript_include_tag "application"
 
     :javascript
+
       $(document).ready(function(){
         get_latest_recipe();
         $('#fancy_counter').tzineClock();
@@ -26,7 +27,6 @@
         $("#newsbar").visibleAfter($("#start"));
 
         #{growl_flash_messages}
-
       });
 
       $(window).load(function(){
@@ -35,7 +35,7 @@
       });
 
     = csrf_meta_tags
-    %meta{:charset => "utf-8"}
+    %meta{ charset:"utf-8" }
 
   %body
     %section.flash_notifications

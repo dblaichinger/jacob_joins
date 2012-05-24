@@ -1,6 +1,10 @@
-###deactivatePlaceholders = (parent) ->
+deactivatePlaceholders = (parent) ->
   parent.find('.placeholder').each ->
-    $(this).val("") if $(this).val() is $(this).attr("placeholder")###
+    $(this).val("") if $(this).val() is $(this).attr("placeholder")
+
+activatePlaceholders = (parent) ->
+  parent.find('.placeholder').each ->
+    $(this).val($(this).attr("placeholder")) if $(this).val() is ""
 
 showWizardLoader = (callback) ->
   $('#wizard-loader').stop(true, true).fadeIn 500, callback
@@ -159,7 +163,9 @@ $ ->
 
     if oldTabIndex < $('#wizard').tabs('length') and oldTab.find(":input").hasClass("changed")
       url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
+      deactivatePlaceholders(oldTab)
       params = oldTab.children('form').serializeArray()
+      activatePlaceholders(oldTab)
 
       actual_form = oldTab.find("form")
       actual_nav_link = $('.ui-state-active')
