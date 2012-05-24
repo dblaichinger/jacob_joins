@@ -61,8 +61,20 @@ function get_facebook_picture(post, current_post){
 }
 
 function show_facebook_posts(post, current_post, pic){
+  var tmp_message = "";
+  var links_in_message = post.message.match(/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?(\?[;&a-z\d%_.~+=-]*)?/gi);
+  
   current_post.append("<img src='"+pic.picture+"' alt='profile_picture' />");
   current_post.append("<h5>"+post.from.name+"</h5>");
+  
+  for(var i=0;links_in_message && i<links_in_message.length;i++){
+    var link_start_pos = post.message.indexOf(links_in_message[i]);
+    tmp_message = post.message.substring(0, link_start_pos);
+    tmp_message += links_in_message[i].link(links_in_message[i]);
+    tmp_message += post.message.substring(link_start_pos + links_in_message[i].length);
+    post.message = tmp_message;
+  }
+  
   current_post.append("<p class='message'>"+post.message+"</p>");
   current_post.append("<p class='time'>"+ prettyDate(post.created_time) +"</p>");
   $("#fb_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
