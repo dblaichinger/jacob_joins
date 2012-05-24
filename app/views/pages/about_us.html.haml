@@ -1,6 +1,6 @@
 :javascript
   $(function() {
-    $('a.lightbox.team').lightBox({
+    $('a.lightbox.brief').lightBox({
       overlayBgColor: '#FFF',
       overlayOpacity: 0.6,
       imageLoading: '#{image_path("ajax-loader.gif")}',
@@ -78,7 +78,6 @@
     %p.aboutteam
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
 
-.uebergang5
 
 #projektteile
   %h1
@@ -87,13 +86,19 @@
         
   %hr
 
-  = link_to image_tag('team.jpg'), image_path('daniela.jpg'), class:"lightbox team"
-  = link_to "", image_path('isi.jpg'), class:"lightbox team"
-  = link_to "", image_path('doris.jpg'), class:"lightbox team"
-  = link_to "", image_path('marta.jpg'), class:"lightbox team"
-  = link_to "", image_path('martina.jpg'), class:"lightbox team"
-  = link_to "", image_path('daniel.jpg'), class:"lightbox team"
-  = link_to "", image_path('tina.jpg'), class:"lightbox team"
-  = link_to "", image_path('alex.jpg'), class:"lightbox team"
+  = image_tag 'Slider_JacobJoins.jpg', class:"jj-lettering"
+
+  %ul#projektarbeiten
+    %li.brief
+      %h4
+        100 Letters
+      %p
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+      #lightbox_brief
+        = link_to image_tag('briefe/02-tisch.jpg'), image_path('daniela.jpg'), class:"lightbox brief"
+        = link_to "", image_path('isi.jpg'), class:"lightbox brief"
+        = link_to "", image_path('doris.jpg'), class:"lightbox brief"
+  
 
 = render "footer"
