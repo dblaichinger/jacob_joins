@@ -1,11 +1,11 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-
+    $("#last_entry").empty()
     $.each(data, function(key, recipe){
       var user_name;
       if(recipe.user_id != null){
         var id = {"id": recipe.user_id};
-        //Get the user, which created the recipe
+        //Get the user, who created the recipe
         $.ajax({
           url: '/users/find_user',
           type: "POST",

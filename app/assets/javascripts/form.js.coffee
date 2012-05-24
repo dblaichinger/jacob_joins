@@ -98,6 +98,7 @@ $ ->
           alert "Unable to save user information (maybe not provided)."
 
         $("#preview_tab").stop(true, true).fadeIn 200, hideWizardLoader
+        get_latest_recipe()
 
     false
 
