@@ -8,9 +8,19 @@
       imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
       imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
       imageBlank: '#{image_path("lightbox/blank.gif")}',
-      containerResizeSpeed: 350,
-      txtImage: 'Imagem',
-      txtOf: 'de'
+      containerResizeSpeed: 350
+    });
+  });
+  $(function() {
+    $('a.lightbox.bierdeckel').lightBox({
+      overlayBgColor: '#FFF',
+      overlayOpacity: 0.6,
+      imageLoading: '#{image_path("ajax-loader.gif")}',
+      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
+      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
+      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
+      imageBlank: '#{image_path("lightbox/blank.gif")}',
+      containerResizeSpeed: 350
     });
   });
 
@@ -19,7 +29,7 @@
 .aboutcontent
   #teamvorstellung
     %h1
-      It´s a pleasure to introduce you to our 
+      It’s a pleasure to introduce you to our 
       %span
         great team! 
     %hr
@@ -90,15 +100,78 @@
 
   %ul#projektarbeiten
     %li.brief
-      %h4
-        100 Letters
-      %p
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      .projektinfo
+        %h4
+          100 Letters
+        %p
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
 
-      #lightbox_brief
-        = link_to image_tag('briefe/02-tisch.jpg'), image_path('daniela.jpg'), class:"lightbox brief"
-        = link_to "", image_path('isi.jpg'), class:"lightbox brief"
-        = link_to "", image_path('doris.jpg'), class:"lightbox brief"
-  
+      #lightbox_container
+        = link_to image_tag('briefe/02-tisch.jpg', class:"lightbox_first"), image_path('briefe/02-tisch.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1029.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1035.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1045.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1050.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1066.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1071.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1078.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1269.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/01-briefe.jpg'), class:"lightbox brief", title:"table bla"
+
+    %li.brief
+      .projektinfo
+        %h4
+          Letterpress coasters
+        %p
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+      #lightbox_container
+        = link_to image_tag('bierdeckel/IMG_5039.jpg', class:"lightbox_first"), image_path('bierdeckel/IMG_5039.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_4989.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_4993.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_5023.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_5035.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_4994.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_5028.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_5037.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to "", image_path('bierdeckel/IMG_5067.jpg'), class:"lightbox bierdeckel", title:"table bla"
+    %li.brief
+      .projektinfo
+        %h4
+          Food Lettering
+        %p
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+      #lightbox_container
+        = link_to image_tag('briefe/02-tisch.jpg', class:"lightbox_first"), image_path('briefe/02-tisch.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1029.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1035.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1045.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1050.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1066.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1071.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1078.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1269.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/01-briefe.jpg'), class:"lightbox brief", title:"table bla"
+
+
+    %li.brief
+      .projektinfo
+        %h4
+          Sponsoring
+        %p
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+      #lightbox_container
+        = link_to image_tag('briefe/02-tisch.jpg', class:"lightbox_first"), image_path('briefe/02-tisch.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1029.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1035.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1045.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1050.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1066.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1071.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1078.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/DSC_1269.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to "", image_path('briefe/01-briefe.jpg'), class:"lightbox brief", title:"table bla"
 
 = render "footer"
