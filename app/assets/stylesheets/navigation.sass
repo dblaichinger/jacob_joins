@@ -20,6 +20,43 @@
     margin: 0 auto
     overflow: hidden
     cursor: pointer
+
+    #navi_neu
+      ul
+        width: 1000px
+        float: left
+        position: relative
+        top: -22px
+
+        li
+          a
+            +navi
+            float: left
+          a:hover
+            color: red
+
+        #home, #story, #about  
+          a
+            padding-right: 40px
+        
+        #contact
+          position: absolute
+          right: 0
+          padding-right: 0
+
+        #search
+          position: absolute
+          right: 120px
+
+        #form
+          position: absolute
+          right: 235px
+
+
+
+
+
+
     h1
       display: none
       overflow: visible
@@ -147,14 +184,5 @@
     img
       display: block
       position: relative
-      top: -34px
+      top: -39px
       margin: 0 auto 0 auto
-
-
-  #beta_
-    background-image: url(image_path('beta.png'))
-    width: 48px
-    height: 48px
-    position: absolute
-    top: 212px
-    left: 0px
