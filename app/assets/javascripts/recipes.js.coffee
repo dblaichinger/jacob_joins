@@ -92,6 +92,7 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       data.submit()
     fail: (e, data) ->
       alert "Couldn't upload image"
+      $('#' + currentFileInput.attr('id')).parent().next().remove()
 
 window.prepare_recipe_uploads = () ->
   $('.steps .step input[type="file"]').each (index) ->
@@ -133,6 +134,7 @@ window.prepare_recipe_uploads = () ->
 
     fail: (e, data) ->
       alert 'Upload of "' + data.files[0].name + '" failed!'
+      $('ul.file_uploads img:last').parent("li").remove()
 
     add: (e, data) ->
       $('ul.file_uploads').append (index, html) ->
