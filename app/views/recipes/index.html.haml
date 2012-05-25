@@ -1,107 +1,50 @@
 :javascript
   $(document).ready(function(){
-    initInfobox();
-    initClusterer();
     $("#toggle_sidebar").click(function(){switchSidebar();});
-    
-    Gmaps.map.callback = function() {
-       for (var i = 0; i < Gmaps.map.markers.length; ++i) {
-        var marker = Gmaps.map.markers[i].serviceObject
-        marker.description = Gmaps.map.markers[i].description;
-        //console.debug(Gmaps.map.markers[i]);
-        google.maps.event.addListener(marker, 'click', function(i){
-          console.debug(marker);
-          showRecipeSidebar(marker);
-        });
-      }
-      //$.each(Gmaps.map.markers, function(index, marker){
-      //  console.debug(marker);
-      //  google.maps.event.addListener(marker, "click", function() {
-      //    alert("click");
-      //    console.debug("click");
-      //});
-    }
-    
-    //var marker;
-    //marker = new google.maps.Marker({
-    //  map: Gmaps.map
-    //});
-
-    //google.maps.event.addListener(Gmaps.map.markers, 'click', function (){ 
-    //  alert("click");
-    //});
-    //console.debug(Gmaps.map.markers);
-
-    
   });
 
-  $(window).load(function(){
-    $('#map').css('height', ($(document).height()-50+"px"));
 
-  });
+.right-haupt
+  .uebergang-seitenleiste
+    .seitenleiste
+      .seitenleistecontent
+        = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
 
--#content_for :scripts do
-  :javascript
-    //Gmaps.map.addListener(marker, "click", function() {
-    //  alert("click");
-    //});
+        %p
+          This project wants to 
+          %em 
+            give a pure impression of the different eating habits 
+          and cultures all over the world. 
+          %em 
+            The aim is to collect international recipes. 
 
-    //Gmaps4Rails.callback = function() {
-    //  function say_yo(arg) { return function(){alert('yo '+ arg + '!' );};};
-    //  for (var i = 0; i <  Gmaps4Rails.markers.length; ++i) {
-    //    google.maps.event.addListener(Gmaps4Rails.markers[i].google_object, 'click', redirect_to(Gmaps4Rails.markers[i].link));
-    //  }
+        #toggle_sidebar
 
-
-#start
-
-.wrapper-haupt
-
-  .left-haupt
-    = #@location
-    = #gmaps4rails(@location)
-    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
-
-  .right-haupt
-    .uebergang-seitenleiste
-      .seitenleiste
-        .seitenleistecontent
-          = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
-
+        #jacob-who
+          = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
+                
+          %h3
+            = link_to 'Who is Jacob?', "#story_1", class:"who"
           %p
-            This project wants to 
-            %em 
-              give a pure impression of the different eating habits 
-            and cultures all over the world. 
-            %em 
-              The aim is to collect international recipes. 
+            = link_to 'Click to get introduced to the story.', "#story_1"
 
-          #toggle_sidebar
+        %hr
 
-          #jacob-who
-            = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
-                  
-            %h3
-              = link_to 'Who is Jacob?', "#story_1", class:"who"
+        .postedrecipe
+          .infoleft
+            = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
+            = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
+          .inforight
+            %h4
+              Posted recipe
             %p
-              = link_to 'Click to get introduced to the story.', "#story_1"
+              These markers point out that there is a recipe to look up.
+            %p
+              If there is a number, then there are more recipes than one.
+              Check out what people of this part of the world are cooking.
 
-          %hr
+      
 
-          .postedrecipe
-            .infoleft
-              = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
-              = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
-            .inforight
-              %h4
-                Posted recipe
-              %p
-                These markers point out that there is a recipe to look up.
-              %p
-                If there is a number, then there are more recipes than one.
-                Check out what people of this part of the world are cooking.
+        %p.gotoform
+          = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
 
-        
-
-          %p.gotoform
-            = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"

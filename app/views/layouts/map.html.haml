@@ -1,0 +1,35 @@
+- content_for :content do
+  :javascript
+    $(document).ready(function(){
+      initInfobox();
+      initClusterer();
+      
+      Gmaps.map.callback = function() {
+         for (var i = 0; i < Gmaps.map.markers.length; ++i) {
+          var marker = Gmaps.map.markers[i].serviceObject
+          marker.description = Gmaps.map.markers[i].description;
+          google.maps.event.addListener(marker, 'click', function(i){
+            console.debug(marker);
+            showRecipeSidebar(marker);
+          });
+        }
+      }
+    });
+
+    $(window).load(function(){
+      $('#map').css('height', ($(document).height()-50+"px"));
+
+    });
+
+  #start
+
+  .wrapper-haupt
+
+    .left-haupt
+      = #@location
+      = #gmaps4rails(@location)
+      = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
+
+    = content_for?(:map_content) ? yield(:map_content) : yield
+
+= render :template => 'layouts/application'
