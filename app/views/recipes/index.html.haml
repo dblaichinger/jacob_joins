@@ -30,11 +30,18 @@
         %hr
 
         .postedrecipe
-          = image_tag 'google_marker.png', class:"marker-info"
-          %h4
-            Posted recipe
-          %p
-            These markers point out that there is a recipe to look up bla bla bla bla lorem ipsum das ist ein Text.
+          .infoleft
+            = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
+            = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
+          .inforight
+            %h4
+              Posted recipe
+            %p
+              These markers point out that there is a recipe to look up.
+            %p
+              If there is a number, there are more recipes than one.
+              %br
+              Check out what people of this part of the world are cooking.
 
       
 
