@@ -147,14 +147,13 @@ function slide_newsbar(){
     return false;
   });
 
-  var event_set = false;
   $(document).ready(function(){
     $("#newsbar").hover(
       function(){
-        if(event_set) { event_set = false; showClickAndSee(); }
+        showClickAndSee();
       },
       function(){
-        if(!event_set) { event_set = true; hideClickAndSee(); }
+        hideClickAndSee();
       }
     );
   });
