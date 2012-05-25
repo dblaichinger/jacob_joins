@@ -1,6 +1,23 @@
+:javascript
+  $(document).ready(function(){
+
+    $('#ingredients_search_form').bind("ajax:success", function(evt, data, status, xhr){
+      recipesSearch.printResults(data);   
+    })
+    .bind("ajax:error", function(evt, xhr, status, error){
+      console.log("Cannot find any ingredient due to the following reason: "+error)
+    });
+
+    $('.search #ingredients_search').autocomplete({
+      source: '/ingredients/names',
+      minLength: 2,
+      select: recipesSearch.ingredientsSearchSelectHandler
+    });
+  });
+
 #start
-#wrapper-haupt
-  #right-haupt
+.wrapper-haupt
+  .right-haupt
     .uebergang-seitenleiste
       .seitenleiste
         .search
@@ -8,7 +25,7 @@
             ***SEARCH FOR RECIPE***
 
             = form_tag recipes_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" }, :id => "ingredients_search_form" do
-              = text_field_tag 'ingredients[search]', nil, :id => 'search_field'
+              = text_field_tag 'ingredients[search]'
               #search_hidden
               = submit_tag "Search", :name => nil 
 
