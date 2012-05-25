@@ -8,61 +8,30 @@
        for (var i = 0; i < Gmaps.map.markers.length; ++i) {
         var marker = Gmaps.map.markers[i].serviceObject
         marker.description = Gmaps.map.markers[i].description;
-        //console.debug(Gmaps.map.markers[i]);
+        console.debug(Gmaps.map.markers[i]);
         google.maps.event.addListener(marker, 'click', function(i){
-          console.debug(marker);
-          showRecipeSidebar(marker);
+          console.debug(this);
+          showRecipeSidebar(this);
         });
       }
-      //$.each(Gmaps.map.markers, function(index, marker){
-      //  console.debug(marker);
-      //  google.maps.event.addListener(marker, "click", function() {
-      //    alert("click");
-      //    console.debug("click");
-      //});
-    }
-    
-    //var marker;
-    //marker = new google.maps.Marker({
-    //  map: Gmaps.map
-    //});
-
-    //google.maps.event.addListener(Gmaps.map.markers, 'click', function (){ 
-    //  alert("click");
-    //});
-    //console.debug(Gmaps.map.markers);
-
-    
+    }   
   });
 
   $(window).load(function(){
     $('#map').css('height', ($(document).height()-50+"px"));
-
+    $('#right-haupt').css('min-height', ($(document).height()+"px"));
   });
-
--#content_for :scripts do
-  :javascript
-    //Gmaps.map.addListener(marker, "click", function() {
-    //  alert("click");
-    //});
-
-    //Gmaps4Rails.callback = function() {
-    //  function say_yo(arg) { return function(){alert('yo '+ arg + '!' );};};
-    //  for (var i = 0; i <  Gmaps4Rails.markers.length; ++i) {
-    //    google.maps.event.addListener(Gmaps4Rails.markers[i].google_object, 'click', redirect_to(Gmaps4Rails.markers[i].link));
-    //  }
-
 
 #start
 
-#wrapper-haupt
+.wrapper-haupt
 
-  #left-haupt
+  .left-haupt
     = #@location
     = #gmaps4rails(@location)
     = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
 
-  #right-haupt
+  .right-haupt
     .uebergang-seitenleiste
       .seitenleiste
         = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"

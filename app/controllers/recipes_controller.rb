@@ -92,9 +92,7 @@ class RecipesController < ApplicationController
   def getSidebar
     respond_to do |format|
       format.json{
-        render :layout => false
-        #render :partial => 'search', :layout=>false#, :locals => {:marker => params[:marker]}
-        #render :json => {:params => params}
+        render :file => 'recipes/search.html.haml'#, :layout=>false#, :locals => {:marker => params[:marker]}
       }
     end
   end
