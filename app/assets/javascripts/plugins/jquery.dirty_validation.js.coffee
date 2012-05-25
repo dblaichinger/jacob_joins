@@ -36,7 +36,7 @@ validateType = (input) ->
     when "numerical"
       return not isNaN input.val()
     when "text"
-      regex = /[^a-zß-ü_\s-]/i
+      regex = /[^a-zß-ü_\s-().,]/i
       return not regex.test input.val()
 
 fieldIsValid = (input) ->
