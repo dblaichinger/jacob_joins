@@ -15,4 +15,12 @@
   height: 100%;
 }
 
+.gmnoprint span{
+  font-family: "Pluto-CondensedItalic";
+  font-size: 12px;
+  line-height: 1.4em;
+  color: #531E09;
+  background-color: rgba(255,255,255,0.9);
+}
+
 .yellow { border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px; }

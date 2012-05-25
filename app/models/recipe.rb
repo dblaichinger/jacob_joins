@@ -89,8 +89,8 @@ class Recipe
   def gmaps4rails_marker_picture
   {
     "picture" => "/assets/google_marker_small.png",  # string,  mandatory
-     "width" =>  32,          # integer, mandatory
-     "height" => 32,          # integer, mandatory
+     "width" =>  30,          # integer, mandatory
+     "height" => 50,          # integer, mandatory
      "marker_anchor" => nil,   # array,   facultative
      "shadow_picture" => nil,  # string,  facultative
      "shadow_width" => nil,    # string,  facultative

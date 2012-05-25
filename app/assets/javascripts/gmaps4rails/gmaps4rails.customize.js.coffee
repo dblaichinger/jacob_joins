@@ -19,17 +19,22 @@ window.initInfobox = ->
 
 window.initClusterer = ->
   Gmaps.map.customClusterer = ->
-    url = "http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/1.0/images/"
+    url = "/assets/"
     [
-      url: url + "heart30.png"
-      height: 26
-      width: 30
+      textColor: "#531E09"
+      url: url + "sammelmarker1.png"
+      height: 90
+      width: 90
     ,
-      url: url + "heart40.png"
-      height: 35
-      width: 40
+      textColor: "#531E09"
+      textSize: 18
+      anchor: [15, 27]
+      url: url + "sammelmarker2.png"
+      height: 75
+      width: 75
     ,
-      url: url + "heart50.png"
-      width: 50
-      height: 44
-     ]
+      textColor: "#531E09"
+      url: url + "sammelmarker3.png"
+      width: 60
+      height: 60
+    ]
