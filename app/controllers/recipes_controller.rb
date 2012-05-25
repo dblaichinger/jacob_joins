@@ -13,6 +13,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
     @location = Recipe.all.to_gmaps4rails
+    render :layout => 'map'
   end
 
   def update
@@ -91,17 +92,13 @@ class RecipesController < ApplicationController
 
   def getSidebar
     respond_to do |format|
-      format.json{
-        render :layout => false
-        #render :partial => 'search', :layout=>false#, :locals => {:marker => params[:marker]}
-        #render :json => {:params => params}
-      }
+      format.json { render :file => 'recipes/search.html.haml' }
     end
   end
 
   def search
     respond_to do |format|
-      format.json {
+      format.json do
         @ingredients = params[:ingredients].select {|i| i != ""}
         @recipes = []
         @recipe_match = []
@@ -126,8 +123,11 @@ class RecipesController < ApplicationController
           end
           @recipes.sort! {|a,b| b["count"] <=> a["count"]}
         end
-      }
-      format.html
+      end
+      format.html do
+        @location = Recipe.all.to_gmaps4rails
+        render :layout => 'map'
+      end
     end
   end
 

@@ -60,7 +60,7 @@
     = render "layouts/contactable"
 
     = yield :scripts
-    = yield
+    = content_for?(:content) ? yield(:content) : yield
 
 
     
