@@ -58,7 +58,7 @@ class Recipe
 
   def self.search_by_ingredient(name)
     ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
-      Recipe.where({"ingredients_with_quantities.name" => name}).cache
+      Recipe.where({"ingredients_with_quantities.name" => name, :state => "published"}).includes(:user)
     end
   end
 
