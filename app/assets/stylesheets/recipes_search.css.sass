@@ -1,0 +1,22 @@
+.search
+  top:  150px
+  position: relative
+
+  h1
+    margin-top: 30px
+
+  #search_selection, #search_result
+    position: relative
+    left: 30px
+
+  #search_selection
+    a.search_remove_ingredient
+      width: 20px
+      height: 20px
+      display: inline-block
+      text-indent: -1000px
+      overflow: hidden
+      background: url(image_path("delete_image_sprite.png")) left top
+
+      &:hover
+        background-position: 0 -20px

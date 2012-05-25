@@ -3,11 +3,6 @@
   $(function(){
     if(!$('html').hasClass('ie7'))
       $('.stories').fancyStoryEffect();
-
-     $('#contactable').contactable({
-      subject: 'A Feeback Message',
-      url: '/feedback'
-     });
   });
 
 = render "newsbar_old"
@@ -123,11 +118,6 @@
     .loader
       = image_tag 'ajax-loader.gif'
       %h1 loading ...
-
-#contactable
-  %div{ style:"margin:0;padding:0;display:inline"}
-    = hidden_field_tag "utf8", "✓"
-    = hidden_field_tag "authenticity_token", form_authenticity_token
 
 = render "footer"
 
