@@ -1,0 +1,41 @@
+#start
+
+.wrapper-haupt
+
+  .left-haupt_recipe
+    %div
+      %h1
+        X Hier Rezeptname X
+      %hr
+      %p
+        cooked by Marta J. from Poland  
+
+    .recipe_imagesteps
+      = image_tag 'proberezept.jpg', id:"recipe_imagesteps_image"
+
+      %p
+        Beschreibung lorem ipsum
+
+    .recipe_steps_klein
+      %h1
+        Ingredients for X Persons
+      .recipe_steps_klein_numbers
+        %strong 1
+      .recipe_steps_klein_bild
+        = image_tag 'step1.jpg', id:"steps"         
+      .recipe_steps_klein_beschreibung
+        %p
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+  .right-haupt
+    .uebergang-seitenleiste
+      .seitenleiste
+       
+
+
+= yield :scripts          
+
+
+
