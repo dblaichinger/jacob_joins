@@ -218,5 +218,3 @@ $ ->
           window.setTimeout(loadPreview, 100)
 
       loadPreview()
-
-
