@@ -17,16 +17,29 @@
     /[if lte IE 6]
       = javascript_include_tag "ie/pngfix"
 
-    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
+
+    = #javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
     = javascript_include_tag "application"
 
     :javascript
 
       $(document).ready(function(){
+        var passCount = 0;
         $('#fancy_counter').tzineClock();
         slide_newsbar();
-        $("#newsbar").visibleAfter($("#start"));
+        $("#newsbar").executeAt($("#start"), function(){
+          $("#newsbar").fadeOut(500);
+        },
+        function(){
+          $("#newsbar").fadeIn(500);
 
+          if(passCount == 0){
+            showClickAndSee();
+            setTimeout("hideClickAndSee()", 2000);
+            passCount++;
+          }
+        });
+        
         #{growl_flash_messages}
       });
 
@@ -44,6 +57,7 @@
         %div{ class:"flash_#{key}"}
           = value 
 
+    = yield :scripts
     = yield
 
     

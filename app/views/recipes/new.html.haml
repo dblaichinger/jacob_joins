@@ -114,10 +114,7 @@
       %p
         Press the "+/-" button to add or remove ingredients. You don’t need one of our three already selected ingredients? Just replace it by another one. Of course you can also split the ingredients in two or three courses by explaining the preparation step by step (3).
 
-      - if @recipe.errors.any?
-        = prefill_ingredient_fields(f, @recipe).html_safe
-      - else
-        = render_default_ingredient_fields(f, @recipe).html_safe
+      = render_default_ingredient_fields(f, @recipe).html_safe
 
   #right
     #preparation.part-3

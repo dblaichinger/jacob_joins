@@ -22,8 +22,9 @@ class Recipe
   #field :location, type: Array, spacial: {lat: :latitude, lng: :longitude, return_array: true }
   #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   #geo_index :location
-  field :gmaps, :type => Boolean
+  #field :gmaps, :type => Boolean
   attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes
+
 
   index "ingredient_with_quantities.name"
 
@@ -70,9 +71,32 @@ class Recipe
     end
   end
 
-  #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+  #Methods for Gmaps4rails
   def gmaps4rails_address
    "#{self.city}, #{self.country}" 
+  end
+
+  def gmaps4rails_infowindow
+    output = []
+    if self.images.present?
+      #output << "#{image_tag self.images.attachment(:small)}"
+      #output << "<img src='#{self.images.attachment(:small)}' />"
+    end
+    output << "<a href='/recipes/#{self.slug}'>#{self.name}</a>"
+    output << "#{self.city}"
+  end
+
+  def gmaps4rails_marker_picture
+  {
+    "picture" => "/assets/google_marker_small.png",  # string,  mandatory
+     "width" =>  32,          # integer, mandatory
+     "height" => 32,          # integer, mandatory
+     "marker_anchor" => nil,   # array,   facultative
+     "shadow_picture" => nil,  # string,  facultative
+     "shadow_width" => nil,    # string,  facultative
+     "shadow_height" => nil,   # string,  facultative
+     "shadow_anchor" => nil,   # string,  facultative
+  }
   end
 
   private
