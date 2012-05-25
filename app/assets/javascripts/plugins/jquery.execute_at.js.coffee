@@ -1,26 +1,26 @@
 $ = jQuery
 
 publicMethods =
-  init: (checkPointCharlie) ->
+  init: (checkPointCharlie, onAbove, onBeneath) ->
     this.each ->
       element = $(this)
 
-      $(window).bind 'scroll.visibleAfter', (event) ->
+      $(window).bind 'scroll.executeAt', (event) ->
         if $(window).scrollTop() >= (checkPointCharlie.position().top + checkPointCharlie.height())
-          if element.is ":hidden"
-            element.fadeIn 500
+          if onBeneath?
+            onBeneath()
         else
-          if element.is ":visible"
-            element.fadeOut 500
+          if onAbove?
+            onAbove()
 
   destroy: ->
     this.each ->
-      $(window).unbind "scroll.visibleAfter"
+      $(window).unbind "scroll.executeAt"
 
-$.fn.visibleAfter = (method) ->
+$.fn.executeAt = (method) ->
   if publicMethods[method]
     publicMethods[method].apply this, Array.prototype.slice.call arguments, 1
   else if typeof method is "object" or not method
     publicMethods.init.apply this, arguments
   else
-    $.error "Method " +  method + " does not exist on jQuery.visibleAfter"
+    $.error "Method " +  method + " does not exist on jQuery.executeAt"

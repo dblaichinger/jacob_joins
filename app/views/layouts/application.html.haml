@@ -10,6 +10,8 @@
         document.childNodes[1].className += " ie7"
     /[if IE 8]
       = stylesheet_link_tag "ie/ie8", :media => "all"
+      :javascript
+        document.childNodes[1].className += " ie8"
     /[if IE 9]
       = stylesheet_link_tag "ie/ie9", :media => "all"
     /[if lte IE 6]
@@ -21,10 +23,22 @@
     :javascript
 
       $(document).ready(function(){
+        var passCount = 0;
         $('#fancy_counter').tzineClock();
         slide_newsbar();
-        $("#newsbar").visibleAfter($("#start"));
+        $("#newsbar").executeAt($("#start"), function(){
+          $("#newsbar").fadeOut(500);
+        },
+        function(){
+          $("#newsbar").fadeIn(500);
 
+          if(passCount == 0){
+            showClickAndSee();
+            setTimeout("hideClickAndSee()", 2000);
+            passCount++;
+          }
+        });
+        
         #{growl_flash_messages}
       });
 

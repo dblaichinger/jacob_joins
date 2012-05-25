@@ -31,10 +31,13 @@ loaderMsg = '<img alt="Ajax-loader" src="/assets/ajax-loader.gif"><h1>Loading...
 $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar")
-    newsbar.visibleAfter "destroy"
+    newsbar.executeAt "destroy"
     $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
       onAfter: ->
-        newsbar.visibleAfter $("#start")
+        newsbar.executeAt $("#start"), ->
+          newsbar.fadeOut 500
+        , ->
+          newsbar.fadein 500
         newsbar.fadeIn 500
     false
 
@@ -215,5 +218,3 @@ $ ->
           window.setTimeout(loadPreview, 100)
 
       loadPreview()
-
-
