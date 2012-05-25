@@ -14,14 +14,9 @@ body
   width: 100%
   height: 100%
 
-  .seitenleiste
-    padding: 80px 0
-
   .left-haupt
-    width: 67%
     height: 100%
     padding-top: 50px
-
 
   .right-haupt
     width: 400px
@@ -30,7 +25,6 @@ body
     position: absolute
     top: 0
     right: 0
-    padding-right: 10px
 
     .uebergang-seitenleiste
       background-image: url(image_path('seitenleiste_uebergang.png'))
@@ -39,9 +33,12 @@ body
       min-height: 100%
 
     .seitenleiste
+      padding: 80px 0 0 0
+      height: 100%
       max-width: 92%
       margin-left: 30px
       background-image: url(image_path('bg4.jpg'))
+      position: relative
 
       p
         padding: 0 5px
@@ -52,7 +49,16 @@ body
 
       img
         display: block
-        margin: 20px auto
+        margin: 0px auto 20px auto
+
+      #toggle_sidebar
+        position: absolute
+        top: 205px
+        left: -62px
+        width: 50px
+        height: 165px
+        background-image: url(image_path('map_btn.jpg'))
+        background-position: 0 0
 
       #jacob-who
         text-align: center
@@ -82,12 +88,22 @@ body
 
       .postedrecipe, .postedcsi
         overflow: hidden
-        margin-top: 30px
+        margin-top: 15px
 
-        .marker-info
-          display: inline
+        .infoleft
+          width: 60px
           float: left
           margin: 0 10px 0 0
+          #recipemarker_bsp, #sammelmarker_bsp
+            width: 60px
+
+        .inforight
+          float: right
+          width: 280px
+          margin: -5px 15px 0 0
+          p
+            margin-bottom: 15px
+            padding-left: 0          
 
         h4
           font-family: Sanches-SemiBold
@@ -99,4 +115,4 @@ body
 
       p.gotoform
         text-align: center
-        margin-top: 50px 
+        margin-top: 30px 

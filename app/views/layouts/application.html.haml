@@ -17,7 +17,8 @@
     /[if lte IE 6]
       = javascript_include_tag "ie/pngfix"
 
-    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
+
+    = #javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
     = javascript_include_tag "application"
 
     :javascript
@@ -56,6 +57,10 @@
         %div{ class:"flash_#{key}"}
           = value 
 
-    = yield
+    = render "layouts/contactable"
+
+    = yield :scripts
+    = content_for?(:content) ? yield(:content) : yield
+
 
     

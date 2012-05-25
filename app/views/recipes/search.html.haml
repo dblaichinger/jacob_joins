@@ -1,26 +1,40 @@
-#start
-#wrapper-haupt
-  #right-haupt
-    .uebergang-seitenleiste
-      .seitenleiste
-        .search
-          %h1
-            ***SEARCH FOR RECIPE***
+:javascript
+  $(document).ready(function(){
 
-            = form_tag recipes_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" }, :id => "ingredients_search_form" do
-              = text_field_tag 'ingredients[search]', nil, :id => 'search_field'
-              #search_hidden
-              = submit_tag "Search", :name => nil 
+    $('#ingredients_search_form').bind("ajax:success", recipesSearch.formSuccessHandler)
+    .bind("ajax:error", recipesSearch.formErrorHandler);
+
+    $('.search #ingredients_search').autocomplete({
+      source: '/ingredients/names',
+      minLength: 2,
+      select: recipesSearch.ingredientsSearchSelectHandler
+    });
+
+    $('#search_selection').on("click", "a.search_remove_ingredient", recipesSearch.removeIngredientClickHandler);
+  });
 
 
-          %h1
-            ***SELECTION***
-          #search_selection
+.right-haupt
+  .uebergang-seitenleiste
+    .seitenleiste
+      .search
+        %h1
+          ***SEARCH FOR RECIPE***
 
-          %h1
-            ***RESULT***
-          #search_result
-          = @recipe.inspect if @recipe
+        = form_tag recipes_search_path, :method => "post", :remote => true, :form => { "data-type" => "json" }, :id => "ingredients_search_form" do
+          = text_field_tag 'ingredients[]', nil, id:"ingredients_search"
+          #search_hidden
+          = submit_tag "Search", :name => nil 
+
+
+        %h1
+          ***SELECTION***
+        #search_selection
+
+        %h1
+          ***RESULT***
+        #search_result
+        = @recipe.inspect if @recipe
 
 
 

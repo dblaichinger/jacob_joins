@@ -2,20 +2,33 @@
 
 #contactcontent
   %h1
-    It’s a pleasure to introduce you to our 
+    Here you see our
     %span
-      great team! 
+      contact information 
+    and 
+    %span
+      legal rights 
   %hr
 
-  = image_tag 'team.gif', id:"teamgif"
-
+  #contactleft
+    = image_tag 'team.gif', id:"teamgif"
+    #projekttext
+      %p.ptext1
+        Potato, Onion, Egg 
+      %p.ptext2
+        three ingredients combine the world. 
+      %p.ptext3
+        Become a part of Jacob Joins 
+      %p.ptext2
+        and expand your culinary horizont! 
+      
   #contactright
     %table.studieninfos
       %tr
         %th
           E-Mail 
         %td
-          hello@jacobjoins.com
+          = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com"
       %tr
         %th
           Members
