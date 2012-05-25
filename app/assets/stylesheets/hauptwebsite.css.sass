@@ -1,3 +1,5 @@
+@import mixins
+
 body  
   position: relative
   z-index: 1
@@ -20,12 +22,37 @@ body
     height: 100%
     padding-top: 50px
 
-  .left_haupt_recipe
+  .left-haupt_recipe
+    width: 67%
+    min-width: 624px
 
+    .content
+      width: 600px
+      margin: 0 auto
+      padding-top: 100px
+
+      .recipe_steps_klein
+        padding-bottom: 20px
+        
+        .numbers
+          clear: both
+          strong
+            width: 80px
+            text-align: right
+        .bild
+          float: left
+          img
+            padding-left: 20px
+            border-left: 1px solid $braun
+            box-shadow: -1px 0px 0px 0px white
+
+        .recipe_steps_klein_beschreibung
+          float: right
+          width: 320px
+  
 
   .right-haupt
-    width: 35%
-    min-width: 400px
+    width: 400px
     height: 100%
     z-index: 20
     position: absolute
