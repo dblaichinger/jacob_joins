@@ -64,6 +64,10 @@ function show_facebook_posts(post, current_post, pic){
   var tmp_message = "";
   var links_in_message = post.message.match(/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?(\?[;&a-z\d%_.~+=-]*)?/gi);
   
+  $("#fb_stream .content").load(function(){
+    $("#fb_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
+  });
+  
   current_post.append("<img src='"+pic.picture+"' alt='profile_picture' />");
   current_post.append("<h5>"+post.from.name+"</h5>");
   
