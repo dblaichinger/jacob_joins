@@ -1,0 +1,64 @@
+
+#start
+
+.wrapper-haupt_recipe
+
+  .left-haupt_recipe
+    .content
+      %h1
+        X Hier Rezeptname X
+      %hr
+      %p
+        cooked by Marta J. from Poland  
+
+      .recipe_imagesteps
+        = image_tag 'recipe_anzeige_proberezept/proberezept.jpg', id:"recipe_imagesteps_image"
+
+        %p
+          Beschreibung lorem ipsum
+
+      .recipe_steps_klein
+        %h1
+          Ingredients for X Persons
+        .numbers
+          %strong 1
+        .bild
+          = image_tag 'recipe_anzeige_proberezept/step1.jpg', id:"steps"         
+        .recipe_steps_klein_beschreibung
+          %p
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+      
+      .recipe_steps_klein
+        .numbers
+          %strong 2
+        .bild
+          = image_tag 'recipe_anzeige_proberezept/step2.jpg', id:"steps"         
+        .recipe_steps_klein_beschreibung
+          %p
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+      .recipe_steps_klein
+        .numbers
+          %strong 13
+        .bild
+          = image_tag 'recipe_anzeige_proberezept/step2.jpg', id:"steps"         
+        .recipe_steps_klein_beschreibung
+          %p
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+
+
+  .right-haupt
+    .uebergang-seitenleiste
+      .seitenleiste
+        %h1
+          Search
+       
+
+
+= yield :scripts          
+
+
+

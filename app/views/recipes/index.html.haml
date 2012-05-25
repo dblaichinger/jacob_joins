@@ -55,14 +55,14 @@
 
 #start
 
-#wrapper-haupt
+.wrapper-haupt
 
-  #left-haupt
+  .left-haupt
     = #@location
     = #gmaps4rails(@location)
     = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
 
-  #right-haupt
+  .right-haupt
     .uebergang-seitenleiste
       .seitenleiste
         = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
@@ -102,5 +102,3 @@
 
         %p.gotoform
           = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
-
-

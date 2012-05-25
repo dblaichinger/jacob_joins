@@ -1,3 +1,5 @@
+@import "mixins"
+
 #user_gender
   visibility: hidden
   display: block
@@ -106,6 +108,7 @@
 //AUTOSUGGEST Zutaten + google map ================================================================
 
 .pac-container, .ui-autocomplete
+  background-color: #fff
   background-color: rgba(255,255,255,0.8)
   color: #531E09
   font-family: "Pluto"
@@ -114,8 +117,24 @@
   border-style: solid 
   border-color: #531E09
 
-.pac-item, .ui-menu-item
-  padding: 5px 0 5px 5px
+.pac-container
+  .pac-item
+    padding: 5px 0 5px 5px
 
-.ui-autocomplete, .ui-menu-item
+    &:hover
+      background-color: $bege
+
+.ui-autocomplete
   width: 200px
+  .ui-menu-item
+    overflow: hidden
+
+    &:hover
+      background-color: $bege
+
+    a
+      width: 100%
+      cursor: pointer
+      display: block
+      float: left
+      padding: 5px 0 5px 5px

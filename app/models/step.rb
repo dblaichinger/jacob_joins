@@ -18,6 +18,7 @@ class Step
     }
     
   validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
+  validates_attachment_size :image, :less_than => 5.megabytes
 
   state_machine :initial => :draft do
     event :publish do

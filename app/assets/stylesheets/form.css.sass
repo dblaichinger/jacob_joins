@@ -51,6 +51,33 @@
   p
     margin: 20px 0px
 
+  .loadmask
+    position: absolute
+    top: 0
+    left: 240px
+    right: 0
+    bottom: 0
+
+  .loadmask-msg
+    position: absolute
+    position: absolute
+    top: 150px !important
+    left: 500px !important
+    width: 210px
+    text-align: center
+    background: #FFFFFF
+    padding: 20px
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
+
+    h1 
+      margin: 10px 0 0 0
+
+  #preview_tab
+    .loadmask
+      left: 0 !important
+    .loadmask-msg
+      left: 260px !important
+
 =input-placeholder
   color: #fff
 
@@ -87,10 +114,13 @@ textarea:focus, input:focus
   background-position: 0 -30px
    
 .ui-tabs
-  .ui-tabs-hide
-    position: absolute
-    left: -10000px
-    top: -10000px
+  .ui-tabs-panel
+    position: relative
+
+    &.ui-tabs-hide
+      position: absolute
+      left: -10000px
+      top: -10000px
 
 // force ie7 to rerender
 .ie7
@@ -137,6 +167,14 @@ textarea:focus, input:focus
   background-position: 0 -284px
   cursor: default
 
+.disabled-send-button-text
+  width: 315px
+  position: absolute
+  bottom: -80px
+  right: 155px
+  font-family: Pluto-CondensedItalic
+  font-size: 12px
+  text-align: right
 
 //PREVIEW RECIPE
 
@@ -170,7 +208,6 @@ textarea:focus, input:focus
         display: block
         background-image: url(image_path('no_image_prev.png'))
         background-repeat: no-repeat
-        text-indent: -30000px
 
     #prev_recipe_info
       min-height: 225px
@@ -269,21 +306,28 @@ textarea:focus, input:focus
           background-image: url(image_path('no_image_prev_steps.png'))
           background-position: 0 0
           background-repeat: no-repeat
-          text-indent: -3000px
 
-        img
+        .image_preparation_show
           width: 66px
           height: 66px
           float: left
           overflow: hidden
           margin: 0 10px 0px 0px
           border: 2px solid #fff
+          text-align: center
+
+          img
+            width: 66px
+            height: 66px
+
+
 
         p
           margin: 0
           float: right
           width: 280px
           text-align: justify
+
         
   #abyc_preview
     margin-top: 150px

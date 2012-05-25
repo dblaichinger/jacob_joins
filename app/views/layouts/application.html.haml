@@ -10,6 +10,8 @@
         document.childNodes[1].className += " ie7"
     /[if IE 8]
       = stylesheet_link_tag "ie/ie8", :media => "all"
+      :javascript
+        document.childNodes[1].className += " ie8"
     /[if IE 9]
       = stylesheet_link_tag "ie/ie9", :media => "all"
     /[if lte IE 6]
@@ -20,13 +22,25 @@
     = javascript_include_tag "application"
 
     :javascript
+
       $(document).ready(function(){
+        var passCount = 0;
         $('#fancy_counter').tzineClock();
         slide_newsbar();
-        $("#newsbar").visibleAfter($("#start"));
+        $("#newsbar").executeAt($("#start"), function(){
+          $("#newsbar").fadeOut(500);
+        },
+        function(){
+          $("#newsbar").fadeIn(500);
 
+          if(passCount == 0){
+            showClickAndSee();
+            setTimeout("hideClickAndSee()", 2000);
+            passCount++;
+          }
+        });
+        
         #{growl_flash_messages}
-
       });
 
       $(window).load(function(){
@@ -35,67 +49,13 @@
       });
 
     = csrf_meta_tags
-    %meta{:charset => "utf-8"}
+    %meta{ charset:"utf-8" }
 
   %body
     %section.flash_notifications
       - flash.each do |key, value|
         %div{ class:"flash_#{key}"}
           = value 
-    %section#newsbar
-      #newsbar_content
-        #fb
-          %h2
-            = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fblike", :target => "_blank"
-
-          %p#fb_error 
-            ="Sorry, Facebook news are not available!"
-          .mcs_container#fb_stream
-            .customScrollBox
-              .container
-                .content
-              .dragger_container
-                .dragger
-            = link_to "", "#", class:"scrollUpBtn"
-            = link_to "", "#", class:"scrollDownBtn"
-
-          .fb-like{"data-href"=>"http://www.facebook.com/jacobjoins", "data-send"=>"false", "data-layout"=>"button_count", "data-width"=>"150", "data-show-faces"=>"false"}
-
-        #entries
-          %h2
-            What happened so far  
-          .mcs_container#jj_stream
-            .customScrollBox
-              .container
-                .content#last_entry
-              .dragger_container
-                .dragger
-            = link_to "", "#", class:"scrollUpBtn"
-            = link_to "", "#", class:"scrollDownBtn"
-          
-
-        #fancy_counter
-          %h2
-            Countdown to release on 4 June '12
-
-        - if Rails.env.production?
-          #countdown
-            %h4.countdown_kl
-              Countdown to release:
-            #days
-            #hours
-            #minutes
-            #seconds 
-        - else
-          = render_navigation
-        
-        #logo
-          = image_tag "logo.png"
-
-        #beta
-
-      #clickandsee
-        = link_to "", "#", class:"show_newsbar"
 
     = yield :scripts
     = yield
