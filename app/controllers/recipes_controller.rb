@@ -92,13 +92,7 @@ class RecipesController < ApplicationController
 
   def getSidebar
     respond_to do |format|
-<<<<<<< HEAD
-      format.json{
-        render :file => 'recipes/search.html.haml'#, :layout=>false#, :locals => {:marker => params[:marker]}
-      }
-=======
-      format.json { render :file => 'recipes/search.html.haml' }
->>>>>>> 4731fa15df7bf5ec6da64a523a17017667d87015
+      format.json render :file => 'recipes/search.html.haml'
     end
   end
 
