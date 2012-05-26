@@ -51,9 +51,15 @@ window.prepare_user_map = ->
       address: address, (results, status) ->
         if status is google.maps.GeocoderStatus.OK
           autoCompleteInput.attr "data-valid", "true"
+
           if results[0].address_components.length > 1
             city = results[0].address_components[0].long_name
-            country = results[0].address_components[results[0].address_components.length-1].long_name
+            
+            if /[0-9]/.test(results[0].address_components[results[0].address_components.length-1].long_name)
+              country = results[0].address_components[results[0].address_components.length-2].long_name
+            else
+              country = results[0].address_components[results[0].address_components.length-1].long_name
+            
             setHiddenFields results[0].geometry.location.lat(), results[0].geometry.location.lng(), city, country 
             autoCompleteInput.val(city+", "+country)
           else
@@ -68,13 +74,11 @@ window.prepare_user_map = ->
           $('#user_tab form').dirtyValidation("validate", autoCompleteInput, false)
           autoCompleteInput.qtip("show")
 
-
   autoCompleteInput.on "change", ()->
     autoCompleteInput.attr "data-valid", "true"
     clearTimeout autoCompleteInput.data('timeout')
     timeout = setTimeout requestlocation, 100
     autoCompleteInput.data timeout: timeout
-
 
   autocomplete = new google.maps.places.Autocomplete autoCompleteInput[0], { types: ['(regions)'] }
   autocomplete.bindTo('bounds', map)
@@ -151,6 +155,7 @@ window.prepare_user_map = ->
       $('#user_tab form').dirtyValidation("validate", autoCompleteInput, false)
       setMarker place.geometry.location
       address = place.address_components
+
       if address.length > 1
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, address[3].long_name
       else
