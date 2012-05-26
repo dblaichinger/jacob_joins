@@ -27,18 +27,18 @@
         var passCount = 0;
         $('#fancy_counter').tzineClock();
         slide_newsbar();
-        $("#newsbar").executeAt($("#start"), function(){
-          $("#newsbar").fadeOut(500);
-        },
-        function(){
-          $("#newsbar").fadeIn(500);
+        //$("#newsbar").executeAt($("#start"), function(){
+        //  $("#newsbar").fadeOut(500);
+        //},
+        //function(){
+        //  $("#newsbar").fadeIn(500);
 
-          if(passCount == 0){
-            showClickAndSee();
-            setTimeout("hideClickAndSee()", 2000);
-            passCount++;
-          }
-        });
+        //  if(passCount == 0){
+        //    showClickAndSee();
+        //    setTimeout("hideClickAndSee()", 2000);
+        //    passCount++;
+        //  }
+        //});
         
         #{growl_flash_messages}
       });
@@ -52,6 +52,7 @@
     %meta{ charset:"utf-8" }
 
   %body
+    #fb-root
     %section.flash_notifications
       - flash.each do |key, value|
         %div{ class:"flash_#{key}"}
