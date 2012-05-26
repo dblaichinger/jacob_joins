@@ -1,4 +1,3 @@
-
 window.publish_user = ->
   return_value = false
 
@@ -36,10 +35,10 @@ window.prepare_user_map = ->
 
   autoCompleteInput = $('#user_tab .address-search')
   autoCompleteInput.keydown (e) ->
-    if e.which == 13
+    if e.which is 13
       e.preventDefault()
 
-  if $('#longitude').val() != "" and $('#latitude').val() != "" and $('#country_hidden').val() != "" and $('#city_hidden').val() != ""
+  if $('#longitude').val() isnt "" and $('#latitude').val() isnt "" and $('#country_hidden').val() isnt "" and $('#city_hidden').val() isnt ""
     autoCompleteInput.attr "data-valid", "true"
   else
     autoCompleteInput.attr "data-valid", "false"
@@ -102,7 +101,7 @@ window.prepare_user_map = ->
     cityInput.val city
     countryInput.val country
 
-  if !latInput.val() || !lngInput.val() || !cityInput.val() || !countryInput.val()
+  if not latInput.val() or not lngInput.val() or not cityInput.val() or not countryInput.val()
     # location via html5 geolocation
     if navigator.geolocation
       navigator.geolocation.getCurrentPosition(
@@ -153,7 +152,7 @@ window.prepare_user_map = ->
       setMarker place.geometry.location
       address = place.address_components
       if address.length > 1
-        setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, address[address.length-1].long_name
+        setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, address[3].long_name
       else
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), null, address[0].long_name
     else

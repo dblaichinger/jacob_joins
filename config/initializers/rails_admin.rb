@@ -172,7 +172,9 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   # end
-  # config.model Recipe do
+  #config.model Recipe do
+  #  configure :state, :text
+  #end
   #   # Found associations:
   #     configure :user, :belongs_to_association 
   #     configure :ingredients, :has_and_belongs_to_many_association 
@@ -193,7 +195,6 @@ RailsAdmin.config do |config|
   #     configure :longitude, :float 
   #     configure :user_id, :bson_object_id         # Hidden 
   #     configure :ingredient_ids, :serialized         # Hidden 
-  #     configure :state, :text   #   # Sections:
   #   list do; end
   #   export do; end
   #   show do; end

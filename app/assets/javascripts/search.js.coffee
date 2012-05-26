@@ -18,8 +18,10 @@ printResults = (data) ->
         output += ("<div><div class='recipe_name'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></div><div class='recipe_origin'>cooked by #{recipe.user.firstname} #{recipe.user.lastname} in #{recipe.country}</div></div>")
 
     $("#search_result").html output
+    Gmaps.map.replaceMarkers(data.markers)
   else
     $("#search_result").html ""
+    Gmaps.map.replaceMarkers([])
 
 window.recipesSearch.ingredientsSearchSelectHandler = (event, ui) ->
   $(event.target).val(ui.item.value)
