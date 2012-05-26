@@ -12,5 +12,15 @@
         }
       }<%= "," if index < 9 %>
     <% end %>
+  ],
+  "markers": [
+    <% @recipes.take(10).each_with_index do |r, index| %>
+      {
+        "lat": "<%= r.latitude %>",
+        "lng": "<%= r.longitude %>",
+        "title": "<%= r.name %>",
+        "description": "from <%= r.user.firstname.capitalize %>"
+      }<%= "," if index < 9 %>
+    <% end %>
   ]
 }
