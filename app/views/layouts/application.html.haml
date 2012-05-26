@@ -26,26 +26,14 @@
       $(document).ready(function(){
         var passCount = 0;
         $('#fancy_counter').tzineClock();
-        slide_newsbar();
-        //$("#newsbar").executeAt($("#start"), function(){
-        //  $("#newsbar").fadeOut(500);
-        //},
-        //function(){
-        //  $("#newsbar").fadeIn(500);
-
-        //  if(passCount == 0){
-        //    showClickAndSee();
-        //    setTimeout("hideClickAndSee()", 2000);
-        //    passCount++;
-        //  }
-        //});
+        newsbar.init();
         
         #{growl_flash_messages}
       });
 
       $(window).load(function(){
-        get_latest_recipe();
-        get_facebook_stream();
+        newsbar.get_latest_recipe();
+        newsbar.get_facebook_stream();
       });
 
     = csrf_meta_tags
@@ -56,7 +44,9 @@
     %section.flash_notifications
       - flash.each do |key, value|
         %div{ class:"flash_#{key}"}
-          = value 
+          = value
+
+    = render "layouts/newsbar_new"
 
     = render "layouts/contactable"
 
