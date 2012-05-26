@@ -1,7 +1,25 @@
 :javascript
   $(document).ready(function(){
     $("#toggle_sidebar").click(function(){switchSidebar();});
+    
+    Gmaps.map.callback = function() {
+       for (var i = 0; i < Gmaps.map.markers.length; ++i) {
+        var marker = Gmaps.map.markers[i].serviceObject
+        marker.description = Gmaps.map.markers[i].description;
+        //console.debug(Gmaps.map.markers[i]);
+        google.maps.event.addListener(marker, 'click', function(i){
+          showRecipeSidebar(this);
+        });
+      }
+    }   
   });
+
+  $(window).load(function(){
+    $('#map').css('height', ($(document).height()-50+"px"));
+    $('#right-haupt').css('min-height', ($(document).height()+"px"));
+    $(".right-haupt").data("status", "open");
+  });
+
 
 .right-haupt
   .uebergang-seitenleiste
@@ -42,8 +60,7 @@
               If there is a number, then there are more recipes than one.
               Check out what people of this part of the world are cooking.
 
-      
-
+    
         %p.gotoform
           = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
 
