@@ -6,12 +6,11 @@ window.initInfobox = ->
     pixelOffset: new google.maps.Size(-140, 0)
     zIndex: null
     boxStyle:
-      background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/examples/tipbox.gif') no-repeat"
-      opacity: 0.75
-      width: "280px"
+      background: "url('assets/tipbox.png') no-repeat"
+      opacity: 0.95
 
     closeBoxMargin: "10px 2px 2px 2px"
-    closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+    closeBoxURL: "assets/close.png"
     infoBoxClearance: new google.maps.Size(1, 1)
     isHidden: false
     pane: "floatPane"
@@ -19,17 +18,24 @@ window.initInfobox = ->
 
 window.initClusterer = ->
   Gmaps.map.customClusterer = ->
-    url = "http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/1.0/images/"
+    url = "/assets/"
     [
-      url: url + "heart30.png"
-      height: 26
-      width: 30
+      textColor: "#531E09"
+      url: url + "sammelmarker1.png"
+      height: 90
+      width: 90
     ,
-      url: url + "heart40.png"
-      height: 35
-      width: 40
+      textColor: "#531E09"
+      textSize: 18
+      anchor: [15, 27]
+      url: url + "sammelmarker2.png"
+      height: 75
+      width: 75
     ,
-      url: url + "heart50.png"
-      width: 50
-      height: 44
-     ]
+      textColor: "#531E09"
+      textSize: 10
+      anchor: [14, 19]
+      url: url + "sammelmarker3.png"
+      width: 60
+      height: 60
+    ]

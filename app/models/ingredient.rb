@@ -9,7 +9,7 @@ class Ingredient
 
   def self.names_with(query)
     names = []
-    Ingredient.only(:name).where(:name => /#{query}/i).entries.each do |i|
+    Ingredient.only(:name).where(:name => /#{Regexp.escape(query)}/i).entries.each do |i|
       names << i.name
     end
     names
