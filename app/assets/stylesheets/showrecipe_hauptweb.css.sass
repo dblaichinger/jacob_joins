@@ -22,29 +22,80 @@
       margin: 0 auto
       padding-top: 100px
 
-      .recipe_steps_klein
-        padding-bottom: 20px
-        overflow: hidden
+      .bx-wrapper
+        .bx-next
+          right: 16px
+          z-index: 100
+          top: 120px
+        .bx-prev  
+          left: 16px
+          z-index: 101
+          top: 120px
 
-        .numbers
-          clear: both
-          strong
-            width: 80px
-            text-align: right
-        .bild
-          float: left
-          img
+
+
+      #recipe_ingredients_content
+        padding-top: 50px
+        table
+          tr
+            td
+              font-family: "PlutoCondensed"
+              width: 100px
+              font-size: 14px
+            .declaration
+              font-family: "PlutoCondensed"
+              width: 300px
+              font-size: 14px
+
+
+      p
+        em
+          color: $rot
+
+      .recipe_imagesteps
+        text-align: center
+        li
+          padding-bottom: 20px
+
+        img
+          border: 2px solid white
+          text-align: center
+        p
+          text-align: center
+
+      h1
+        margin-bottom: 20px
+
+      p
+        padding-bottom: 10px
+      #recipe_steps_klein_wrapper
+        margin-top: 70px
+        .recipe_steps_klein
+          padding-bottom: 20px
+          overflow: hidden
+
+          .numbers
+            clear: both
+            strong
+              width: 80px
+              text-align: right
+              padding-top: 3px
+              font-size: 50px
+          .bild
+            float: left
             padding-left: 20px
             border-left: 1px solid $braun
-            box-shadow: -1px 0px 0px 0px white
-            width: 100px
-            height: 100px
+            box-shadow: -1px 0px 0px 0px white            
+            img
+              width: 100px
+              height: 100px
+              border: solid 2px white
 
-        .recipe_steps_klein_beschreibung
-          float: right
-          width: 370px
+          .recipe_steps_klein_beschreibung
+            float: right
+            width: 370px
 
-          
+
   .right-haupt
     width: 400px
     height: 100%
