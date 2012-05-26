@@ -8,9 +8,8 @@
        for (var i = 0; i < Gmaps.map.markers.length; ++i) {
         var marker = Gmaps.map.markers[i].serviceObject
         marker.description = Gmaps.map.markers[i].description;
-        console.debug(Gmaps.map.markers[i]);
+        //console.debug(Gmaps.map.markers[i]);
         google.maps.event.addListener(marker, 'click', function(i){
-          console.debug(this);
           showRecipeSidebar(this);
         });
       }
@@ -20,6 +19,7 @@
   $(window).load(function(){
     $('#map').css('height', ($(document).height()-50+"px"));
     $('#right-haupt').css('min-height', ($(document).height()+"px"));
+    $(".right-haupt").data("status", "open");
   });
 
 #start

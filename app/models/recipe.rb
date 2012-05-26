@@ -77,13 +77,17 @@ class Recipe
   end
 
   def gmaps4rails_infowindow
-    output = []
+    output = ""
     if self.images.present?
       #output << "#{image_tag self.images.attachment(:small)}"
       #output << "<img src='#{self.images.attachment(:small)}' />"
     end
-    output << "<a href='/recipes/#{self.slug}'>#{self.name}</a>"
-    output << "#{self.city}"
+    output += "<a href='/recipes/#{self.slug}'>#{self.name}</a>"
+    output += "#{self.city}"
+    unless self.user.nil?
+      output += "<br /> cooked by #{self.user.firstname} #{self.user.lastname[0,1]}."
+    end
+    output += "<br /> Estimated cooking time: #{self.duration}"
   end
 
   def gmaps4rails_marker_picture
