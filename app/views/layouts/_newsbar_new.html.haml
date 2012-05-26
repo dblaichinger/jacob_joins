@@ -22,27 +22,12 @@
 
     #entries
       %h2
-        What happened so far  
-      .mcs_container#jj_stream
-        .customScrollBox
-          .container
-            .content#last_entry
-          .dragger_container
-            .dragger
-        = link_to "", "#", class:"scrollUpBtn"
-        = link_to "", "#", class:"scrollDownBtn"
+        The last three entries  
+      #jj_stream
+        #last_entry
       
-    - if Rails.env.production?
-      #countdown
-        %h4.countdown_kl
-          Countdown to release:
-        #days_
-        #hours_
-        #minutes_
-        #seconds_
-    - else
-      #navi_neu
-        = render_navigation
+    #navi_neu
+      = render_navigation
     
     #logo
       = image_tag "logo.png"
