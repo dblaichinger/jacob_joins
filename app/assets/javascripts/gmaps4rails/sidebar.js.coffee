@@ -5,21 +5,14 @@ window.switchSidebar = (data, callback) ->
       300,
       ->
         if(callback != undefined && typeof callback == 'function') 
-          alert("callback1")
           callback(data)
     console.log("closing")
-    $(".right-haupt").removeClass("sidebar_open").addClass("sidebar_closed") 
     $(".right-haupt").data "status", "closed"
   else
     $(".right-haupt").animate
       "right": "0px",
-      2000, 
-      ->
-        if callback != undefined && typeof callback == 'function'
-          alert("callback2")
-          callback(data)
+      300
       console.log("opening")
-    $(".right-haupt").removeClass("sidebar_closed").addClass("sidebar_open") 
     $(".right-haupt").data "status", "open"
 
 
@@ -34,7 +27,7 @@ window.getSidebar = (marker) ->
     url: "/recipes/getSidebar"
     dataType: "text"
     success: (data, textStatus, jqXHR) ->
-      $('.right-haupt').replaceWith(data).addClass("sidebar_closed")
+      $('.seitenleiste').replaceWith(data)
       $('#search_result').html(marker.description)
       $('.right-haupt').css 'min-height', $(document).height()+"px"
       $('.seitenleiste').css 'min-height', $(document).height()+"px"
@@ -46,7 +39,6 @@ window.getSidebar = (marker) ->
 
     complete: ->
       if $(".right-haupt").data("status") == "closed"
-        alert("openBLA")
         switchSidebar()
 
 
