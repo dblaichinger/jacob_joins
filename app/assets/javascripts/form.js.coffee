@@ -76,7 +76,7 @@ $ ->
           empty_recipe_form = publish_recipe(window.user.id, window.user.location) if $('#yourrecipe').parent().hasClass('form_valid')
           empty_csi_form = publish_csi(window.user.id, window.user.location) if $('#aboutyourcountry').parent().hasClass('form_valid')
 
-          if empty_recipe_form or empty_csi_form
+          if (empty_recipe_form? and empty_recipe_form) or (empty_csi_form? and empty_csi_form) or (empty_csi_form and empty_recipe_form)
             $.ajax
               url: "/pages/drafts_saved"
               async: false
