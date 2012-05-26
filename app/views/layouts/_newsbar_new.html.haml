@@ -1,10 +1,10 @@
 %section#newsbar_new
   #newsbar_content
-    #fb_
+    #fb
       %h2
         = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fblike", :target => "_blank"
 
-      %p#fb_error_
+      %p#fb_error
         ="Sorry, Facebook news are not available!"
       .mcs_container_#fb_stream
         .customScrollBox
@@ -17,21 +17,24 @@
 
       .fb-like{"data-href"=>"http://www.facebook.com/jacobjoins", "data-send"=>"false", "data-layout"=>"button_count", "data-width"=>"150", "data-show-faces"=>"false"}
 
-    #entries_
+    #bildzeichen_newsbar
+      = image_tag 'bildzeichen.png'
+
+    #entries
       %h2
         What happened so far  
       .mcs_container_#jj_stream
         .customScrollBox
           .container
-            .content#last_entry_
+            .content#last_entry
           .dragger_container
             .dragger
         = link_to "", "#", class:"scrollUpBtn"
         = link_to "", "#", class:"scrollDownBtn"
       
     - if Rails.env.production?
-      #countdown_
-        %h4.countdown_kl_
+      #countdown
+        %h4.countdown_kl
           Countdown to release:
         #days_
         #hours_
@@ -41,7 +44,7 @@
       #navi_neu
         = render_navigation
     
-    #logo_
+    #logo
       = image_tag "logo.png"
 
   #clickandsee_
