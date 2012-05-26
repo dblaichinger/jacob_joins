@@ -92,7 +92,7 @@ class RecipesController < ApplicationController
 
   def getSidebar
     respond_to do |format|
-      format.json render :file => 'recipes/search.html.haml'
+      format.json {render :file => 'recipes/search.html.haml'}
     end
   end
 

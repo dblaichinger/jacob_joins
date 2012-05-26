@@ -47,7 +47,7 @@ window.getSidebar = (marker) ->
     complete: ->
       if $(".right-haupt").data("status") == "closed"
         alert("openBLA")
-        setTimeout("switchSidebar()", 2000)
+        switchSidebar()
 
 
 
