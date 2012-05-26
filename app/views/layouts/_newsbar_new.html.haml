@@ -6,7 +6,7 @@
 
       %p#fb_error
         ="Sorry, Facebook news are not available!"
-      .mcs_container_#fb_stream
+      .mcs_container#fb_stream
         .customScrollBox
           .container
             .content
@@ -23,7 +23,7 @@
     #entries
       %h2
         What happened so far  
-      .mcs_container_#jj_stream
+      .mcs_container#jj_stream
         .customScrollBox
           .container
             .content#last_entry
@@ -47,5 +47,5 @@
     #logo
       = image_tag "logo.png"
 
-  #clickandsee_
+  #clickandsee
     = link_to "", "#", class:"show_newsbar"
