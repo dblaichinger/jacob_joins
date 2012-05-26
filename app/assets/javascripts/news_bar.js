@@ -1,11 +1,11 @@
 function get_latest_recipe(){
   $.get('/recipes/last', function(data, textstatus, jqxhr) {
-
+    $("#last_entry").empty()
     $.each(data, function(key, recipe){
       var user_name;
       if(recipe.user_id != null){
         var id = {"id": recipe.user_id};
-        //Get the user, which created the recipe
+        //Get the user, who created the recipe
         $.ajax({
           url: '/users/find_user',
           type: "POST",
@@ -61,8 +61,24 @@ function get_facebook_picture(post, current_post){
 }
 
 function show_facebook_posts(post, current_post, pic){
+  var tmp_message = "";
+  var links_in_message = post.message.match(/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?(\?[;&a-z\d%_.~+=-]*)?/gi);
+  
+  $("#fb_stream .content").load(function(){
+    $("#fb_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
+  });
+  
   current_post.append("<img src='"+pic.picture+"' alt='profile_picture' />");
   current_post.append("<h5>"+post.from.name+"</h5>");
+  
+  for(var i=0;links_in_message && i<links_in_message.length;i++){
+    var link_start_pos = post.message.indexOf(links_in_message[i]);
+    tmp_message = post.message.substring(0, link_start_pos);
+    tmp_message += links_in_message[i].link(links_in_message[i]);
+    tmp_message += post.message.substring(link_start_pos + links_in_message[i].length);
+    post.message = tmp_message;
+  }
+  
   current_post.append("<p class='message'>"+post.message+"</p>");
   current_post.append("<p class='time'>"+ prettyDate(post.created_time) +"</p>");
   $("#fb_stream").mCustomScrollbar("vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10);
@@ -116,19 +132,32 @@ function replaceAt(string, index, char) {
   return string.substr(0, index) + char + string.substr(index+char.length);
 }
 
+function hideClickAndSee(){
+  if($('html').hasClass('ie7') || $('html').hasClass('ie8'))
+    $("#clickandsee").hide();
+  else
+    $("#clickandsee").stop(true, true).fadeOut(500);
+}
+
+function showClickAndSee(){
+  if($('html').hasClass('ie7') || $('html').hasClass('ie8'))
+    $("#clickandsee").show();
+  else
+    $("#clickandsee").stop(true, true).fadeIn(500);
+}
+
 function slide_newsbar(){
   $('#clickandsee').click(function(e){
     return false;
   });
 
-  var event_set = false;
   $(document).ready(function(){
     $("#newsbar").hover(
       function(){
-        if(event_set) { event_set = false; $("#clickandsee").stop(true, true).fadeIn(500); }
+        showClickAndSee();
       },
       function(){
-        if(!event_set) { event_set = true; $("#clickandsee").stop(true, true).fadeOut(500); }
+        hideClickAndSee();
       }
     );
   });
@@ -140,7 +169,7 @@ function slide_newsbar(){
       if(newsBar.hasClass('extended')){
         newsBar.stop().animate({
           top: "-215px"
-        }, 500).hover(function(){ $("#clickandsee").stop(true, true).fadeIn(500); }, function(){ $("#clickandsee").stop(true, true).fadeOut(500); });
+        }, 500).hover(function(){ showClickAndSee(); }, function(){ hideClickAndSee(); });
       } else {
         newsBar.stop().animate({
           top: "0"
@@ -148,7 +177,7 @@ function slide_newsbar(){
       }
 
       $("#countdown", newsBar).fadeToggle(500);
-      $("#clickandsee", newsBar).stop(true, true).fadeOut(500);
+      hideClickAndSee();
 
       $('#newsbar').toggleClass('extended');
 

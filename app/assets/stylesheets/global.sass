@@ -1,6 +1,7 @@
 @import compass/reset
 @import compass/css3/font-face
 @import mixins
+@import compass/typography/text/force-wrap
 
 
  
@@ -122,6 +123,12 @@ body
         .message
           font-size: 12px
           margin: 0 10px 0 60px
+          +force-wrap()
+
+          a
+            color: #fff
+          a:hover
+            color: $rot  
 
         .time
           font-size: 10px
@@ -177,6 +184,9 @@ body
       .countdown_kl
         margin-right: 10px
         font-family: "Sanches-Italic"
+        font-size: 16px
+        color: #fff
+        text-transform: none
 
   #logo
     clear: both
@@ -205,7 +215,7 @@ body
     width: 1024px
     min-height: 640px
     margin: 0px auto 0 auto
-    background-image: url(image_path('kuvert.png'))
+    background-image: url(image_path('kuvert.jpg'))
     background-repeat: no-repeat
     background-position: 0 center
     text-align: center

@@ -1,3 +1,11 @@
+deactivatePlaceholders = (parent) ->
+  parent.find('.placeholder').each ->
+    $(this).val("") if $(this).val() is $(this).attr("placeholder")
+
+activatePlaceholders = (parent) ->
+  parent.find('.placeholder').each ->
+    $(this).val($(this).attr("placeholder")) if $(this).val() is ""
+
 showWizardLoader = (callback) ->
   $('#wizard-loader').stop(true, true).fadeIn 500, callback
 
@@ -18,13 +26,18 @@ window.reinitialize_tooltips = (context) ->
         classes: "validation"
     .qtip('option', 'content.text', $(this).attr("data-tooltip"))
 
+loaderMsg = '<img alt="Ajax-loader" src="/assets/ajax-loader.gif"><h1>Loading...</h1>'
+
 $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar")
-    newsbar.visibleAfter "destroy"
-    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800#,
+    newsbar.executeAt "destroy"
+    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
       onAfter: ->
-        newsbar.visibleAfter $("#start")
+        newsbar.executeAt $("#start"), ->
+          newsbar.fadeOut 500
+        , ->
+          newsbar.fadein 500
         newsbar.fadeIn 500
     false
 
@@ -39,6 +52,7 @@ $ ->
       return false
 
     $("#send").addClass "disabled"
+    $('.disabled-send-button-text').show()
 
     $.scrollTo "#wizard", 800
       offset:
@@ -91,6 +105,7 @@ $ ->
           alert "Unable to save user information (maybe not provided)."
 
         $("#preview_tab").stop(true, true).fadeIn 200, hideWizardLoader
+        get_latest_recipe()
 
     false
 
@@ -102,10 +117,36 @@ $ ->
 
     if data.valid
       referring_link.removeClass("form_not_valid").addClass("form_valid")
+
+      qapi = referring_link.qtip('api')
+      unless qapi == undefined
+        tooltip = $(qapi.elements.tooltip)
+        referring_link.removeData('qtip')
+        tooltip.remove()
+
     else
       referring_link.removeClass("form_valid").addClass("form_not_valid")
+      referring_link.qtip
+        overwrite: false
+        content:
+          text: "Check your entries!"
+        position:
+          my: "bottom left"
+          at: "top right"
+          target: referring_link
+          adjust:
+            x: -20
+            y: 0
+        hide:
+          event: false
+        show:
+          event: false
+        style:
+          classes: "tip-brown rufezeichen"
+      .qtip('show')
 
   $('#wizard').tabs()
+  $('#wizard').data('activeRequests', 0)
 
   $('#wizard').bind 'tabsshow', (event, ui) ->
     $(".error", ui.panel).qtip "show"
@@ -120,11 +161,15 @@ $ ->
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
 
+    $(ui.tab).parent().qtip 'hide'
+
     $("[aria-describedby]", oldTab).qtip "hide"
 
     if oldTabIndex < $('#wizard').tabs('length') and oldTab.find(":input").hasClass("changed")
       url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
+      deactivatePlaceholders(oldTab)
       params = oldTab.children('form').serializeArray()
+      activatePlaceholders(oldTab)
 
       actual_form = oldTab.find("form")
       actual_nav_link = $('.ui-state-active')
@@ -132,8 +177,16 @@ $ ->
       $.ajax
         url: url
         type: 'POST'
-        async: false
+        async: true
         data: params
+        beforeSend: ->
+          activeRequests = $('#wizard').data('activeRequests')
+          $('#wizard').data('activeRequests', ++activeRequests)
+          oldTab.mask(loaderMsg)
+        complete: ->
+          activeRequests = $('#wizard').data('activeRequests')
+          $('#wizard').data('activeRequests', --activeRequests)
+          oldTab.unmask()
         success: (data, textStatus, jqXHR) ->
           oldTab.html data
           $(".dirtyform", oldTab).dirtyValidation "validate", $(":input", oldTab).not("[type='hidden']")
@@ -142,20 +195,26 @@ $ ->
 
           oldTab.css
             display: "block"
-          oldTab.attr "style", ""     
+          oldTab.attr "style", ""
         statusCode:
           400: ->
             console.log "Unable to save changes"
 
+
     if ui.index is $('#wizard').tabs('length') - 1
-      showWizardLoader()
+      $(ui.panel).mask(loaderMsg)
 
-      $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
-        $(this).animate
-          opacity: 1
-        , 200
+      loadPreview = ->
+        if $('#wizard').data('activeRequests') is 0
+          $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
+            $(this).animate
+              opacity: 1
+            , 200
 
-        hideWizardLoader()
+            if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
+              $('#send').removeClass('disabled')
+              $('.disabled-send-button-text').hide()
+        else
+          window.setTimeout(loadPreview, 100)
 
-        if $('#aboutyou').parent().hasClass('form_valid') and ( $('#yourrecipe').parent().hasClass('form_valid') or $('#aboutyourcountry').parent().hasClass('form_valid') )
-          $('#send').removeClass('disabled')
+      loadPreview()

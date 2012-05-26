@@ -7,6 +7,8 @@ JacobJoins::Application.routes.draw do
 
   post "/feedback" => "feedback#create"
 
+  get "/pages/about_us" => 'pages#show', :as => :page, :format => false, :id => "about_us"
+  get "/pages/contact" => 'pages#show', :as => :page, :format => false, :id => "contact"
   get "/pages/preview" => 'pages#show', :as => :page, :format => false, :id => "preview"
   get "/pages/drafts_saved" => 'pages#show', :as => :page, :format => false, :id => "drafts_saved"
   match "/pages/fb_channel" => 'pages#show', :as => :page, :format => false, :id => "fb_channel"
