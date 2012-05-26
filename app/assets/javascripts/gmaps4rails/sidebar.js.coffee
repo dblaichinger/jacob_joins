@@ -6,13 +6,11 @@ window.switchSidebar = (data, callback) ->
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
-    console.log("closing")
     $(".right-haupt").data "status", "closed"
   else
     $(".right-haupt").animate
       "right": "0px",
       300
-      console.log("opening")
     $(".right-haupt").data "status", "open"
 
 
@@ -26,9 +24,16 @@ window.getSidebar = (marker) ->
   $.ajax 
     url: "/recipes/getSidebar"
     dataType: "text"
+    
     success: (data, textStatus, jqXHR) ->
       $('.seitenleiste').replaceWith(data)
-      $('#search_result').html(marker.description)
+      console.debug(marker)
+      if marker.length > 1
+        $.each marker, (index, m) -> 
+          $(m.description).appendTo $('#search_result')
+      else
+        $('#search_result').html(marker.description)
+
       $('.right-haupt').css 'min-height', $(document).height()+"px"
       $('.seitenleiste').css 'min-height', $(document).height()+"px"
 
