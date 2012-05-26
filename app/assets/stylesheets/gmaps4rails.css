@@ -20,7 +20,38 @@
   font-size: 12px;
   line-height: 1.4em;
   color: #531E09;
-  background-color: rgba(255,255,255,0.9);
+  background-position: center center;
 }
 
-.yellow { border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px; }
+.yellow { 
+  border: 2px solid #531E09; 
+  margin-top: 8px; 
+  background: #fff; 
+  padding: 5px;
+  font-family: "PlutoCondensed";
+  font-size: 14px;
+  line-height: 1.4em;
+  color: #531E09; 
+  min-width: 260px;
+  background-position: 0 center;
+}
+
+.yellow .infobox_recipe a{
+  font-family: "Pluto-SemiBold";
+  font-size: 14px;
+  line-height: 1.4em;
+  color: #531E09;
+}
+
+.yellow .infobox_recipe a:hover {
+  color: #E2001A;
+}
+
+.yellow .infobox_author em {
+  color: #E2001A;
+}
+
+.yellow .infobox_duration {
+  font-family: Pluto-CondensedItalic;
+  font-size: 12px;
+}
