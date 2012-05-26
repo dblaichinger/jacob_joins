@@ -1,5 +1,5 @@
 %section#newsbar_new
-  #newsbar_content_
+  #newsbar_content
     #fb_
       %h2
         = link_to "Join us on Facebook", "https://www.facebook.com/jacobjoins", class:"fblike", :target => "_blank"
@@ -15,7 +15,7 @@
         = link_to "", "#", class:"scrollUpBtn"
         = link_to "", "#", class:"scrollDownBtn"
 
-      .fb-like_{"data-href"=>"http://www.facebook.com/jacobjoins", "data-send"=>"false", "data-layout"=>"button_count", "data-width"=>"150", "data-show-faces"=>"false"}
+      .fb-like{"data-href"=>"http://www.facebook.com/jacobjoins", "data-send"=>"false", "data-layout"=>"button_count", "data-width"=>"150", "data-show-faces"=>"false"}
 
     #entries_
       %h2
@@ -29,11 +29,6 @@
         = link_to "", "#", class:"scrollUpBtn"
         = link_to "", "#", class:"scrollDownBtn"
       
-
-    #fancy_counter_
-      %h2
-        Countdown to release on 4 June '12
-
     - if Rails.env.production?
       #countdown_
         %h4.countdown_kl_

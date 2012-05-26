@@ -1,7 +1,7 @@
+set :rvm_ruby_string, "1.9.3"
+set :rvm_type, :system
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
-set :rvm_ruby_string, "1.9.2"
-set :rvm_type, :system
 
 set :stages, %w(staging production)
 require "capistrano/ext/multistage"
@@ -9,7 +9,7 @@ require "capistrano/ext/multistage"
 set :application, "jacob_joins"
 
 set :scm, :git
-set :repository,  "git@github.com:dblaichinger/jacob_joins.git"
+set :repository, "git@github.com:dblaichinger/jacob_joins.git"
 set :deploy_via, :remote_cache
 default_run_options[:pty] = true
 

@@ -1,0 +1,26 @@
+{
+  "ingredients": <%= @ingredients.inspect.html_safe %>,
+  "recipes": [
+    <% @recipes.take(10).each_with_index do |r, index| %>
+      {
+        "slug": "<%= r.slug %>",
+        "name": "<%= r.name %>",
+        "country": "<%= r.country %>",
+        "user": {
+          "firstname": "<%= r.user.firstname.capitalize %>",
+          "lastname": "<%= r.user.lastname[0].upcase + "." if r.user.lastname.present? %>"
+        }
+      }<%= "," if index < 9 %>
+    <% end %>
+  ],
+  "markers": [
+    <% @recipes.take(10).each_with_index do |r, index| %>
+      {
+        "lat": "<%= r.latitude %>",
+        "lng": "<%= r.longitude %>",
+        "title": "<%= r.name %>",
+        "description": "from <%= r.user.firstname.capitalize %>"
+      }<%= "," if index < 9 %>
+    <% end %>
+  ]
+}

@@ -34,6 +34,14 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       type: 'POST'
       data:
         _method: "DELETE"
+      beforeSend: ->
+        uploadWrapper = clicked_link.parent().prev('.upload_wrapper')
+
+        uploadImage = uploadWrapper.next().find "img"
+        uploadImage.attr "src", "/assets/ajax-loader.gif"
+        uploadImage.attr "alt", "loading"
+        uploadImage.attr "height", "42px"
+        uploadImage.attr "width", "42px"
       success: (data, textStatus, jqXHR) ->
         imagePreview = clicked_link.parent()
         uploadWrapper = imagePreview.prev('.upload_wrapper')
@@ -45,6 +53,8 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
         $(":input", uploadWrapper).addClass "changed"
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
+        clicked_link.parent().prev('.upload_wrapper').css "display", "block"
+        clicked_link.parent().prev('.upload_wrapper').next().remove()
     false
 
   currentFileInput.fileupload
@@ -92,6 +102,7 @@ window.prepare_recipe_step_upload = (currentFileInput) ->
       data.submit()
     fail: (e, data) ->
       alert "Couldn't upload image"
+      uploadWrapper = $('#' + currentFileInput.attr('id')).parent().css "display", "block"
       $('#' + currentFileInput.attr('id')).parent().next().remove()
 
 window.prepare_recipe_uploads = () ->
@@ -105,6 +116,14 @@ window.prepare_recipe_uploads = () ->
       type: 'POST'
       data:
         _method: "DELETE"
+      beforeSend: ->
+        uploadWrapper = clicked_link.parent().prev('.upload_wrapper')
+
+        uploadImage = uploadWrapper.next().find "img"
+        uploadImage.attr "src", "/assets/ajax-loader.gif"
+        uploadImage.attr "alt", "loading"
+        uploadImage.attr "height", "42px"
+        uploadImage.attr "width", "42px"
       success: (data, textStatus, jqXHR) ->
         imagePreview = clicked_link.parent()
         uploadWrapper = imagePreview.prev('.upload_wrapper')
@@ -116,6 +135,8 @@ window.prepare_recipe_uploads = () ->
         $(":input", uploadWrapper).addClass "changed"
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
+        clicked_link.parent().prev('.upload_wrapper').css "display", "block"
+        clicked_link.parent().prev('.upload_wrapper').next().remove()
     false
 
   $('#recipe_images input[type="file"]').fileupload
@@ -151,10 +172,13 @@ window.prepare_recipe_uploads = () ->
       type: 'POST'
       data:
         _method: "DELETE"
+      beforeSend: ->
+        clicked_link.prev().remove()
+        clicked_link.parent().prepend '<img src="/assets/ajax-loader.gif" alt="loading">'
       success: (data, textStatus, jqXHR) ->
         clicked_link.parent('li').remove()
         $(":input", "#recipe_images").addClass "changed"
-
       failure: (jqXHR, textStatus, errorThrown) ->
         alert 'Image delete failed!'
+        clicked_link.parent('li').remove()
     false
