@@ -64,8 +64,8 @@
       .genderage1
         = f.label :gender, "Gender"
         #gendericons
-          = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
-          = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
+          = link_to "", "#", id:"male_link", class:"male", :onclick => "return gender_icon('male');"
+          = link_to "", "#", id:"female_link", class:"female", :onclick => "return gender_icon('female');"
         = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true, "data-error-target" => "#gendericons" }
     
       .genderage2
