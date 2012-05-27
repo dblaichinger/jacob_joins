@@ -3,39 +3,24 @@
     $(document).ready(function(){
       initInfobox();
       initClusterer();
-
-      $("#toggle_sidebar").click(function(){
-        switchSidebar();
-        return false;
-      });
+      initSidebar();
       
       Gmaps.map.callback = function() {
-         //Set eventlistener for Marker
+        //Set eventlistener for Marker
         for (var i = 0; i < Gmaps.map.markers.length; ++i) {
           var marker = Gmaps.map.markers[i].serviceObject
           marker.description = Gmaps.map.markers[i].description;
-          //console.debug(Gmaps.map.markers[i]);
           google.maps.event.addListener(marker, 'click', function(i){
             showRecipeSidebar(this);
           });
         }
+        //Set eventlistener for MarkerCluster
         var markerClusterer = Gmaps.map.markerClusterer
         google.maps.event.addListener(markerClusterer, "clusterclick", function (cluster) {
           var markers = cluster.getMarkers();
-          console.debug(markers);
           showRecipeSidebar(markers);
         });
-        
-
-        //for (var i = 0; i < Gmaps.map.markerClusterer.clusters_.length; ++i) {
-        //  var markerClusterer = Gmaps.map.markerClusterer
-          //marker.description = Gmaps.map.markers[i].description;
-          //console.debug(Gmaps.map.markers[i]);
-        //  google.maps.event.addListener(markerClusterer, "clusterclick", function (i) {
-        //    alert('MarkerClusterer click event');
-        //  }); 
-        //}
-      }   
+      }
 
     });
 
