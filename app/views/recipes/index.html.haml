@@ -1,83 +1,60 @@
 :javascript
   $(document).ready(function(){
-    $("#toggle_sidebar").click(function(){switchSidebar();});
-    
     Gmaps.map.callback = function() {
-       //Set eventlistener for Marker
+      //Set eventlistener for Marker
       for (var i = 0; i < Gmaps.map.markers.length; ++i) {
         var marker = Gmaps.map.markers[i].serviceObject
         marker.description = Gmaps.map.markers[i].description;
-        //console.debug(Gmaps.map.markers[i]);
         google.maps.event.addListener(marker, 'click', function(i){
           showRecipeSidebar(this);
         });
       }
+      //Set eventlistener for MarkerCluster
       var markerClusterer = Gmaps.map.markerClusterer
       google.maps.event.addListener(markerClusterer, "clusterclick", function (cluster) {
         var markers = cluster.getMarkers();
-        console.debug(markers);
         showRecipeSidebar(markers);
       });
-      
-
-      //for (var i = 0; i < Gmaps.map.markerClusterer.clusters_.length; ++i) {
-      //  var markerClusterer = Gmaps.map.markerClusterer
-        //marker.description = Gmaps.map.markers[i].description;
-        //console.debug(Gmaps.map.markers[i]);
-      //  google.maps.event.addListener(markerClusterer, "clusterclick", function (i) {
-      //    alert('MarkerClusterer click event');
-      //  }); 
-      //}
     }   
   });
 
-  $(window).load(function(){
-    $('#map').css('height', ($(document).height()-50+"px"));
-    $('#right-haupt').css('min-height', ($(document).height()+"px"));
-    $(".right-haupt").data("status", "open");
-  });
+.seitenleistecontent
+  = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
+
+  %p
+    This project wants to 
+    %em 
+      give a pure impression of the different eating habits 
+    and cultures all over the world. 
+    %em 
+      The aim is to collect international recipes. 
+
+  #toggle_sidebar
+
+  #jacob-who
+    = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
+          
+    %h3
+      = link_to 'Who is Jacob?', "#story_1", class:"who"
+    %p
+      = link_to 'Click to get introduced to the story.', "#story_1"
+
+  %hr
+
+  .postedrecipe
+    .infoleft
+      = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
+      = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
+    .inforight
+      %h4
+        Posted recipe
+      %p
+        These markers point out that there is a recipe to look up.
+      %p
+        If there is a number, then there are more recipes than one.
+        Check out what people of this part of the world are cooking.
 
 
-.right-haupt
-  .uebergang-seitenleiste
-    .seitenleiste
-      .seitenleistecontent
-        = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
-
-        %p
-          This project wants to 
-          %em 
-            give a pure impression of the different eating habits 
-          and cultures all over the world. 
-          %em 
-            The aim is to collect international recipes. 
-
-        #toggle_sidebar
-
-        #jacob-who
-          = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
-                
-          %h3
-            = link_to 'Who is Jacob?', "#story_1", class:"who"
-          %p
-            = link_to 'Click to get introduced to the story.', "#story_1"
-
-        %hr
-
-        .postedrecipe
-          .infoleft
-            = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
-            = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
-          .inforight
-            %h4
-              Posted recipe
-            %p
-              These markers point out that there is a recipe to look up.
-            %p
-              If there is a number, then there are more recipes than one.
-              Check out what people of this part of the world are cooking.
-
-    
-        %p.gotoform
-          = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
+  %p.gotoform
+    = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
 

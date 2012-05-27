@@ -61,14 +61,16 @@ body
           margin: 0px auto 20px auto
 
         #toggle_sidebar
+          display: none
           position: absolute
-          top: 270px
           left: -52px
           width: 40px
           height: 40px
           background-image: url(image_path('map_btn.jpg'))
           background-position: 0 0
-
+          &:hover
+            cursor: pointer
+            
         #jacob-who
           text-align: center
           margin: 20px auto 25px auto

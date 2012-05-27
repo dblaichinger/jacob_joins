@@ -6,11 +6,14 @@ window.switchSidebar = (data, callback) ->
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
+    $("#toggle_sidebar").css("background-position", "0px 40px")
     $(".right-haupt").data "status", "closed"
   else
     $(".right-haupt").animate
       "right": "0px",
       300
+    
+    $("#toggle_sidebar").css("background-position", "0px 0px")
     $(".right-haupt").data "status", "open"
 
 
@@ -24,18 +27,17 @@ window.getSidebar = (marker) ->
   $.ajax 
     url: "/recipes/getSidebar"
     dataType: "text"
-    
+
     success: (data, textStatus, jqXHR) ->
-      $('.seitenleiste').replaceWith(data)
-      console.debug(marker)
+      $('.seitenleistecontent').replaceWith(data)
       if marker.length > 1
         $.each marker, (index, m) -> 
           $(m.description).appendTo $('#search_result')
       else
         $('#search_result').html(marker.description)
 
-      $('.right-haupt').css 'min-height', $(document).height()+"px"
-      $('.seitenleiste').css 'min-height', $(document).height()+"px"
+      initSidebar()
+
 
     error: (jqXHR, textStatus, errorThrown) ->
       console.debug(jqXHR)
@@ -47,7 +49,15 @@ window.getSidebar = (marker) ->
         switchSidebar()
 
 
+window.initSidebar = (fadeIn)->
+  $('#toggle_sidebar').css('top', (($(document).height()/2)-25+"px"))
+  if fadeIn
+    $('#toggle_sidebar').fadeIn(1500)
+  else
+    $('#toggle_sidebar').show()
 
+  $("#toggle_sidebar").click ->
+    switchSidebar()
   
 
 
