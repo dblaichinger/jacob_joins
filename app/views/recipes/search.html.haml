@@ -13,8 +13,6 @@
     $('#search_selection').on("click", "a.search_remove_ingredient", recipesSearch.removeIngredientClickHandler);
   });
 
-
-
 .search
   %h1
     ***SEARCH FOR RECIPE***
@@ -34,6 +32,7 @@
     ***RESULT***
   #search_result
   = @recipe.inspect if @recipe
+
 
 
 

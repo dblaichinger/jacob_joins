@@ -52,9 +52,7 @@
           position: absolute
           right: 235px
 
-
-
-
+    #bildzeichen_newsbar
 
 
     h1
@@ -66,13 +64,14 @@
       font-size: 20px
       overflow: visible
 
-    #fb_, #entries_
+    #fb, #entries, #bildzeichen_newsbar
       float: left
-      width: 300px
       margin-top: 20px
 
-    #fb_
+    #fb
       height: 230px
+      width: 365px
+      margin-right: 83px
       position: relative
       cursor: default
 
@@ -80,30 +79,34 @@
         margin-top: 1px
         overflow: visible
 
-      .mcs_container_
+      .mcs_container
         display: none
-      #fb_error_
+
+      #fb_error
         margin-top: 10px
         font-size: 12px
 
-      .fblike_
+      .fblike
         text-decoration: none
         color: #fff
         display: block
         width: 280px
         height: 20px
 
-      .fblike_:hover
+      .fblike:visited
+        color: #fff
+
+      .fblike:hover
         color: $rot
 
-      .fb-like_
+      .fb-like
         width: 150px
         height: 25px
         position: absolute
-        bottom: 0px
-        right: 30px
+        top: 0px
+        left: 220px
 
-      .post_
+      .post
         overflow: hidden
         margin: 10px 0px
         padding-top: 5px
@@ -119,22 +122,29 @@
           margin-bottom: 5px
           font-size: 14px
 
-        .message_
+        .message
           font-size: 12px
           margin: 0 10px 0 60px
-
-        .time_
+          a
+            color: #fff
+          a:hover
+            color: $rot 
+        .time
           font-size: 10px
           font-family: "Pluto-LightCondensed"
           margin: 5px 0 0 60px
 
-    #entries_
-      margin-left: 30px
+    #bildzeichen_newsbar
+      width: 100px
+      margin: 70px 86px 0 0
+
+    #entries
       height: 190px
+      width: 365px
       overflow: hidden
       cursor: default
 
-      #last_entry_
+      #last_entry
         padding-top: 10px
         
         p
@@ -148,7 +158,7 @@
           font-family: "Pluto-LightCondensed"
           margin-bottom: 10px
 
-    #fancy_counter_
+    #fancy_counter
       float: right
       margin: 20px 0
       height: 190px
@@ -161,24 +171,10 @@
         width: 70px
         text-align: center
 
-      .display_
+      .display
         font-family: "Sanches-Bold"
 
-    #countdown_
-      position: absolute
-      bottom: 35px
-      right: 15px
-      font-family: "Sanches-Semibold"
-
-      .countdown_kl_, #days_, #hours_, #minutes_, #seconds_
-        float: left
-        margin-right: 5px
-
-      .countdown_kl_
-        margin-right: 10px
-        font-family: "Sanches-Italic"
-
-  #logo_
+  #logo
     clear: both
 
     img
