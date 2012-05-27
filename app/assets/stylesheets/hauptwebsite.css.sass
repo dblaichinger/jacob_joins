@@ -21,16 +21,18 @@ body
     #toggle_sidebar
       position: absolute
       z-index: 1
-      top: 205px
-      left: -33px
-      width: 50px
-      height: 165px
+      top: 220px
+      left: -22px
+      width: 40px
+      height: 40px
       background-image: url(image_path('map_btn.jpg'))
       background-position: 0 0
       cursor: pointer
 
+      &.closed
+        background-position: 0 -40px
+
     .seitenleiste
-<<<<<<< HEAD
       float: right
       background-image: url(image_path('seitenleiste_bg.png'))
       background-repeat: repeat-y
