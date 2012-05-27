@@ -1,48 +1,37 @@
-:javascript
-  $(document).ready(function(){
-    $("#toggle_sidebar").click(function(){switchSidebar();});
-  });
+= image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
+
+%p
+  This project wants to 
+  %em 
+    give a pure impression of the different eating habits 
+  and cultures all over the world. 
+  %em 
+    The aim is to collect international recipes. 
+
+#jacob-who
+  = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
+        
+  %h3
+    = link_to 'Who is Jacob?', "#story_1", class:"who"
+  %p
+    = link_to 'Click to get introduced to the story.', "#story_1"
+
+%hr
+
+.postedrecipe
+  .infoleft
+    = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
+    = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
+  .inforight
+    %h4
+      Posted recipe
+    %p
+      These markers point out that there is a recipe to look up.
+    %p
+      If there is a number, then there are more recipes than one.
+      Check out what people of this part of the world are cooking.
 
 
-.right-haupt
-  .uebergang-seitenleiste
-    .seitenleiste
-      = image_tag 'Logo-haupt.png', id:"Logo_hauptstart"
 
-      %p
-        This project wants to 
-        %em 
-          give a pure impression of the different eating habits 
-        and cultures all over the world. 
-        %em 
-          The aim is to collect international recipes. 
-
-      #toggle_sidebar
-
-      #jacob-who
-        = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
-              
-        %h3
-          = link_to 'Who is Jacob?', "#story_1", class:"who"
-        %p
-          = link_to 'Click to get introduced to the story.', "#story_1"
-
-      %hr
-
-      .postedrecipe
-        .infoleft
-          = image_tag 'google_marker.png', class:"marker-info", id:"recipemarker_bsp"
-          = image_tag 'sammelmarker_bsp.png', class:"marker-info", id:"sammelmarker_bsp"
-        .inforight
-          %h4
-            Posted recipe
-          %p
-            These markers point out that there is a recipe to look up.
-          %p
-            If there is a number, then there are more recipes than one.
-            Check out what people of this part of the world are cooking.
-
-    
-
-      %p.gotoform
-        = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
+%p.gotoform
+  = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"

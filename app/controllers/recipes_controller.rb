@@ -98,6 +98,10 @@ class RecipesController < ApplicationController
 
   def search
     respond_to do |format|
+      format.html do
+        @location = Recipe.all.to_gmaps4rails
+        render :layout => 'map'
+      end
       format.json do
         @ingredients = params[:ingredients].select {|i| i != ""}
         @recipes = []
@@ -123,10 +127,6 @@ class RecipesController < ApplicationController
           end
           @recipes.sort! {|a,b| b["count"] <=> a["count"]}
         end
-      end
-      format.html do
-        @location = Recipe.all.to_gmaps4rails
-        render :layout => 'map'
       end
     end
   end

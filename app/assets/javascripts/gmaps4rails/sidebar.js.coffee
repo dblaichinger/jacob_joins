@@ -1,11 +1,11 @@
 window.switchSidebar = ->
-  if $(".right-haupt").css("margin-right") is "0px"
+  if $(".right-haupt").css("right") is "0px"
     $(".right-haupt").animate
-      "margin-right": "-400px",
+      "right": "-392px",
       300
   else
     $(".right-haupt").animate
-      "margin-right": "0px",
+      "right": "0px",
       300
 
 window.showRecipeSidebar = (marker) ->
