@@ -53,6 +53,7 @@ class Recipe
     state :published do
       validates :name, :portions, :duration, :country, :latitude, :longitude, :presence => true
       validates_numericality_of :portions, :duration
+      validates_associated :steps
     end
 
   end
