@@ -5,21 +5,11 @@ class CsiSet
   accepts_nested_attributes_for :country_specific_informations
 
   def publish
-    worked = true
-
-    country_specific_informations.where(:state.ne => "published").and(:answer.ne => "").entries.each do |csi|
-      worked &&= csi.publish
-    end
-
-    worked
+    country_specific_informations.where(:state.ne => "published").and(:answer.ne => "").entries.all? { |csi| csi.publish }
   end
 
   def self.empty_set
-    csis = []
-    Question.all.each do |q|
-      csis << CountrySpecificInformation.new(:question_reference => q, :question => q.text)
-    end
-    csis
+    Question.all.map { |q| CountrySpecificInformation.new :question_reference => q, :question => q.text }
   end
 
   protected
