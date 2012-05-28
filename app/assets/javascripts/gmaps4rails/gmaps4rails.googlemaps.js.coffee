@@ -89,13 +89,22 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       center:                 @createLatLng(@map_options.center_latitude, @map_options.center_longitude)
       mapTypeId:              google.maps.MapTypeId[@map_options.type]
       mapTypeControl:         @map_options.mapTypeControl
+      mapTypeControlOptions:
+        position: google.maps.ControlPosition.RIGHT_TOP
       disableDefaultUI:       @map_options.disableDefaultUI
       disableDoubleClickZoom: @map_options.disableDoubleClickZoom
       draggable:              @map_options.draggable
 
     mergedOptions = @mergeObjectWithDefault @map_options.raw, defaultOptions
 
-    return new google.maps.Map document.getElementById(@map_options.id), mergedOptions
+    map = new google.maps.Map document.getElementById(@map_options.id), mergedOptions
+
+    pushDiv = document.createElement "div"
+    pushDiv.style.height = "15px"
+    pushDiv.id = "derp"
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push pushDiv
+
+    return map
 
 
   createMarkerImage : (markerPicture, markerSize, origin, anchor, scaledSize) ->
