@@ -2,7 +2,7 @@ window.publish_user = ->
   return_value = false
 
   $.ajax
-    url: "users/draft"
+    url: "/users/draft"
     type: "POST"
     data:
       _method: "PUT"
