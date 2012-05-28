@@ -9,8 +9,8 @@ class User
   field :heard_from, :type => String
   field :gender, :type => String
 
-  has_one :recipe
-  has_many :country_specific_informations
+  has_one :recipe, :dependent => :destroy
+  has_many :country_specific_informations, :dependent => :destroy
 
   state_machine :initial => :draft do
     event :publish do
