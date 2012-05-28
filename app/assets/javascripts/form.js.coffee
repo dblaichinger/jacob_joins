@@ -30,7 +30,7 @@ loaderMsg = '<img alt="Ajax-loader" src="/assets/ajax-loader.gif"><h1>Loading...
 
 $ ->
   $(".scroll").click ->
-    newsbar = $("#newsbar")
+    newsbar = $("#newsbar_new")
     newsbar.executeAt "destroy"
     $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
       onAfter: ->
