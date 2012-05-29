@@ -1,25 +1,26 @@
 window.switchSidebar = (data, callback) ->
+  console.log "switchSidebar"
   rightHaupt = $(".right-haupt")
-  if rightHaupt.data("status") == "open"
+  toggleSidebar = $('#toggle_sidebar')
+  if toggleSidebar.hasClass('closed')
+    rightHaupt.animate
+      "right": "0px",
+      300,
+      ->
+        toggleSidebar.removeClass("closed")
+      
+    rightHaupt.data "status", "open"
+
+  else
     rightHaupt.animate
       "right": "-392px",
       300,
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
-    rightHaupt.data "status", "closed"
-    $('#toggle_sidebar').delay(300).queue ->
-      $(this).addClass("closed")
-      $(this).dequeue()
+        toggleSidebar.addClass("closed")
 
-  else
-    rightHaupt.animate
-      "right": "0px",
-      300
-    rightHaupt.data "status", "open"
-    $('#toggle_sidebar').delay(300).queue ->
-      $(this).removeClass("closed")
-      $(this).dequeue()
+    rightHaupt.data "status", "closed"
 
 window.showRecipeSidebar = (marker) ->
   if $(".right-haupt").data("status") == "open"
@@ -42,8 +43,6 @@ window.getSidebar = (marker) ->
       else
         $('#search_result').html(marker.description)
 
-      initSidebar()
-
     error: (jqXHR, textStatus, errorThrown) ->
       console.debug(jqXHR)
       console.debug(textStatus)
@@ -53,17 +52,18 @@ window.getSidebar = (marker) ->
       if $(".right-haupt").data("status") == "closed"
         switchSidebar()
 
-
-window.initSidebar = (fadeIn)->
-  $('#toggle_sidebar').css('top', (($(document).height()/2)-25+"px"))
+window.positionToggleSidebar = (fadeIn) ->
+  $('#toggle_sidebar').css('top', (($(document).height()/2)-45+"px"))
   if fadeIn
     $('#toggle_sidebar').fadeIn(1500)
   else
     $('#toggle_sidebar').show()
 
+window.initSidebar = ->
   $("#toggle_sidebar").click ->
     switchSidebar()
     false
+  $('.right-haupt').data "status", "open"
   
 
 
