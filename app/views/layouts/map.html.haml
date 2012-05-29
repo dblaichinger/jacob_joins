@@ -3,7 +3,11 @@
     $(document).ready(function(){
       initInfobox();
       initClusterer();
-      initSidebar();
+      initSidebar(true);
+      
+      $(".recipe_link").click(function(){
+        clickMarker(marker)
+      });
       
       Gmaps.map.callback = function() {
         //Set eventlistener for Marker
