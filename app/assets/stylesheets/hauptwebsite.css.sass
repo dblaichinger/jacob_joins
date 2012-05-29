@@ -12,6 +12,7 @@ body
   width: 100%
   position: relative
   padding-top: 45px
+  overflow-x: hidden
 
   .right-haupt
     position: relative
@@ -19,6 +20,7 @@ body
     right: 0px
 
     #toggle_sidebar
+      display: none
       position: absolute
       z-index: 1
       top: 220px
@@ -36,13 +38,14 @@ body
       float: right
       background-image: url(image_path('seitenleiste_bg.png'))
       background-repeat: repeat-y
-      width: 400px
+      width: 405px
       //overflow-y: hidden
       position: relative
+      margin-right: -5px
 
 
       .seitenleistecontent
-        padding-left: 30px
+        padding: 45px 0 0 30px
 
         p
           padding: 0 5px

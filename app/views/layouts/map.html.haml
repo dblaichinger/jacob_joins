@@ -26,11 +26,13 @@
 
     $(window).load(function(){
       $('.window-sensitive').css("min-height", $(window).height() - 45);
-      $(".right-haupt").data("status", "open");
+      positionToggleSidebar(true);
+
     });
 
     $(window).resize(function(){
       $('.window-sensitive').css("min-height", $(window).height() - 45);
+      positionToggleSidebar();
     });
 
   .wrapper-haupt.window-sensitive
