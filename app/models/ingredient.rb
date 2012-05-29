@@ -5,6 +5,8 @@ class Ingredient
 
   has_and_belongs_to_many :recipes
 
+  attr_accessible :name, :recipes
+
   validates_presence_of :name
 
   def self.names_with(query)
