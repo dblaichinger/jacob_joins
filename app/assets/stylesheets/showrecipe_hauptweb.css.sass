@@ -23,18 +23,6 @@
     margin: 0 auto
     padding-top: 100px
 
-    .bx-wrapper
-      .bx-next
-        right: 16px
-        z-index: 100
-        top: 120px
-      .bx-prev  
-        left: 16px
-        z-index: 101
-        top: 120px
-
-
-
     #recipe_ingredients_content
       padding-top: 50px
       table
@@ -47,22 +35,43 @@
             font-family: "PlutoCondensed"
             width: 300px
             font-size: 14px
-
-
     p
       em
         color: $rot
 
-    .recipe_imagesteps
-      text-align: center
-      li
-        padding-bottom: 20px
+    .bx-wrapper
+      .bx-pager
+        text-align: center
+        margin-top: 10px
 
-      img
-        border: 2px solid white
-        text-align: center
-      p
-        text-align: center
+        a
+          background-image: url(image_path('delete_image_sprite.png'))
+          background-position: 0 0
+          width: 20px
+          height: 20px
+          display: inline-block
+          text-indent: -1000px
+          overflow: hidden
+          margin: 0 2px
+
+          &.pager-active, &:hover
+            background-position: 0 -20px
+
+      .bx-window
+        height: auto 
+        .recipe_images
+          text-align: center
+
+          li
+            width: 100%
+
+            img
+              border: 2px solid white
+              text-align: center
+              width: auto
+              height: auto
+              max-height: 500px
+
 
     h1
       margin-bottom: 20px

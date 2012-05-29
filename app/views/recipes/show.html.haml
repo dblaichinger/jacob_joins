@@ -1,12 +1,19 @@
 - content_for :map_overlay_content do
   :javascript
     $(document).ready(function(){
-      $('.recipe_imagesteps').bxSlider({
-       pager: false,
+      pagerNeeded = $('.recipe_images li').length > 1;
+      $('.recipe_images').bxSlider({
+       pager: pagerNeeded,
        infiniteLoop: false,
-       hideControlOnEnd: true,
+       controls: false,
        mode: 'fade'
       });
+    });
+
+    $(window).load(function(){
+      if($('.bx-wrapper .bx-window').height() < 20){
+        fixBxSliderHeight($('.bx-wrapper'));
+      }
     });
 
   .left-haupt_recipe
@@ -21,12 +28,11 @@
         from
         = @recipe.country  
 
-      %ul.recipe_imagesteps
-        - @recipe.steps.order_by(:number).each do |step|
-          %li
-            = image_tag step.image.url(:large), class:"recipe_imagesteps_image"
-            %p
-              = step.description
+      - if @recipe.images.count > 0
+        %ul.recipe_images
+          - @recipe.images.each do |image|
+            %li
+              = image_tag image.attachment.url(:large)
 
 
       #recipe_ingredients_content
