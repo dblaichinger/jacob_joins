@@ -109,11 +109,6 @@ window.newsbar.init = ->
   $("#clickandsee").click (e) ->
     false
 
-  $("#newsbar_new").executeAt $("#start"), ->
-    $("#newsbar_new").fadeOut 500
-  ,
-  ->
-    $("#newsbar_new").fadeIn 500
 
   setTimeout "$('#clickandsee').mouseleave()", 2500
 
