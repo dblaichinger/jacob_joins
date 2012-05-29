@@ -2,11 +2,11 @@ namespace :db do
   desc "Fill database with sample data (WARNING: DELETES ALL DOCUMENTS FIRST)"
   task :populate => :environment do
     
-    Ingredient.delete_all
-    Recipe.delete_all
+    #Ingredient.delete_all
+    #Recipe.delete_all
 
-    NUMBER_OF_INGREDIENTS = 100
-    NUMBER_OF_RECIPES = 1000
+    NUMBER_OF_INGREDIENTS = 10
+    NUMBER_OF_RECIPES = 100
 
     require 'benchmark'
     include Benchmark

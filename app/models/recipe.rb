@@ -83,7 +83,7 @@ class Recipe
       #output << "#{image_tag self.images.attachment(:small)}"
       #output << "<img src='#{self.images.attachment(:small)}' />"
     end
-    output += "<div class='infobox_recipe'><a href='/recipes/#{self.slug}'>#{self.name}</a></div>"
+    output += "<div class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link'>#{self.name}</a></div>"
     unless self.user.nil?
       output += "<div class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em>, #{self.city} </div>"
     end

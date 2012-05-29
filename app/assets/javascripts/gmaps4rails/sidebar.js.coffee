@@ -7,7 +7,7 @@ window.switchSidebar = (data, callback) ->
       'fast'
     .animate
       "right": "0px",
-      600
+      200
       ->
         toggleSidebar.removeClass("closed")
       
@@ -15,10 +15,11 @@ window.switchSidebar = (data, callback) ->
 
   else
     rightHaupt.animate
-      "right": "5px"
+      "right": "5px",
+      "fast"
     .animate
       "right": "-392px",
-      600
+      200
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
