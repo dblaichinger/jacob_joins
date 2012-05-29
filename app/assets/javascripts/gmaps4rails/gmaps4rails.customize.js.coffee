@@ -6,11 +6,11 @@ window.initInfobox = ->
     pixelOffset: new google.maps.Size(-140, 0)
     zIndex: null
     boxStyle:
-      background: "url('assets/tipbox.png') no-repeat"
+      background: "url('/assets/tipbox.png') no-repeat"
       opacity: 0.95
 
     closeBoxMargin: "10px 2px 2px 2px"
-    closeBoxURL: "assets/close.png"
+    closeBoxURL: "/assets/close.png"
     infoBoxClearance: new google.maps.Size(1, 1)
     isHidden: false
     pane: "floatPane"

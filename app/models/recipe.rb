@@ -53,6 +53,7 @@ class Recipe
     state :published do
       validates :name, :portions, :duration, :country, :latitude, :longitude, :presence => true
       validates_numericality_of :portions, :duration
+      validates_associated :steps
     end
 
   end
@@ -84,7 +85,7 @@ class Recipe
     end
     output += "<div class='infobox_recipe'><a href='/recipes/#{self.slug}'>#{self.name}</a></div>"
     unless self.user.nil?
-      output += "<div class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.lastname[0,1]}.</em>, #{self.city} </div>"
+      output += "<div class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em>, #{self.city} </div>"
     end
     output += "<div class='infobox_duration'> Estimated cooking time: #{self.duration} minutes</div>"
   end

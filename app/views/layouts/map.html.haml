@@ -3,33 +3,44 @@
     $(document).ready(function(){
       initInfobox();
       initClusterer();
+      initSidebar();
       
       Gmaps.map.callback = function() {
-         for (var i = 0; i < Gmaps.map.markers.length; ++i) {
+        //Set eventlistener for Marker
+        for (var i = 0; i < Gmaps.map.markers.length; ++i) {
           var marker = Gmaps.map.markers[i].serviceObject
           marker.description = Gmaps.map.markers[i].description;
           google.maps.event.addListener(marker, 'click', function(i){
-            console.debug(marker);
-            showRecipeSidebar(marker);
+            showRecipeSidebar(this);
           });
         }
+        //Set eventlistener for MarkerCluster
+        var markerClusterer = Gmaps.map.markerClusterer
+        google.maps.event.addListener(markerClusterer, "clusterclick", function (cluster) {
+          var markers = cluster.getMarkers();
+          showRecipeSidebar(markers);
+        });
       }
+
     });
 
     $(window).load(function(){
-      $('#map').css('height', ($(document).height()-50+"px"));
-
+      $('.window-sensitive').css("min-height", $(window).height() - 45);
+      $(".right-haupt").data("status", "open");
     });
 
-  #start
+    $(window).resize(function(){
+      $('.window-sensitive').css("min-height", $(window).height() - 45);
+    });
 
-  .wrapper-haupt
+  .wrapper-haupt.window-sensitive
 
-    .left-haupt
-      = #@location
-      = #gmaps4rails(@location)
-      = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
+    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
 
-    = content_for?(:map_content) ? yield(:map_content) : yield
+    .right-haupt
+      #toggle_sidebar
+      .seitenleiste.window-sensitive
+        .seitenleistecontent
+          = content_for?(:sidebar_content) ? yield(:sidebar_content) : yield
 
 = render :template => 'layouts/application'

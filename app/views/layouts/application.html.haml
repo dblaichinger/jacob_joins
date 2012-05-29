@@ -22,7 +22,6 @@
     :javascript
 
       $(document).ready(function(){
-        var passCount = 0;
         $('#fancy_counter').tzineClock();
         newsbar.init();
         
@@ -39,10 +38,6 @@
 
   %body
     #fb-root
-    %section.flash_notifications
-      - flash.each do |key, value|
-        %div{ class:"flash_#{key}"}
-          = value
 
     = render "layouts/newsbar_new"
 

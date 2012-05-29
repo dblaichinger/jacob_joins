@@ -30,7 +30,7 @@ loaderMsg = '<img alt="Ajax-loader" src="/assets/ajax-loader.gif"><h1>Loading...
 
 $ ->
   $(".scroll").click ->
-    newsbar = $("#newsbar")
+    newsbar = $("#newsbar_new")
     newsbar.executeAt "destroy"
     $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
       onAfter: ->
@@ -166,7 +166,7 @@ $ ->
     $("[aria-describedby]", oldTab).qtip "hide"
 
     if oldTabIndex < $('#wizard').tabs('length') and oldTab.find(":input").hasClass("changed")
-      url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
+      url = "/#{oldTab.attr('id').replace('_tab', 's/sync_wizard')}"
       deactivatePlaceholders(oldTab)
       params = oldTab.children('form').serializeArray()
       activatePlaceholders(oldTab)
@@ -206,7 +206,7 @@ $ ->
 
       loadPreview = ->
         if $('#wizard').data('activeRequests') is 0
-          $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
+          $('#preview_tab').css('opacity', '0').load "preview", (data, textStatus) ->
             $(this).animate
               opacity: 1
             , 200

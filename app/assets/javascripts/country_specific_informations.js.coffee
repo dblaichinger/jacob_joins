@@ -1,7 +1,7 @@
 window.publish_csi = (id, user_location) ->
   return_value = false
   $.ajax
-    url: "country_specific_informations/draft"
+    url: "/country_specific_informations/draft"
     type: "POST"
     async: false
     data:
