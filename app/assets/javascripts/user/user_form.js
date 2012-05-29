@@ -2,7 +2,7 @@ function gender_icon(classname){
   $("#user_gender").val(classname);
   gendericons = $("#gendericons").children();
   otherGender = gendericons.not("." + classname);
-  otherGender.css("background-position", "0px 0px");
+  otherGender.removeAttr("style");
   $("#" + classname + "_link").css("background-position", "0px -63px");
   $(".dirtyform", "#user_tab").dirtyValidation("validate", $("#user_gender"), false);
   $("#user_gender").addClass("changed");

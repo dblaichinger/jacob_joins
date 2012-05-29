@@ -77,7 +77,7 @@ show_facebook_posts = (post, current_post, pic) ->
 # Takes an ISO time and returns a string representing how
 # long ago the date represents.
 
-prettyDate = (time) ->
+window.prettyDate = (time) ->
   date = (time or "").replace(/-/g, "/").replace(/[TZ]/g, " ").replace(/\+/g, " +")
   index = date.lastIndexOf(":")
   if index > 20
@@ -85,7 +85,7 @@ prettyDate = (time) ->
     second = date.substr(index + 1, date.length)
     date = first + second
   date = new Date(date)
-  diff = ((new Date()).getTime() - date.getTime() / 1000)
+  diff = (((new Date()).getTime() - date.getTime()) / 1000)
   day_diff = Math.floor(diff / 86400)
   return  if isNaN(day_diff) or day_diff < 0 or day_diff >= 31
   day_diff is 0 and (diff < 60 and "just now" or diff < 120 and "1 minute ago" or diff < 3600 and Math.floor(diff / 60) + " minutes ago" or diff < 7200 and "1 hour ago" or diff < 86400 and Math.floor(diff / 3600) + " hours ago") or day_diff is 1 and "Yesterday" or day_diff < 7 and day_diff + " days ago" or day_diff < 31 and Math.ceil(day_diff / 7) + " weeks ago"
