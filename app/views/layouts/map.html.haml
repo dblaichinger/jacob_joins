@@ -37,6 +37,7 @@
 
   .wrapper-haupt.window-sensitive
 
+    = yield :map_overlay_content
     = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
 
     .right-haupt

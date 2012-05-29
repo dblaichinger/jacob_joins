@@ -1,13 +1,13 @@
 class RecipesController < ApplicationController
 
   respond_to :json, :except => :index
+  layout "map", :only => [:show, :index, :search]
   append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
-  before_filter :check_recipe_id_presence, :only => :show
+  before_filter :get_requested_recipe, :only => :show
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
 
   def show
-    @recipe = Recipe.find session[:recipe_id]
-    render :layout => false
+    @location = @recipe.to_gmaps4rails
   end
 
   def index
@@ -142,8 +142,16 @@ class RecipesController < ApplicationController
     end
   end
 
-  def check_recipe_id_presence
-    render :status => 410, :text => "Gone" and return unless session[:recipe_id].present?
+  def get_requested_recipe
+    if params[:id].present?
+      @recipe = Recipe.where(:slug => params[:id], :state => "published").first
+      @preview = false
+    elsif session[:recipe_id].present?
+      @recipe = Recipe.where(:id => session[:recipe_id]).first
+      @preview = true
+    end
+
+    render :status => 404, :text => "Not Found" and return unless @recipe.present?
   end
 
   def already_published?
