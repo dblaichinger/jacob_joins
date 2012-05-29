@@ -17,7 +17,7 @@
     %p
       Portions:
       %em 
-        = @recipe.portions.present? ? @recipe.formatted_portions : "unknown"
+        = @recipe.portions.present? ? formatted_portions(@recipe.portions) : "unknown"
 
     %p
       Preparation time: 

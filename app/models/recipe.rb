@@ -64,14 +64,6 @@ class Recipe
     end
   end
 
-  def formatted_portions
-    if portions.present?
-      portions > 6 ? "more than six" : portions
-    else
-      "your portion count"
-    end
-  end
-
   #Methods for Gmaps4rails
   def gmaps4rails_address
    "#{self.city}, #{self.country}" 
