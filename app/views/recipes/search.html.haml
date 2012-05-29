@@ -15,21 +15,24 @@
 
 .search
   %h1
-    ***SEARCH FOR RECIPE***
+    Search for some 
+    %br
+    tasty 
+    %span ingredients
 
   = form_tag recipes_search_path, :method => "post", :remote => true, "data-type" => "json", :id => "ingredients_search_form" do
     = text_field_tag 'ingredients[]', nil, id:"ingredients_search"
     #search_hidden
     = submit_tag "Search", :name => nil 
 
-
-  %h1
-    ***SELECTION***
-
   #search_selection
 
   %h1
-    ***RESULT***
+    Delicious 
+    %span recipes 
+    from
+    %br
+    City, Country
   #search_result
   = @recipe.inspect if @recipe
 
