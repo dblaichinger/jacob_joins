@@ -1,11 +1,13 @@
 window.switchSidebar = (data, callback) ->
-  console.log "switchSidebar"
   rightHaupt = $(".right-haupt")
   toggleSidebar = $('#toggle_sidebar')
-  if toggleSidebar.hasClass('closed')
+  if rightHaupt.data("status") is "closed"
     rightHaupt.animate
+      "right": "-397px",
+      'fast'
+    .animate
       "right": "0px",
-      300,
+      600
       ->
         toggleSidebar.removeClass("closed")
       
@@ -13,8 +15,10 @@ window.switchSidebar = (data, callback) ->
 
   else
     rightHaupt.animate
+      "right": "5px"
+    .animate
       "right": "-392px",
-      300,
+      600
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
