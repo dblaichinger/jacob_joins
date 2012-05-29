@@ -8,15 +8,10 @@ class Ingredient
   validates_presence_of :name
 
   def self.names_with(query)
-    names = []
-    Ingredient.only(:name).where(:name => /#{Regexp.escape(query)}/i).entries.each do |i|
-      names << i.name
-    end
-    names
+    Ingredient.only(:name).where(:name => /#{Regexp.escape(query)}/i).entries.map { |i| i.name }
   end
 
   def self.search_by_name(ingredient)
-    Ingredient.where("name" => ingredient)
+    Ingredient.where :name => ingredient
   end
-
 end
