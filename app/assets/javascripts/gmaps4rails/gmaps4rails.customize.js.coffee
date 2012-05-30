@@ -48,18 +48,63 @@ window.initClusterer = ->
 
 window.initCustomMapStyles = ->
   customMapStyles = [
-    {
-      featureType: "all",
+      {
+      featureType: "water"
       stylers: [
-        { saturation: -80 }
+        {hue: "#531E09"},
+        {saturation: -70}
       ]
-    },
-    {
-      featureType: "poi.park",
+      },
+      {
+      featureType: "landscape.man_made"
       stylers: [
-        { hue: "#ff0023" },
-        { saturation: 40 }
+        {hue: "#531E09"}
       ]
-    }
+      },
+      {
+      featureType: "poi.park"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: -80},
+        {lightness: 50},
+        {gamma: 0.3}
+      ]
+      },
+      {
+      featureType: "administrative"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: 0},
+        {gamma: 2.0}
+      ]
+      },
+      {
+      featureType: "administrative.province"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: 0},
+        {gamma: 0.8}
+      ]
+      },
+      {
+      featureType: "poi"
+      stylers: [
+        {visibility: "off"},
+      ]
+      },
+      {
+      featureType: "landscape"
+      stylers: [
+        {visibility: "off"},
+      ]
+      },
+      {
+      featureType: "road"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: -90},
+        {gamma: 3.5}
+      ]
+      }
   ];
 
