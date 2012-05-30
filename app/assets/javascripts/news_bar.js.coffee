@@ -2,7 +2,6 @@ window.newsbar ||= {}
 
 window.newsbar.get_latest_recipe = ->
   $.get "/recipes/last", ((data, textstatus, jqxhr) ->
-    console.debug(data)
     $("#last_entry").empty()
     $.each data, (key, recipe) ->
       user_name = undefined

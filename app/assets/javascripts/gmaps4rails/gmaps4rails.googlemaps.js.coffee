@@ -11,6 +11,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       disableDefaultUI:       false
       disableDoubleClickZoom: false
       type:                   "ROADMAP" # HYBRID, ROADMAP, SATELLITE, TERRAIN
+      minZoom:                2
 
     #markers + info styling
     @markers_conf =
@@ -100,8 +101,12 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     map = new google.maps.Map document.getElementById(@map_options.id), mergedOptions
 
     customMapStyles = initCustomMapStyles()
-    map.setOptions {styles: customMapStyles}
-
+    map.setOptions
+      styles: customMapStyles
+      streetViewControl: false
+      zoomControlOptions:
+        style: google.maps.ZoomControlStyle.SMALL
+  
     pushDiv = document.createElement "div"
     pushDiv.style.height = "15px"
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push pushDiv
