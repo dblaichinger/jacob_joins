@@ -24,6 +24,13 @@
           var markers = cluster.getMarkers();
           showRecipeSidebar(markers);
         });
+
+        //Eventlistener for zoom changed
+        google.maps.event.addListener(Gmaps.map.serviceObject, 'zoom_changed', function() {
+          if(Gmaps.map.serviceObject.zoom < 5 && Gmaps.map.visibleInfoWindow != null){
+            Gmaps.map.visibleInfoWindow.close();
+          }
+        });
       }
 
     });
@@ -39,11 +46,9 @@
       positionToggleSidebar();
     });
 
-   
-
   .wrapper-haupt.window-sensitive
 
-    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
+    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>1000, "custom_infowindow_class" => "yellow" } })
 
 
     .right-haupt
