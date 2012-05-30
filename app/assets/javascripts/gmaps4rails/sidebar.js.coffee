@@ -46,6 +46,7 @@ window.getSidebar = (marker) ->
     success: (data, textStatus, jqXHR) ->
       $('.seitenleistecontent').html(data)
       if marker.length > 1
+        $('#search_result').html("<div id='recipe_number'><p>Number of recipes: "+marker.length+"</p></div>")
         $.each marker, (index, m) -> 
           $(m.description).appendTo $('#search_result')
       else

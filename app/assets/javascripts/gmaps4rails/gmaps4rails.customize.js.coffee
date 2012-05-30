@@ -39,3 +39,20 @@ window.initClusterer = ->
       width: 60
       height: 60
     ]
+
+window.initCustomMapStyles = ->
+  customMapStyles = [
+    {
+      featureType: "all",
+      stylers: [
+        { saturation: -80 }
+      ]
+    },
+    {
+      featureType: "poi.park",
+      stylers: [
+        { hue: "#ff0023" },
+        { saturation: 40 }
+      ]
+    }
+  ];
