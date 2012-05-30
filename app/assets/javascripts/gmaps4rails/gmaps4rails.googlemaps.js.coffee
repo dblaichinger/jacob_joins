@@ -99,9 +99,11 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
 
     map = new google.maps.Map document.getElementById(@map_options.id), mergedOptions
 
+    customMapStyles = initCustomMapStyles()
+    map.setOptions {styles: customMapStyles}
+
     pushDiv = document.createElement "div"
     pushDiv.style.height = "15px"
-    pushDiv.id = "derp"
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push pushDiv
 
     return map
