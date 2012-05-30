@@ -29,7 +29,10 @@ window.switchSidebar = (data, callback) ->
 
 window.showRecipeSidebar = (marker) ->
   if $(".right-haupt").data("sidebar") == "info"
-    switchSidebar(marker, getSidebar)
+    if $(".right-haupt").data("status") == "closed"
+      getSidebar(marker)
+    else
+      switchSidebar(marker, getSidebar)
   else if $(".right-haupt").data("status") == "open"
     $('#sidebar_loader').fadeOut "fast"
     $('#sidebar_loader').show()
