@@ -19,6 +19,7 @@
     %br
     tasty 
     %span ingredients
+  %hr
 
   = form_tag recipes_search_path, :method => "post", :remote => true, "data-type" => "json", :id => "ingredients_search_form" do
     = text_field_tag 'ingredients[]', nil, id:"ingredients_search"
@@ -33,6 +34,9 @@
     from
     %br
     City, Country
+  
+  %hr.searchhr
+
   #search_result
     #wizard-loader
       .loader#sidebar_loader
