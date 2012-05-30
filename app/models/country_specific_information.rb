@@ -12,6 +12,7 @@ class CountrySpecificInformation
   belongs_to :user
 
   attr_accessible :question, :answer, :city, :country, :latitude, :longitude, :user, :question_reference
+  attr_accessible :question, :answer, :city, :country, :latitude, :longitude, :user, :question_reference, :state, :as => :admin
 
   before_save :get_question_text
 

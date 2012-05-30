@@ -13,6 +13,7 @@ class User
   has_many :country_specific_informations, :dependent => :destroy
 
   attr_accessible :firstname, :lastname, :email, :age, :heard_from, :gender, :recipe, :country_specific_informations
+  attr_accessible :firstname, :lastname, :email, :age, :heard_from, :gender, :recipe, :country_specific_informations, :state, :as => :admin
 
   state_machine :initial => :draft do
     event :publish do

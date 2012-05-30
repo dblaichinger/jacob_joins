@@ -24,6 +24,7 @@ class Recipe
   #geo_index :location
   #field :gmaps, :type => Boolean
   attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes
+  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes, :state, :as => :admin
 
 
   index "ingredient_with_quantities.name"
