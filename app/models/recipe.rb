@@ -23,8 +23,7 @@ class Recipe
   #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   #geo_index :location
   #field :gmaps, :type => Boolean
-  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes
-
+  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user
 
   index "ingredient_with_quantities.name"
 
@@ -96,7 +95,7 @@ class Recipe
   end
 
   def self.last_entries(count = 3)
-    Recipe.where(:user => {"$ne"=>nil}, :state => "published").order_by(:created_at => :desc).limit(count)
+    Recipe.where(:user.ne => "nil", :state => "published").order_by(:created_at => :desc).limit(count)
   end
 
   private
