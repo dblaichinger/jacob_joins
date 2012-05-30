@@ -18,13 +18,16 @@ body
     position: relative
     float: right
     right: 0px
+    width: 100%
+
+    @media screen and (min-width: 1400px)
+      width: auto
 
     #toggle_sidebar
       display: none
-      position: absolute
+      position: fixed
       z-index: 1
-      top: 220px
-      left: -22px
+      right: 382px
       width: 40px
       height: 40px
       background-image: url(image_path('map_btn_.jpg'))
@@ -35,6 +38,7 @@ body
         background-position: 0 -40px
 
     .seitenleiste
+      z-index: 1
       float: right
       background-image: url(image_path('seitenleiste_bg.png'))
       background-repeat: repeat-y
@@ -45,7 +49,7 @@ body
 
 
       .seitenleistecontent
-        padding: 45px 30px 0 30px
+        padding: 45px 30px
 
         p
           padding: 0 5px

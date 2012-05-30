@@ -8,15 +8,26 @@
        controls: false,
        mode: 'fade'
       });
+
+      $('.close-recipe').click(closeRecipeHandler);
     });
 
     $(window).load(function(){
       if($('.bx-wrapper .bx-window').height() < 20){
         fixBxSliderHeight($('.bx-wrapper'));
+        $(window).resize();
       }
+
+      positionVerticalCentered($('.close-recipe.left'), true);
     });
 
-  .left-haupt_recipe
+    $(window).resize(function(){
+      positionVerticalCentered($('.close-recipe.left'));
+    });
+
+  .map-overlay.window-sensitive
+    = link_to "close", "", class:"close-recipe right"
+    = link_to "close", "", class:"close-recipe left"
     .content
       %h1
         = @recipe.name

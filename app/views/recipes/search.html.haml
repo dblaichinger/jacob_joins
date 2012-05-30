@@ -34,7 +34,16 @@
     %br
     City, Country
   #search_result
-  = @recipe.inspect if @recipe
+    - if @recipe.present?
+      .infobox_recipe
+        = link_to @recipe.name, @recipe
+      .infobox_author
+        cooked by
+        = formatted_user_name(@recipe.user) + ","
+        = @recipe.country
+      .infobox_duration
+        = @recipe.duration
+        minutes
 
 
 

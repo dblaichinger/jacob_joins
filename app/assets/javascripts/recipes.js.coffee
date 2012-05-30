@@ -31,6 +31,9 @@ window.fixBxSliderHeight = (bxWrapper) ->
     newHeight = $(this).height() if $(this).height() > newHeight
   $('.bx-window', bxWrapper).css('height', newHeight + 'px')
 
+window.closeRecipeHandler = (e) ->
+  
+
 window.prepare_recipe_step_upload = (currentFileInput) ->
   $('.step').on 'click', 'a.delete', (e) ->
     clicked_link = $(this)
