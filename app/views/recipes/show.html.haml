@@ -1,60 +1,80 @@
-- @recipe.steps.sort! { |a,b| a.number <=> b.number }
+- content_for :map_overlay_content do
+  :javascript
+    $(document).ready(function(){
+      pagerNeeded = $('.recipe_images li').length > 1;
+      $('.recipe_images').bxSlider({
+       pager: pagerNeeded,
+       infiniteLoop: false,
+       controls: false,
+       mode: 'fade'
+      });
 
-= link_to "", "#!/recipe_tab", class:"edit_recipe"
+      $('.close-recipe').click(closeRecipeHandler);
+    });
 
-%div#img_preview
-  -if @recipe.images.present?
-    - @recipe.images.each do |image|
-      = image_tag image.attachment(:medium)
-  -else
-    = link_to image_tag(asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"), "#!/recipe_tab"
+    $(window).load(function(){
+      if($('.bx-wrapper .bx-window').height() < 20){
+        fixBxSliderHeight($('.bx-wrapper'));
+        $(window).resize();
+      }
 
-%div#prev_recipe_info
-  %h1
-    = @recipe.name.blank? ? "Unknown title of your recipe" : @recipe.name
+      positionVerticalCentered($('.close-recipe.left'), true);
+    });
 
-  %div#p_prev
-    %p
-      Portions:
-      %em 
-        = @recipe.portions.present? ? @recipe.formatted_portions : "unknown"
+    $(window).resize(function(){
+      positionVerticalCentered($('.close-recipe.left'));
+    });
 
-    %p
-      Preparation time: 
-      %em
-        = @recipe.duration.present? ? "#{@recipe.duration} min" : "unknown"
-
-    %p
-      Cooked by: 
-      %em
-        = @recipe.user.present? ? @recipe.user.formatted_user_info : "Your name is required."
-
-%div#prev_ingredients
-  %h2 
-    = "your ingredients"
-  - @recipe.ingredients_with_quantities.each do |ingredient|
-    %ul
-      %li
-        %span
-          = ingredient.quantity
-        %em
-          = ingredient.name
-
-%div#prev_preparation
-  %h2
-    = "how to prepare your meal"
-
-  - @recipe.steps.each_with_index do |step, index|
-    %div.prev_preparatoin_step
-      %div.image_preparation_show
-        - if step.image.present?
-          = image_tag step.image(:small)
-        - else
-          = image_tag asset_path("no_image_prev_steps.png"), class:"missing", alt:"missing_image", :size => "66x66"
+  .map-overlay.window-sensitive
+    = link_to "close", "", class:"close-recipe right"
+    = link_to "close", "", class:"close-recipe left"
+    .content
+      %h1
+        = @recipe.name
+      %hr
       %p
+        cooked by 
         %em
-          = "Step #{index + 1}"
-        %br
-        = sanitize step.description.gsub(/\n/, '<br/>'), :tags => %w(br)
+          = "#{@recipe.user.firstname.capitalize} #{@recipe.user.lastname[0].capitalize + '. ' if @recipe.user.lastname.present?}(#{@recipe.user.age})"
+        from
+        = @recipe.country  
 
-  
+      - if @recipe.images.count > 0
+        %ul.recipe_images
+          - @recipe.images.each do |image|
+            %li
+              = image_tag image.attachment.url(:large)
+
+
+      #recipe_ingredients_content
+        %h1
+          Ingredients for
+          = formatted_portions(@recipe)
+          = @recipe.portions > 1 ? "persons" : "person"
+        %table
+          - @recipe.ingredients_with_quantities.each do |iwq|
+            %tr
+              %td
+                = iwq.quantity
+              %td.declaration
+                = iwq.name
+
+      #recipe_steps_klein_wrapper
+        %h1
+          Preparation
+        - @recipe.steps.order_by(:number).each do |step|
+          %div{class: "recipe_steps_klein #{'no-image' unless step.image.present?}"}
+            .numbers
+              %strong
+                = step.number + 1
+            .recipe_steps_container
+              - if step.image.present?
+                .bild
+                  = image_tag step.image(:small)
+
+              .recipe_steps_klein_beschreibung
+                %p
+                  = step.description
+        
+
+= render :template => "recipes/search"

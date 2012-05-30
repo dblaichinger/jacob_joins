@@ -7,22 +7,39 @@ window.switchSidebar = (data, callback) ->
       'fast'
     .animate
       "right": "0px",
-      600
+      200
+
+    toggleSidebar.animate
+      "right": "-13px",
+      "fast"
+    .animate
+      "right": "382px",
+      200
       ->
         toggleSidebar.removeClass("closed")
-      
+
     rightHaupt.data "status", "open"
 
   else
     rightHaupt.animate
-      "right": "5px"
+      "right": "5px",
+      "fast"
     .animate
       "right": "-392px",
-      600
+      200
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
+
+    toggleSidebar.animate
+      "right": "387px",
+      'fast'
+    .animate
+      "right": "-8px",
+      200
+      ->
         toggleSidebar.addClass("closed")
+
 
     rightHaupt.data "status", "closed"
 
@@ -56,18 +73,26 @@ window.getSidebar = (marker) ->
       if $(".right-haupt").data("status") == "closed"
         switchSidebar()
 
-window.positionToggleSidebar = (fadeIn) ->
-  $('#toggle_sidebar').css('top', (($(document).height()/2)-45+"px"))
+window.positionVerticalCentered = (element, fadeIn) ->
+  element.css 'top', ($(window).height() + 45 - element.height()) / 2
   if fadeIn
-    $('#toggle_sidebar').fadeIn(1500)
+    element.fadeIn(1500)
   else
-    $('#toggle_sidebar').show()
+    element.show()
 
 window.initSidebar = ->
   $("#toggle_sidebar").click ->
     switchSidebar()
     false
   $('.right-haupt').data "status", "open"
+
+window.adjustParentOrWindowSensitiveElements = ->
+  $('.parent-or-window-sensitive').each ->
+    $(this).css 'min-height', '100%'
+    parentMinHeight = $(this).parent().css('min-height')
+    parentHeight = $(this).parent().height()
+    $(this).css 'min-height', parentHeight
+
   
 
 

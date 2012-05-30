@@ -25,6 +25,14 @@ window.publish_recipe = (id, user_location) ->
 
   return_value
 
+window.fixBxSliderHeight = (bxWrapper) ->
+  newHeight = 0
+  bxWrapper.find('li').each ->
+    newHeight = $(this).height() if $(this).height() > newHeight
+  $('.bx-window', bxWrapper).css('height', newHeight + 'px')
+
+window.closeRecipeHandler = (e) ->
+  
 
 window.prepare_recipe_step_upload = (currentFileInput) ->
   $('.step').on 'click', 'a.delete', (e) ->
