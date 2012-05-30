@@ -19,6 +19,7 @@
     %br
     tasty 
     %span ingredients
+  %hr
 
   = form_tag recipes_search_path, :method => "post", :remote => true, "data-type" => "json", :id => "ingredients_search_form" do
     = text_field_tag 'ingredients[]', nil, id:"ingredients_search"
@@ -27,13 +28,20 @@
 
   #search_selection
 
-  %h1
+  %h1.search_result
     Delicious 
     %span recipes 
     from
     %br
     City, Country
+  
+  %hr.searchhr
+
   #search_result
+    /#wizard-loader
+    /  .loader#sidebar_loader
+    /    = image_tag 'ajax-loader.gif'
+
     - if @recipe.present?
       .infobox_recipe
         = link_to @recipe.name, @recipe
@@ -44,6 +52,5 @@
       .infobox_duration
         = @recipe.duration
         minutes
-
 
 

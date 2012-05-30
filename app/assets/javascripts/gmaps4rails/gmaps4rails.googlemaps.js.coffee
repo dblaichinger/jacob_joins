@@ -14,8 +14,8 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
 
     #markers + info styling
     @markers_conf =
-      clusterer_gridSize:      50
-      clusterer_maxZoom:       5
+      clusterer_gridSize:      100
+      clusterer_maxZoom:       10
       custom_cluster_pictures: null
       custom_infowindow_class: null
 
@@ -99,9 +99,11 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
 
     map = new google.maps.Map document.getElementById(@map_options.id), mergedOptions
 
+    customMapStyles = initCustomMapStyles()
+    map.setOptions {styles: customMapStyles}
+
     pushDiv = document.createElement "div"
     pushDiv.style.height = "15px"
-    pushDiv.id = "derp"
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push pushDiv
 
     return map

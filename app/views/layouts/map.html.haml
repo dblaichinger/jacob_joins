@@ -5,9 +5,9 @@
       initClusterer();
       initSidebar(true);
       
-      $(".recipe_link").click(function(){
-        clickMarker(marker)
-      });
+      //$(".recipe_link").click(function(){
+      //  clickMarker(marker)
+      //});
       
       Gmaps.map.callback = function() {
         //Set eventlistener for Marker
@@ -23,6 +23,13 @@
         google.maps.event.addListener(markerClusterer, "clusterclick", function (cluster) {
           var markers = cluster.getMarkers();
           showRecipeSidebar(markers);
+        });
+
+        //Eventlistener for zoom changed
+        google.maps.event.addListener(Gmaps.map.serviceObject, 'zoom_changed', function() {
+          if(Gmaps.map.serviceObject.zoom < 5 && Gmaps.map.visibleInfoWindow != null){
+            Gmaps.map.visibleInfoWindow.close();
+          }
         });
       }
 
@@ -43,7 +50,7 @@
 
   .wrapper-haupt.window-sensitive
 
-    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" }}, "map_options" =>  { "language" => "en"})
+    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>1000, "custom_infowindow_class" => "yellow" }}, "map_options" =>  { "language" => "en"})
 
     .right-haupt.window-sensitive
       .seitenleiste.parent-or-window-sensitive

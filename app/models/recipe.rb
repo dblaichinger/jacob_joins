@@ -23,8 +23,7 @@ class Recipe
   #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   #geo_index :location
   #field :gmaps, :type => Boolean
-  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes
-
+  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user
 
   index "ingredient_with_quantities.name"
 
@@ -85,14 +84,18 @@ class Recipe
   def gmaps4rails_marker_picture
   {
     "picture" => "/assets/google_marker_small.png",  # string,  mandatory
-     "width" =>  30,          # integer, mandatory
-     "height" => 50,          # integer, mandatory
-     "marker_anchor" => nil,   # array,   facultative
-     "shadow_picture" => nil,  # string,  facultative
-     "shadow_width" => nil,    # string,  facultative
-     "shadow_height" => nil,   # string,  facultative
-     "shadow_anchor" => nil,   # string,  facultative
+    "width" =>  30,          # integer, mandatory
+    "height" => 50,          # integer, mandatory
+    "marker_anchor" => nil,   # array,   facultative
+    "shadow_picture" => nil,  # string,  facultative
+    "shadow_width" => nil,    # string,  facultative
+    "shadow_height" => nil,   # string,  facultative
+    "shadow_anchor" => nil,   # string,  facultative
   }
+  end
+
+  def self.last_entries(count = 3)
+    Recipe.where(:user.ne => "nil", :state => "published").order_by(:created_at => :desc).limit(count)
   end
 
   private

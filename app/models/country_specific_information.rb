@@ -11,6 +11,8 @@ class CountrySpecificInformation
   belongs_to :question_reference, :class_name => "Question"
   belongs_to :user
 
+  attr_accessible :question, :answer, :city, :country, :latitude, :longitude, :user, :question_reference
+
   before_save :get_question_text
 
   state_machine :initial => :draft do
@@ -25,6 +27,6 @@ class CountrySpecificInformation
 
   protected
   def get_question_text
-    self.question = self.question_reference.text if self.question_reference.present?
+    question = question_reference.text if question_reference.present?
   end
 end

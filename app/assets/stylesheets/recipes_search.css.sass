@@ -1,6 +1,17 @@
 .search
-
+  
   h1
+
+  #ingredients_search_form
+    overflow: hidden
+    margin-top: 20px
+
+    input 
+      float: left
+
+    #ingredients_search
+      width: 220px
+      margin-right: 10px
 
   #search_selection, #search_result
     padding-left: 30px
@@ -16,3 +27,37 @@
 
       &:hover
         background-position: 0 -20px
+
+  .search_result
+    line-height: 1.4em
+    margin-top: 100px
+
+  .searchhr
+    margin-top: -5px
+
+  #search_result
+    .infobox_recipe, .infobox_author, .infobox_duration
+      margin-bottom: 5px
+
+    .infobox_recipe
+      a
+        font-family: "Pluto-SemiBold"
+        font-size: 14px
+        line-height: 1.4em
+        color: #531E09
+        text-transform: none
+
+        &:hover
+          color: #E2001A
+
+    .infobox_author
+      font-family: "PlutoCondensed"
+      font-size: 14px
+      em
+        color: #E2001A
+        font-family: "PlutoCondensed"
+
+    .infobox_duration
+      font-family: Pluto-CondensedItalic
+      font-size: 12px
+      padding-bottom: 20px

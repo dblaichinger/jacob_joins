@@ -2,7 +2,7 @@ window.publish_recipe = (id, user_location) ->
   return_value = false
 
   $.ajax
-    url: "recipes/draft"
+    url: "/recipes/draft"
     type: "POST"
     async: false
     data:
