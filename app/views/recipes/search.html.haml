@@ -34,7 +34,9 @@
     %br
     City, Country
   #search_result
-  = @recipe.inspect if @recipe
+    #wizard-loader
+      .loader#sidebar_loader
+        = image_tag 'ajax-loader.gif'
 
 
 

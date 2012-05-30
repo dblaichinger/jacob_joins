@@ -18,8 +18,9 @@ class RecipesController < ApplicationController
 
   def update
     user = User.find params[:user_id]
+    @recipe.user = user
 
-    if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
+    if @recipe.update_attributes(params[:location]) && @recipe.publish
       @recipe = Recipe.new
       render :new, :layout => false
     else
@@ -87,7 +88,7 @@ class RecipesController < ApplicationController
   end
 
   def last
-    respond_with Recipe.where(:user_id => {"$ne"=>nil}, :state => "published").order_by(:created_at => :desc).limit(3)
+    respond_with Recipe.last_entries
   end
 
   def getSidebar

@@ -7,7 +7,7 @@ window.switchSidebar = (data, callback) ->
       'fast'
     .animate
       "right": "0px",
-      200
+      300
       ->
         toggleSidebar.removeClass("closed")
       
@@ -19,7 +19,7 @@ window.switchSidebar = (data, callback) ->
       "fast"
     .animate
       "right": "-392px",
-      200
+      300
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
@@ -28,20 +28,23 @@ window.switchSidebar = (data, callback) ->
     rightHaupt.data "status", "closed"
 
 window.showRecipeSidebar = (marker) ->
-  if $(".right-haupt").data("status") == "open"
+  if $(".right-haupt").data("sidebar") == "info"
     switchSidebar(marker, getSidebar)
-  else
+  else if $(".right-haupt").data("status") == "open"
+    $('#sidebar_loader').fadeOut "fast"
+    $('#sidebar_loader').show()
     getSidebar(marker)
+  else
+    switchSidebar(marker, getSidebar)
+
 
 window.getSidebar = (marker) ->
-  $.ajax 
+  $.ajax
     url: "/recipes/getSidebar"
     dataType: "text"
 
     success: (data, textStatus, jqXHR) ->
       $('.seitenleistecontent').html(data)
-      console.debug(marker)
-
       if marker.length > 1
         $.each marker, (index, m) -> 
           $(m.description).appendTo $('#search_result')
@@ -54,7 +57,9 @@ window.getSidebar = (marker) ->
       console.debug(errorThrown)
 
     complete: ->
+      $('#sidebar_loader').hide()
       if $(".right-haupt").data("status") == "closed"
+        $(".right-haupt").data("sidebar", "")
         switchSidebar()
 
 window.positionToggleSidebar = (fadeIn) ->

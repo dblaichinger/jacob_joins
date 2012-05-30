@@ -1,4 +1,12 @@
 module RecipesHelper
+  def formatted_portions(portions)
+    if portions.present?
+      portions > 6 ? "more than six" : portions
+    else
+      ""
+    end
+  end
+
   def render_default_ingredient_fields(form, object)
     html = ""
 
