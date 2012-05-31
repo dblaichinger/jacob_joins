@@ -31,11 +31,10 @@
   #search_selection
 
   %h1.search_result
-    Delicious 
+    Take a look at all 
+    %br 
+    the great 
     %span recipes 
-    from
-    %br
-    City, Country
   
   %hr.searchhr
 
@@ -48,10 +47,11 @@
       .infobox_recipe
         = link_to @recipe.name, @recipe
       .infobox_author
-        cooked by
-        = formatted_user_name(@recipe.user) + ","
+        = "cooked by"
+        = formatted_user_name(@recipe.user) 
         = @recipe.country
       .infobox_duration
+        Estimated cooking time:
         = @recipe.duration
         minutes
 
