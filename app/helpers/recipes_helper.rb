@@ -3,7 +3,7 @@ module RecipesHelper
     if portions.present?
       portions > 6 ? "more than six" : portions
     else
-      ""
+      "unknown"
     end
   end
 
@@ -38,14 +38,6 @@ module RecipesHelper
     end
 
     html
-  end
-
-  def formatted_portions(recipe)
-    if recipe.portions.present?
-      recipe.portions > 6 ? "more than six" : recipe.portions
-    else
-      "your portion count"
-    end
   end
 
   private
