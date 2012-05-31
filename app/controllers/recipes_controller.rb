@@ -107,7 +107,6 @@ class RecipesController < ApplicationController
         @ingredients = params[:ingredients].select {|i| i != ""}
         @recipes = []
         @recipe_match = []
-
         unless @ingredients.empty?
           @ingredients.each do |value|
             @query = Recipe.search_by_ingredient(value)
