@@ -5,7 +5,7 @@ printResults = (data) ->
     $.each data.ingredients, (key, ingredient) ->
       ingredient_exists = false
       $.each $("#search_hidden input:hidden"), (key, input) ->
-        ingredient_exists = true  if $(input).val() is ingredient
+        ingredient_exists = true if $(input).val() is ingredient
 
       unless ingredient_exists
         searchHidden = $("<input type='hidden' name='ingredients[]' value='" + ingredient + "' >").appendTo "#search_hidden"
@@ -17,18 +17,19 @@ printResults = (data) ->
     $("#search_result").html recipe_number
 
     if data.recipes.length > 0
-      recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
-      $("#search_result").append recipe_number
-    output = ""
-    $.each data.recipes, (key, recipe) ->
-      if recipe?
-        output += ("<div class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></div>
-                    <div class='infobox_author'>cooked by <em>#{recipe.user.firstname} #{recipe.user.shorten_lastname}.</em>, #{recipe.country}</div>
-                    <div class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</div>")
+      output = ""
+      $.each data.recipes, (key, recipe) ->
+        if recipe?
+          output += ("<div class='recipe_search_result'>
+                      <p class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></p>
+                      <p class='infobox_author'>cooked by <em>#{recipe.user.firstname} #{recipe.user.lastname}</em>, #{recipe.country}</p>
+                      <p class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</p>
+                      </div>")
 
-    $("#search_result").append output
-    Gmaps.map.replaceMarkers(data.markers)
-
+      $("#search_result").append output
+      Gmaps.map.replaceMarkers(data.markers)
+    else
+      $("#search_result").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
     $("#search_result").html ""
     Gmaps.map.replaceMarkers([])

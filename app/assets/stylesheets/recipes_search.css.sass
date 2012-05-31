@@ -41,17 +41,17 @@
       margin-bottom: 5px
 
     a.search_remove_ingredient
-      width: 20px
-      height: 20px
+      width: 15px
+      height: 15px
       display: block
       text-indent: -1000px
       overflow: hidden
       float: left
-      margin-right: 5px
-      background: url(image_path("delete_image_sprite.png")) left top
+      margin: 3px 5px 0 0
+      background: url(image_path("delete_image_kl.png")) left top
 
       &:hover
-        background-position: 0 -20px
+        background-position: 0 -15px
 
   .search_result
     margin-top: 60px
@@ -62,6 +62,17 @@
   #search_result
     position: relative
     margin-top: 20px
+
+    .no_result_1
+      font-weight: normal
+      color: #E2001A
+      font-family: "Sanches-SemiBold"
+      text-transform: uppercase
+      padding-top: 20px
+
+    .no_result_1, .no_result_2
+      text-align: center
+      margin-left: -30px
 
     #recipe_number
       position: relative

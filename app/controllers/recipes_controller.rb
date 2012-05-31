@@ -134,6 +134,10 @@ class RecipesController < ApplicationController
 
 
   private
+  def check_recipe_id_presence
+    render :status => 410, :text => "Gone" and return unless session[:recipe_id].present?
+  end
+
   def get_or_create_recipe
     if session[:recipe_id].present?
       @recipe = Recipe.find session[:recipe_id]
