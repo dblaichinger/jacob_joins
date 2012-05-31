@@ -14,10 +14,11 @@ printResults = (data) ->
 
     output = ""
     $.each data.recipes, (key, recipe) ->
+      console.debug(recipe)
       if recipe?
         output += ("<div class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></div>
-                    <div class='infobox_author'>cooked by #{recipe.user.firstname} #{recipe.user.shorten_lastname}., #{recipe.country}</div>
-                    <div class='infobox_duration'>#{recipe.duration}</div>")
+                    <div class='infobox_author'>cooked by #{recipe.user.firstname} #{recipe.user.lastname}, #{recipe.country}</div>
+                    <div class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</div>")
 
     $("#search_result").html output
     Gmaps.map.replaceMarkers(data.markers)

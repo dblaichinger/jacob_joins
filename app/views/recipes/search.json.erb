@@ -6,9 +6,10 @@
         "slug": "<%= r.slug %>",
         "name": "<%= r.name %>",
         "country": "<%= r.country %>",
+        "duration": "<%= r.duration.to_i %>",
         "user": {
           "firstname": "<%= r.user.firstname.capitalize %>",
-          "lastname": "<%= r.user.lastname[0].upcase + "." if r.user.lastname.present? %>"
+          "lastname": "<%= r.user.shorten_lastname %>"
         }
       }<%= "," if index != @recipes.count - 1 %>
     <% end %>
