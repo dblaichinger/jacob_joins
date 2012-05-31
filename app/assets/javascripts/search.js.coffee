@@ -12,7 +12,10 @@ printResults = (data) ->
         searchSelection = $("<p><a href='#' class='search_remove_ingredient'>remove ingredient</a>#{ingredient}</p>").appendTo "#search_selection"
         searchSelection.data('hidden', searchHidden)
 
-    $("#search_result")
+    
+    recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
+    $("#search_result").html recipe_number
+
     if data.recipes.length > 0
       recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
       $("#search_result").append recipe_number
@@ -25,6 +28,7 @@ printResults = (data) ->
 
     $("#search_result").append output
     Gmaps.map.replaceMarkers(data.markers)
+
   else
     $("#search_result").html ""
     Gmaps.map.replaceMarkers([])
