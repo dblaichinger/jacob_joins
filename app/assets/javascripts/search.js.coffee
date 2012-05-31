@@ -12,15 +12,18 @@ printResults = (data) ->
         searchSelection = $("<p><a href='#' class='search_remove_ingredient'>remove ingredient</a>#{ingredient}</p>").appendTo "#search_selection"
         searchSelection.data('hidden', searchHidden)
 
+    $("#search_result")
+    if data.recipes.length > 0
+      recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
+      $("#search_result").append recipe_number
     output = ""
     $.each data.recipes, (key, recipe) ->
-      console.debug(recipe)
       if recipe?
         output += ("<div class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></div>
                     <div class='infobox_author'>cooked by #{recipe.user.firstname} #{recipe.user.lastname}, #{recipe.country}</div>
                     <div class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</div>")
 
-    $("#search_result").html output
+    $("#search_result").append output
     Gmaps.map.replaceMarkers(data.markers)
   else
     $("#search_result").html ""
