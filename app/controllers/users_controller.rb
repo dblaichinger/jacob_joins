@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   def save_csi_set
     csi_set = CsiSet.criteria.for_ids(session[:csi_set_id]).entries.first
     user = User.find session[:user_id]
-    csi_set.user =  user
+    csi_set.country_specific_informations.map { |csi| csi.user = user }
   end
 
   def check_user_id_presence
