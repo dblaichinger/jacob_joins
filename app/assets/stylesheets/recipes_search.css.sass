@@ -6,23 +6,48 @@
     overflow: hidden
     margin-top: 20px
 
-    input 
+    #ingredients_search, #ingredients_search_btn 
       float: left
 
     #ingredients_search
-      width: 220px
+      width: 260px
       margin-right: 10px
+
+    #ingredients_search_btn
+      height: 30px
+      width: 60px
+      margin-top: 1px
+      background: url(image_path("btn_search.png"))
+      background-position: 0 0
+      border: none
+      cursor: pointer
+
+      input
+        border: none
+        background: transparent
+        height: 30px
+        width: 60px
+
+    #ingredients_search_btn:hover
+      background-position: 0 -30px
 
   #search_selection, #search_result
     padding-left: 30px
 
   #search_selection
+    margin-top: 20px
+    p
+      padding: 0
+      margin-bottom: 5px
+
     a.search_remove_ingredient
       width: 20px
       height: 20px
-      display: inline-block
+      display: block
       text-indent: -1000px
       overflow: hidden
+      float: left
+      margin-right: 5px
       background: url(image_path("delete_image_sprite.png")) left top
 
       &:hover
@@ -30,12 +55,26 @@
 
   .search_result
     line-height: 1.4em
-    margin-top: 100px
+    margin-top: 60px
 
   .searchhr
     margin-top: -5px
 
   #search_result
+    position: relative
+
+    #recipe_number
+      position: relative
+      left: 168px
+      height: 30px
+      width: 150px
+
+      p
+        font-family: Pluto-CondensedItalic
+        font-size: 12px
+        padding: 0 0 10px 0
+        text-align: right
+
     .infobox_recipe, .infobox_author, .infobox_duration
       margin-bottom: 5px
 

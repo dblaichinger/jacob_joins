@@ -16,7 +16,7 @@ printResults = (data) ->
     $.each data.recipes, (key, recipe) ->
       if recipe?
         output += ("<div class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></div>
-                    <div class='infobox_author'>cooked by #{recipe.user.firstname} #{recipe.user.shorten_lastname}., #{recipe.country}</div>
+                    <div class='infobox_author'>cooked by <em>#{recipe.user.firstname} #{recipe.user.shorten_lastname}.</em>, #{recipe.country}</div>
                     <div class='infobox_duration'>#{recipe.duration}</div>")
 
     $("#search_result").html output
