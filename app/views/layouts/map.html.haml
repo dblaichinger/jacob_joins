@@ -5,10 +5,6 @@
       initClusterer();
       initSidebar(true);
       
-      $(".recipe_link").click(function(){
-        clickMarker(marker)
-      });
-      
       Gmaps.map.callback = function() {
         //Set eventlistener for Marker
         for (var i = 0; i < Gmaps.map.markers.length; ++i) {
@@ -24,29 +20,39 @@
           var markers = cluster.getMarkers();
           showRecipeSidebar(markers);
         });
+
+        //Eventlistener for zoom changed
+        google.maps.event.addListener(Gmaps.map.serviceObject, 'zoom_changed', function() {
+          if(Gmaps.map.serviceObject.zoom < 5 && Gmaps.map.visibleInfoWindow != null){
+            Gmaps.map.visibleInfoWindow.close();
+          }
+        });
       }
 
     });
 
     $(window).load(function(){
       $('.window-sensitive').css("min-height", $(window).height() - 45);
-      positionToggleSidebar(true);
+      adjustParentOrWindowSensitiveElements();
+      positionVerticalCentered($('#toggle_sidebar'), true);
 
     });
 
     $(window).resize(function(){
       $('.window-sensitive').css("min-height", $(window).height() - 45);
-      positionToggleSidebar();
+      adjustParentOrWindowSensitiveElements();
+      positionVerticalCentered($('#toggle_sidebar'));
     });
 
   .wrapper-haupt.window-sensitive
 
-    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>10, "custom_infowindow_class" => "yellow" } })
+    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>1000, "custom_infowindow_class" => "yellow" }}, "map_options" =>  { "language" => "en"})
 
-    .right-haupt
-      #toggle_sidebar
-      .seitenleiste.window-sensitive
+    .right-haupt.window-sensitive
+      .seitenleiste.parent-or-window-sensitive
         .seitenleistecontent
           = content_for?(:sidebar_content) ? yield(:sidebar_content) : yield
+      = yield :map_overlay_content
+      #toggle_sidebar
 
 = render :template => 'layouts/application'

@@ -21,21 +21,90 @@ window.initClusterer = ->
     url = "/assets/"
     [
       textColor: "#531E09"
-      url: url + "sammelmarker1.png"
-      height: 90
-      width: 90
+      textSize: 12
+      fontFamily: "Sanches-SemiBold"
+      anchorIcon: [60, 30]
+      anchor: [13, 26]
+      url: url + "sammelmarker3.png"
+      width: 60
+      height: 60
     ,
       textColor: "#531E09"
       textSize: 18
-      anchor: [15, 27]
+      fontFamily: "Sanches-SemiBold"
+      anchorIcon: [75, 37]
+      anchor: [16, 26]
       url: url + "sammelmarker2.png"
       height: 75
       width: 75
     ,
       textColor: "#531E09"
-      textSize: 10
-      anchor: [14, 19]
-      url: url + "sammelmarker3.png"
-      width: 60
-      height: 60
+      fontFamily: "Sanches-SemiBold"
+      anchorIcon: [90, 45]
+      url: url + "sammelmarker1.png"
+      height: 90
+      width: 90
     ]
+
+window.initCustomMapStyles = ->
+  customMapStyles = [
+      {
+      featureType: "water"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: -70}
+      ]
+      },
+      {
+      featureType: "landscape.man_made"
+      stylers: [
+        {hue: "#531E09"}
+      ]
+      },
+      {
+      featureType: "poi.park"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: -80},
+        {lightness: 50},
+        {gamma: 0.3}
+      ]
+      },
+      {
+      featureType: "administrative"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: 0},
+        {gamma: 2.0}
+      ]
+      },
+      {
+      featureType: "administrative.province"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: 0},
+        {gamma: 0.8}
+      ]
+      },
+      {
+      featureType: "poi"
+      stylers: [
+        {visibility: "off"},
+      ]
+      },
+      {
+      featureType: "landscape"
+      stylers: [
+        {visibility: "off"},
+      ]
+      },
+      {
+      featureType: "road"
+      stylers: [
+        {hue: "#531E09"},
+        {saturation: -90},
+        {gamma: 3.5}
+      ]
+      }
+  ];
+

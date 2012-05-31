@@ -40,6 +40,14 @@ module RecipesHelper
     html
   end
 
+  def formatted_portions(recipe)
+    if recipe.portions.present?
+      recipe.portions > 6 ? "more than six" : recipe.portions
+    else
+      "your portion count"
+    end
+  end
+
   private
   def make_default_ingredients
     [

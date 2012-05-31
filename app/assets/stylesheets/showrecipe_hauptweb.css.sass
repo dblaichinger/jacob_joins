@@ -1,129 +1,143 @@
 @import mixins
 
-.wrapper-haupt_recipe
-  position: absolute
-  top: 0
-  right: 0
-  left: 0
-  bottom: 0
-  z-index: 2
-  width: 100%
-  height: 100%  
+.map-overlay
+  width: auto
+  background: url(image_path('bg4.jpg'))
+  padding: 0 20px
+  margin-right: 392px
+  position: relative
 
-  .seitenleiste
-    padding: 80px 0
+  @media screen and (min-width: 1400px)
+    width: 624px
+    float: right
+    margin-right: -8px
 
-  .left-haupt_recipe
-    width: 67%
-    min-width: 624px
+  + #toggle_sidebar
+    display: none !important
 
-    .content
-      width: 600px
-      margin: 0 auto
-      padding-top: 100px
+  a.close-recipe
+    overflow: hidden
+    text-indent: -1000px
+    background-position: 0 0
 
-      .bx-wrapper
-        .bx-next
-          right: 16px
-          z-index: 100
-          top: 120px
-        .bx-prev  
-          left: 16px
-          z-index: 101
-          top: 120px
+    &.right
+      position: absolute
+      top: 20px
+      right: 20px
+      width: 20px
+      height: 20px
+      background-image: url(image_path('delete_image_sprite.png'))
+      
+      &:hover
+        background-position: 0 -20px
 
+    &.left
+      position: fixed
+      right: 1040px
+      width: 40px
+      height: 40px
+      background-image: url(image_path('map_btn_.jpg'))
 
-
-      #recipe_ingredients_content
-        padding-top: 50px
-        table
-          tr
-            td
-              font-family: "PlutoCondensed"
-              width: 100px
-              font-size: 14px
-            .declaration
-              font-family: "PlutoCondensed"
-              width: 300px
-              font-size: 14px
+      @media screen and (max-width: 1400px)
+        display: none !important
 
 
-      p
-        em
-          color: $rot
+  .content
+    width: 600px
+    margin: 0 auto
+    padding-top: 100px
 
-      .recipe_imagesteps
+    #recipe_ingredients_content
+      padding-top: 50px
+      table
+        tr
+          td
+            font-family: "PlutoCondensed"
+            width: 100px
+            font-size: 14px
+          .declaration
+            font-family: "PlutoCondensed"
+            width: 300px
+            font-size: 14px
+    p
+      em
+        color: $rot
+
+    .bx-wrapper
+      .bx-pager
         text-align: center
-        li
-          padding-bottom: 20px
+        margin-top: 10px
 
-        img
-          border: 2px solid white
-          text-align: center
-        p
-          text-align: center
-
-      h1
-        margin-bottom: 20px
-
-      p
-        padding-bottom: 10px
-      #recipe_steps_klein_wrapper
-        margin-top: 70px
-        .recipe_steps_klein
-          padding-bottom: 20px
+        a
+          background-image: url(image_path('delete_image_sprite.png'))
+          background-position: 0 0
+          width: 20px
+          height: 20px
+          display: inline-block
+          text-indent: -1000px
           overflow: hidden
+          margin: 0 2px
 
-          .numbers
-            clear: both
-            strong
-              width: 80px
-              text-align: right
-              padding-top: 3px
-              font-size: 50px
+          &.pager-active, &:hover
+            background-position: 0 -20px
+
+      .bx-window
+        height: auto 
+        .recipe_images
+          text-align: center
+
+          li
+            width: 100%
+
+            img
+              border: 2px solid white
+              text-align: center
+              width: auto
+              height: auto
+              max-height: 500px
+
+
+    h1
+      margin-bottom: 20px
+
+    p
+      padding-bottom: 10px
+    #recipe_steps_klein_wrapper
+      margin-top: 70px
+      .recipe_steps_klein
+        padding-bottom: 20px
+        overflow: hidden
+
+        .numbers
+          clear: both
+          float: left
+          strong
+            float: none
+            width: 80px
+            text-align: right
+            padding-top: 3px
+            font-size: 50px
+
+        .recipe_steps_container
+          padding-left: 20px
+          border-left: 1px solid $braun
+          box-shadow: -1px 0px 0px 0px white
+          float: left         
+
           .bild
             float: left
-            padding-left: 20px
-            border-left: 1px solid $braun
-            box-shadow: -1px 0px 0px 0px white            
             img
               width: 100px
               height: 100px
               border: solid 2px white
 
           .recipe_steps_klein_beschreibung
+            width: 360px
             float: right
-            width: 370px
+            padding-left: 10px
 
-
-  .right-haupt
-    width: 400px
-    height: 100%
-    z-index: 20
-    position: absolute
-    top: 0
-    right: 0
-    padding-right: 10px
-
-    .uebergang-seitenleiste
-      background-image: url(image_path('seitenleiste_uebergang.png'))
-      background-repeat: repeat-y
-      background-position: 0 0
-      min-height: 100%
-
-    .seitenleiste
-      max-width: 92%
-      margin-left: 30px
-      background-image: url(image_path('bg4.jpg'))
-
-      p
-        padding: 0 5px
-        word-wrap: break-word
-
-      em
-        font-family: "Pluto-Semibold"
-
-      img
-        display: block
-        margin: 20px auto
-  
+        &.no-image
+          .recipe_steps_container
+            .recipe_steps_klein_beschreibung
+              width: 480px
+              padding-left: 0

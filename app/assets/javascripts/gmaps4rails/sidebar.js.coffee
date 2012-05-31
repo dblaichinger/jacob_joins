@@ -7,10 +7,17 @@ window.switchSidebar = (data, callback) ->
       'fast'
     .animate
       "right": "0px",
-      200
+      300
+
+    toggleSidebar.animate
+      "right": "-13px",
+      "fast"
+    .animate
+      "right": "382px",
+      300
       ->
         toggleSidebar.removeClass("closed")
-      
+
     rightHaupt.data "status", "open"
 
   else
@@ -19,30 +26,46 @@ window.switchSidebar = (data, callback) ->
       "fast"
     .animate
       "right": "-392px",
-      200
+      300
       ->
         if(callback != undefined && typeof callback == 'function') 
           callback(data)
+
+    toggleSidebar.animate
+      "right": "387px",
+      'fast'
+    .animate
+      "right": "-8px",
+      300
+      ->
         toggleSidebar.addClass("closed")
+
 
     rightHaupt.data "status", "closed"
 
 window.showRecipeSidebar = (marker) ->
-  if $(".right-haupt").data("status") == "open"
-    switchSidebar(marker, getSidebar)
-  else
+  if $(".right-haupt").data("sidebar") == "info"
+    if $(".right-haupt").data("status") == "closed"
+      getSidebar(marker)
+    else
+      switchSidebar(marker, getSidebar)
+  else if $(".right-haupt").data("status") == "open"
+    $('#sidebar_loader').fadeOut "fast"
+    $('#sidebar_loader').show()
     getSidebar(marker)
+  else
+    switchSidebar(marker, getSidebar)
+
 
 window.getSidebar = (marker) ->
-  $.ajax 
+  $.ajax
     url: "/recipes/getSidebar"
     dataType: "text"
 
     success: (data, textStatus, jqXHR) ->
       $('.seitenleistecontent').html(data)
-      console.debug(marker)
-
       if marker.length > 1
+        $('#search_result').html("<div id='recipe_number'><p>Number of recipes: "+marker.length+"</p></div>")
         $.each marker, (index, m) -> 
           $(m.description).appendTo $('#search_result')
       else
@@ -54,21 +77,31 @@ window.getSidebar = (marker) ->
       console.debug(errorThrown)
 
     complete: ->
+      $('#sidebar_loader').hide()
       if $(".right-haupt").data("status") == "closed"
+        $(".right-haupt").data("sidebar", "")
         switchSidebar()
 
-window.positionToggleSidebar = (fadeIn) ->
-  $('#toggle_sidebar').css('top', (($(document).height()/2)-45+"px"))
+window.positionVerticalCentered = (element, fadeIn) ->
+  element.css 'top', ($(window).height() + 45 - element.height()) / 2
   if fadeIn
-    $('#toggle_sidebar').fadeIn(1500)
+    element.fadeIn(1500)
   else
-    $('#toggle_sidebar').show()
+    element.show()
 
 window.initSidebar = ->
   $("#toggle_sidebar").click ->
     switchSidebar()
     false
   $('.right-haupt').data "status", "open"
+
+window.adjustParentOrWindowSensitiveElements = ->
+  $('.parent-or-window-sensitive').each ->
+    $(this).css 'min-height', '100%'
+    parentMinHeight = $(this).parent().css('min-height')
+    parentHeight = $(this).parent().height()
+    $(this).css 'min-height', parentHeight
+
   
 
 
