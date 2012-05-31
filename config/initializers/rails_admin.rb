@@ -8,6 +8,9 @@ RailsAdmin.config do |config|
   # I18n.default_locale = :de
 
   config.current_user_method { current_admin_user } # auto-generated
+  config.attr_accessible_role do
+    :admin
+  end
 
   # If you want to track changes on your models:
   # config.audit_with :history, AdminUser
@@ -79,7 +82,7 @@ RailsAdmin.config do |config|
 
   # All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible. (visible(true))
 
-  # config.model CountrySpecificInformation do
+  config.model CountrySpecificInformation do
   #   # Found associations:
   #     configure :question_reference, :belongs_to_association 
   #     configure :user, :belongs_to_association   #   # Found columns:
@@ -99,8 +102,14 @@ RailsAdmin.config do |config|
   #   show do; end
   #   edit do; end
   #   create do; end
-  #   update do; end
-  # end
+    update do
+      configure :state do
+        def render
+          bindings[:view].render :partial => "state_partial", :locals => { :form => bindings[:form], :state => bindings[:object].state }
+        end
+      end
+    end
+  end
   # config.model CsiSet do
   #   # Found associations:
   #     configure :country_specific_informations, :has_and_belongs_to_many_association   #   # Found columns:
@@ -172,9 +181,7 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   # end
-  #config.model Recipe do
-  #  configure :state, :text
-  #end
+  config.model Recipe do
   #   # Found associations:
   #     configure :user, :belongs_to_association 
   #     configure :ingredients, :has_and_belongs_to_many_association 
@@ -195,14 +202,21 @@ RailsAdmin.config do |config|
   #     configure :longitude, :float 
   #     configure :user_id, :bson_object_id         # Hidden 
   #     configure :ingredient_ids, :serialized         # Hidden 
+  #     configure :state, :text   #   # Sections:
   #   list do; end
   #   export do; end
   #   show do; end
   #   edit do; end
   #   create do; end
-  #   update do; end
-  # end
-  # config.model Step do
+    update do
+      configure :state do
+        def render
+          bindings[:view].render :partial => "state_partial", :locals => { :form => bindings[:form], :state => bindings[:object].state }
+        end
+      end
+    end
+  end
+  config.model Step do
   #   # Found associations:
   #   # Found columns:
   #     configure :_type, :text         # Hidden 
@@ -219,9 +233,15 @@ RailsAdmin.config do |config|
   #   show do; end
   #   edit do; end
   #   create do; end
-  #   update do; end
-  # end
-  # config.model User do
+    update do
+      configure :state do
+        def render
+          bindings[:view].render :partial => "state_partial", :locals => { :form => bindings[:form], :state => bindings[:object].state }
+        end
+      end
+    end
+  end
+  config.model User do
   #   # Found associations:
   #     configure :recipe, :has_one_association 
   #     configure :country_specific_informations, :has_many_association   #   # Found columns:
@@ -241,6 +261,12 @@ RailsAdmin.config do |config|
   #   show do; end
   #   edit do; end
   #   create do; end
-  #   update do; end
-  # end
+    update do
+      configure :state do
+        def render
+          bindings[:view].render :partial => "state_partial", :locals => { :form => bindings[:form], :state => bindings[:object].state }
+        end
+      end
+    end
+  end
 end
