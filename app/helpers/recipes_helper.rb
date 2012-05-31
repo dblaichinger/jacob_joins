@@ -3,7 +3,7 @@ module RecipesHelper
     if portions.present?
       portions > 6 ? "more than six" : portions
     else
-      ""
+      "unknown"
     end
   end
 

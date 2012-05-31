@@ -23,7 +23,9 @@ class Recipe
   #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   #geo_index :location
   #field :gmaps, :type => Boolean
-  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user
+
+  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user, :user_id
+  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user, :state, :as => :admin
 
   index "ingredient_with_quantities.name"
 
@@ -58,9 +60,7 @@ class Recipe
   end
 
   def self.search_by_ingredient(name)
-    ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
-      Recipe.where({"ingredients_with_quantities.name" => name, :state => "published"}).includes(:user)
-    end
+    Recipe.where({"ingredients_with_quantities.name" => name, :state => "published"}).includes(:user)
   end
 
   #Methods for Gmaps4rails
@@ -74,11 +74,13 @@ class Recipe
       #output << "#{image_tag self.images.attachment(:small)}"
       #output << "<img src='#{self.images.attachment(:small)}' />"
     end
-    output += "<div class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link'>#{self.name}</a></div>"
+    output += "<div class='recipe_marker_result'>"
+    output += "<p class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link'>#{self.name}</a></p>"
     unless self.user.nil?
-      output += "<div class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em>, #{self.city} </div>"
+      output += "<p class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em>, #{self.city} </p>"
     end
-    output += "<div class='infobox_duration'> Estimated cooking time: #{self.duration} minutes</div>"
+    output += "<p class='infobox_duration'> Estimated cooking time: #{self.duration} minutes</p>"
+    output += "</div>"
   end
 
   def gmaps4rails_marker_picture
