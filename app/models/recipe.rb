@@ -60,9 +60,7 @@ class Recipe
   end
 
   def self.search_by_ingredient(name)
-    ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
-      Recipe.where({"ingredients_with_quantities.name" => name, :state => "published"}).includes(:user)
-    end
+    Recipe.where({"ingredients_with_quantities.name" => name, :state => "published"}).includes(:user)
   end
 
   #Methods for Gmaps4rails
