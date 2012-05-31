@@ -60,7 +60,7 @@ class Recipe
   end
 
   def self.search_by_ingredient(name)
-    Recipe.where({"ingredients_with_quantities.name" => name, :state => "published"}).includes(:user)
+    Recipe.where({"ingredients_with_quantities.name" => /#{Regexp.escape(name)}/i, :state => "published"}).includes(:user)
   end
 
   #Methods for Gmaps4rails
