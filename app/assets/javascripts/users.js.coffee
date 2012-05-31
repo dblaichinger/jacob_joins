@@ -156,8 +156,15 @@ window.prepare_user_map = ->
       setMarker place.geometry.location
       address = place.address_components
 
+      console.log address
+
+      if /[0-9]/.test(address[address.length-1].long_name)
+        country = address[address.length-2].long_name
+      else
+        country = address[address.length-1].long_name
+
       if address.length > 1
-        setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, address[3].long_name
+        setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), address[0].long_name, country
       else
         setHiddenFields place.geometry.location.lat(), place.geometry.location.lng(), null, address[0].long_name
     else
