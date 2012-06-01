@@ -46,13 +46,10 @@ window.recipesSearch.ingredientsSearchSelectHandler = (event, ui) ->
   false
 
 window.recipesSearch.removeIngredientClickHandler = (e) ->
-  #console.debug(e.target)
   searchEntry = $(e.target).parent()
-  #console.debug(searchEntry)
   hiddenField = searchEntry.data('hidden')
   hiddenField.remove()
   searchEntry.addClass("pending")
-  console.debug(searchEntry)
   $('#ingredients_search_form').submit()
   false
 
