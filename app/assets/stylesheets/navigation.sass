@@ -31,7 +31,6 @@
         li
           a
             +navi
-            float: left
           a:hover
             color: red
 
@@ -65,34 +64,31 @@
             background-repeat: no-repeat
             background-position: bottom center 
 
-
-
-        #home, #form, #search  
-          a
-            padding: 0px 22px 5px 22px
-        
-        #contact
+        #home, #form, #search, #contact, #about, #story
+          top: 0px
           position: absolute
-          right: 0
-          margin-right: 0
-          
+
           a.selected
             padding-bottom: 5px
 
+        #home
+          left: 0
+
+        #search
+          left: 78px
+
+        #form
+          left: 190px
+
+        #contact
+          right: 0
 
         #about
-          position: absolute
           right: 120px
-          
-          a.selected
-            padding-bottom: 5px
 
         #story
-          position: absolute
           right: 245px
 
-          a.selected
-            padding-bottom: 5px
 
     #bildzeichen_newsbar
 
@@ -224,5 +220,5 @@
     img
       display: block
       position: relative
-      top: -45px
+      top: -25px
       margin: 0 auto 0 auto
