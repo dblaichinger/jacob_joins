@@ -35,13 +35,16 @@
       $('.window-sensitive').css("min-height", $(window).height() - 45);
       adjustParentOrWindowSensitiveElements();
       positionVerticalCentered($('#toggle_sidebar'), true);
-
+      $("#contactable").css("top", $("#contactForm").height() / 2);
+      positionVerticalCentered($("#contactable_inner"));
     });
 
     $(window).resize(function(){
       $('.window-sensitive').css("min-height", $(window).height() - 45);
       adjustParentOrWindowSensitiveElements();
       positionVerticalCentered($('#toggle_sidebar'));
+      $("#contactable").css("top", $("#contactForm").height() / 2);
+      positionVerticalCentered($("#contactable_inner"));
     });
 
   .wrapper-haupt.window-sensitive
