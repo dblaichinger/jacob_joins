@@ -1,6 +1,17 @@
 = javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
 :javascript
   $(function(){
+    if(window.location.hash == "#skipstory")
+      $("li#story, li#story .selected").removeClass("selected simple-navigation-active-leaf");
+    else
+      $("li#form, li#form .selected").removeClass("selected simple-navigation-active-leaf");
+
+    $("li#form a").click(function(){
+      $(this).addClass("selected");
+      $("li#form").addClass("selected simple-navigation-active-leaf");
+      $("li#story, li#story .selected").removeClass("selected simple-navigation-active-leaf");
+    });
+
     if(!$('html').hasClass('ie7'))
       $('.stories').fancyStoryEffect();
   });
@@ -69,12 +80,7 @@
         with Jacob and the world!
       %p.share2
         There you go, fill in our lovely form!  
-      %p.share3
-        %span Note: 
-        This is only a temporary website - its purpose is to collect lots of recipes. All recipes will be shown online on the 
-        %span 4th of June, 
-        when the final Jacob Joins website will be released.    
-
+      
   #story_6
 
 #skipstory

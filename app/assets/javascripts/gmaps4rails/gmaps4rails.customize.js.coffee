@@ -10,7 +10,7 @@ window.initInfobox = ->
       opacity: 0.95
 
     closeBoxMargin: "10px 2px 2px 2px"
-    closeBoxURL: "/assets/close.png"
+    closeBoxURL: "/assets/infobox_close.png"
     infoBoxClearance: new google.maps.Size(1, 1)
     isHidden: false
     pane: "floatPane"
@@ -108,3 +108,8 @@ window.initCustomMapStyles = ->
       }
   ];
 
+window.initCustomMarkers = (markers) ->
+  $.each markers, (key, m) ->
+    m.picture = "/assets/google_marker_small.png"
+    m.width = 30
+    m.height = 50

@@ -31,26 +31,64 @@
         li
           a
             +navi
-            float: left
           a:hover
             color: red
 
-        #home, #form, #search  
-          a
-            padding-right: 40px
-        
-        #contact
+          a.selected
+            color: red  
+            background-image: url(image_path('underline_haupt.png'))
+            background-repeat: no-repeat
+            background-position: bottom center
+
+        li#form, #story
+          a.selected
+            background-image: url(image_path('underline_haupt_lang.png'))
+            background-repeat: no-repeat
+            background-position: bottom center          
+
+        li#home
+          a.selected
+            background-image: url(image_path('underline_haupt_kurz.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #about, #contact
+          a.selected   
+            background-image: url(image_path('underline_haupt_mittel.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        li#search 
+          a.selected   
+            background-image: url(image_path('underline_haupt_search.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #home, #form, #search, #contact, #about, #story
+          top: 0px
           position: absolute
+
+          a.selected
+            padding-bottom: 5px
+
+        #home
+          left: 0
+
+        #search
+          left: 78px
+
+        #form
+          left: 190px
+
+        #contact
           right: 0
-          padding-right: 0
 
         #about
-          position: absolute
           right: 120px
 
         #story
-          position: absolute
           right: 245px
+
 
     #bildzeichen_newsbar
 
@@ -182,5 +220,5 @@
     img
       display: block
       position: relative
-      top: -39px
+      top: -25px
       margin: 0 auto 0 auto

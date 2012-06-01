@@ -349,8 +349,10 @@ $.fn.mCustomScrollbar = function (scrollType,animSpeed,easeType,bottomSpace,drag
 				$dragger.css("left", $dragger_container.width()-$dragger.width());
 			}
 		} else {
-			if($dragger.position().top>$dragger_container.height()-$dragger.height()){
-				$dragger.css("top", $dragger_container.height()-$dragger.height());
+			if($dragger.position() != null){
+				if($dragger.position().top>$dragger_container.height()-$dragger.height()){
+					$dragger.css("top", $dragger_container.height()-$dragger.height());
+				}
 			}
 		}
 		CustomScroller("resize");
