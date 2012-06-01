@@ -31,12 +31,10 @@
     #ingredients_search_btn:hover
       background-position: 0 -30px
 
-  #search_selection, #search_result
-    padding-left: 30px
-
   #search_selection
     margin-top: 20px
     position: relative
+    padding-left: 30px
     p
       padding: 0
       margin-bottom: 5px
@@ -97,28 +95,40 @@
         padding: 0 0 10px 0
         text-align: right
 
-    .infobox_recipe, .infobox_author, .infobox_duration
-      margin-bottom: 2px
+    .recipe_marker_result
+      margin-bottom: 20px
+      overflow: hidden
 
-    .infobox_recipe
-      a
-        font-family: "Pluto-SemiBold"
-        font-size: 14px
-        line-height: 1.4em
-        color: #531E09
-        text-transform: none
+      .infobox_image
+        width: 76px
+        height: 76px
+        border: 2px solid #fff
+        float: left
+        margin-right: 15px
+        img
+          width: 76px
+          height: 76px
+      .infobox_recipe, .infobox_author, .infobox_duration
+        margin-bottom: 2px
 
-        &:hover
-          color: #E2001A
+      .infobox_recipe
+        a
+          font-family: "Pluto-SemiBold"
+          font-size: 14px
+          line-height: 1.4em
+          color: #531E09
+          text-transform: none
 
-    .infobox_author
-      font-family: "PlutoCondensed"
-      font-size: 14px
-      em
-        color: #E2001A
+          &:hover
+            color: #E2001A
+
+      .infobox_author
         font-family: "PlutoCondensed"
+        font-size: 14px
+        em
+          color: #E2001A
+          font-family: "PlutoCondensed"
 
-    .infobox_duration
-      font-family: Pluto-CondensedItalic
-      font-size: 12px
-      padding-bottom: 20px
+      .infobox_duration
+        font-family: Pluto-CondensedItalic
+        font-size: 12px
