@@ -68,12 +68,13 @@ class Recipe
     if self.images.first.present?
       output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link'><img src='#{self.images.first.attachment.url(:small)}' /></a></div>"
     end
+    output += "<div class='infobox_recipe_text'>"
     output += "<p class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link'>#{self.name}</a></p>"
     unless self.user.nil?
       output += "<p class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em>, #{self.city} </p>"
     end
     output += "<p class='infobox_duration'> Estimated cooking time: #{self.duration} minutes</p>"
-    output += "</div>"
+    output += "</div></div>"
   end
 
   def gmaps4rails_marker_picture
