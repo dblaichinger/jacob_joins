@@ -38,7 +38,9 @@
         %em
           = "#{@recipe.user.firstname.capitalize} #{@recipe.user.lastname[0].capitalize + '. ' if @recipe.user.lastname.present?}(#{@recipe.user.age})"
         from
-        = @recipe.country  
+        = @recipe.country
+      %p.infobox_duration
+        = "Estimated cooking time: #{@recipe.duration} minutes"
 
       - if @recipe.images.count > 0
         %ul.recipe_images
