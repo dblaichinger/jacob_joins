@@ -14,7 +14,7 @@ window.newsbar.get_latest_recipe = ->
           data: id
           async: false
           success: (data, textStatus, jqXHR) ->
-            user_name = data.firstname
+            user_name = data.firstname+" "+data.lastname.charAt(0)+"."
         , "json"
       else
         user_name = "an anonymous user"
