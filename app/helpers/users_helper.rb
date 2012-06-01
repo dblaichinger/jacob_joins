@@ -1,5 +1,5 @@
 module UsersHelper
   def formatted_user_name(user)
-    "#{user.firstname.capitalize}#{' ' + user.lastname[0].upcase + '.' if user.lastname.present?}"
+    "<em>#{user.firstname.capitalize} #{user.shorten_lastname}</em>,".html_safe
   end
 end
