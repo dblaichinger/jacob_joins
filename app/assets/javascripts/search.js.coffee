@@ -11,12 +11,13 @@ printResults = (data) ->
         searchHidden = $("<input type='hidden' name='ingredients[]' value='" + ingredient + "' >").appendTo "#search_hidden"
         searchSelection = $("<p><a href='#' class='search_remove_ingredient'>remove ingredient</a>#{ingredient}</p>").appendTo "#search_selection"
         searchSelection.data('hidden', searchHidden)
+        $('#ingredients_search').val("").focus()
+
 
     
     recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
     $("#search_result").html recipe_number
 
-    console.debug(data)
     if data.recipes.length > 0
       output = ""
       $.each data.recipes, (key, recipe) ->
@@ -44,10 +45,13 @@ window.recipesSearch.ingredientsSearchSelectHandler = (event, ui) ->
   false
 
 window.recipesSearch.removeIngredientClickHandler = (e) ->
+  #console.debug(e.target)
   searchEntry = $(e.target).parent()
+  #console.debug(searchEntry)
   hiddenField = searchEntry.data('hidden')
   hiddenField.remove()
   searchEntry.addClass("pending")
+  console.debug(searchEntry)
   $('#ingredients_search_form').submit()
   false
 
@@ -57,6 +61,5 @@ window.recipesSearch.formSuccessHandler = (evt, data, status, xhr) ->
 
 window.recipesSearch.formErrorHandler = (evt, xhr, status, error) ->
   console.log("Cannot find any ingredient due to the following reason: "+error)
-
   $("#search_selection p.pending").each (e) ->
     $('#search_hidden').append $(e).data('hidden')
