@@ -36,6 +36,7 @@
 
   #search_selection
     margin-top: 20px
+    position: relative
     p
       padding: 0
       margin-bottom: 5px
@@ -52,12 +53,18 @@
 
       &:hover
         background-position: 0 -15px
-    #horizontalenaht
-      background: url(image_path("btn_search.png"))
+
+  #horizontalenaht
+    background: url(image_path("horizontalenaht.png"))
+    background-repeat: y-repeat
+    width: 390px
+    height: 20px
+    display: block
+    margin: 40px 0 0 -15px
 
 
   .search_result
-    margin-top: 60px
+    margin-top: 40px
 
   .searchhr
     margin-top: -5px
@@ -91,7 +98,7 @@
         text-align: right
 
     .infobox_recipe, .infobox_author, .infobox_duration
-      margin-bottom: 5px
+      margin-bottom: 2px
 
     .infobox_recipe
       a
