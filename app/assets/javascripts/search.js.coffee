@@ -16,6 +16,7 @@ printResults = (data) ->
     recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
     $("#search_result").html recipe_number
 
+    console.debug(data)
     if data.recipes.length > 0
       output = ""
       $.each data.recipes, (key, recipe) ->
@@ -27,7 +28,9 @@ printResults = (data) ->
                       </div>")
 
       $("#search_result").append output
+      initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
+
     else
       $("#search_result").append "<h1 class='no_result'>No recipes found!</h1><p>Please use the auto-complete function.</p>"  
   else
