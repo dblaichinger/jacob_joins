@@ -29,19 +29,20 @@
         });
       }
 
-    });
+      $(window).load(function(){
+        $('.window-sensitive').css("min-height", $(window).height() - 45);
+        adjustParentOrWindowSensitiveElements();
+        positionVerticalCentered($('#toggle_sidebar'), true);
 
-    $(window).load(function(){
-      $('.window-sensitive').css("min-height", $(window).height() - 45);
-      adjustParentOrWindowSensitiveElements();
-      positionVerticalCentered($('#toggle_sidebar'), true);
+      });
 
-    });
+      $(window).resize(function(){
+        $('.window-sensitive').css("min-height", $(window).height() - 45);
+        adjustParentOrWindowSensitiveElements();
+        positionVerticalCentered($('#toggle_sidebar'));
+      });
 
-    $(window).resize(function(){
-      $('.window-sensitive').css("min-height", $(window).height() - 45);
-      adjustParentOrWindowSensitiveElements();
-      positionVerticalCentered($('#toggle_sidebar'));
+      $('body').data('initMapLayoutDone', true);
     });
 
   .wrapper-haupt.window-sensitive
@@ -52,7 +53,10 @@
       .seitenleiste.parent-or-window-sensitive
         .seitenleistecontent
           = content_for?(:sidebar_content) ? yield(:sidebar_content) : yield
-      = yield :map_overlay_content
+      - if content_for?(:map_overlay_content)
+        = yield(:map_overlay_content)
+      - elsif content_for?(:sidebar_content)
+        = yield
       #toggle_sidebar
 
 = render :template => 'layouts/application'

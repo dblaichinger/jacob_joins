@@ -1,19 +1,20 @@
 class RecipesController < ApplicationController
 
   respond_to :json, :except => :index
-  layout "map", :only => [:show, :index, :search]
+  layout "map", :only => [:index, :search]
   append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
   before_filter :get_requested_recipe, :only => :show
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
 
   def show
     @location = @recipe.to_gmaps4rails
+    render :layout => request.xhr? ? false : 'map_overlay'
   end
 
   def index
     @recipes = Recipe.all
     @location = Recipe.all.to_gmaps4rails
-    render :layout => 'map'
+    render :layout => request.xhr? ? false : 'map'
   end
 
   def update
@@ -47,6 +48,7 @@ class RecipesController < ApplicationController
 
     if @recipe.update_attributes params[:recipe]
       @recipe.steps.sort! { |a,b| a.number <=> b.number }
+      @recipe.save
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
@@ -92,6 +94,7 @@ class RecipesController < ApplicationController
   end
 
   def getSidebar
+    @recipe = Recipe.where(:slug => params[:id], :state => "published").first if params[:id].present?
     respond_to do |format|
       format.json {render :file => 'recipes/search.html.haml'}
     end
