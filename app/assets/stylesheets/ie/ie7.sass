@@ -21,90 +21,6 @@
     overflow: hidden
     cursor: pointer
 
-    #navi_neu
-      ul
-        width: 1000px
-        float: left
-        position: relative
-        top: -22px
-
-        li
-          a
-            +navi
-            float: left
-          a:hover
-            color: red
-
-          a.selected
-            color: red  
-            background-image: url(image_path('underline_haupt.png'))
-            background-repeat: no-repeat
-            background-position: bottom center
-
-        li#form, #story
-          a.selected
-            background-image: url(image_path('underline_haupt_lang.png'))
-            background-repeat: no-repeat
-            background-position: bottom center          
-
-        li#home
-          a.selected
-            background-image: url(image_path('underline_haupt_kurz.png'))
-            background-repeat: no-repeat
-            background-position: bottom center 
-
-        #about, #contact
-          a.selected   
-            background-image: url(image_path('underline_haupt_mittel.png'))
-            background-repeat: no-repeat
-            background-position: bottom center 
-
-        li#search 
-          a.selected   
-            background-image: url(image_path('underline_haupt_search.png'))
-            background-repeat: no-repeat
-            background-position: bottom center 
-
-
-
-        #home, #form, #search  
-          a
-            padding: 0px 22px 5px 22px
-
-        #search
-          position: absolute
-          bottom: 0
-
-        #form
-          position: absolute
-          left: 190px
-          bottom: 0
-        
-        #contact
-          position: absolute
-          right: 0
-          margin-right: 0
-          bottom: 5px
-
-          a.selected
-            padding-bottom: 5px
-
-        #about
-          position: absolute
-          right: 120px
-          bottom: 5px
-          
-          a.selected
-            padding-bottom: 5px
-
-        #story
-          position: absolute
-          right: 245px
-          bottom: 5px
-
-          a.selected
-            padding-bottom: 5px
-
 #logo
   clear: both
 
@@ -178,6 +94,22 @@ input
 textarea
   overflow: auto
 
+#duration
+  overflow: hidden
+
+  #duration_label
+    float: left
+
+  input
+    width: 55px
+
+  p
+    width: 58px
+    float: right
+    text-transform: lowercase
+    margin-top: 7px !important
+    margin-left: 0
+
 .step_label
   span
     color: #531E09
@@ -186,3 +118,18 @@ textarea
 
 .ui-autocomplete
   background-color: #ffffff
+
+.wrapper-haupt
+  .right-haupt
+    #toggle_sidebar
+    .seitenleiste
+      .seitenleistecontent
+        em
+          font-family: "Pluto-Semibold"
+          font-style: normal
+
+.search
+  h1
+    line-height: 1.4em
+  hr
+    width: 340px
