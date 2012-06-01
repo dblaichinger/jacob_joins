@@ -84,7 +84,7 @@
 
     #recipe_number
       position: relative
-      left: 168px
+      left: 190px
       top: -5px
       height: 30px
       width: 150px
@@ -108,27 +108,32 @@
         img
           width: 76px
           height: 76px
-      .infobox_recipe, .infobox_author, .infobox_duration
-        margin-bottom: 2px
 
-      .infobox_recipe
-        a
-          font-family: "Pluto-SemiBold"
-          font-size: 14px
-          line-height: 1.4em
-          color: #531E09
-          text-transform: none
+      .infobox_recipe_text
+        float: right
+        width: 250px
 
-          &:hover
-            color: #E2001A
+        .infobox_recipe, .infobox_author, .infobox_duration
+          margin-bottom: 2px
 
-      .infobox_author
-        font-family: "PlutoCondensed"
-        font-size: 14px
-        em
-          color: #E2001A
+        .infobox_recipe
+          a
+            font-family: "Pluto-SemiBold"
+            font-size: 14px
+            line-height: 1.4em
+            color: #531E09
+            text-transform: none
+
+            &:hover
+              color: #E2001A
+
+        .infobox_author
           font-family: "PlutoCondensed"
+          font-size: 14px
+          em
+            color: #E2001A
+            font-family: "PlutoCondensed"
 
-      .infobox_duration
-        font-family: Pluto-CondensedItalic
-        font-size: 12px
+        .infobox_duration
+          font-family: Pluto-CondensedItalic
+          font-size: 12px
