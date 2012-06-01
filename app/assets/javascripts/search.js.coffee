@@ -23,6 +23,7 @@ printResults = (data) ->
       $.each data.recipes, (key, recipe) ->
         if recipe?
           output += ("<div class='recipe_search_result'>
+                      <div class='infobox_image'><a href='/recipes/#{recipe.slug}' class='recipe_link'><img src='#{recipe.image}' /></a></div>
                       <p class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></p>
                       <p class='infobox_author'>cooked by <em>#{recipe.user.firstname} #{recipe.user.lastname}</em>, #{recipe.country}</p>
                       <p class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</p>
@@ -45,13 +46,10 @@ window.recipesSearch.ingredientsSearchSelectHandler = (event, ui) ->
   false
 
 window.recipesSearch.removeIngredientClickHandler = (e) ->
-  #console.debug(e.target)
   searchEntry = $(e.target).parent()
-  #console.debug(searchEntry)
   hiddenField = searchEntry.data('hidden')
   hiddenField.remove()
   searchEntry.addClass("pending")
-  console.debug(searchEntry)
   $('#ingredients_search_form').submit()
   false
 
