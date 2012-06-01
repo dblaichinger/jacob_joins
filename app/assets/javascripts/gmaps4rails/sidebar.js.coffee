@@ -1,26 +1,7 @@
 window.switchSidebar = (data, callback) ->
   rightHaupt = $(".right-haupt")
   toggleSidebar = $('#toggle_sidebar')
-  if rightHaupt.data("status") is "closed"
-    rightHaupt.animate
-      "right": "-397px",
-      'fast'
-    .animate
-      "right": "0px",
-      300
-
-    toggleSidebar.animate
-      "right": "-13px",
-      "fast"
-    .animate
-      "right": "382px",
-      300
-      ->
-        toggleSidebar.removeClass("closed")
-
-    rightHaupt.data "status", "open"
-
-  else
+  if rightHaupt.data("status") is "open"
     rightHaupt.animate
       "right": "5px",
       "fast"
@@ -40,8 +21,25 @@ window.switchSidebar = (data, callback) ->
       ->
         toggleSidebar.addClass("closed")
 
-
     rightHaupt.data "status", "closed"
+  else
+    rightHaupt.animate
+      "right": "-397px",
+      'fast'
+    .animate
+      "right": "0px",
+      300
+
+    toggleSidebar.animate
+      "right": "-13px",
+      "fast"
+    .animate
+      "right": "382px",
+      300
+      ->
+        toggleSidebar.removeClass("closed")
+
+    rightHaupt.data "status", "open"
 
 window.showRecipeSidebar = (marker) ->
   if $(".right-haupt").data("sidebar") == "info"

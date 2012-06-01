@@ -1,0 +1,7 @@
+- content_for :sidebar_content do
+  = render :template => "recipes/search"
+
+- content_for :map_overlay_content do
+  = yield
+
+= render :template => 'layouts/map'

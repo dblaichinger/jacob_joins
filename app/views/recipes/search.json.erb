@@ -5,6 +5,7 @@
       {
         "slug": "<%= r.slug %>",
         "name": "<%= r.name %>",
+        "image": "<%= r.images.first.attachment.url(:small) if r.images.first.present?%>",
         "country": "<%= r.country %>",
         "duration": "<%= r.duration.to_i %>",
         "user": {
@@ -20,9 +21,9 @@
         "lat": "<%= r.latitude %>",
         "lng": "<%= r.longitude %>",
         "title": "<%= r.name %>",
-        "description": "<div class='recipe_marker_result'><p class='infobox_recipe'><a href='/recipes/<%=r.slug%>' class='recipe_link'><%=r.name%></a></p><p class='infobox_author'> cooked by <em><%=r.user.firstname%> <%=r.user.shorten_lastname%></em>, <%=r.city%> </p><p class='infobox_duration'> Estimated cooking time: <%=r.duration%> minutes</p></div>"
+        "description": 
+          "<div class='recipe_marker_result'><div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link'><img src='<%=r.images.first.attachment.url(:small) if r.images.first.present?%>' /></a></div><p class='infobox_recipe'><a href='/recipes/<%=r.slug%>' class='recipe_link'><%=r.name%></a></p><p class='infobox_author'> cooked by <em><%=r.user.firstname%> <%=r.user.shorten_lastname%></em>, <%=r.city%> </p><p class='infobox_duration'> Estimated cooking time: <%=r.duration%> minutes</p></div>"
       }<%= "," if index != @recipes.count - 1 %>
     <% end %>
   ]
 }
-
