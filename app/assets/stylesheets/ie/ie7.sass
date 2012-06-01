@@ -1,12 +1,109 @@
-#newsbar
+@import "mixins"
+
+#newsbar_new
   height: 280px
-  background-image: url("/assets/newsbar_offen_repeat.png")
+  background-image: url(image_path('newsbar_offen_repeat.png'))
   background-position: top center
   background-repeat: repeat-x
+  color: #fff
+  position: fixed
+  width: 100%
+  z-index: 20000
+  top: -215px
+  cursor: pointer
 
   #newsbar_content
-    h2
-      font-size: 18px
+    background-image: url(image_path('newsbar_offen2_.png'))
+    background-position: top center
+    width: 1000px
+    height: 280px
+    margin: 0 auto
+    overflow: hidden
+    cursor: pointer
+
+    #navi_neu
+      ul
+        width: 1000px
+        float: left
+        position: relative
+        top: -22px
+
+        li
+          a
+            +navi
+            float: left
+          a:hover
+            color: red
+
+          a.selected
+            color: red  
+            background-image: url(image_path('underline_haupt.png'))
+            background-repeat: no-repeat
+            background-position: bottom center
+
+        li#form, #story
+          a.selected
+            background-image: url(image_path('underline_haupt_lang.png'))
+            background-repeat: no-repeat
+            background-position: bottom center          
+
+        li#home
+          a.selected
+            background-image: url(image_path('underline_haupt_kurz.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #about, #contact
+          a.selected   
+            background-image: url(image_path('underline_haupt_mittel.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        li#search 
+          a.selected   
+            background-image: url(image_path('underline_haupt_search.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+
+
+        #home, #form, #search  
+          a
+            padding: 0px 22px 5px 22px
+
+        #search
+          position: absolute
+          bottom: 0
+
+        #form
+          position: absolute
+          left: 190px
+          bottom: 0
+        
+        #contact
+          position: absolute
+          right: 0
+          margin-right: 0
+          bottom: 5px
+
+          a.selected
+            padding-bottom: 5px
+
+        #about
+          position: absolute
+          right: 120px
+          bottom: 5px
+          
+          a.selected
+            padding-bottom: 5px
+
+        #story
+          position: absolute
+          right: 245px
+          bottom: 5px
+
+          a.selected
+            padding-bottom: 5px
 
 #logo
   clear: both
