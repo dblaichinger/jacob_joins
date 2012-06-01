@@ -3,23 +3,24 @@ removeMapOverlay = (callback = ->) ->
     $(window).unbind 'load', recipesShowWindowLoadHandler
     $(window).unbind 'resize', recipesShowWindowResizeHandler
 
+    animationCallback = ->
+      mapOverlay.remove()
+      callback()
+
     if $(window).width() <= 1400
-      mapOverlay.fadeOut 300, ->
-        mapOverlay.remove()
-        callback()
+      mapOverlay.fadeOut 300, animationCallback
     else
       mapOverlay.css
         right: "0px"
       .animate
         right: "-670px",
-        300
-        ->
-          mapOverlay.remove()
-          callback()
+        300, animationCallback
       $('.close-recipe.left').animate
         right: "-=670",
         opacity: "0"
         300
+  else
+    callback()
 
 getSearchSidebar = (recipe_slug = "") ->
   if $('.right-haupt .seitenleistecontent .search').length == 0
@@ -49,8 +50,12 @@ getSearchSidebar = (recipe_slug = "") ->
         window.setTimeout loadSearchBar, 100
     loadSearchBar()
 
+ie7fix = ->
+  if $('html').hasClass('ie7')
+    $('.right-haupt').width $('.seitenleiste').width()
+
 recipesIndexController = () ->
-  removeMapOverlay()
+  removeMapOverlay(ie7fix)
   switchSidebar '', ->
     $.ajax
       url: '/recipes'
@@ -80,9 +85,12 @@ Path.map("/recipes").to () ->
 
 Path.map("/recipes/search").to () ->
   getSearchSidebar()
-  removeMapOverlay() if ($('.map-overlay')).length > 0
+  removeMapOverlay(ie7fix)
 
 Path.map("/recipes/:recipe_slug").to () ->
+  if $('html').hasClass 'ie7'
+    $('.right-haupt').width('auto')
+
   route = this
 
   getSearchSidebar(route.params.recipe_slug)
@@ -94,6 +102,7 @@ Path.map("/recipes/:recipe_slug").to () ->
       success: (data, textStatus, jqXHR) ->
         $('#toggle_sidebar').before(data)
         recipesShowWindowLoadHandler()
+        adjustParentOrWindowSensitiveElements()
 
         if $(window).width() <= 1400
           $('.map-overlay').hide().fadeIn 500
