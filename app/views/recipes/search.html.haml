@@ -50,16 +50,14 @@
         .infobox_image
           - if @recipe.images.first.present? 
             = image_tag @recipe.images.first
-        .infobox_recipe
-          = link_to @recipe.name, @recipe
-        .infobox_author
-          = "cooked by"
-          = formatted_user_name(@recipe.user) 
-          = @recipe.country
-        .infobox_duration
-          Estimated cooking time:
-          = @recipe.duration
-          minutes
-
-
-
+        .infobox_recipe_text
+          %p.infobox_recipe
+            = link_to @recipe.name, @recipe
+          %p.infobox_author
+            = "cooked by"
+            = formatted_user_name(@recipe.user) 
+            = @recipe.country
+          %p.infobox_duration
+            Estimated cooking time:
+            = @recipe.duration
+            minutes
