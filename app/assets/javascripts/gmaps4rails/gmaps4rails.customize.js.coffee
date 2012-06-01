@@ -108,3 +108,8 @@ window.initCustomMapStyles = ->
       }
   ];
 
+window.initCustomMarkers = (markers) ->
+  $.each markers, (key, m) ->
+    m.picture = "/assets/google_marker_small.png"
+    m.width = 30
+    m.height = 50
