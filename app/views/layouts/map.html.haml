@@ -29,23 +29,25 @@
         });
       }
 
+      $(window).load(function(){
+        $('.window-sensitive').css("min-height", $(window).height() - 45);
+        adjustParentOrWindowSensitiveElements();
+        positionVerticalCentered($('#toggle_sidebar'), true);
+        $("#contactable").css("top", $("#contactForm").height() / 2);
+        positionVerticalCentered($("#contactable_inner"));
+      });
+
+      $(window).resize(function(){
+        $('.window-sensitive').css("min-height", $(window).height() - 45);
+        adjustParentOrWindowSensitiveElements();
+        positionVerticalCentered($('#toggle_sidebar'));
+        $("#contactable").css("top", $("#contactForm").height() / 2);
+        positionVerticalCentered($("#contactable_inner"));
+      });
+
+      $('body').data('initMapLayoutDone', true);
     });
 
-    $(window).load(function(){
-      $('.window-sensitive').css("min-height", $(window).height() - 45);
-      adjustParentOrWindowSensitiveElements();
-      positionVerticalCentered($('#toggle_sidebar'), true);
-      $("#contactable").css("top", $("#contactForm").height() / 2);
-      positionVerticalCentered($("#contactable_inner"));
-    });
-
-    $(window).resize(function(){
-      $('.window-sensitive').css("min-height", $(window).height() - 45);
-      adjustParentOrWindowSensitiveElements();
-      positionVerticalCentered($('#toggle_sidebar'));
-      $("#contactable").css("top", $("#contactForm").height() / 2);
-      positionVerticalCentered($("#contactable_inner"));
-    });
 
   .wrapper-haupt.window-sensitive
 
@@ -55,7 +57,10 @@
       .seitenleiste.parent-or-window-sensitive
         .seitenleistecontent
           = content_for?(:sidebar_content) ? yield(:sidebar_content) : yield
-      = yield :map_overlay_content
+      - if content_for?(:map_overlay_content)
+        = yield(:map_overlay_content)
+      - elsif content_for?(:sidebar_content)
+        = yield
       #toggle_sidebar
 
 = render :template => 'layouts/application'
