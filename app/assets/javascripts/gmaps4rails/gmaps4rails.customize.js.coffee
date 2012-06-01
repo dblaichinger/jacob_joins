@@ -10,7 +10,7 @@ window.initInfobox = ->
       opacity: 0.95
 
     closeBoxMargin: "10px 2px 2px 2px"
-    closeBoxURL: "/assets/close.png"
+    closeBoxURL: "/assets/infobox_close.png"
     infoBoxClearance: new google.maps.Size(1, 1)
     isHidden: false
     pane: "floatPane"

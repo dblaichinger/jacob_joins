@@ -24,16 +24,18 @@
   = form_tag recipes_search_path, :method => "post", :remote => true, "data-type" => "json", :id => "ingredients_search_form" do
     = text_field_tag 'ingredients[]', nil, id:"ingredients_search"
     #search_hidden
-    = submit_tag "Search", :name => nil 
+    #ingredients_search_btn
+      %p
+      = submit_tag "", :name => nil
 
   #search_selection
+  #horizontalenaht
 
   %h1.search_result
-    Delicious 
+    Take a look at all 
+    %br 
+    the great 
     %span recipes 
-    from
-    %br
-    City, Country
   
   %hr.searchhr
 
@@ -46,10 +48,11 @@
       .infobox_recipe
         = link_to @recipe.name, @recipe
       .infobox_author
-        cooked by
-        = formatted_user_name(@recipe.user) + ","
+        = "cooked by"
+        = formatted_user_name(@recipe.user) 
         = @recipe.country
       .infobox_duration
+        Estimated cooking time:
         = @recipe.duration
         minutes
 

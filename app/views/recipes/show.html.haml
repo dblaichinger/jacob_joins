@@ -50,7 +50,7 @@
       #recipe_ingredients_content
         %h1
           Ingredients for
-          = formatted_portions(@recipe)
+          = formatted_portions(@recipe.portions)
           = @recipe.portions > 1 ? "persons" : "person"
         %table
           - @recipe.ingredients_with_quantities.each do |iwq|
