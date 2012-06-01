@@ -1,81 +1,91 @@
-- content_for :map_overlay_content do
-  :javascript
-    $(document).ready(function(){
-      pagerNeeded = $('.recipe_images li').length > 1;
-      $('.recipe_images').bxSlider({
-       pager: pagerNeeded,
-       infiniteLoop: false,
-       controls: false,
-       mode: 'fade'
-      });
-
-      $('.close-recipe').click(closeRecipeHandler);
-      $('.right-haupt').css('width', '100%')
+:javascript
+  $(document).ready(function(){
+    pagerNeeded = $('.recipe_images li').length > 1;
+    $('.recipe_images').bxSlider({
+     pager: pagerNeeded,
+     infiniteLoop: false,
+     controls: false,
+     mode: 'fade'
     });
-
-    $(window).load(function(){
-      if($('.bx-wrapper .bx-window').height() < 20){
-        fixBxSliderHeight($('.bx-wrapper'));
-        $(window).resize();
+    
+    var images = $('.recipe_images img');
+    var count = 0;
+    images.load(function(){
+      if(++count == images.length){
+        if($('.bx-wrapper .bx-window').height() < 20){
+          fixBxSliderHeight($('.bx-wrapper'));
+          $(window).resize();
+        }
+        images.unbind('load');
       }
 
-      positionVerticalCentered($('.close-recipe.left'), true);
     });
 
-    $(window).resize(function(){
-      positionVerticalCentered($('.close-recipe.left'));
-    });
+    $('.close-recipe').click(closeRecipeHandler);
+    $('.right-haupt').css('width', '100%')
+  });
 
-  .map-overlay.window-sensitive
-    = link_to "close", "", class:"close-recipe right"
-    = link_to "close", "", class:"close-recipe left"
-    .content
-      %h1
-        = @recipe.name
-      %hr
-      %p
-        cooked by 
-        %em
-          = "#{@recipe.user.firstname.capitalize} #{@recipe.user.lastname[0].capitalize + '. ' if @recipe.user.lastname.present?}(#{@recipe.user.age})"
-        from
-        = @recipe.country  
+  var recipesShowWindowLoadHandler = function(){
+    positionVerticalCentered($('.close-recipe.left'), true);
+  }
 
-      - if @recipe.images.count > 0
-        %ul.recipe_images
-          - @recipe.images.each do |image|
-            %li
-              = image_tag image.attachment.url(:large)
+  var recipesShowWindowResizeHandler = function(){
+    positionVerticalCentered($('.close-recipe.left'));
+  }
 
+  $(window).load(recipesShowWindowLoadHandler);
+  $(window).resize(recipesShowWindowResizeHandler);
 
-      #recipe_ingredients_content
-        %h2
-          Ingredients for
-          = formatted_portions(@recipe.portions)
-          = @recipe.portions > 1 ? "persons" : "person"
-        %table
-          - @recipe.ingredients_with_quantities.each do |iwq|
-            %tr
-              %td
-                = iwq.quantity
-              %td.declaration
-                = iwq.name
+.map-overlay.parent-or-window-sensitive
+  = link_to "close", recipes_search_path(), class:"close-recipe right"
+  = link_to "close", recipes_search_path(), class:"close-recipe left"
+  .content
+    %h1
+      = @recipe.name
+    %hr
+    %p
+      cooked by 
+      %em
+        = "#{@recipe.user.firstname.capitalize} #{@recipe.user.lastname[0].capitalize + '. ' if @recipe.user.lastname.present?}(#{@recipe.user.age})"
+      from
+      = @recipe.country  
+    %p.infobox_duration
+      = "Estimated cooking time: #{@recipe.duration} minutes"
 
-      #recipe_steps_klein_wrapper
-        %h2
-          Preparation
-        - @recipe.steps.order_by(:number).each do |step|
-          %div{class: "recipe_steps_klein #{'no-image' unless step.image.present?}"}
-            .numbers
-              %strong
-                = step.number + 1
-            .recipe_steps_container
-              - if step.image.present?
-                .bild
-                  = image_tag step.image(:small)
+    - if @recipe.images.count > 0
+      %ul.recipe_images
+        - @recipe.images.each do |image|
+          %li
+            = image_tag image.attachment.url(:large)
 
-              .recipe_steps_klein_beschreibung
-                %p
-                  = step.description
-        
+    #recipe_ingredients_content
+      %h2
+        Ingredients for
+        = formatted_portions(@recipe.portions)
+        = @recipe.portions > 1 ? "persons" : "person"
+      %table
+        - @recipe.ingredients_with_quantities.each do |iwq|
+          %tr
+            %td
+              = iwq.quantity
+            %td.declaration
+              = iwq.name
 
-= render :template => "recipes/search"
+    #recipe_steps_klein_wrapper
+      %h2
+        Preparation
+      - @recipe.steps.sort{ |a,b| a.number <=> b.number }.each do |step|
+        %div{class: "recipe_steps_klein #{'no-image' unless step.image.present?}"}
+          .numbers
+            %strong
+              = step.number + 1
+          .recipe_steps_container
+            - if step.image.present?
+              .bild
+                = image_tag step.image(:small)
+
+            .recipe_steps_klein_beschreibung
+              %p
+                = step.description
+      
+

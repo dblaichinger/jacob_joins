@@ -1,5 +1,6 @@
 :javascript
   $(document).ready(function(){
+    $(".right-haupt").data("sidebar", "")
 
     $('#ingredients_search_form').bind("ajax:success", recipesSearch.formSuccessHandler)
     .bind("ajax:error", recipesSearch.formErrorHandler);
