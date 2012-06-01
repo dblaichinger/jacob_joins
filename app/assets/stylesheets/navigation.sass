@@ -35,22 +35,64 @@
           a:hover
             color: red
 
+          a.selected
+            color: red  
+            background-image: url(image_path('underline_haupt.png'))
+            background-repeat: no-repeat
+            background-position: bottom center
+
+        li#form, #story
+          a.selected
+            background-image: url(image_path('underline_haupt_lang.png'))
+            background-repeat: no-repeat
+            background-position: bottom center          
+
+        li#home
+          a.selected
+            background-image: url(image_path('underline_haupt_kurz.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #about, #contact
+          a.selected   
+            background-image: url(image_path('underline_haupt_mittel.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        li#search 
+          a.selected   
+            background-image: url(image_path('underline_haupt_search.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+
+
         #home, #form, #search  
           a
-            padding-right: 40px
+            padding: 0px 22px 5px 22px
         
         #contact
           position: absolute
           right: 0
-          padding-right: 0
+          margin-right: 0
+          
+          a.selected
+            padding-bottom: 5px
+
 
         #about
           position: absolute
           right: 120px
+          
+          a.selected
+            padding-bottom: 5px
 
         #story
           position: absolute
           right: 245px
+
+          a.selected
+            padding-bottom: 5px
 
     #bildzeichen_newsbar
 
