@@ -49,7 +49,7 @@
       .recipe_search_result
         .infobox_image
           - if @recipe.images.first.present? 
-            = image_tag @recipe.images.first
+            = image_tag @recipe.images.first.attachment.url(:small)
         .infobox_recipe_text
           %p.infobox_recipe
             = link_to @recipe.name, @recipe
