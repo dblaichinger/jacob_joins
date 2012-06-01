@@ -5,7 +5,7 @@ printResults = (data) ->
     $.each data.ingredients, (key, ingredient) ->
       ingredient_exists = false
       $.each $("#search_hidden input:hidden"), (key, input) ->
-        ingredient_exists = true  if $(input).val() is ingredient
+        ingredient_exists = true if $(input).val() is ingredient
 
       unless ingredient_exists
         searchHidden = $("<input type='hidden' name='ingredients[]' value='" + ingredient + "' >").appendTo "#search_hidden"
@@ -32,7 +32,7 @@ printResults = (data) ->
       Gmaps.map.replaceMarkers(data.markers)
 
     else
-      $("#search_result").append "<h1 class='no_result'>No recipes found!</h1><p>Please use the auto-complete function.</p>"  
+      $("#search_result").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
     $("#search_result").html ""
     Gmaps.map.replaceMarkers([])
