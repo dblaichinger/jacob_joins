@@ -6,5 +6,6 @@ window.lightboxSettings = {
     imageBtnPrev: "/assets/lightbox/btn-prev.gif",
     imageBtnNext: "/assets/lightbox/btn-next.gif",
     imageBlank: "/assets/lightbox/blank.gif",
-    containerResizeSpeed: 350
+    containerResizeSpeed: 350,
+    txtImage: "Step"
   }
