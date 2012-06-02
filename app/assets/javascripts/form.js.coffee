@@ -1,3 +1,19 @@
+window.formHashChangeHandler = ->
+  Path.routes.current = null
+  if window.location.hash and window.location.hash != '#skipstory'
+    $("li#story").removeClass("selected simple-navigation-active-leaf");
+    $('li#story a').removeClass('selected')
+    $("li#form").addClass("selected simple-navigation-active-leaf");
+    $("li#form a").addClass("selected");
+
+    $('#wizard').tabs 'select', window.location.hash + "_tab"
+    $.scrollTo '#skipstory', 800
+
+window.wizardNavClickHandler = (e) ->
+  window.location.hash = $(e.target).attr('href').replace('_tab', '')
+  false
+
+
 deactivatePlaceholders = (parent) ->
   parent.find('.placeholder').each ->
     $(this).val("") if $(this).val() is $(this).attr("placeholder")
@@ -32,17 +48,8 @@ $ ->
   $(".scroll").click ->
     newsbar = $("#newsbar_new")
     newsbar.executeAt "destroy"
-    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
-      onAfter: ->
-        newsbar.executeAt $("#start"), ->
-          newsbar.fadeOut 500
-        , ->
-          newsbar.fadein 500
-        newsbar.fadeIn 500
+    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800
     false
-
-  $(".next_tab").live "click", ->
-    $.scrollTo $('#skipstory'), 800
 
   $("#gotoform").click ->
     $.scrollTo $('#skipstory'), 800
@@ -156,7 +163,6 @@ $ ->
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
     newHash = "#!/#{ui.tab.hash.slice 1}"
-    window.location.hash = newHash if window.location.hash isnt newHash
 
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
