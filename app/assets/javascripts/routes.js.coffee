@@ -76,16 +76,18 @@ getSearchSidebar = (recipe_slug = "", overwrite = false) ->
         window.setTimeout loadSearchBar, 100
     loadSearchBar()
 
-ie7fix = ->
+widthFix = ->
   if $('html').hasClass('ie7')
     $('.right-haupt').width $('.seitenleiste').width()
+  else
+    $('.right-haupt').width 'auto'
 
 # controller ------------------------------------------------------
 
 recipesIndexController = () ->
   newsbar.selectNavigationPoint $('#navi_neu #home')
-  removeMapOverlay(ie7fix)
-  switchSidebar '', ->
+  removeMapOverlay(widthFix)
+  loadIndexBarAjax = ->
     $.ajax
       url: '/recipes'
       dataType: 'html'
@@ -107,6 +109,11 @@ recipesIndexController = () ->
         if $(".right-haupt").data("status") == "closed"
           $(".right-haupt").data "sidebar", "info"
           switchSidebar()
+
+  if $(".right-haupt").data("status") == "closed"
+    loadIndexBarAjax()
+  else
+    switchSidebar '', loadIndexBarAjax
 
 # routes -----------------------------------------------------------
 
@@ -130,7 +137,7 @@ Path.map("/recipes/search").to () ->
     else
       getSearchSidebar("", true)
 
-  removeMapOverlay(ie7fix)
+  removeMapOverlay(widthFix)
 
 Path.map("/recipes/:recipe_slug").to () ->
   newsbar.selectNavigationPoint $('#navi_neu #search')
@@ -162,7 +169,7 @@ Path.map("/recipes/:recipe_slug").to () ->
           $('.close-recipe.left').css
             right: '350px'
           .animate
-            right: "1040px",
+            right: "1068px",
             500
 
       error: (jqXHR, textStatus, errorThrown) ->
