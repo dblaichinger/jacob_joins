@@ -106,7 +106,7 @@
 		  now.getTime();
 		  var time = Date.parse(now);
 		  
-		  var release = Date.parse("Su, 03 Jun 2012 00:00:00 GMT+1");
+		  var release = Date.parse("Mo, 04 Jun 2012 00:00:00 GMT+1");
 		  
 		  var diff = release - time;
 		  
