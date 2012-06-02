@@ -368,7 +368,16 @@ textarea
       color: #531E09
       background-position: center center
 
-  .yellow
+.infoBox
+  & > img
+    position: absolute !important
+    right: 0
+    top: 0
+    z-index: 2
+
+  & > div
+    position: relative
+    top: 8px
     border: 2px solid #531E09
     margin-top: 8px
     background: #fff
@@ -377,23 +386,8 @@ textarea
     font-size: 14px
     line-height: 1.4em
     color: #531E09
-    min-width: 260px
+    min-width: 330px
+    min-height: 70px
     background-position: 0 center
 
-    .infobox_recipe
-      a
-        font-family: "Pluto-SemiBold"
-        font-size: 14px
-        line-height: 1.4em
-        color: #531E09
 
-        &:hover
-          color: #E2001A
-
-    .infobox_author
-      em
-        color: #E2001A
-
-    .infobox_duration
-      font-family: Pluto-CondensedItalic
-      font-size: 12px
