@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ihanli/Google-Maps-for-Rails.git
+  revision: 99b8d8234f700d6997a257b6e78f68a35073b9be
+  specs:
+    gmaps4rails (1.5.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -96,7 +102,6 @@ GEM
     ffi (1.0.11)
     fssm (0.2.8.1)
     geocoder (1.1.1)
-    gmaps4rails (1.5.2)
     haml (3.1.4)
     high_voltage (1.1.1)
     highline (1.6.11)
@@ -299,7 +304,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   geocoder
-  gmaps4rails (~> 1.5.2)
+  gmaps4rails (~> 1.5.2)!
   haml
   high_voltage
   hirb
