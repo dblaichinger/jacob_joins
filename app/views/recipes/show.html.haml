@@ -64,6 +64,7 @@
             = "#{@recipe.user.firstname.capitalize} #{@recipe.user.lastname[0].capitalize + '. ' if @recipe.user.lastname.present?}(#{@recipe.user.age})"
             %span
               from
+              = @recipe.city + ","
               = @recipe.country  
         %p
           Portions:
