@@ -1,3 +1,29 @@
+# Set eventlistener for Marker
+window.initMarkerEventListener = ->
+  i = 0
+
+  while i < Gmaps.map.markers.length
+    marker = Gmaps.map.markers[i].serviceObject
+    marker.description = Gmaps.map.markers[i].description
+    google.maps.event.addListener marker, "click", (i) ->
+      if Path.routes.current is "/recipes/search" or Path.routes.current is "#/recipes/search"
+        showRecipeSidebar this
+      else
+        $("body").data "selected_map_markers", this
+        Path.history.pushState {}, "", "/recipes/search"
+    ++i
+
+# Set eventlistener for MarkerCluster
+window.initClusterEventListener = ->
+  markerClusterer = Gmaps.map.markerClusterer
+  google.maps.event.addListener markerClusterer, "clusterclick", (cluster) ->
+    markers = cluster.getMarkers()
+    if Path.routes.current is "/recipes/search" or Path.routes.current is "#/recipes/search"
+      showRecipeSidebar markers
+    else
+      $("body").data "selected_map_markers", markers
+      Path.history.pushState {}, "", "/recipes/search"
+
 window.initInfobox = ->
   Gmaps.map.infobox = (boxText) ->
     content: boxText

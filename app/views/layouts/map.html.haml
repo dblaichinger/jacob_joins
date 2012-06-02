@@ -6,31 +6,8 @@
       initSidebar(true);
       
       Gmaps.map.callback = function() {
-        //Set eventlistener for Marker
-        for (var i = 0; i < Gmaps.map.markers.length; ++i) {
-          var marker = Gmaps.map.markers[i].serviceObject
-          marker.description = Gmaps.map.markers[i].description;
-          google.maps.event.addListener(marker, 'click', function(i){
-            if(Path.routes.current == '/recipes/search' || Path.routes.current == '#/recipes/search')
-              showRecipeSidebar(this);
-            else {
-              $('body').data('selected_map_markers', this)
-              Path.history.pushState({}, '', '/recipes/search');
-            }
-          });
-        }
-        //Set eventlistener for MarkerCluster
-        var markerClusterer = Gmaps.map.markerClusterer
-        google.maps.event.addListener(markerClusterer, "clusterclick", function (cluster) {
-          var markers = cluster.getMarkers();
-          showRecipeSidebar(markers);
-          if(Path.routes.current == '/recipes/search' || Path.routes.current == '#/recipes/search')
-            showRecipeSidebar(markers);
-          else {
-            $('body').data('selected_map_markers', markers)
-            Path.history.pushState({}, '', '/recipes/search');
-          }
-        });
+        initMarkerEventListener();
+        initClusterEventListener();
 
         //Eventlistener for zoom changed
         google.maps.event.addListener(Gmaps.map.serviceObject, 'zoom_changed', function() {
@@ -62,7 +39,7 @@
 
   .wrapper-haupt.window-sensitive
 
-    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>1000, "custom_infowindow_class" => "yellow" }}, "map_options" =>  { "language" => "en", "auto_zoom" => false, "zoom" => 0, "auto_adjust" => false, "center_longitude" => 50.45, "center_latitude" => 30.5 })
+    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>1000, "custom_infowindow_class" => "yellow" }}, "map_options" =>  { "language" => "en", "auto_zoom" => true, "zoom" => 2, "minZoom" => 0, "auto_adjust" => false, "center_longitude" => 50.45, "center_latitude" => 30.5 })
 
     .right-haupt.window-sensitive
       .seitenleiste.parent-or-window-sensitive
