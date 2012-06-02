@@ -70,14 +70,14 @@ window.getSidebar = (marker) ->
         $.each marker, (index, m) -> 
           description = $(m.description)
           $('a', description).attr('onclick', '')
-          description.appendTo $('.content')
+          description.appendTo $('.paginationContent')
 
         if marker.length > 9
           $('#search_result').pajinate(paginationSettings)
       else
         description = $(marker.description)
         $('a', description).attr('onclick', '')
-        $('.content').html(description)
+        $('.paginationContent').html(description)
 
     error: (jqXHR, textStatus, errorThrown) ->
       console.debug(jqXHR)
@@ -111,6 +111,7 @@ window.adjustParentOrWindowSensitiveElements = ->
 
 window.paginationSettings = {
   items_per_page: 10,
+  item_container_id: '.paginationContent'
   num_page_links_to_display: 10,
   nav_label_first: '<<',
   nav_label_last: '>>',

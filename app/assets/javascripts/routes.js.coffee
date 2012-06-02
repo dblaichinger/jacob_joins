@@ -95,6 +95,8 @@ recipesIndexController = () ->
         Gmaps.map.replaceMarkers(markers)
         initMarkerEventListener()
         initClusterEventListener()
+        Gmaps.map.serviceObject.setZoom(2)
+        Gmaps.map.serviceObject.setCenter(new google.maps.LatLng(30.5, 50.45, true))
 
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)

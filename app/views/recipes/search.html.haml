@@ -13,7 +13,7 @@
 
     $('#search_selection').on("click", "a.search_remove_ingredient", recipesSearch.removeIngredientClickHandler);
 
-    if($('.recipe_search_result').length > 3)
+    if($('.recipe_search_result').length > 9)
       $('#search_result').pajinate(paginationSettings);
   });
 
@@ -45,7 +45,7 @@
 
   #search_result
     .page_navigation
-    .content
+    .paginationContent
       /#wizard-loader
       /  .loader#sidebar_loader
       /    = image_tag 'ajax-loader.gif'
