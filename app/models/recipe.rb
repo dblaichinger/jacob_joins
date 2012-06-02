@@ -67,6 +67,8 @@ class Recipe
     output += "<div class='recipe_marker_result'>"
     if self.images.first.present?
       output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link'><img src='#{self.images.first.attachment.url(:small)}' /></a></div>"
+    else
+      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link'><img src='/assets/infobox_image_placeholder.jpg' /></a></div>"
     end
     output += "<div class='infobox_recipe_text'>"
     output += "<p class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link'>#{self.name}</a></p>"
