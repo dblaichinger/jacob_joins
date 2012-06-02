@@ -33,8 +33,8 @@ printResults = (data) ->
       $("#search_result").append output
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
-      initMarkerEventListener()
-      initClusterEventListener()
+      #initMarkerEventListener()
+      #initClusterEventListener()
 
     else
       $("#search_result").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
