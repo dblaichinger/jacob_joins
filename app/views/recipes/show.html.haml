@@ -1,4 +1,17 @@
 :javascript
+  $(function() {
+    $('a.lightbox').lightBox({
+      overlayBgColor: '#FFF',
+      overlayOpacity: 0.6,
+      imageLoading: '#{image_path("ajax-loader.gif")}',
+      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
+      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
+      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
+      imageBlank: '#{image_path("lightbox/blank.gif")}',
+      containerResizeSpeed: 350
+    });
+  });
+
   $(document).ready(function(){
     pagerNeeded = $('.recipe_images li').length > 1;
     $('.recipe_images').bxSlider({
@@ -82,7 +95,7 @@
           .recipe_steps_container
             - if step.image.present?
               .bild
-                = image_tag step.image(:small)
+                = link_to image_tag(step.image(:small)), step.image.url(:large), :class=>"lightbox", :title=>step.description 
 
             .recipe_steps_klein_beschreibung
               %p
