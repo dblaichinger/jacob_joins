@@ -12,6 +12,9 @@
     });
 
     $('#search_selection').on("click", "a.search_remove_ingredient", recipesSearch.removeIngredientClickHandler);
+
+    if($('.recipe_search_result').length > 9)
+      $('#search_result').pajinate(paginationSettings);
   });
 
 .search
@@ -41,25 +44,28 @@
   %hr.searchhr
 
   #search_result
-    /#wizard-loader
-    /  .loader#sidebar_loader
-    /    = image_tag 'ajax-loader.gif'
+    .page_navigation
+    .content
+      /#wizard-loader
+      /  .loader#sidebar_loader
+      /    = image_tag 'ajax-loader.gif'
+      - if @recipe.present?
+        .recipe_search_result
+          .infobox_image
+            - if @recipe.images.first.present? 
+              = image_tag @recipe.images.first.attachment.url(:small)
+            - else
+              = image_tag "infobox_image_placeholder.jpg"
+          .infobox_recipe_text
+            %p.infobox_recipe
+              = link_to @recipe.name, @recipe
+            %p.infobox_author
+              = "cooked by"
+              = formatted_user_name(@recipe.user) 
+              = @recipe.country
+            %p.infobox_duration
+              Estimated cooking time:
+              = @recipe.duration
+              minutes
 
-    - if @recipe.present?
-      .recipe_search_result
-        .infobox_image
-          - if @recipe.images.first.present? 
-            = image_tag @recipe.images.first.attachment.url(:small)
-          - else
-            = image_tag "infobox_image_placeholder.jpg"
-        .infobox_recipe_text
-          %p.infobox_recipe
-            = link_to @recipe.name, @recipe
-          %p.infobox_author
-            = "cooked by"
-            = formatted_user_name(@recipe.user) 
-            = @recipe.country
-          %p.infobox_duration
-            Estimated cooking time:
-            = @recipe.duration
-            minutes
+    
