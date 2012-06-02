@@ -34,5 +34,5 @@
 //= require jquery.loadmask.min
 //= require jquery.lightbox-0.5.pack
 //= require jquery.pajinate.min
-//= require customSelect.jquery
+//= require jquery.selectbox-0.6.1
 //= require_tree .

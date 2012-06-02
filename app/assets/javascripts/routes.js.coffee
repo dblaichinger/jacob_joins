@@ -85,7 +85,7 @@ ie7fix = ->
 recipesIndexController = () ->
   newsbar.selectNavigationPoint $('#navi_neu #home')
   removeMapOverlay(ie7fix)
-  switchSidebar '', ->
+  loadIndexBarAjax = ->
     $.ajax
       url: '/recipes'
       dataType: 'html'
@@ -107,6 +107,11 @@ recipesIndexController = () ->
         if $(".right-haupt").data("status") == "closed"
           $(".right-haupt").data "sidebar", "info"
           switchSidebar()
+          
+  if $(".right-haupt").data("status") == "closed"
+    loadIndexBarAjax()
+  else
+    switchSidebar '', loadIndexBarAjax
 
 # routes -----------------------------------------------------------
 
@@ -162,7 +167,7 @@ Path.map("/recipes/:recipe_slug").to () ->
           $('.close-recipe.left').css
             right: '350px'
           .animate
-            right: "1040px",
+            right: "1068px",
             500
 
       error: (jqXHR, textStatus, errorThrown) ->
