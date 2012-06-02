@@ -36,16 +36,16 @@
         background-position: 0 -20px
 
     &.left
-      position: fixed
-      right: 1068px
-      width: 40px
-      height: 40px
-      background-image: url(image_path('close_recipe.jpg'))
-      cursor: pointer
 
-      @media screen and (max-width: 1400px)
-        display: none !important
+      display: none !important
 
+      @media screen and (min-width: 1400px)
+        display: block !important
+        position: fixed
+        right: 1068px
+        width: 40px
+        height: 40px
+        background-image: url(image_path('close_recipe.jpg'))
 
   .content
     width: 600px

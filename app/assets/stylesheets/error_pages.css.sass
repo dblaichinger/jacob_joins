@@ -1,0 +1,37 @@
+@import compass/reset
+@import compass/css3/font-face
+@import mixins
+@import compass/typography/text/force-wrap
+
++font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf", "Sanches/203126_1_0.woff"),"Sanches/203126_1_0.eot")
++font-face("Pluto-LightItalic", font-files("Pluto-Italic/203125_2_0.ttf", "Pluto-Italic/203125_2_0.woff"), "Pluto-Italic/203125_2_0.eot")
+
+body
+  height: 100%
+  color: #531E09
+  background-image: url(image_path('bg4.jpg'))
+  font-weight: normal
+  p
+    font-family: "PlutoCondensed"
+    font-size: 14px
+    line-height: 1.4em
+
+.dialog
+  width: 1000px
+  margin: 200px auto
+  text-align: center
+
+  h1
+    font-family: Sanches-Bold
+    color: #531E09
+    font-size: 64px
+    text-shadow: 0 -2px 0 #000000, 0 1px 0px #fff 
+    text-align: center
+    line-height: 1.2em
+
+  p
+    font-family: Pluto-LightItalic
+    color: #531E09
+    font-size: 25px
+    text-shadow: 0 1px 0 #fff
+    text-align: center
