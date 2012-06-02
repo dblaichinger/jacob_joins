@@ -72,11 +72,6 @@ recipesIndexController = () ->
           $(".right-haupt").data("sidebar", "")
           switchSidebar()
 
-
-
-Path.map("#!/:tab").to () ->
-  $('#wizard').tabs 'select', '#' + this.params['tab']
-
 Path.map("/").to () ->
   recipesIndexController()
 
@@ -140,19 +135,23 @@ $ ->
   Path.history.listen(true)
 
   if Path.history.supported
-    window.location = window.location.hash.substr(1) if window.location.hash.substr(0, 2) == "#/"
+    window.location = window.location.hash.substr(1) if window.location.hash.substr(0, 2) == "#/" and not window.location.pathname.substr(0, 6) == '/pages'
+    Path.routes.current = window.location.pathname if Path.match(window.location.pathname)
   else
     window.location = "/#" + window.location.pathname if (window.location.pathname.substr(0, 8) == "/recipes" or window.location.pathname == "/") and not window.location.hash
 
   $('body').on 'click', 'a', (e) ->
-    if (Path.routes.current == null or Path.routes.current == "") and !Path.history.supported
+    if Path.routes.current == null or Path.routes.current == ""
       return
 
-    _t = href = $(e.target).attr('href').replace('http://'+window.location.host,'')
-    _t = '#' + href unless Path.history.supported
-    
-    if href != undefined and Path.match(_t) != null
-      e.preventDefault()
-      Path.history.pushState({}, '', href)
-      false
+    href = $(e.target).attr('href')
+
+    if href != undefined
+      _t = href = href.replace('http://'+window.location.host,'')
+      _t = '#' + href unless Path.history.supported
+      
+      if Path.match(_t) != null
+        e.preventDefault()
+        Path.history.pushState({}, '', href)
+        false
 
