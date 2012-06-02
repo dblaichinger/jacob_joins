@@ -1,28 +1,15 @@
 :javascript
   $(function() {
-    $('a.lightbox.brief').lightBox({
-      overlayBgColor: '#FFF',
-      overlayOpacity: 0.6,
-      imageLoading: '#{image_path("ajax-loader.gif")}',
-      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
-      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
-      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
-      imageBlank: '#{image_path("lightbox/blank.gif")}',
-      containerResizeSpeed: 350
-    });
+    $('a.lightbox.brief').lightBox(
+      window.lightboxSettings
+    );
   });
   $(function() {
-    $('a.lightbox.bierdeckel').lightBox({
-      overlayBgColor: '#FFF',
-      overlayOpacity: 0.6,
-      imageLoading: '#{image_path("ajax-loader.gif")}',
-      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
-      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
-      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
-      imageBlank: '#{image_path("lightbox/blank.gif")}',
-      containerResizeSpeed: 350
-    });
+    $('a.lightbox.bierdeckel').lightBox(
+      window.lightboxSettings
+    );
   });
+
 
 .aboutcontent
   #teamvorstellung
