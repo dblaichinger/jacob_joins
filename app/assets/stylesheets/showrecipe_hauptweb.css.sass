@@ -60,19 +60,44 @@
       margin-bottom: 20px
       padding-top: 3px  
 
+    #recipe_information_content
+      position: relative
+    #recipe_information
+      padding: 40px 20px
+      position: absolute
+      right: 0
+      width: 147px
+      top: 35px
+      p
+        font-family: "Sanches-SemiBold"
+        margin: 0
+        text-transform: uppercase
+        padding: 0 0 10px 0
+
+        em
+          font-family: "PlutoCondensed"
+          text-transform: none
+          display: block
+
+
     #recipe_ingredients_content
       padding-top: 50px
       table
         tr
           td
-            font-family: "PlutoCondensed"
+            font-family: "Pluto-SemiBold"
             width: 112px
             font-size: 14px
             line-height: 1.4em
+            text-align: right
+            padding-right: 8px
+            padding-bottom: 7px
+            vertical-align: top
           .declaration
             font-family: "PlutoCondensed"
             width: 300px
             font-size: 14px
+            text-align: left
     p
       em
         color: $rot
@@ -120,6 +145,7 @@
       padding-bottom: 10px
     #recipe_steps_klein_wrapper
       margin-top: 70px
+      padding-bottom: 70px
 
       .recipe_steps_klein
         padding-bottom: 20px
