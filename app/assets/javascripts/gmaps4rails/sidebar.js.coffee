@@ -94,12 +94,7 @@ window.initSidebar = ->
   $('.right-haupt').data "status", "open"
 
 window.adjustParentOrWindowSensitiveElements = ->
-  $('.parent-or-window-sensitive').each ->
-    $(this).css 'min-height', '100%'
+  $('.parent-or-window-sensitive').css('min-height', '100%').each ->
     parentMinHeight = $(this).parent().css('min-height')
     parentHeight = $(this).parent().height()
     $(this).css 'min-height', parentHeight
-
-  
-
-
