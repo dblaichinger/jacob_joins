@@ -50,6 +50,8 @@
         .infobox_image
           - if @recipe.images.first.present? 
             = image_tag @recipe.images.first.attachment.url(:small)
+          - else
+            = image_tag "infobox_image_placeholder.jpg"
         .infobox_recipe_text
           %p.infobox_recipe
             = link_to @recipe.name, @recipe
