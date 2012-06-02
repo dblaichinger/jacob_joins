@@ -6,6 +6,7 @@
   padding: 0 20px
   margin-right: 392px
   position: relative
+  right: 0
 
   @media screen and (min-width: 1400px)
     width: 624px
@@ -63,10 +64,10 @@
     #recipe_information_content
       position: relative
     #recipe_information
-      padding: 40px 20px
+      padding: 0px 20px
       position: absolute
       right: 0
-      width: 147px
+      width: 170px
       top: 35px
       p
         font-family: "Sanches-SemiBold"
@@ -79,9 +80,15 @@
           text-transform: none
           display: block
 
+          span
+            color: $braun
+            font-family: "PlutoCondensed"
+            font-size: 14px
+
 
     #recipe_ingredients_content
       padding-top: 50px
+      width: 340px
       table
         tr
           td
@@ -91,7 +98,7 @@
             line-height: 1.4em
             text-align: right
             padding-right: 8px
-            padding-bottom: 7px
+            padding-bottom: 10px
             vertical-align: top
           .declaration
             font-family: "PlutoCondensed"
@@ -155,6 +162,7 @@
         .numbers
           clear: both
           float: left
+          margin-top: 7px
           strong
             float: none
             width: 80px

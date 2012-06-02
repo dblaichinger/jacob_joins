@@ -3,7 +3,7 @@ window.initInfobox = ->
     content: boxText
     disableAutoPan: false
     maxWidth: 0
-    pixelOffset: new google.maps.Size(-140, 0)
+    pixelOffset: new google.maps.Size(-169, 0)
     zIndex: null
     boxStyle:
       background: "url('/assets/tipbox.png') no-repeat"
