@@ -17,9 +17,9 @@
   = image_tag 'Bildzeichen_Screen.png', id:"Bildzeichen_Screen-haupt"
         
   %h3
-    = link_to 'Who is Jacob?', "#story_1", class:"who"
+    = link_to 'Who is Jacob?', page_path("form"), class:"who"
   %p
-    = link_to 'Click to get introduced to the story.', "#story_1"
+    = link_to 'Click to get introduced to the story.', page_path("form")
 
 %hr
 
@@ -38,5 +38,5 @@
 
 
 %p.gotoform
-  = link_to 'You want to share your favourite recipe with Jacob? Click here!', "#"
+  = link_to 'You want to share your favourite recipe with Jacob? Click here!', page_path("form", :anchor => "skipstory")
 
