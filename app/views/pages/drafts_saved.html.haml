@@ -1,5 +1,3 @@
-- provided = @recipe.present? ? "recipe" : "info"
-
 %h1 
   Thank you for your 
   %span contribution!
@@ -8,7 +6,7 @@
 
 %p.danke
   Now you also got your personal tag in our 
-  = link_to 'map', recipes_path
+  = link_to 'map', recipe_path(@recipe.slug)
   among all the other great recipes from all over the world.
 
 %p
