@@ -1,7 +1,7 @@
 = javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
 :javascript
   $(function(){
-    if(window.location.hash == "#skipstory")
+    if(window.location.hash)
       $("li#story, li#story .selected").removeClass("selected simple-navigation-active-leaf");
     else
       $("li#form, li#form .selected").removeClass("selected simple-navigation-active-leaf");
@@ -16,7 +16,17 @@
       $('.stories').fancyStoryEffect();
 
     $(".select_box_jj_style").customSelect();
+
+    $('#formnav ul li a').click(wizardNavClickHandler);
+    $('#wizard').on('click', 'a.next_tab', wizardNavClickHandler);
+
+    $(window).load(function(){
+      formHashChangeHandler();
+    });
+
+    $(window).bind('hashchange', formHashChangeHandler);
   });
+
 
 #jacobsstory
   %ol.stories
@@ -31,7 +41,7 @@
 
           = link_to 'Scroll down', "#story_1", class:"scroll"
 
-          = link_to 'You already know the story? Just go on to the form!', "#!/recipe_tab", id:"gotoform"
+          = link_to 'You already know the story? Just go on to the form!', "#recipe", id:"gotoform"
       .uebergang1
     %li
       #story_1

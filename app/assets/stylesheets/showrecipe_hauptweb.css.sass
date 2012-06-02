@@ -10,8 +10,11 @@
 
   @media screen and (min-width: 1400px)
     width: 624px
+    background: url(image_path('recipeshow_uebergang.png'))
+    background-repeat: y-repeat
     float: right
     margin-right: -8px
+    padding-left: 50px
 
   + #toggle_sidebar
     display: none !important
@@ -33,16 +36,16 @@
         background-position: 0 -20px
 
     &.left
+
       display: none !important
 
       @media screen and (min-width: 1400px)
         display: block !important
         position: fixed
-        right: 1040px
+        right: 1068px
         width: 40px
         height: 40px
-        background-image: url(image_path('map_btn_.jpg'))
-
+        background-image: url(image_path('close_recipe.jpg'))
 
   .content
     width: 600px
@@ -62,19 +65,50 @@
       margin-bottom: 20px
       padding-top: 3px  
 
+    #recipe_information_content
+      position: relative
+    #recipe_information
+      padding: 0px 20px
+      position: absolute
+      right: 0
+      width: 170px
+      top: 35px
+      p
+        font-family: "Sanches-SemiBold"
+        margin: 0
+        text-transform: uppercase
+        padding: 5px 0 5px 0
+
+        em
+          font-family: "PlutoCondensed"
+          text-transform: none
+          display: block
+
+          span
+            color: $braun
+            font-family: "PlutoCondensed"
+            font-size: 14px
+
+
     #recipe_ingredients_content
       padding-top: 50px
+      width: 340px
       table
         tr
           td
-            font-family: "PlutoCondensed"
+            font-family: "Pluto-SemiBold"
             width: 112px
             font-size: 14px
             line-height: 1.4em
+            text-align: right
+            padding-right: 8px
+            padding-bottom: 10px
+            vertical-align: top
           .declaration
             font-family: "PlutoCondensed"
             width: 300px
             font-size: 14px
+            text-align: left
     p
       em
         color: $rot
@@ -112,7 +146,6 @@
               text-align: center
               width: auto
               height: auto
-              max-height: 500px
 
 
     h1
@@ -122,6 +155,7 @@
       padding-bottom: 10px
     #recipe_steps_klein_wrapper
       margin-top: 70px
+      padding-bottom: 70px
 
       .recipe_steps_klein
         padding-bottom: 20px
@@ -144,7 +178,7 @@
           border-left: 1px solid $braun
           box-shadow: -1px 0px 0px 0px white
           float: left  
-          min-height: 40px       
+          min-height: 50px       
 
           .bild
             float: left

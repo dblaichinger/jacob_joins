@@ -11,7 +11,12 @@
           var marker = Gmaps.map.markers[i].serviceObject
           marker.description = Gmaps.map.markers[i].description;
           google.maps.event.addListener(marker, 'click', function(i){
-            showRecipeSidebar(this);
+            if(Path.routes.current == '/recipes/search' || Path.routes.current == '#/recipes/search')
+              showRecipeSidebar(this);
+            else {
+              $('body').data('selected_map_markers', this)
+              Path.history.pushState({}, '', '/recipes/search');
+            }
           });
         }
         //Set eventlistener for MarkerCluster
@@ -19,6 +24,12 @@
         google.maps.event.addListener(markerClusterer, "clusterclick", function (cluster) {
           var markers = cluster.getMarkers();
           showRecipeSidebar(markers);
+          if(Path.routes.current == '/recipes/search' || Path.routes.current == '#/recipes/search')
+            showRecipeSidebar(markers);
+          else {
+            $('body').data('selected_map_markers', markers)
+            Path.history.pushState({}, '', '/recipes/search');
+          }
         });
 
         //Eventlistener for zoom changed

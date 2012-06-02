@@ -6,8 +6,9 @@
 
 %p.danke
   Now you also got your personal tag in our 
-  = link_to 'map', recipe_path(@recipe.slug)
-  among all the other great recipes from all over the world.
+  = link_to 'map', root_path
+  among all the other great recipes from all over the world. Check out all the different eating habits and cultures or take a look at your 
+  = link_to 'own recipe.', recipe_path(@recipe.slug)
 
 %p
   You want to post another recipe? Click

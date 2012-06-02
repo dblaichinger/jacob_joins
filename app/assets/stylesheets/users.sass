@@ -5,17 +5,65 @@
   display: block
 
 #user_heard_from
-  font-family: "Pluto"
-  background-color: #DDD2C6
+  background-color: rgba(255,255,255,0.8)
   color: #531E09
-  width: 150px
+  font-family: "Pluto"
+  font-size: 12px
+  border-width: 0 2px 2px 2px
+  border-style: solid 
+  border-color: #531E09
+  width: 222px
   height: 26px
-  border: 2px solid #fff
   outline: 0px
+
+#user_heard_from
+  select:hover
+    background-color: yellow
+
+  option:hover
+    color: $braun
+
 
 #heard_from_other
   display: none
   margin-top: 5px
+
+.customStyleSelectBox
+  width: 222px
+  height: 30px
+  background: url(image_path("select_bg.jpg")) no-repeat
+  font-family: "PlutoCondensed"
+  color: #531E09 !important
+  font-size: 14px
+  line-height: 1.4em
+
+.customStyleSelectBox.changed
+/* You can use this if you want a different style after user has made a selection */
+
+
+/* on the next line we add a down arrow on the right to indicate that it is a select box */
+.customStyleSelectBoxInner
+  width: 217px
+  height: 30px
+  background: url(image_path("select.png")) no-repeat 
+  background-position: right 0
+  font-family: "PlutoCondensed"
+  color: #531E09 !important
+  font-size: 14px
+  font-weight: normal
+  line-height: 1.4em
+  padding: 4px 0 0 5px
+  vertical-align: middle
+
+.customStyleSelectBoxInner:hover
+  background-position: right -30px
+
+.first_select
+  color: #bda79b
+  font-family: Pluto-CondensedItalic
+
+.first_select:hover
+  background-color: yellow
 
 #vorname
   display: block

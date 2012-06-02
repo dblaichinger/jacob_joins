@@ -22,11 +22,11 @@ removeMapOverlay = (callback = ->) ->
   else
     callback()
 
-getSearchSidebar = (recipe_slug = "") ->
-  if $('.right-haupt .seitenleistecontent .search').length == 0
+getSearchSidebar = (recipe_slug = "", overwrite = false) ->
+  if $('.right-haupt .seitenleistecontent .search').length == 0 or overwrite
     loadSearchBar = ->
       if $('body').data "initMapLayoutDone"
-        switchSidebar '', ->
+        loadSearchBarAjaxRequest = ->
           $.ajax
             url: "/recipes/getSidebar"
             dataType: "text"
@@ -46,6 +46,11 @@ getSearchSidebar = (recipe_slug = "") ->
               if $(".right-haupt").data("status") == "closed"
                 $(".right-haupt").data("sidebar", "")
                 switchSidebar()
+        if $(".right-haupt").data("status") == "closed"
+          loadSearchBarAjaxRequest()
+        else
+          switchSidebar '', loadSearchBarAjaxRequest
+
       else
         window.setTimeout loadSearchBar, 100
     loadSearchBar()
@@ -55,6 +60,7 @@ ie7fix = ->
     $('.right-haupt').width $('.seitenleiste').width()
 
 recipesIndexController = () ->
+  newsbar.selectNavigationPoint $('#navi_neu #home')
   removeMapOverlay(ie7fix)
   switchSidebar '', ->
     $.ajax
@@ -62,20 +68,19 @@ recipesIndexController = () ->
       dataType: 'html'
       success: (data, textStatus, jqXHR) ->
         $('.right-haupt .seitenleistecontent').html(data)
+        markers = $('body').data('map_markers')
+        if markers.length != Gmaps.map.markers.length
+          Gmaps.map.replaceMarkers(markers)
+
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)
         console.debug(textStatus)
-        consol
+        console.debug(errorThrown)
       complete: ->
         $('#sidebar_loader').hide()
         if $(".right-haupt").data("status") == "closed"
           $(".right-haupt").data("sidebar", "")
           switchSidebar()
-
-
-
-Path.map("#!/:tab").to () ->
-  $('#wizard').tabs 'select', '#' + this.params['tab']
 
 Path.map("/").to () ->
   recipesIndexController()
@@ -84,10 +89,23 @@ Path.map("/recipes").to () ->
   recipesIndexController()
 
 Path.map("/recipes/search").to () ->
-  getSearchSidebar()
+  newsbar.selectNavigationPoint $('#navi_neu #search')
+  if($('body').data('selected_map_markers'))
+    showRecipeSidebar($('body').data('selected_map_markers'))
+    $('body').data('selected_map_markers', "")
+  else
+    if Path.routes.previous
+      match = Path.match(Path.routes.previous)
+
+    if match and match.path == "/recipes/:recipe_slug"
+      getSearchSidebar("", false)
+    else
+      getSearchSidebar("", true)
+
   removeMapOverlay(ie7fix)
 
 Path.map("/recipes/:recipe_slug").to () ->
+  newsbar.selectNavigationPoint $('#navi_neu #search')
   if $('html').hasClass 'ie7'
     $('.right-haupt').width('auto')
 
@@ -119,7 +137,6 @@ Path.map("/recipes/:recipe_slug").to () ->
             right: "1040px",
             500
 
-
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)
         console.debug(textStatus)
@@ -140,19 +157,23 @@ $ ->
   Path.history.listen(true)
 
   if Path.history.supported
-    window.location = window.location.hash.substr(1) if window.location.hash.substr(0, 2) == "#/"
+    window.location = window.location.hash.substr(1) if window.location.hash.substr(0, 2) == "#/" and not window.location.pathname.substr(0, 6) == '/pages'
+    Path.routes.current = window.location.pathname if Path.match(window.location.pathname)
   else
     window.location = "/#" + window.location.pathname if (window.location.pathname.substr(0, 8) == "/recipes" or window.location.pathname == "/") and not window.location.hash
 
   $('body').on 'click', 'a', (e) ->
-    if (Path.routes.current == null or Path.routes.current == "") and !Path.history.supported
+    if Path.routes.current == null or Path.routes.current == ""
       return
 
-    _t = href = $(e.target).attr('href').replace('http://'+window.location.host,'')
-    _t = '#' + href unless Path.history.supported
-    
-    if href != undefined and Path.match(_t) != null
-      e.preventDefault()
-      Path.history.pushState({}, '', href)
-      false
+    href = $(e.target).attr('href')
+
+    if href != undefined
+      _t = href = href.replace('http://'+window.location.host,'')
+      _t = '#' + href unless Path.history.supported
+      
+      if Path.match(_t) != null
+        e.preventDefault()
+        Path.history.pushState({}, '', href)
+        false
 
