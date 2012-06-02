@@ -4,17 +4,20 @@
 en:
   errship:
     '404':
-      title: 'We’re sorry, but something went wrong.'
+      title: 'We’re sorry, but something is broken.'
       description:
         text0: "The page you were looking for doesn't exist."
         text1: "You may have mistyped the address or the page may have moved."
+        text2: 'foto'
     '422':
-      title: 'We’re sorry, but something went wrong.'
+      title: 'We’re sorry, but something is broken.'
       description:
         text0: "The change you wanted was rejected."
         text1: "Maybe you tried to change something you didn't have access to."
+        text2: 'foto'
     '500':
       title: 'We’re sorry, but something is broken.'
       description:
         text0: 'There occured an internal server error. It’s absolutely not your fault.'
         text1: 'We’ve been notified about this incident.'
+        text2: 'foto'
