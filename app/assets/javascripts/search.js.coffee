@@ -62,3 +62,7 @@ window.recipesSearch.formErrorHandler = (evt, xhr, status, error) ->
   console.log("Cannot find any ingredient due to the following reason: "+error)
   $("#search_selection p.pending").each (e) ->
     $('#search_hidden').append $(e).data('hidden')
+
+window.removeAutoComplete = ->
+  if $('.ui-menu-item').length >0
+    $('.ui-menu-item').remove()
