@@ -16,7 +16,7 @@ printResults = (data) ->
 
     
     recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
-    $("#search_result").html recipe_number
+    $(".content").html recipe_number
 
     if data.recipes.length > 0
       output = ""
@@ -30,14 +30,14 @@ printResults = (data) ->
                       <p class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</p>
                       </div></div>")
 
-      $("#search_result").append output
+      $(".content").append output
+      $('#search_result').pajinate(paginationSettings);
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
-
     else
-      $("#search_result").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
+      $(".content").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
-    $("#search_result").html ""
+    $(".content").html ""
     Gmaps.map.replaceMarkers([])
 
 window.recipesSearch.ingredientsSearchSelectHandler = (event, ui) ->

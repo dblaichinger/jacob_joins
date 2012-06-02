@@ -1,11 +1,11 @@
-
-
 {
   "ingredients": <%= @ingredients.inspect.html_safe %>,
   "recipes": [
     <% @recipes.each_with_index do |r, index| %>
-    <% if r.images.first.present? image = r.images.first.attachment.url(:small)  %>
-    <% else image = "/assets/infobox_image_placeholder.jpg" %>
+    <% if r.images.first.present? %>
+      <% image = r.images.first.attachment.url(:small)  %>
+    <% else %>
+      <% image = "/assets/infobox_image_placeholder.jpg" %>
     <% end %>
       {
         "slug": "<%= r.slug %>",
@@ -22,6 +22,11 @@
   ],
   "markers": [
     <% @recipes.each_with_index do |r, index| %>
+      <% if r.images.first.present? %>
+        <% image = r.images.first.attachment.url(:small)  %>
+      <% else %>
+        <% image = "/assets/infobox_image_placeholder.jpg" %>
+      <% end %>
       {
         "lat": "<%= r.latitude %>",
         "lng": "<%= r.longitude %>",
