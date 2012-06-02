@@ -10,8 +10,11 @@
 
   @media screen and (min-width: 1400px)
     width: 624px
+    background: url(image_path('recipeshow_uebergang.png'))
+    background-repeat: y-repeat
     float: right
     margin-right: -8px
+    padding-left: 50px
 
   + #toggle_sidebar
     display: none !important
@@ -34,10 +37,11 @@
 
     &.left
       position: fixed
-      right: 1040px
+      right: 1068px
       width: 40px
       height: 40px
-      background-image: url(image_path('map_btn_.jpg'))
+      background-image: url(image_path('close_recipe.jpg'))
+      cursor: pointer
 
       @media screen and (max-width: 1400px)
         display: none !important
