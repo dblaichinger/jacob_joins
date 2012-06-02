@@ -1,3 +1,24 @@
+# eventhandler -------------------------------------------------------
+
+window.ankerPathClickHandler = (e) ->
+  if Path.routes.current == null or Path.routes.current == ""
+    return
+
+  href = $(e.target).attr('href')
+
+  if href != undefined
+    _t = href = href.replace('http://'+window.location.host,'')
+    _t = '#' + href unless Path.history.supported
+    
+    if Path.match(_t) != null
+      e.preventDefault()
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      Path.history.pushState({}, '', href)
+      return false
+
+# helper -------------------------------------------------------------
+
 removeMapOverlay = (callback = ->) ->
   if (mapOverlay = $('.map-overlay')).length > 0
     $(window).unbind 'load', recipesShowWindowLoadHandler
@@ -59,6 +80,8 @@ ie7fix = ->
   if $('html').hasClass('ie7')
     $('.right-haupt').width $('.seitenleiste').width()
 
+# controller ------------------------------------------------------
+
 recipesIndexController = () ->
   newsbar.selectNavigationPoint $('#navi_neu #home')
   removeMapOverlay(ie7fix)
@@ -82,6 +105,8 @@ recipesIndexController = () ->
         if $(".right-haupt").data("status") == "closed"
           $(".right-haupt").data "sidebar", "info"
           switchSidebar()
+
+# routes -----------------------------------------------------------
 
 Path.map("/").to () ->
   recipesIndexController()
@@ -149,6 +174,7 @@ Path.map("/recipes/:recipe_slug").to () ->
     getRecipe()
 
 
+
 $ ->
   __listen = Path.history.listen
   Path.history.listen = (fallback) ->
@@ -163,18 +189,4 @@ $ ->
   else
     window.location = "/#" + window.location.pathname if (window.location.pathname.substr(0, 8) == "/recipes" or window.location.pathname == "/") and not window.location.hash
 
-  $('body').on 'click', 'a', (e) ->
-    if Path.routes.current == null or Path.routes.current == ""
-      return
-
-    href = $(e.target).attr('href')
-
-    if href != undefined
-      _t = href = href.replace('http://'+window.location.host,'')
-      _t = '#' + href unless Path.history.supported
-      
-      if Path.match(_t) != null
-        e.preventDefault()
-        Path.history.pushState({}, '', href)
-        false
-
+  $('body').on 'click', 'a', ankerPathClickHandler
