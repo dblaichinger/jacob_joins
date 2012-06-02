@@ -4,6 +4,12 @@ GIT
   specs:
     gmaps4rails (1.5.2)
 
+GIT
+  remote: git://github.com/ihanli/errship.git
+  revision: 5d1bbe04e62d382fd3fae9d52f065138c49db9f3
+  specs:
+    errship (2.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -302,6 +308,7 @@ DEPENDENCIES
   compass-rails
   database_cleaner
   devise
+  errship (~> 2.2.0)!
   factory_girl_rails
   geocoder
   gmaps4rails (~> 1.5.2)!

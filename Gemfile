@@ -22,6 +22,7 @@ gem "airbrake"
 gem "devise"
 gem 'mongo'
 gem 'mongo_store'
+gem 'errship', '~> 2.2.0', :git => "git://github.com/ihanli/errship.git"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

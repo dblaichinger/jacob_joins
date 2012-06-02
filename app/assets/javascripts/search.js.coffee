@@ -34,6 +34,9 @@ printResults = (data) ->
       $('#search_result').pajinate(paginationSettings);
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
+      #initMarkerEventListener()
+      #initClusterEventListener()
+      
     else
       $(".content").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else

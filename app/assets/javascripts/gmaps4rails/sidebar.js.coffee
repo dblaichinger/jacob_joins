@@ -68,11 +68,16 @@ window.getSidebar = (marker) ->
         else
           $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: "+marker.length+"</p></div>")
         $.each marker, (index, m) -> 
-          $(m.description).appendTo $('.content')
-        if marker.length > 10
+          description = $(m.description)
+          $('a', description).attr('onclick', '')
+          description.appendTo $('.content')
+
+        if marker.length > 9
           $('#search_result').pajinate(paginationSettings)
       else
-        $('.content').html(marker.description)
+        description = $(marker.description)
+        $('a', description).attr('onclick', '')
+        $('.content').html(description)
 
     error: (jqXHR, textStatus, errorThrown) ->
       console.debug(jqXHR)
