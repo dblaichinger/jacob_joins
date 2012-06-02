@@ -99,9 +99,11 @@
             %strong
               = step.number + 1
           .recipe_steps_container
-            - if step.image.present?
-              .bild
+            .bild
+              - if step.image.present?
                 = link_to image_tag(step.image(:small)), step.image.url(:large), :class=>"lightbox", :title=>step.description 
+              - else
+                = link_to "", image_tag("show_noimage"), :class=>"lightbox", :title=>step.description 
 
             .recipe_steps_klein_beschreibung
               %p

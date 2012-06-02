@@ -69,8 +69,9 @@ recipesIndexController = () ->
       success: (data, textStatus, jqXHR) ->
         $('.right-haupt .seitenleistecontent').html(data)
         markers = $('body').data('map_markers')
-        if markers.length != Gmaps.map.markers.length
-          Gmaps.map.replaceMarkers(markers)
+        Gmaps.map.replaceMarkers(markers)
+        initMarkerEventListener()
+        initClusterEventListener()
 
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)
@@ -79,7 +80,7 @@ recipesIndexController = () ->
       complete: ->
         $('#sidebar_loader').hide()
         if $(".right-haupt").data("status") == "closed"
-          $(".right-haupt").data("sidebar", "")
+          $(".right-haupt").data "sidebar", "info"
           switchSidebar()
 
 Path.map("/").to () ->
