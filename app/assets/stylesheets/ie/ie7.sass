@@ -29,9 +29,10 @@
         top: -22px
 
         li
+          overflow: visible
+
           a
             +navi
-            float: left
           a:hover
             color: red
 
@@ -39,71 +40,61 @@
             color: red  
             background-image: url(image_path('underline_haupt.png'))
             background-repeat: no-repeat
-            background-position: bottom center
+            background-position: 0 center
+            overflow: visible
+            height: 35px
+            display: block
 
         li#form, #story
           a.selected
             background-image: url(image_path('underline_haupt_lang.png'))
             background-repeat: no-repeat
-            background-position: bottom center          
+            background-position: 0 center        
 
         li#home
           a.selected
             background-image: url(image_path('underline_haupt_kurz.png'))
             background-repeat: no-repeat
-            background-position: bottom center 
+            background-position: 0 center 
+            display: block
+            overflow: visible  
 
         #about, #contact
           a.selected   
             background-image: url(image_path('underline_haupt_mittel.png'))
             background-repeat: no-repeat
-            background-position: bottom center 
+            background-position: 0 center 
 
         li#search 
           a.selected   
             background-image: url(image_path('underline_haupt_search.png'))
             background-repeat: no-repeat
-            background-position: bottom center 
+            background-position: 0 center 
 
+        #home, #form, #search, #contact, #about, #story
+          top: 0px
+          position: absolute
 
+          a.selected
+            padding-bottom: 5px
 
-        #home, #form, #search  
-          a
-            padding: 0px 22px 5px 22px
+        #home
+          left: 0
 
         #search
-          position: absolute
-          bottom: 0
+          left: 78px
 
         #form
-          position: absolute
           left: 190px
-          bottom: 0
-        
-        #contact
-          position: absolute
-          right: 0
-          margin-right: 0
-          bottom: 5px
 
-          a.selected
-            padding-bottom: 5px
+        #contact
+          right: 0
 
         #about
-          position: absolute
           right: 120px
-          bottom: 5px
-          
-          a.selected
-            padding-bottom: 5px
 
         #story
-          position: absolute
           right: 245px
-          bottom: 5px
-
-          a.selected
-            padding-bottom: 5px
 
 #logo
   clear: both
@@ -178,6 +169,24 @@ input
 textarea
   overflow: auto
 
+#duration
+  overflow: hidden
+  position: relative
+
+  #duration_label
+    float: left
+
+  input
+    width: 55px
+
+  p
+    width: 58px
+    float: right
+    text-transform: lowercase
+    margin-top: 7px !important
+    margin-left: 0
+    position: absolute
+
 .step_label
   span
     color: #531E09
@@ -189,5 +198,202 @@ textarea
 
 .wrapper-haupt
   .right-haupt
+    #toggle_sidebar
     .seitenleiste
       margin-left: -8px
+      .seitenleistecontent
+        em
+          font-family: "Pluto-Semibold"
+          font-style: normal
+
+.search
+  h1
+    line-height: 1.4em
+  hr
+    width: 340px
+
+.aboutcontent
+  width: 1000px
+  margin: 0 auto
+  padding: 100px 20px 50px 20px
+
+
+  #teamvorstellung
+    overflow: hidden
+
+    hr
+      width: 1000px 
+
+    #teamfoto
+      width: 700px
+      height: 490px
+      border: 2px solid #fff
+      float: left
+      margin-top: 20px
+
+
+      ul
+        li
+          float: left
+          width: 175px
+          height: 245px
+          margin: 0
+          position: relative
+          cursor: pointer
+          background-image: url(image_path('teamfoto.jpg'))
+
+
+          .member
+            display: none
+            width: 165px
+            height: 60px
+            padding: 10px 5px 0px 5px
+            background-color: #fff
+            position: absolute
+            left: 0
+            bottom: 0
+
+            h5
+              color: #531E09
+              font-family: Sanches-SemiBold
+              font-size: 14px
+              margin-bottom: 5px
+              text-transform: uppercase
+              a
+                text-decoration: none
+                color: #531E09
+              a:hover
+                color: #E2001A
+
+
+            p
+              font-family: Pluto-CondensedItalic
+              font-size: 12px
+
+        li:hover
+          .member
+            display: block
+
+        #isi
+          background-position: 0 0
+        #marta
+          background-position: -175px 0
+        #alex
+          background-position: -350px 0
+        #martina
+          background-position: -525px 0
+        #doris
+          background-position: 0 -245px
+        #tina
+          background-position: -175px -245px
+        #daniel
+          background-position: -350px -245px
+        #daniela
+          background-position: -525px -245px
+
+    .aboutteam
+      position: relative
+      float: right
+      width: 280px   
+      min-height: 490px
+      margin-top: 20px
+
+      em
+        font-family: "Pluto-Semibold"
+        font-style: normal
+    
+      .aboutteamhint
+        font-family: Pluto-CondensedItalic
+        font-size: 12px
+        position: absolute
+        bottom: 0
+
+#projektteile
+  hr
+    width: 1000px
+
+#projektarbeiten
+  li
+    margin-bottom: 20px
+    em
+      font-family: "Pluto-Semibold"
+      font-style: normal
+
+.brief
+  .projektinfo
+    float: left
+    width: 446px
+    margin-right: 50px
+    margin-top: 15px
+
+    h4
+      font-family: Sanches-SemiBold
+      text-transform: uppercase
+      margin-bottom: 10px
+      color: #531E09
+      font-size: 20px
+      padding-top: 10px
+
+  #lightbox_container
+    width: 500px
+    height: 140px
+    overflow: hidden
+    text-align: center
+    border: 2px solid #fff
+
+#contactcontent
+  hr
+    width: 1000px
+
+.lightbox_first
+  margin: -20%
+
+.map_container
+  width: 100%
+  height: 100%
+  position: fixed
+
+  #map
+    height: 100%
+
+  .gmaps4rails_map
+    width: 100%
+    height: 100%
+
+  .gmnoprint
+    span
+      font-family: "Pluto-CondensedItalic"
+      font-size: 12px
+      line-height: 1.4em
+      color: #531E09
+      background-position: center center
+
+  .yellow
+    border: 2px solid #531E09
+    margin-top: 8px
+    background: #fff
+    padding: 5px
+    font-family: "PlutoCondensed"
+    font-size: 14px
+    line-height: 1.4em
+    color: #531E09
+    min-width: 260px
+    background-position: 0 center
+
+    .infobox_recipe
+      a
+        font-family: "Pluto-SemiBold"
+        font-size: 14px
+        line-height: 1.4em
+        color: #531E09
+
+        &:hover
+          color: #E2001A
+
+    .infobox_author
+      em
+        color: #E2001A
+
+    .infobox_duration
+      font-family: Pluto-CondensedItalic
+      font-size: 12px
