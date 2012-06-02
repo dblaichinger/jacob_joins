@@ -63,15 +63,21 @@ window.getSidebar = (marker) ->
     success: (data, textStatus, jqXHR) ->
       $('.seitenleistecontent').html(data)
       if marker.length > 1
-        $('#search_result').html("<div id='recipe_number'><p>Number of recipes: "+marker.length+"</p></div>")
+        if($('#recipe_number').length > 0)
+           $('#recipe_number').html("<p>Number of recipes: "+marker.length+"</p>")
+        else
+          $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: "+marker.length+"</p></div>")
         $.each marker, (index, m) -> 
           description = $(m.description)
           $('a', description).attr('onclick', '')
-          description.appendTo $('#search_result')
+          description.appendTo $('.paginationContent')
+
+        if marker.length > 9
+          $('#search_result').pajinate(paginationSettings)
       else
         description = $(marker.description)
         $('a', description).attr('onclick', '')
-        $('#search_result').html(description)
+        $('.paginationContent').html(description)
 
     error: (jqXHR, textStatus, errorThrown) ->
       console.debug(jqXHR)
@@ -102,3 +108,13 @@ window.adjustParentOrWindowSensitiveElements = ->
     parentMinHeight = $(this).parent().css('min-height')
     parentHeight = $(this).parent().height()
     $(this).css 'min-height', parentHeight
+
+window.paginationSettings = {
+  items_per_page: 10,
+  item_container_id: '.paginationContent'
+  num_page_links_to_display: 10,
+  nav_label_first: '<<',
+  nav_label_last: '>>',
+  nav_label_prev: '<',
+  nav_label_next: '>'
+}
