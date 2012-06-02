@@ -58,7 +58,7 @@
                    
       %p
         = f.label :heard_from, "How did you hear from Jacob Joins?"             
-        = f.select :heard_from, options_for_select([['Letter', 'letter'], ['Friends', 'friends'], ['Email', 'email'], ['Facebook', 'facebook'], ['Pling.de', 'pling.de'], ['Poster', 'poster'], ['Flyer', 'flyer'], ['Other', 'other']]), {}, { :onchange => "heard_from($(this).val());", class:"select_box_jj_style" }
+        = f.select :heard_from, options_for_select([['Select', 'select', {class:"first_select"}],['Letter', 'letter'], ['Friends', 'friends'], ['Email', 'email'], ['Facebook', 'facebook'], ['Poster', 'poster'], ['Coaster', 'coaster'], ['Sticker', 'sticker'], ['Other', 'other']]), {}, { :onchange => "heard_from($(this).val());", class:"select_box_jj_style" }
         = text_field_tag :heard_from_other
       
       .genderage1

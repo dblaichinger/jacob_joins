@@ -31,28 +31,35 @@
     min-height: 70px
     background-position: 0 center
 
-  .infobox_image
-    width: 60px
-    height: 80px
-    float: left
-    margin: 5px 12px 0 5px
-    img
+  .recipe_marker_result
+    overflow: hidden
+    .infobox_image
       width: 60px
-      height: 60px
-  .infobox_recipe
-    a
-      font-family: "Pluto-SemiBold"
-      font-size: 14px
-      line-height: 1.4em
-      color: #531E09
+      height: 80px
+      float: left
+      margin: 5px 12px 0 5px
+      img
+        width: 60px
+        height: 60px
+    
+    .infobox_recipe_text
+      width: 238px
+      float: right
+      
+      .infobox_recipe
+        a
+          font-family: "Pluto-SemiBold"
+          font-size: 14px
+          line-height: 1.4em
+          color: #531E09
 
-      &:hover
-        color: #E2001A
+          &:hover
+            color: #E2001A
 
-  .infobox_author
-    em
-      color: #E2001A
+      .infobox_author
+        em
+          color: #E2001A
 
-  .infobox_duration
-    font-family: Pluto-CondensedItalic
-    font-size: 12px
+      .infobox_duration
+        font-family: Pluto-CondensedItalic
+        font-size: 12px
