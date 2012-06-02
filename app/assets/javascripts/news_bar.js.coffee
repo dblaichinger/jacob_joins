@@ -1,5 +1,12 @@
 window.newsbar ||= {}
 
+window.newsbar.selectNavigationPoint = (element) ->
+  $('#navi_neu li.selected').removeClass("selected simple-navigation-active-leaf")
+  .find('a').removeClass("selected")
+
+  element.addClass("selected simple-navigation-active-leaf")
+  .find('a').addClass('selected')
+
 window.newsbar.get_latest_recipe = ->
   $.get "/recipes/last", ((data, textstatus, jqxhr) ->
     $("#last_entry").empty()

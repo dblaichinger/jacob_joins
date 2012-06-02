@@ -22,11 +22,11 @@ removeMapOverlay = (callback = ->) ->
   else
     callback()
 
-getSearchSidebar = (recipe_slug = "") ->
-  if $('.right-haupt .seitenleistecontent .search').length == 0
+getSearchSidebar = (recipe_slug = "", overwrite = false) ->
+  if $('.right-haupt .seitenleistecontent .search').length == 0 or overwrite
     loadSearchBar = ->
       if $('body').data "initMapLayoutDone"
-        switchSidebar '', ->
+        loadSearchBarAjaxRequest = ->
           $.ajax
             url: "/recipes/getSidebar"
             dataType: "text"
@@ -46,6 +46,11 @@ getSearchSidebar = (recipe_slug = "") ->
               if $(".right-haupt").data("status") == "closed"
                 $(".right-haupt").data("sidebar", "")
                 switchSidebar()
+        if $(".right-haupt").data("status") == "closed"
+          loadSearchBarAjaxRequest()
+        else
+          switchSidebar '', loadSearchBarAjaxRequest
+
       else
         window.setTimeout loadSearchBar, 100
     loadSearchBar()
@@ -55,6 +60,7 @@ ie7fix = ->
     $('.right-haupt').width $('.seitenleiste').width()
 
 recipesIndexController = () ->
+  newsbar.selectNavigationPoint $('#navi_neu #home')
   removeMapOverlay(ie7fix)
   switchSidebar '', ->
     $.ajax
@@ -62,10 +68,14 @@ recipesIndexController = () ->
       dataType: 'html'
       success: (data, textStatus, jqXHR) ->
         $('.right-haupt .seitenleistecontent').html(data)
+        markers = $('body').data('map_markers')
+        if markers.length != Gmaps.map.markers.length
+          Gmaps.map.replaceMarkers(markers)
+
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)
         console.debug(textStatus)
-        consol
+        console.debug(errorThrown)
       complete: ->
         $('#sidebar_loader').hide()
         if $(".right-haupt").data("status") == "closed"
@@ -79,10 +89,23 @@ Path.map("/recipes").to () ->
   recipesIndexController()
 
 Path.map("/recipes/search").to () ->
-  getSearchSidebar()
+  newsbar.selectNavigationPoint $('#navi_neu #search')
+  if($('body').data('selected_map_markers'))
+    showRecipeSidebar($('body').data('selected_map_markers'))
+    $('body').data('selected_map_markers', "")
+  else
+    if Path.routes.previous
+      match = Path.match(Path.routes.previous)
+
+    if match and match.path == "/recipes/:recipe_slug"
+      getSearchSidebar("", false)
+    else
+      getSearchSidebar("", true)
+
   removeMapOverlay(ie7fix)
 
 Path.map("/recipes/:recipe_slug").to () ->
+  newsbar.selectNavigationPoint $('#navi_neu #search')
   if $('html').hasClass 'ie7'
     $('.right-haupt').width('auto')
 
@@ -113,7 +136,6 @@ Path.map("/recipes/:recipe_slug").to () ->
           .animate
             right: "1040px",
             500
-
 
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)
