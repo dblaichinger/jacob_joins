@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+	include Errship::Rescuers
+  include Errship::Mongoid::Rescuers
+
   protect_from_forgery
 
   protected
