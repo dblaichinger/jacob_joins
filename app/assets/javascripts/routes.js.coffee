@@ -162,7 +162,7 @@ Path.map("/recipes/:recipe_slug").to () ->
           $('.close-recipe.left').css
             right: '350px'
           .animate
-            right: "1040px",
+            right: "1068px",
             500
 
       error: (jqXHR, textStatus, errorThrown) ->
