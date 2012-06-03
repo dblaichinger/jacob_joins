@@ -3,7 +3,7 @@
 .jquery-selectbox {
 	position: relative;
 	height: 30px;
-	width: 217px;
+	width: 222px !important;
 	z-index: 0;
 	float: left;
 	display: inline;
@@ -16,7 +16,7 @@
 }
 .jquery-selectbox.selecthover {
 	background-image: url("/assets/select_bg.jpg");
-	z-index: 700;
+	z-index: 19999;
 }	
 
 .jquery-selectbox .jquery-custom-selectboxes-replaced .selecthover {
@@ -25,13 +25,15 @@
 	color: #531E09 !important;
 }
 .jquery-selectbox .jquery-selectbox-currentItem {
-	padding: 3px 0px 0px 3px;
+	padding: 0px 0px 0px 3px;
 	white-space: nowrap;
 	display: block;
 	overflow: hidden;
 	font-size: 14px;
 	font-family: "PlutoCondensed" !important;
 	color: #531E09 !important;
+	line-height: 30px;
+	margin: 0;
 }
 
 
@@ -39,8 +41,11 @@
 	font-size: 14px; 
 	font-family: "Pluto-CondensedItalic" !important;
 	color: #531E09 !important;
-	width: 215px !important;
-	height: 175px;
+	width:219px !important;
+	height: 180px;
+	margin: 0;
+	padding: 3px;
+
 }
 
 .jquery-selectbox .jquery-selectbox-list {
@@ -48,10 +53,9 @@
 	position: absolute;
 	background-color: rgba(255,255,255,0.8);
 	top: 30px;
-	padding: 2px;
 	left: 0px;
-	width: 215px !important;
-	height: 175px !important;
+	width: 219px !important;
+	height: 180px !important;
 	overflow-x: hidden;
 	overflow-y: auto;
 	z-index: 1000;

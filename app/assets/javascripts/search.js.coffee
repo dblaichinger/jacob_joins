@@ -32,17 +32,23 @@ printResults = (data) ->
 
       $(".paginationContent").append output
       if data.recipes.length > 9
-        $('#search_result').pajinate(paginationSettings);
+        $('#search_result').pajinate(paginationSettings)
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
-      #initMarkerEventListener()
-      #initClusterEventListener()
+      initMarkerEventListener()
+      initClusterEventListener()
       
     else
       $(".paginationContent").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
     $(".paginationContent").html ""
-    Gmaps.map.replaceMarkers([])
+    $(".page_navigation").html ""
+    $("#recipe_number").remove()
+    markers = $("body").data("map_markers")
+    initCustomMarkers(markers)
+    Gmaps.map.replaceMarkers(markers)
+    initMarkerEventListener()
+    initClusterEventListener()
 
 window.recipesSearch.ingredientsSearchSelectHandler = (event, ui) ->
   $(event.target).val(ui.item.value)
@@ -68,5 +74,5 @@ window.recipesSearch.formErrorHandler = (evt, xhr, status, error) ->
     $('#search_hidden').append $(e).data('hidden')
 
 window.removeAutoComplete = ->
-  if $('.ui-menu-item').length >0
-    $('.ui-menu-item').remove()
+  if $('.ui-menu-item').length > 0
+    $('.search #ingredients_search').autocomplete('close')

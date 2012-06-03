@@ -94,11 +94,15 @@ recipesIndexController = () ->
       success: (data, textStatus, jqXHR) ->
         $('.right-haupt .seitenleistecontent').html(data)
         markers = $('body').data('map_markers')
-        Gmaps.map.replaceMarkers(markers)
-        initMarkerEventListener()
-        initClusterEventListener()
+        if markers.length > Gmaps.map.markers.length
+          initCustomMarkers(markers)
+          Gmaps.map.replaceMarkers(markers)
+          initMarkerEventListener()
+          initClusterEventListener()
+
         Gmaps.map.serviceObject.setZoom(2)
         Gmaps.map.serviceObject.setCenter(new google.maps.LatLng(30.5, 50.45, true))
+        Gmaps.map.markerClusterer.redraw_()
 
       error: (jqXHR, textStatus, errorThrown) ->
         console.debug(jqXHR)
