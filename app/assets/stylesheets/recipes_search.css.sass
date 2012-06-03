@@ -1,3 +1,5 @@
+@import "mixins"
+
 .search
   
   h1
@@ -70,6 +72,49 @@
   #search_result
     position: relative
     margin-top: 20px
+
+    .page_navigation
+      width: 300px
+      margin: 0 auto
+      text-align: center
+      padding-top: 20px
+      .no_more, .page_link, .next_link, .last_link, .first_link, .previous_link
+        width: 50px
+        display: inline
+        padding: 0 3px
+        font-size: 14px
+        color: $braun
+        font-family: "PlutoCondensed"
+        text-transform: none
+        text-decoration: none
+
+      .active_page
+        color: $rot
+        font-family: "Pluto-Heavy"
+
+      .next_link
+        background-image: url(image_path("pagination_next.png"))
+        display: inline-block
+        width: 6px
+        height: 14px
+        background-repeat: no-repeat
+        background-position: bottom
+        text-indent: -100000px
+      .previous_link
+        background-image: url(image_path("pagination_prev.png"))
+        display: inline-block
+        width: 6px
+        height: 14px
+        background-repeat: no-repeat
+        background-position: bottom
+        text-indent: -100000px
+
+      .previous_link:hover, .next_link:hover
+        background-position: top 
+
+      .no_more:hover, .page_link:hover, .last_link:hover, .first_link:hover
+        color: $rot
+
 
     .no_result_1
       font-weight: normal
