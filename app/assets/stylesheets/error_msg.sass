@@ -143,9 +143,7 @@ label.error
     span
       opacity: 0
 
-
-
-.ui-widget-overlay
+.ui-widget-overlay, .noscript_overlay
   position: absolute
   top: 0
   left: 0
@@ -155,4 +153,20 @@ label.error
   opacity: .6
   filter: Alpha(Opacity=60)
 
-  
+.noscript_overlay
+  z-index: 1000
+  opacity: 1
+  background-color: rgba(255, 255, 255, 0.6)
+
+.noscript_message
+  position: absolute
+  background-color: rgba(255, 255, 255, 1)
+  border: $braun solid 2px
+  padding: 20px
+  margin: auto
+  width: 440px
+  position: relative
+  top: 200px
+  opacity: 1
+  filter: Alpha(Opacity=100)
+  z-index: 1001
