@@ -61,6 +61,7 @@ window.getSidebar = (marker) ->
 
     success: (data, textStatus, jqXHR) ->
       $('.seitenleistecontent').html(data)
+
       if marker.length > 1
         if($('#recipe_number').length > 0)
            $('#recipe_number').html("<p>Number of recipes: "+marker.length+"</p>")
