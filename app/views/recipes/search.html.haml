@@ -69,8 +69,10 @@
               = link_to @recipe.name, @recipe
             %p.infobox_author
               = "cooked by"
-              = formatted_user_name(@recipe.user) 
-              = @recipe.country
+              = formatted_user_name @recipe.user
+              = "from"
+            %p.infobox_location
+              = formatted_location @recipe.city, @recipe.country
             %p.infobox_duration
               Estimated cooking time:
               = @recipe.duration
