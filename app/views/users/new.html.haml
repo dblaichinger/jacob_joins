@@ -5,9 +5,12 @@
     $("form", "#user_tab").dirtyValidation();
     $(".select_box_jj_style").selectbox();
 
-    if($("[selected]", "#user_gender").size() == 1 && $("[selected]", "#user_gender").first().val().length > 1){
-      gender_icon($("#user_gender").val());
-    }
+    selectGender($("#user_gender").val());
+
+    $('#gendericons a').click(function(e){
+      selectGender($(e.target).attr('class'));
+      return false;
+    });
   });
 
 = form_for @user, :html => { class:"user_form" } do |f|
