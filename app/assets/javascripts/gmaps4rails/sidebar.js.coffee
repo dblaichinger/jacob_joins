@@ -48,7 +48,6 @@ window.showRecipeSidebar = (marker) ->
     else
       switchSidebar(marker, getSidebar)
   else if $(".right-haupt").data("status") == "open"
-    $('#sidebar_loader').fadeOut "fast"
     $('#sidebar_loader').show()
     getSidebar(marker)
   else
