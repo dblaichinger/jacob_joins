@@ -106,7 +106,7 @@ recipesIndexController = () ->
           initClusterEventListener()
 
         Gmaps.map.serviceObject.setZoom(2)
-        Gmaps.map.serviceObject.setCenter(new google.maps.LatLng(30.5, 50.45, true))
+        Gmaps.map.serviceObject.panTo(new google.maps.LatLng(0.0, 50.45, true))
         Gmaps.map.markerClusterer.redraw_()
 
       error: (jqXHR, textStatus, errorThrown) ->
