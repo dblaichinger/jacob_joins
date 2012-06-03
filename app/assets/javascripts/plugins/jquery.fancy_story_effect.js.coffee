@@ -53,6 +53,8 @@ prepareStories = (container, settings) ->
 
   container.height(lisHeight)
 
+  if window.location.hash is "#skipstory" then window.location.hash = "#skipstory"
+
 
 publicMethods =
   init: (options) ->
