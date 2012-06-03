@@ -19,6 +19,10 @@
       $('#search_result').pajinate(paginationSettings);
 
     $('#ingredients_search_form').submit(removeAutoComplete);
+
+    $('.page_navigation').on('click', 'a', function(){
+      $.scrollTo(0, 800);
+    });
   });
 
 .search

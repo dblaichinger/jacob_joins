@@ -19,6 +19,9 @@ window.ankerPathClickHandler = (e) ->
 
 # helper -------------------------------------------------------------
 
+scrollToTop = ->
+  $.scrollTo 0, 800
+
 removeMapOverlay = (callback = ->) ->
   if (mapOverlay = $('.map-overlay')).length > 0
     $(window).unbind 'load', recipesShowWindowLoadHandler
@@ -86,6 +89,7 @@ widthFix = ->
 
 recipesIndexController = () ->
   newsbar.selectNavigationPoint $('#navi_neu #home')
+  scrollToTop()
   removeMapOverlay(widthFix)
   loadIndexBarAjax = ->
     $.ajax
@@ -129,6 +133,7 @@ Path.map("/recipes").to () ->
 
 Path.map("/recipes/search").to () ->
   newsbar.selectNavigationPoint $('#navi_neu #search')
+  scrollToTop()
   if($('body').data('selected_map_markers'))
     showRecipeSidebar($('body').data('selected_map_markers'))
     $('body').data('selected_map_markers', "")
@@ -145,6 +150,8 @@ Path.map("/recipes/search").to () ->
 
 Path.map("/recipes/:recipe_slug").to () ->
   newsbar.selectNavigationPoint $('#navi_neu #search')
+  scrollToTop()
+
   if $('html').hasClass 'ie7'
     $('.right-haupt').width('auto')
 

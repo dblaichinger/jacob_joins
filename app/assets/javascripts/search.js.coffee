@@ -13,10 +13,10 @@ printResults = (data) ->
         searchSelection.data('hidden', searchHidden)
         $('#ingredients_search').val("").focus()
 
-
-    
-    recipe_number = "<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>"
-    $(".paginationContent").html recipe_number
+    if($('#recipe_number').length > 0)
+      $('#recipe_number').html("<p>Number of recipes: #{data.recipes.length}</p>")
+    else
+      $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>")
 
     if data.recipes.length > 0
       output = ""
@@ -31,7 +31,8 @@ printResults = (data) ->
                       </div></div>")
 
       $(".paginationContent").append output
-      $('#search_result').pajinate(paginationSettings)
+      if data.recipes.length > 9
+        $('#search_result').pajinate(paginationSettings)
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
       initMarkerEventListener()
@@ -43,6 +44,7 @@ printResults = (data) ->
     $(".paginationContent").html ""
     $(".page_navigation").html ""
     $("#recipe_number").remove()
+    
     markers = $("body").data("map_markers")
     initCustomMarkers(markers)
     Gmaps.map.replaceMarkers(markers)

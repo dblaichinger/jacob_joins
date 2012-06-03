@@ -54,10 +54,6 @@ $ ->
   $("#gotoform").click ->
     $.scrollTo $('#skipstory'), 800
 
-  $('body').on 'click', '#gendericons a', (e) ->
-    gender_icon $(e.target).attr('class')
-    return false
-
   $("#send").live 'click', (event) ->
     if $(this).hasClass("disabled")
       return false
