@@ -43,12 +43,13 @@
   
   %hr.searchhr
 
+  .loader#sidebar_loader
+    = image_tag 'ajax-loader.gif', :id => "loader_img"
+
   #search_result
     .page_navigation
     .paginationContent
-      /#wizard-loader
-      /  .loader#sidebar_loader
-      /    = image_tag 'ajax-loader.gif'
+
       - if @recipe.present?
         .recipe_search_result
           .infobox_image
