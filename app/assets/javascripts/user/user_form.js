@@ -10,8 +10,16 @@ function gender_icon(classname){
 }
 
 function heard_from(option){
-  if(option == "other")
-    $("#heard_from_other").fadeIn("500");
-  else 
-    $("#heard_from_other").fadeOut("500");
+  if(option == "other"){
+    $("#heard_from_other").fadeIn("500", function(){
+      $("#user_heard_from").addClass("changed");
+      $(".user_form .error").qtip("reposition");
+    });
+  }
+  else{
+    $("#heard_from_other").fadeOut("500", function(){
+      $("#user_heard_from").addClass("changed");
+      $(".user_form .error").qtip("reposition");
+    });
+  }
 }
