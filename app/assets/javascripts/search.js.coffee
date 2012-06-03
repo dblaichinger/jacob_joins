@@ -19,6 +19,7 @@ printResults = (data) ->
       $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>")
 
     if data.recipes.length > 0
+      $(".paginationContent").empty()
       output = ""
       $.each data.recipes, (key, recipe) ->
         if recipe?
@@ -32,18 +33,21 @@ printResults = (data) ->
                       </div></div>")
 
       $(".paginationContent").append output
-      if data.recipes.length > 9
+      console.debug(data.recipes.length)
+      if data.recipes.length > 10
         $('#search_result').pajinate(paginationSettings)
+      else
+        $('.page_navigation').empty()
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
       initMarkerEventListener()
       initClusterEventListener()
       
     else
-      $(".paginationContent").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
+      $(".paginationContent").html "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
-    $(".paginationContent").html ""
-    $(".page_navigation").html ""
+    $(".paginationContent").empty()
+    $(".page_navigation").empty()
     $("#recipe_number").remove()
     
     markers = $("body").data("map_markers")

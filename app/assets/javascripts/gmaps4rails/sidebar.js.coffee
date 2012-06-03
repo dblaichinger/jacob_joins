@@ -72,7 +72,7 @@ window.getSidebar = (marker) ->
           $('a', description).attr('onclick', '')
           description.appendTo $('.paginationContent')
 
-        if marker.length > 9
+        if marker.length > 10
           $('#search_result').pajinate(paginationSettings)
       else
         description = $(marker.description)
@@ -80,6 +80,7 @@ window.getSidebar = (marker) ->
         $('.paginationContent').html(description)
 
     error: (jqXHR, textStatus, errorThrown) ->
+      ajaxError.dialog('open')
       console.debug(jqXHR)
       console.debug(textStatus)
       console.debug(errorThrown)
