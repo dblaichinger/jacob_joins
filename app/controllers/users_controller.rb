@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
     if @user.update_attributes params[:user]
       @user.update_attribute :heard_from, params[:heard_from_other] if params[:heard_from_other] && params[:user][:heard_from] == "other"
+      @heard_from = params[:user][:heard_from]
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
