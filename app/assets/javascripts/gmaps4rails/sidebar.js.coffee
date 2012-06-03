@@ -71,7 +71,7 @@ window.getSidebar = (marker) ->
           $('a', description).attr('onclick', '')
           description.appendTo $('.paginationContent')
 
-        if marker.length > 9
+        if marker.length > 10
           $('#search_result').pajinate(paginationSettings)
       else
         description = $(marker.description)
