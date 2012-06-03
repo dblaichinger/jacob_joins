@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require console_fallback
-//= require jquery-ui-1.8.19.custom.min
+//= require jquery-ui-1.8.20.custom.min
 //= require jquery.easing.1.3
 //= require jquery.mousewheel.min
 //= require jquery.qtip
