@@ -31,7 +31,7 @@ printResults = (data) ->
                       </div></div>")
 
       $(".paginationContent").append output
-      $('#search_result').pajinate(paginationSettings);
+      $('#search_result').pajinate(paginationSettings)
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
       #initMarkerEventListener()
@@ -67,5 +67,5 @@ window.recipesSearch.formErrorHandler = (evt, xhr, status, error) ->
     $('#search_hidden').append $(e).data('hidden')
 
 window.removeAutoComplete = ->
-  if $('.ui-menu-item').length >0
+  if $('.ui-menu-item').length > 0
     $('.ui-menu-item').remove()
