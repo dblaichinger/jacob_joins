@@ -79,6 +79,7 @@ window.getSidebar = (marker) ->
         $('.paginationContent').html(description)
 
     error: (jqXHR, textStatus, errorThrown) ->
+      ajaxError.dialog('open')
       console.debug(jqXHR)
       console.debug(textStatus)
       console.debug(errorThrown)

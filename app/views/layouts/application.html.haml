@@ -38,7 +38,17 @@
       $(document).ready(function(){
         $('#fancy_counter').tzineClock();
         newsbar.init();
-        
+        window.ajaxError = $('<div></div>')
+          .html("Please reload the page!")
+          .dialog({
+            autoOpen: false,
+            title: 'Sorry, this request failed',
+            resizable: false,
+            draggable: false,
+            modal: true,
+            buttons: { "Reload": function() { window.location.reload(); } }
+          });
+
         #{growl_flash_messages}
       });
 

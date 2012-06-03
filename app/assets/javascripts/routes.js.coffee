@@ -61,6 +61,7 @@ getSearchSidebar = (recipe_slug = "", overwrite = false) ->
               $('.right-haupt .seitenleistecontent').html(data)
 
             error: (jqXHR, textStatus, errorThrown) ->
+              ajaxError.dialog('open')
               console.debug(jqXHR)
               console.debug(textStatus)
               console.debug(errorThrown)
@@ -109,6 +110,7 @@ recipesIndexController = () ->
         Gmaps.map.markerClusterer.redraw_()
 
       error: (jqXHR, textStatus, errorThrown) ->
+        ajaxError.dialog('open')
         console.debug(jqXHR)
         console.debug(textStatus)
         console.debug(errorThrown)
@@ -184,6 +186,7 @@ Path.map("/recipes/:recipe_slug").to () ->
             500
 
       error: (jqXHR, textStatus, errorThrown) ->
+        ajaxError.dialog('open')
         console.debug(jqXHR)
         console.debug(textStatus)
         console.debug(errorThrown)
