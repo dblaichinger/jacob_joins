@@ -12,8 +12,8 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all
-    @location = Recipe.all.to_gmaps4rails
+    @recipes = Recipe.where(:state => "published").asc(:country, :name).entries
+    @location = @recipes.to_gmaps4rails
     render :layout => request.xhr? ? false : 'map'
   end
 
