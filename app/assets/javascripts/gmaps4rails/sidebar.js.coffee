@@ -113,8 +113,8 @@ window.paginationSettings = {
   items_per_page: 10,
   item_container_id: '.paginationContent'
   num_page_links_to_display: 10,
-  nav_label_first: '<<',
-  nav_label_last: '>>',
+  nav_label_first: 'first',
+  nav_label_last: 'last',
   nav_label_prev: '<',
   nav_label_next: '>'
 }
