@@ -143,7 +143,7 @@ Path.map("/recipes/search").to () ->
     if Path.routes.previous
       match = Path.match(Path.routes.previous)
 
-    if match and match.path == "/recipes/:recipe_slug"
+    if match and (match.path == "/recipes/:recipe_slug" or match.path == "#/recipes/:recipe_slug")
       getSearchSidebar("", false)
     else
       getSearchSidebar("", true)

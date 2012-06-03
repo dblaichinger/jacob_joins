@@ -129,7 +129,13 @@ window.initCustomMapStyles = ->
       stylers: [
         {hue: "#531E09"},
         {saturation: -90},
-        {gamma: 3.5}
+        {gamma: 2.8}
+      ]
+      },
+      {
+      featureType: "transit"
+      stylers: [
+        {visibility: "off"},
       ]
       }
   ];
