@@ -19,6 +19,7 @@ printResults = (data) ->
       $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>")
 
     if data.recipes.length > 0
+      $(".paginationContent").empty()
       output = ""
       $.each data.recipes, (key, recipe) ->
         if recipe?
@@ -39,7 +40,7 @@ printResults = (data) ->
       initClusterEventListener()
       
     else
-      $(".paginationContent").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
+      $(".paginationContent").html "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
     $(".paginationContent").html ""
     $(".page_navigation").html ""

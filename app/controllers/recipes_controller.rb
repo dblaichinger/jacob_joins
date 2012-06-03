@@ -129,6 +129,7 @@ class RecipesController < ApplicationController
             end
           end
           @recipes.sort! {|a,b| b["count"] <=> a["count"]}
+          @recipes = @recipes.uniq
           @recipes.slice!(10..-1) #replace with pagination
         end
       end
