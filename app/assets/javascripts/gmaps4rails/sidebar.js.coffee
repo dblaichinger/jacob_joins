@@ -61,6 +61,7 @@ window.getSidebar = (marker) ->
 
     success: (data, textStatus, jqXHR) ->
       $('.seitenleistecontent').html(data)
+
       if marker.length > 1
         if($('#recipe_number').length > 0)
            $('#recipe_number').html("<p>Number of recipes: "+marker.length+"</p>")
@@ -71,7 +72,7 @@ window.getSidebar = (marker) ->
           $('a', description).attr('onclick', '')
           description.appendTo $('.paginationContent')
 
-        if marker.length > 9
+        if marker.length > 10
           $('#search_result').pajinate(paginationSettings)
       else
         description = $(marker.description)

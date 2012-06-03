@@ -15,13 +15,13 @@
 
     $('#search_selection').on("click", "a.search_remove_ingredient", recipesSearch.removeIngredientClickHandler);
 
-    if($('.recipe_search_result').length > 9)
+    if($('.recipe_search_result').length > 10)
       $('#search_result').pajinate(paginationSettings);
 
     $('#ingredients_search_form').submit(removeAutoComplete);
 
     $('.page_navigation').on('click', 'a', function(){
-      $.scrollTo(0, 800);
+      $.scrollTo('#horizontalenaht', 800);
     });
   });
 
@@ -69,8 +69,10 @@
               = link_to @recipe.name, @recipe
             %p.infobox_author
               = "cooked by"
-              = formatted_user_name(@recipe.user) 
-              = @recipe.country
+              = formatted_user_name @recipe.user
+              = "from"
+            %p.infobox_location
+              = formatted_location @recipe.city, @recipe.country
             %p.infobox_duration
               Estimated cooking time:
               = @recipe.duration

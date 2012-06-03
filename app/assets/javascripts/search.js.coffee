@@ -19,6 +19,7 @@ printResults = (data) ->
       $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>")
 
     if data.recipes.length > 0
+      $(".paginationContent").empty()
       output = ""
       $.each data.recipes, (key, recipe) ->
         if recipe?
@@ -26,23 +27,27 @@ printResults = (data) ->
                       <div class='infobox_image'><a href='/recipes/#{recipe.slug}' class='recipe_link'><img src='#{recipe.image}' /></a></div>
                       <div class='infobox_recipe_text'>
                       <p class='infobox_recipe'><a href='/recipes/#{recipe.slug}'>#{recipe.name}</a></p>
-                      <p class='infobox_author'>cooked by <em>#{recipe.user.firstname} #{recipe.user.lastname}</em>, #{recipe.country}</p>
+                      <p class='infobox_author'>cooked by <em>#{recipe.user.firstname} #{recipe.user.lastname}</em> from</p>
+                      <p class='infobox_location'>#{recipe.city}#{ ',' if recipe.city } #{recipe.country}</p>
                       <p class='infobox_duration'>Estimated cooking time: #{recipe.duration} minutes</p>
                       </div></div>")
 
       $(".paginationContent").append output
-      if data.recipes.length > 9
+      console.debug(data.recipes.length)
+      if data.recipes.length > 10
         $('#search_result').pajinate(paginationSettings)
+      else
+        $('.page_navigation').empty()
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
       initMarkerEventListener()
       initClusterEventListener()
       
     else
-      $(".paginationContent").append "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
+      $(".paginationContent").html "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
-    $(".paginationContent").html ""
-    $(".page_navigation").html ""
+    $(".paginationContent").empty()
+    $(".page_navigation").empty()
     $("#recipe_number").remove()
     
     markers = $("body").data("map_markers")

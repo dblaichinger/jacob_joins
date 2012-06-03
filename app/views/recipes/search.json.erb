@@ -12,6 +12,7 @@
         "name": "<%= r.name %>",
         "image": "<%= image %>",
         "country": "<%= r.country %>",
+        "city": "<%= r.city %>",
         "duration": "<%= r.duration.to_i %>",
         "user": {
           "firstname": "<%= r.user.firstname.capitalize %>",
@@ -32,7 +33,7 @@
         "lng": "<%= r.longitude %>",
         "title": "<%= r.name %>",
         "description": 
-          "<div class='recipe_marker_result'><div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {target: this}))'><img src='<%= image %>' /></a></div><div class='infobox_recipe_text'><p class='infobox_recipe'><a href='/recipes/<%=r.slug%>' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {target: this}))'><%=r.name%></a></p><p class='infobox_author'> cooked by <em><%=r.user.firstname%> <%=r.user.shorten_lastname%></em>, <%=r.city%> </p><p class='infobox_duration'> Estimated cooking time: <%=r.duration%> minutes</p></div></div>"
+          "<div class='recipe_marker_result'><div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'><img src='<%= image %>' /></a></div><div class='infobox_recipe_text'><p class='infobox_recipe'><a href='/recipes/<%=r.slug%>' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'><%=r.name%></a></p><p class='infobox_author'> cooked by <em><%=r.user.firstname%> <%=r.user.shorten_lastname%></em> from</p><p class='infobox_location'><%=formatted_location r.city, r.country%></p><p class='infobox_duration'> Estimated cooking time: <%=r.duration%> minutes</p></div></div>"
       }<%= "," if index != @recipes.count - 1 %>
     <% end %>
   ]

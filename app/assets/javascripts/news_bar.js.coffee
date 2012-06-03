@@ -35,26 +35,39 @@ window.newsbar.get_latest_recipe = ->
 
 window.newsbar.get_facebook_stream = ->
   token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs"
-  $.get "https://graph.facebook.com/111627842294635/feed?access_token=" + token, ((data, textstatus, jqxhr) ->
-    if data
-      $("#fb_error").css "display", "none"
-      $("#fb .mcs_container").css "display", "block"
-    counter = 0
-    $.each data.data, (key, value) ->
-      if value.message and counter <= 4
-        if $("#newsbar_new #fb .post").length <= 0
-          $("#newsbar_new #fb .content").append "<div class='post'></div>"
-        else
-          $("#newsbar_new #fb .post:last").after "<div class='post'></div>"
-        current_post = $("#newsbar_new #fb .post:last")
-        get_facebook_picture value, current_post
-        counter++
-  ), "json"
+  $.ajax
+    url: "https://graph.facebook.com/111627842294635/feed?access_token=" + token
+    dataType: 'jsonp'
+    success: (data, textstatus, jqxhr) -> 
+      if data
+        $("#fb_error").css "display", "none"
+        $("#fb .mcs_container").css "display", "block"
+
+        counter = 0
+        $.each data.data, (key, value) ->
+          if counter > 4
+            return false
+
+          if value.message
+            if $("#newsbar_new #fb .post").length <= 0
+              $("#newsbar_new #fb .content").append "<div class='post'></div>"
+            else
+              $("#newsbar_new #fb .post:last").after "<div class='post'></div>"
+            current_post = $("#newsbar_new #fb .post:last")
+            get_facebook_picture value, current_post
+            counter++
+    error: (jqXHR, textStatus, errorThrown) ->
+      console.log jqXHR
+      console.log textStatus
+      console.log errorThrown
+
 
 get_facebook_picture = (post, current_post) ->
-  $.get "https://graph.facebook.com/" + post.from.id + "?fields=picture&type=square", ((data, textstatus, jqxhr) ->
-    show_facebook_posts post, current_post, data
-  ), "json"
+  $.ajax
+    url: "https://graph.facebook.com/" + post.from.id + "?fields=picture&type=square"
+    dataType: 'jsonp'
+    success: (data, textstatus, jqxhr) ->
+      show_facebook_posts post, current_post, data
 
 show_facebook_posts = (post, current_post, pic) ->
   tmp_message = ""
@@ -154,7 +167,7 @@ unless typeof jQuery is "undefined"
 unless $("html").hasClass("ie7")
   window.fbAsyncInit = ->
     FB.init
-      channelUrl: "http://www.jacobjoins.com/pages/fb_channel"
+      channelUrl: "\/pages\/fb-channel"
       status: true
       cookie: true
       xfbml: true

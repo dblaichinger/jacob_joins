@@ -7,23 +7,28 @@
 
   $(document).ready(function(){
     pagerNeeded = $('.recipe_images li').length > 1;
-    $('.recipe_images').bxSlider({
-     pager: pagerNeeded,
-     infiniteLoop: false,
-     controls: false,
-     mode: 'fade'
+    var imageSlider = $('.recipe_images').bxSlider({
+      pager: pagerNeeded,
+      infiniteLoop: true,
+      controls: false,
+      mode: 'fade'
     });
     
     var images = $('.recipe_images img');
     var count = 0;
     images.load(function(){
       if(++count == images.length){
-        if($('.bx-wrapper .bx-window').height() < 20){
+        if($('.bx-wrapper .bx-window').height() < 100){
           fixBxSliderHeight($('.bx-wrapper'));
           $(window).resize();
         }
         images.unbind('load');
       }
+
+    images.bind('click', function(){
+      imageSlider.goToNextSlide();
+      return false;
+    });
 
     });
 
@@ -55,7 +60,10 @@
       %ul.recipe_images
         - @recipe.images.each do |image|
           %li
-            = image_tag image.attachment.url(:large)
+            - if @recipe.images.count > 1
+              = image_tag image.attachment.url(:large), :class => "clickable"
+            - else  
+              = image_tag image.attachment.url(:large)
     #recipe_information_content
       
       #recipe_information
