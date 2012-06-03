@@ -4,7 +4,7 @@ window.ankerPathClickHandler = (e) ->
   if Path.routes.current == null or Path.routes.current == ""
     return
 
-  href = $(e.target).attr('href')
+  href = $(e.currentTarget).attr('href')
 
   if href != undefined
     _t = href = href.replace('http://'+window.location.host,'')
