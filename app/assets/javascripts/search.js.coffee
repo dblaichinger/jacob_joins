@@ -14,7 +14,7 @@ printResults = (data) ->
         $('#ingredients_search').val("").focus()
 
     if($('#recipe_number').length > 0)
-      $('#recipe_number').html("<p>Number of recipes: "+data.recipes.length+"</p>")
+      $('#recipe_number').html("<p>Number of recipes: #{data.recipes.length}</p>")
     else
       $('#search_result').prepend("<div id='recipe_number'><p>Number of recipes: #{data.recipes.length}</p></div>")
 
