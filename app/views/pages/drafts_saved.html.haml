@@ -1,0 +1,18 @@
+%h1 
+  Thank you for your 
+  %span contribution!
+
+%hr
+
+%p.danke
+  Now you also got your personal tag in our 
+  = link_to 'map', root_path
+  among all the other great recipes from all over the world. Check out all the different eating habits and cultures or take a look at your 
+  = link_to 'own recipe.', recipe_path(@recipe.slug)
+
+%p
+  You want to post another recipe? Click
+  = link_to 'here', "#recipe"  
+  to continue!
+
+%p.wichtig You enjoyed the challenge? Don’t hesitate to tell your friends and family about it, maybe they would also like to be a part of Jacob Joins.

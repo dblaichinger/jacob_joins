@@ -1,0 +1,187 @@
+@import "mixins"
+@import "compass/css3/transition"
+@import "compass/css3/opacity"
+
+.search
+  
+  h1
+
+  #ingredients_search_form
+    overflow: hidden
+    margin-top: 20px
+
+    #ingredients_search, #ingredients_search_btn 
+      float: left
+
+    #ingredients_search
+      width: 260px
+      margin-right: 10px
+
+    #ingredients_search_btn
+      height: 30px
+      width: 60px
+      margin-top: 1px
+      background: url(image_path("btn_search.png"))
+      background-position: 0 0
+      border: none
+      cursor: pointer
+
+      input
+        border: none
+        background: transparent
+        height: 30px
+        width: 60px
+
+    #ingredients_search_btn:hover
+      background-position: 0 -30px
+
+  #search_selection
+    margin-top: 20px
+    position: relative
+    padding-left: 30px
+    p
+      padding: 0
+      margin-bottom: 5px
+
+    a.search_remove_ingredient
+      width: 15px
+      height: 15px
+      display: block
+      text-indent: -1000px
+      overflow: hidden
+      float: left
+      margin: 3px 5px 0 0
+      background: url(image_path("delete_image_kl.png")) left top
+
+      &:hover
+        background-position: 0 -15px
+
+  #horizontalenaht
+    background: url(image_path("horizontalenaht.png"))
+    background-repeat: y-repeat
+    width: 390px
+    height: 20px
+    display: block
+    margin: 40px 0 0 -15px
+
+
+  .search_result
+    margin-top: 40px
+
+  .searchhr
+    margin-top: -5px
+
+  #search_result
+    position: relative
+    margin-top: 20px
+
+    .page_navigation
+      width: 300px
+      margin: 0 auto
+      text-align: center
+      padding-top: 20px
+      .page_link, .next_link, .last_link, .first_link, .previous_link
+        width: 50px
+        display: inline
+        padding: 0 3px
+        font-size: 14px
+        color: $braun
+        font-family: "PlutoCondensed"
+        text-transform: none
+        text-decoration: none
+        +transition(opacity 400ms)
+
+      .active_page
+        color: $rot
+        font-family: "Pluto-Heavy"
+
+      .next_link
+        background-image: url(image_path("pagination_next.png"))
+        display: inline-block
+        width: 6px
+        height: 14px
+        background-repeat: no-repeat
+        background-position: bottom
+        text-indent: -100000px
+      .previous_link
+        background-image: url(image_path("pagination_prev.png"))
+        display: inline-block
+        width: 6px
+        height: 14px
+        background-repeat: no-repeat
+        background-position: bottom
+        text-indent: -100000px
+
+      .previous_link:hover, .next_link:hover
+        background-position: top
+
+      .no_more
+        +opacity(0)
+
+      .page_link:hover, .last_link:hover, .first_link:hover
+        color: $rot
+
+
+    .no_result_1
+      font-weight: normal
+      color: #E2001A
+      font-family: "Sanches-SemiBold"
+      text-transform: uppercase
+      padding-top: 20px
+
+    .no_result_1, .no_result_2
+      text-align: center
+      margin-left: -30px
+
+    #recipe_number
+      position: relative
+      left: 190px
+      top: -5px
+      height: 30px
+      width: 150px
+
+      p
+        font-family: Pluto-CondensedItalic
+        font-size: 12px
+        padding: 0 0 10px 0
+        text-align: right
+
+    .recipe_marker_result, .recipe_search_result
+      margin-bottom: 20px
+      overflow: hidden
+
+      .infobox_image
+        width: 76px
+        height: 76px
+        border: 2px solid #fff
+        float: left
+        margin-right: 15px
+        img
+          width: 76px
+          height: 76px
+
+      .infobox_recipe_text
+        float: right
+        width: 250px
+
+        .infobox_recipe
+          a
+            font-family: "Pluto-SemiBold"
+            font-size: 14px
+            line-height: 1.4em
+            color: #531E09
+            text-transform: none
+
+            &:hover
+              color: #E2001A
+
+        .infobox_author
+          font-family: "PlutoCondensed"
+          font-size: 14px
+          em
+            color: #E2001A
+            font-family: "PlutoCondensed"
+
+        .infobox_duration
+          font-family: Pluto-CondensedItalic
+          font-size: 12px

@@ -1,0 +1,442 @@
+@import "compass/css3/opacity"
+@import "mixins"
+
+#wizard-loader
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  .loader
+    position: absolute
+    top: 150px
+    left: 500px
+    width: 210px
+    text-align: center
+    background: #FFFFFF
+    padding: 20px
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
+
+    h1 
+      margin: 10px 0 0 0
+
+#sidebar_loader
+  display: none
+  margin: auto
+  position: absolute
+  z-index: 100
+  width: 100%
+  right: 0
+  margin-top: 30px
+  #loader_img
+    background-color: #FFF
+    padding: 3px
+    border: 2px solid $braun
+
+#clickandsee
+  text-align: center
+  position: absolute
+  bottom: 9px
+  width: 100%
+  height: 1px
+  display: none
+
+  .show_newsbar
+    display: inline-block
+    margin: 0 auto
+    height: 160px
+    width: 100px
+    margin-top: 8px !important
+    background-image: url(image_path('clickandsee_blob.png'))
+    background-repeat: no-repeat
+    cursor: pointer
+
+#wizard
+  width: 1000px
+  margin: 100px auto
+  position: relative
+  padding: 5px
+
+  p
+    margin: 20px 0px
+
+  .loadmask
+    position: absolute
+    top: 0
+    left: 240px
+    right: 0
+    bottom: 0
+
+  .loadmask-msg
+    position: absolute
+    position: absolute
+    top: 150px !important
+    left: 500px !important
+    width: 210px
+    text-align: center
+    background: #FFFFFF
+    padding: 20px
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
+
+    h1 
+      margin: 10px 0 0 0
+
+  #preview_tab
+    .loadmask
+      left: 0 !important
+    .loadmask-msg
+      left: 260px !important
+
+=input-placeholder
+  color: #fff
+
+#wizard input
+  &:-moz-placeholder
+    +input-placeholder
+
+  &::-webkit-input-placeholder
+    +input-placeholder
+
+  &.placeholder
+    +input-placeholder
+
+textarea:focus, input:focus
+  outline: 0px
+
+.next_tab
+  width: 143px
+  height: 30px
+  display: block
+  text-transform: uppercase
+  vertical-align: middle
+  border: none
+  color: #fff
+  background-color: transparent
+  background-image: url(image_path('next_tab.png'))
+  background-repeat: no-repeat
+  background-position: 0 0
+  position: absolute
+  bottom: 0
+  right: 0
+
+.next_tab:hover
+  background-position: 0 -30px
+   
+.ui-tabs
+  .ui-tabs-panel
+    position: relative
+
+    &.ui-tabs-hide
+      position: absolute
+      left: -10000px
+      top: -10000px
+
+// force ie7 to rerender
+.ie7
+  .ui-tabs
+    .ui-tabs-hide
+      filter: alpha(opacity = 50)
+
+
+//PREVIEW ================================================================
+
+
+#preview_tab
+  padding: 37.5px
+  width: 685px
+  margin-left: 240px
+  min-height: 450px
+
+  a
+    color: #E2001A
+    text-transform: uppercase
+    font-family: "Pluto-CondensedItalic"
+
+  .wichtig
+    margin: 0 auto 50px auto
+    text-align: center
+
+
+//FINISH BUTTON
+
+#send
+  display: block
+  width: 142px
+  height: 142px
+  background-image: url(image_path('finish.png'))
+  background-repeat: no-repeat
+  background-position: 0 0
+  position: absolute
+  right: 0
+
+#send:hover
+  background-position: 0 -142px
+
+#send.disabled
+  background-position: 0 -284px
+  cursor: default
+
+.disabled-send-button-text
+  width: 315px
+  position: absolute
+  bottom: -80px
+  right: 155px
+  font-family: Pluto-CondensedItalic
+  font-size: 12px
+  text-align: right
+
+//PREVIEW RECIPE
+
+#prev_recipe, #prev_csi
+  position: relative
+
+  .no_recipe_preview, .no_csi_preview
+    font-family: "PlutoCondensed"
+
+    a
+      color: #E2001A
+      text-transform: uppercase
+      font-family: "Pluto-CondensedItalic"  
+
+  .recipe
+    overflow: hidden
+
+    #img_preview
+      width: 350px
+      min-height: 230px
+      overflow: hidden
+      float: left
+      margin: 20px 20px 30px 0px
+      text-align: center
+      vertical-align: middle
+      overflow: hidden
+      
+      .missing
+        width: 350px
+        height: 230px
+        display: block
+        background-image: url(image_path('no_image_prev.png'))
+        background-repeat: no-repeat
+
+    #prev_recipe_info
+      width: 300px
+      margin: 0 0 30px 0
+      padding: 15px 0 15px 0
+      overflow: hidden
+      position: relative
+
+      #p_prev
+
+        p
+          margin: 0
+          font-family: "Sanches-SemiBold"
+          text-transform: uppercase
+
+        em
+          font-family: "PlutoCondensed"
+          text-transform: none
+
+    h1
+      font-family: "Pluto-Semibold"
+      color: #E2001A
+      font-size: 30px
+      text-transform: none
+      line-height: 1.2em
+      text-shadow: 0 -1px 0 #000, 0 1px 0px #FFFFFF
+
+
+    h2
+      font-size: 20px
+      font-family: "Sanches-SemiBold"
+      font-weight: normal
+      color: #531E09
+      text-transform: uppercase
+      text-shadow: 1px 1px 0px #FFFFFF
+      margin-bottom: 20px
+      padding-top: 3px
+
+    em
+      color: #E2001A
+
+    #prev_ingredients
+      float: left
+      width: 300px
+      overflow: hidden
+      margin: 0 15px 0 0
+      clear: both
+
+      ul
+        li
+          font-family: "PlutoCondensed"
+          font-size: 14px
+          line-height: 1.4em
+
+        span
+          font-family: "PlutoCondensed"
+          font-size: 14px
+          line-height: 1.4em
+          width: 100px
+          display: inline-block
+          color: #531E09
+
+        em
+          color: #531E09
+
+    #prev_preparation
+      width: 370px
+      float: right
+      overflow: hidden
+
+      .img_step_preview
+        display: block
+        width: 50px
+        height: 50px
+        float: left
+        margin: 20px 15px 20px 0px
+        background-color: #fff
+
+      em
+        color: #531E09
+        font-family: "Sanches-SemiBold"
+        text-transform: uppercase
+
+      .prev_preparatoin_step
+        width: 100%
+        margin-bottom: 20px
+        overflow: hidden
+
+        img.missing
+          border: none
+          width: 70px
+          height: 70px
+          background-image: url(image_path('no_image_prev_steps.png'))
+          background-position: 0 0
+          background-repeat: no-repeat
+
+        .image_preparation_show
+          width: 66px
+          height: 66px
+          float: left
+          overflow: hidden
+          margin: 0 10px 0px 0px
+          border: 2px solid #fff
+          text-align: center
+
+          img
+            width: 66px
+            height: 66px
+
+
+
+        p
+          margin: 0
+          float: right
+          width: 280px
+          text-align: justify
+
+        
+  #abyc_preview
+    margin-top: 150px
+
+
+  .csi
+    p
+      font-family: "Sanches-SemiBold"
+      text-transform: uppercase
+
+    em
+      color: #E2001A
+      font-family: "PlutoCondensed"
+      text-transform: none
+
+    ul
+      margin: 20px auto
+      li
+        text-align: center
+        margin: 40px auto
+
+        .question
+          color: #E2001A
+          font-family: "Sanches-SemiBold"
+          text-transform: uppercase
+          margin-bottom: 10px
+
+        h3
+          font-family: "Sanches-SemiBold"
+          text-transform: uppercase
+
+        p
+          margin-top: 5px
+
+        .answer
+          width: 100%
+          font-family: "PlutoCondensed"
+          text-transform: none
+
+  #answered
+    margin: 20px auto
+    text-align: center
+
+    .herz
+      display: block
+      margin: 0 auto
+
+    .fragen
+      font-size: 20px
+      font-family: "Sanches-SemiBold"
+      font-weight: normal
+      color: #531E09
+      text-transform: uppercase
+      text-shadow: 1px 1px 0px #FFFFFF
+
+    .tell_more
+      text-transform: uppercase
+      color: #E2001A
+      font-family: "Pluto-CondensedItalic"
+
+    .tell_more:hover
+      color: #531E09
+      
+  .edit_recipe
+    width: 93px
+    height: 30px
+    background-image: url(image_path('btn_edit_recipe.png'))
+    background-position: 0 0
+    background-repeat: no-repeat  
+
+  .edit_recipe:hover
+    background-position: 0 -30px 
+
+  .edit_answers
+    width: 106px
+    height: 30px
+    background-image: url(image_path('btn_edit_answers.png'))
+    background-position: 0 0
+    background-repeat: no-repeat  
+
+  .edit_answers:hover
+    background-position: 0 -30px
+
+  .edit_recipe, .edit_answers
+    float: right
+    margin: 0px
+    position: absolute
+    right: 0
+    border: none
+    cursor: pointer
+
+  .edit_recipe 
+    top: 105px
+
+  .edit_answers
+    top: 0
+
+//AFTER FINISH ================================================================
+
+
+.danke
+  span
+    font-family: "PlutoCondensed"
+    font-size: 14px
+    padding: 0px
+    margin: 0px

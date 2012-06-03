@@ -1,0 +1,69 @@
+@import compass/reset
+@import compass/css3/font-face
+@import mixins
+@import compass/typography/text/force-wrap
+
++font-face("Sanches-Bold", font-files("Sanches/203126_1_0.ttf", "Sanches/203126_1_0.woff"),"Sanches/203126_1_0.eot")
++font-face("Pluto-Semibold", font-files("Pluto/203124_E_0.ttf", "Pluto/203124_E_0.woff"), "Pluto/203124_E_0.eot")
++font-face("Pluto-LightItalic", font-files("Pluto-Italic/203125_2_0.ttf", "Pluto-Italic/203125_2_0.woff"), "Pluto-Italic/203125_2_0.eot")
+
+body
+  height: 100%
+  color: #531E09
+  background-image: url(image_path('bg4.jpg'))
+  font-weight: normal
+  p
+    font-family: "PlutoCondensed"
+    font-size: 14px
+    line-height: 1.4em
+
+.errship
+  min-width: 1000px
+  margin: 200px auto
+  text-align: center
+  position: relative
+  min-height: 250px
+
+  h1
+    display: none
+
+  h2
+    font-family: Sanches-Bold
+    color: #531E09
+    font-size: 52px
+    text-shadow: 0 -2px 0 #000000, 0 1px 0px #fff 
+    text-align: center
+    line-height: 1.2em
+
+    @media screen and (min-width: 1250px)
+      font-size: 64px
+  
+  #text0
+    font-family: Pluto-Semibold
+    font-size: 26px
+    color: #E2001A
+    text-align: center
+    text-shadow: 0 -1px 0 #000, 0 1px 0px #FFFFFF
+
+    @media screen and (min-width: 1250px)
+      font-size: 30px
+
+  #text1
+    font-family: Pluto-LightItalic
+    color: #531E09
+    font-size: 22px
+    text-shadow: 0 1px 0 #fff
+    text-align: center
+
+    @media screen and (min-width: 1250px)
+      font-size: 25px
+
+  #text2
+    width: 400px
+    height: 267px
+    text-indent: -10000px
+    background-image: url(image_path('broken.jpg'))
+    position: absolute
+    right: 0
+
+  

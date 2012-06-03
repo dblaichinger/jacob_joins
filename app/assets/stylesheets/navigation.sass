@@ -1,0 +1,224 @@
+@import "mixins"
+
+#newsbar_new
+  height: 280px
+  background-image: url(image_path('newsbar_offen_repeat.png'))
+  background-position: top center
+  background-repeat: repeat-x
+  color: #fff
+  position: fixed
+  width: 100%
+  z-index: 20000
+  top: -215px
+  cursor: pointer
+
+  #newsbar_content
+    background-image: url(image_path('newsbar_offen2_.png'))
+    background-position: top center
+    width: 1000px
+    height: 280px
+    margin: 0 auto
+    overflow: hidden
+    cursor: pointer
+
+    #navi_neu
+      ul
+        width: 1000px
+        float: left
+        position: relative
+        top: -22px
+
+        li
+          a
+            +navi
+          a:hover
+            color: $rot
+
+          a.selected
+            color: $rot  
+            background-image: url(image_path('underline_haupt.png'))
+            background-repeat: no-repeat
+            background-position: bottom center
+
+        li#form, #story
+          a.selected
+            background-image: url(image_path('underline_haupt_lang.png'))
+            background-repeat: no-repeat
+            background-position: bottom center          
+
+        li#home
+          a.selected
+            background-image: url(image_path('underline_haupt_kurz.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #about, #contact
+          a.selected   
+            background-image: url(image_path('underline_haupt_mittel.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        li#search 
+          a.selected   
+            background-image: url(image_path('underline_haupt_search.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #home, #form, #search, #contact, #about, #story
+          top: 0px
+          position: absolute
+
+          a.selected
+            padding-bottom: 5px
+
+        #home
+          left: 0
+
+        #search
+          left: 78px
+
+        #form
+          left: 188px
+
+        #contact
+          right: 0
+
+        #about
+          right: 120px
+
+        #story
+          right: 245px
+
+
+    #bildzeichen_newsbar
+
+    h1
+      display: none
+      overflow: visible
+
+    h2
+      font-family: "Sanches-Italic"
+      font-size: 20px
+      overflow: visible
+
+    #fb, #entries, #bildzeichen_newsbar
+      float: left
+      margin-top: 20px
+
+    #fb
+      height: 230px
+      width: 365px
+      margin-right: 83px
+      position: relative
+      cursor: default
+
+      #fb_stream
+        padding-bottom: 5px
+
+      h2
+        margin-top: 1px
+        overflow: visible
+
+      .mcs_container
+        display: none
+
+      #fb_error
+        margin-top: 10px
+        font-size: 12px
+
+      .fblike
+        text-decoration: none
+        color: #fff
+        display: block
+        width: 280px
+        height: 20px
+
+      .fblike:visited
+        color: #fff
+
+      .fblike:hover
+        color: $rot
+
+      .fb-like
+        width: 150px
+        height: 25px
+        position: absolute
+        top: 0px
+        left: 235px
+
+      .post
+        overflow: hidden
+        margin: 10px 0px
+        padding-top: 5px
+
+        img
+          width: 50px
+          height: 50px
+          margin-right: 10px
+          float: left
+
+        h5
+          font-family: "Sanches-SemiBold"
+          margin-bottom: 5px
+          font-size: 14px
+
+        .message
+          font-size: 12px
+          margin: 0 10px 0 60px
+          a
+            color: #fff
+          a:hover
+            color: $rot 
+        .time
+          font-size: 10px
+          font-family: "Pluto-LightCondensed"
+          margin: 5px 0 0 60px
+
+    #bildzeichen_newsbar
+      width: 100px
+      margin: 70px 86px 0 0
+
+    #entries
+      height: 190px
+      width: 365px
+      overflow: hidden
+      cursor: default
+
+      #last_entry
+        padding-top: 20px
+        
+        p
+          font-size: 12px
+          span
+            font-size: 14px
+            font-family: "Sanches-Semibold"
+            color: $weiss
+        p.time
+          font-size: 10px
+          font-family: "Pluto-LightCondensed"
+          margin-bottom: 15px
+
+    #fancy_counter
+      float: right
+      margin: 20px 0
+      height: 190px
+      cursor: default
+
+      .text_
+        position: absolute
+        bottom: 0
+        font-family: "Pluto-CondensedItalic"
+        width: 70px
+        text-align: center
+
+      .display
+        font-family: "Sanches-Bold"
+
+  #logo
+    clear: both
+
+    img
+      display: block
+      position: relative
+      top: -25px
+      margin: 0 auto 0 auto

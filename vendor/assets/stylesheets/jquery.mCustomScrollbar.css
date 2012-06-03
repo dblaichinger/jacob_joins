@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+/* some custom fonts via google font api */
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight);
+/* content block 1 */
+.mcs_container{width:340px; height:160px; padding:10px 10px 0 0px;}
+.mcs_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+.mcs_container .customScrollBox .container{position:relative; width:325px; top:0; float:left;}
+.mcs_container .customScrollBox .content{clear:both;}
+.mcs_container .customScrollBox .content p.alt{padding:10px 5px; margin:10px 0; color:#fff; font-family:Georgia, "Times New Roman", Times, serif; font-size:17px; line-height:19px; color:#999;}
+.mcs_container .dragger_container{position:relative; top:-23px; width:2px; height:133px; float:left; margin:40px 0 0 10px; background:#000; cursor:pointer; -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; cursor:s-resize;}
+.mcs_container .dragger{position:absolute; width:2px; height:60px; background:#999; text-align:center; line-height:60px; color:#666; overflow:hidden; cursor:pointer; -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+.mcs_container .dragger_pressed{position:absolute; width:4px; margin-left:-1px; height:60px; background:#999; text-align:center; line-height:60px; color:#666; overflow:hidden; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; cursor:s-resize;}
+.mcs_container .scrollUpBtn,.mcs_container .scrollDownBtn{position:relative; display:inline-block; width:14px; height:15px; text-decoration:none; left:329px; filter:alpha(opacity=20); -moz-opacity:0.20; -khtml-opacity:0.20; opacity:0.20;}
+.mcs_container .scrollUpBtn{top:-168px; background:url(mcs_btnUp.png) center center no-repeat;}
+.mcs_container .scrollDownBtn{bottom:12px; left:311px; background:url(mcs_btnDown.png) center center no-repeat;}
+.mcs_container .scrollUpBtn:hover,.mcs_container .scrollDownBtn:hover{filter:alpha(opacity=60); -moz-opacity:0.60; -khtml-opacity:0.60; opacity:0.60;}

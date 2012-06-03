@@ -1,0 +1,83 @@
+!!! html5
+%html
+  %head
+    %title Jacob Joins - Global Cooking
+    %link{ :href => "/favicon.png", :rel => "icon", :type => "image/png" }
+    %meta{ "http-equiv" => "language", :content => "en" }
+    %meta{ :name => "description", :content => "Jacob Joins - Global Cooking is the final project created by eight students at the FH Salzburg (University of Applied Sciences) and deals with the issue of international cuisine." }
+    %meta{ :name => "keywords", :content => "potato, onion, egg, jacob joins, jacobs join, potluck" }
+    %meta{ :name => "page-topic", :content => "a pure impression of the different eating habits and cultures all over the world" }
+    %meta{ :name => "robots", :content => "index,follow" }
+    %meta{ :name => "copyright", :content => "(c) Jacob Joins 2012" }
+    %meta{ :property => "og:title", :content => "Jacob Joins - Global Cooking" }
+    %meta{ :property => "og:image", :content => "http://profile.ak.fbcdn.net/hprofile-ak-snc4/41608_111627842294635_781875873_n.jpg" }
+    %meta{ :property => "og:url", :content => "http://jacobjoins.com" }
+    %meta{ :property => "og:type", :content => "website" }
+    %meta{ :property => "og:description", :content => "Jacob Joins - Global Cooking is the final project created by eight students at the FH Salzburg (University of Applied Sciences) and deals with the issue of international cuisine." }
+    %meta{ :property => "og:site_name", :content => "Jacob Joins" }
+    %meta{ :property => "og:locale", :content => "en_GB" }
+
+    = stylesheet_link_tag "application", :media => "all"
+    /[if IE 7]
+      = stylesheet_link_tag "ie/ie7", :media => "all"
+      :javascript
+        document.childNodes[1].className += " ie7"
+    /[if IE 8]
+      = stylesheet_link_tag "ie/ie8", :media => "all"
+      :javascript
+        document.childNodes[1].className += " ie8"
+    /[if IE 9]
+      = stylesheet_link_tag "ie/ie9", :media => "all"
+    /[if lte IE 6]
+      = javascript_include_tag "ie/pngfix"
+
+    = javascript_include_tag "application"
+
+    :javascript
+
+      $(document).ready(function(){
+        $('#fancy_counter').tzineClock();
+        newsbar.init();
+        window.ajaxError = $('<div></div>')
+          .html("Please reload the page")
+          .dialog({
+            autoOpen: false,
+            title: 'Sorry, an error occured.',
+            resizable: false,
+            draggable: false,
+            modal: true,
+            buttons: { "Reload": function() { window.location.reload(); } }
+          });
+
+        #{growl_flash_messages}
+      });
+
+      $(window).load(function(){
+        newsbar.get_latest_recipe();
+        newsbar.get_facebook_stream();
+      });
+
+    = csrf_meta_tags
+    %meta{ charset:"utf-8" }
+
+  %body
+    #fb-root
+
+    = render "layouts/newsbar_new"
+    = render "layouts/contactable"
+
+    %noscript
+      .noscript_overlay
+        .noscript_message
+          %h1
+            PLEASE ACTIVATE JAVASCRIPT !!!
+          %p
+            Ohterwise this website can not be used properly!
+          %p
+            Jacob says "Brigitte, no, no, no"
+
+
+    = yield :scripts
+    = content_for?(:content) ? yield(:content) : yield
+
+    

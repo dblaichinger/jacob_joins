@@ -12,4 +12,27 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require console_fallback
+//= require jquery-ui-1.8.20.custom.min
+//= require jquery.easing.1.3
+//= require jquery.mousewheel.min
+//= require jquery.qtip
+//= require jquery.livequery
+//= require jquery.placeholder
+//= require jquery.iframe-transport
+//= require jquery.bxSlider.min
+//= require jquery.fileupload
+//= require jquery.tzineClock
+//= require jquery.dirtyform
+//= require jquery.scrollTo-1.4.2-min
+//= require path.min
+//= require jquery.rating
+//= require jquery.mCustomScrollbar
+//= require modernizr
+//= require jquery.validate.pack
+//= require jquery.contactable
+//= require jquery.loadmask.min
+//= require jquery.lightbox-0.5.pack
+//= require jquery.pajinate.min
+//= require jquery.selectbox-0.6.1
 //= require_tree .

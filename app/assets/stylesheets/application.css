@@ -9,5 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require jquery.tzineClock
+ *= require jquery.qtip
+ *= require jquery.rating
+ *= require jquery.mCustomScrollbar
+ *= require contactable
+ *= require jquery.lightbox-0.5
+ *= require jquery.selectbox
+ *= require_directory .
 */

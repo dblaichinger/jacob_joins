@@ -1,0 +1,29 @@
+= link_to "", "#country_specific_information", class:"edit_answers"
+
+- if @csi_set.country_specific_informations.first.user
+  %p
+    Answered by:
+    %em
+      = @csi_set.country_specific_informations.first.user.formatted_user_info
+
+
+%ul
+  - answered_csis = @csi_set.country_specific_informations.where(:answer.ne => "").entries
+  - answered_csis.each do |csi|
+    - index = @csi_set.country_specific_informations.index csi
+    %li
+      %p.question
+        = "Question #{index + 1}"
+      %h3
+        = csi.question
+      = simple_format csi.answer, class:"answer"
+
+%div#answered
+  = image_tag 'herz.png', class:"herz"
+  %p.fragen
+    You’ve answered 
+    %br
+    = "#{answered_csis.count} of #{Question.count} questions"
+
+  - if answered_csis.count < @csi_set.country_specific_informations.count
+    = link_to 'Do you want to tell us more about your country?', "#country_specific_information", class:"tell_more"

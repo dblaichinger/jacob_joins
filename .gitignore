@@ -9,6 +9,7 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+/db/mongodumps
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -16,5 +17,11 @@
 
 #Own config
 /config/mongoid.yml
+/config/mailers.yml
 /config/initializers/secret_token.rb
 /.rvmrc
+/public/system
+/.jhw-cache/
+.DS_Store
+
+/public/assets
