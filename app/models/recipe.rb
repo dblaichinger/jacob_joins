@@ -66,12 +66,12 @@ class Recipe
     output = ""
     output += "<div class='recipe_marker_result'>"
     if self.images.first.present?
-      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {target: this}))'><img src='#{self.images.first.attachment.url(:small)}' /></a></div>"
+      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'><img src='#{self.images.first.attachment.url(:small)}' /></a></div>"
     else
-      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {target: this}))'><img src='/assets/infobox_image_placeholder.jpg' /></a></div>"
+      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'><img src='/assets/infobox_image_placeholder.jpg' /></a></div>"
     end
     output += "<div class='infobox_recipe_text'>"
-    output += "<p class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {target: this}))'>#{self.name}</a></p>"
+    output += "<p class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'>#{self.name}</a></p>"
     unless self.user.nil?
       output += "<p class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em>, #{self.city} </p>"
     end

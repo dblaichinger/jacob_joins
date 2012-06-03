@@ -4,7 +4,7 @@ window.ankerPathClickHandler = (e) ->
   if Path.routes.current == null or Path.routes.current == ""
     return
 
-  href = $(e.target).attr('href')
+  href = $(e.currentTarget).attr('href')
 
   if href != undefined
     _t = href = href.replace('http://'+window.location.host,'')
@@ -106,7 +106,7 @@ recipesIndexController = () ->
           initClusterEventListener()
 
         Gmaps.map.serviceObject.setZoom(2)
-        Gmaps.map.serviceObject.setCenter(new google.maps.LatLng(30.5, 50.45, true))
+        Gmaps.map.serviceObject.panTo(new google.maps.LatLng(0.0, 50.45, true))
         Gmaps.map.markerClusterer.redraw_()
 
       error: (jqXHR, textStatus, errorThrown) ->
