@@ -31,7 +31,7 @@ printResults = (data) ->
                       </div></div>")
 
       $(".paginationContent").append output
-      if data.recipes.length > 9
+      if data.recipes.length > 10
         $('#search_result').pajinate(paginationSettings)
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
