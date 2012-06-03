@@ -64,11 +64,20 @@
     #fb-root
 
     = render "layouts/newsbar_new"
-
     = render "layouts/contactable"
+
+    %noscript
+      .noscript_overlay
+        .noscript_message
+          %h1
+            PLEASE ACTIVATE JAVASCRIPT !!!
+          %p
+            Ohterwise this website can not be used properly!
+          %p
+            Jacob says "Brigitte, no, no, no"
+
 
     = yield :scripts
     = content_for?(:content) ? yield(:content) : yield
-
 
     
