@@ -43,6 +43,7 @@ printResults = (data) ->
     $(".paginationContent").html ""
     $(".page_navigation").html ""
     $("#recipe_number").remove()
+    
     markers = $("body").data("map_markers")
     initCustomMarkers(markers)
     Gmaps.map.replaceMarkers(markers)
