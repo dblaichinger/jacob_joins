@@ -29,6 +29,9 @@ window.switchSidebar = (data, callback) ->
     .animate
       "right": "0px",
       300
+      ->
+        if(callback != undefined && typeof callback == 'function') 
+          callback(data)
 
     toggleSidebar.animate
       "right": "-13px",
