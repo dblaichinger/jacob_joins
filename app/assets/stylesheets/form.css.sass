@@ -1,4 +1,5 @@
 @import "compass/css3/opacity"
+@import "mixins"
 
 #wizard-loader
   position: absolute
@@ -6,13 +7,6 @@
   left: 0
   bottom: 0
   right: 0
-  #sidebar_loader
-    display: none
-    width: 60px
-    height: 45px
-    left: 160px
-    top: 300px
-
   .loader
     position: absolute
     top: 150px
@@ -26,7 +20,18 @@
     h1 
       margin: 10px 0 0 0
 
-
+#sidebar_loader
+  display: none
+  margin: auto
+  position: absolute
+  z-index: 100
+  width: 100%
+  right: 0
+  margin-top: 30px
+  #loader_img
+    background-color: #FFF
+    padding: 3px
+    border: 2px solid $braun
 
 #clickandsee
   text-align: center
