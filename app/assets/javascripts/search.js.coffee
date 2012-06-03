@@ -32,8 +32,11 @@ printResults = (data) ->
                       </div></div>")
 
       $(".paginationContent").append output
+      console.debug(data.recipes.length)
       if data.recipes.length > 10
         $('#search_result').pajinate(paginationSettings)
+      else
+        $('.page_navigation').empty()
       initCustomMarkers(data.markers)
       Gmaps.map.replaceMarkers(data.markers)
       initMarkerEventListener()
@@ -42,8 +45,8 @@ printResults = (data) ->
     else
       $(".paginationContent").html "<p class='no_result_1'>No recipes found!</p><p class='no_result_2'>Please use the auto-complete function.</p>"
   else
-    $(".paginationContent").html ""
-    $(".page_navigation").html ""
+    $(".paginationContent").empty()
+    $(".page_navigation").empty()
     $("#recipe_number").remove()
     
     markers = $("body").data("map_markers")
