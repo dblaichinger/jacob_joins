@@ -18,7 +18,7 @@
     var count = 0;
     images.load(function(){
       if(++count == images.length){
-        if($('.bx-wrapper .bx-window').height() < 20){
+        if($('.bx-wrapper .bx-window').height() < 100){
           fixBxSliderHeight($('.bx-wrapper'));
           $(window).resize();
         }
