@@ -1,13 +1,13 @@
 - @recipe.steps.sort! { |a,b| a.number <=> b.number }
 
-= link_to "", "#!/recipe_tab", class:"edit_recipe"
+= link_to "", "#recipe", class:"edit_recipe"
 
 %div#img_preview
   -if @recipe.images.present?
     - @recipe.images.each do |image|
       = image_tag image.attachment(:medium)
   -else
-    = link_to image_tag(asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"), "#!/recipe_tab"
+    = link_to image_tag(asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"), "#recipe"
 
 %div#prev_recipe_info
   %h1

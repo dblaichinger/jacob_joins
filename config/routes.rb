@@ -10,9 +10,10 @@ JacobJoins::Application.routes.draw do
   get "/pages/about_us" => 'pages#show', :as => :page, :format => false, :id => "about_us"
   get "/pages/form" => 'pages#show', :as => :page, :format => false, :id => "form"
   get "/pages/contact" => 'pages#show', :as => :page, :format => false, :id => "contact"
-  get "/pages/preview" => 'pages#show', :as => :page, :format => false, :id => "preview"
-  get "/pages/drafts_saved" => 'pages#show', :as => :page, :format => false, :id => "drafts_saved"
-  match "/pages/fb_channel" => 'pages#show', :as => :page, :format => false, :id => "fb_channel"
+  
+  get "/pages/preview" => 'pages#preview', :as => :page, :format => false, :id => "preview"
+  get "/pages/drafts_saved" => 'pages#drafts_saved', :as => :page, :format => false, :id => "drafts_saved"
+  match "/pages/fb_channel" => 'pages#fb_channel', :as => :page, :format => false, :id => "fb_channel"
   
   get '/recipes/last', :to => 'recipes#last'
   post '/users/find_user', :to => 'users#find_user'

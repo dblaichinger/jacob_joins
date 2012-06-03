@@ -166,8 +166,6 @@ $ ->
     .parent().qtip "show"
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
-    newHash = "#!/#{ui.tab.hash.slice 1}"
-
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
 
