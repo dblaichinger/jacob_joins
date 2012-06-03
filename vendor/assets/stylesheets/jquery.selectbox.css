@@ -8,7 +8,7 @@
 	float: left;
 	display: inline;
 	margin: 4px 4px 30px 0;
-	font-size: 12px;
+	font-size: 12px !important; 
 	font-family: "PlutoCondensed" !important;
 	color: #531E09;
 	padding: 0;

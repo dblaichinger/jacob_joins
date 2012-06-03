@@ -47,7 +47,6 @@
     = image_tag 'ajax-loader.gif', :id => "loader_img"
 
   #search_result
-    .page_navigation
     .paginationContent
 
       - if @recipe.present?
@@ -68,5 +67,7 @@
               Estimated cooking time:
               = @recipe.duration
               minutes
+
+    .page_navigation
 
     
