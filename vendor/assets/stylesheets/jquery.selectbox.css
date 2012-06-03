@@ -16,7 +16,7 @@
 }
 .jquery-selectbox.selecthover {
 	background-image: url("/assets/select_bg.jpg");
-	z-index: 700;
+	z-index: 19999;
 }	
 
 .jquery-selectbox .jquery-custom-selectboxes-replaced .selecthover {

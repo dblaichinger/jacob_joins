@@ -1,6 +1,8 @@
 :javascript
   $(document).ready(function(){
-    $(".right-haupt").data("sidebar", "")
+    $(".right-haupt").data("sidebar", "");
+
+    #{"$('body').data('map_markers', #{@location});" if @location.present?}
 
     $('#ingredients_search_form').bind("ajax:success", recipesSearch.formSuccessHandler)
     .bind("ajax:error", recipesSearch.formErrorHandler);
@@ -15,6 +17,12 @@
 
     if($('.recipe_search_result').length > 9)
       $('#search_result').pajinate(paginationSettings);
+
+    $('#ingredients_search_form').submit(removeAutoComplete);
+
+    $('.page_navigation').on('click', 'a', function(){
+      $.scrollTo(0, 800);
+    });
   });
 
 .search
@@ -30,7 +38,7 @@
     #search_hidden
     #ingredients_search_btn
       %p
-      = submit_tag "", :name => nil, :onclick => "removeAutoComplete()"
+      = submit_tag "", :name => nil
 
   #search_selection
   #horizontalenaht
