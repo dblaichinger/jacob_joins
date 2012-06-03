@@ -1,5 +1,3 @@
-- provided = @recipe.present? ? "recipe" : "info"
-
 %h1 
   Thank you for your 
   %span contribution!
@@ -7,13 +5,14 @@
 %hr
 
 %p.danke
-  = "Your #{provided} will be shown online on"
-  %span
-    = "4th of June 2012"
-  = "together with all the other great #{provided}s from all over the world!"
+  Now you also got your personal tag in our 
+  = link_to 'map', root_path
+  among all the other great recipes from all over the world. Check out all the different eating habits and cultures or take a look at your 
+  = link_to 'own recipe.', recipe_path(@recipe.slug)
+
 %p
   You want to post another recipe? Click
-  = link_to 'here', "#!/recipe_tab"  
+  = link_to 'here', "#recipe"  
   to continue!
 
 %p.wichtig You enjoyed the challenge? Don’t hesitate to tell your friends and family about it, maybe they would also like to be a part of Jacob Joins.

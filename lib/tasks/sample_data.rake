@@ -2,11 +2,11 @@ namespace :db do
   desc "Fill database with sample data (WARNING: DELETES ALL DOCUMENTS FIRST)"
   task :populate => :environment do
     
-    Ingredient.delete_all
-    Recipe.delete_all
+    #Ingredient.delete_all
+    #Recipe.delete_all
 
-    NUMBER_OF_INGREDIENTS = 100
-    NUMBER_OF_RECIPES = 1000
+    NUMBER_OF_INGREDIENTS = 10
+    NUMBER_OF_RECIPES = 100
 
     require 'benchmark'
     include Benchmark
@@ -43,17 +43,25 @@ namespace :db do
           (1+rand(4)).times do |counter|
             steps << Step.new(:description => "This is a description for step "+counter.to_s+" for recipe "+name)
           end
-     
-          r = Recipe.create(:name => name,
+
+          u = User.create(:email => "user#{n}@gmail.com", :firstname => "firstname#{n}", :lastname => "lastname#{n}", :gender => (n.even? ? "male" : "female"), :age => n)
+          u.publish
+
+          r = Recipe.new(:name => name,
                         :portions => portions,
                         :duration => duration,
                         :city => city,
                         :country => country,
                         :latitude => latitude,
-                        :longitude => longitude,
-                        :ingredients_with_quantities => chooseIngredients,
-                        :steps => steps,
-                        :ingredient_ids => ingredient_ids)
+                        :longitude => longitude)
+
+          r.ingredient_ids = ingredient_ids
+          r.steps << steps
+          r.ingredients_with_quantities << chooseIngredients
+          r.user = u
+          r.save
+          r.publish
+
           ingredient_ids.each do |id|
             recipe_arr = [r._id]
             Ingredient.find(id).recipe_ids << r._id

@@ -3,7 +3,6 @@ class Recipe
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Paperclip
-  #include Mongoid::Spacial::Document
   include Gmaps4rails::ActsAsGmappable
   
   acts_as_gmappable :validation => false, :check_process => false #:lat => :latitude, :lng => :longitude, :process_geocoding => false, :check_process => false, :validation => false
@@ -19,11 +18,9 @@ class Recipe
   field :country, :type => String
   field :latitude, :type => Float
   field :longitude, :type => Float
-  #field :location, type: Array, spacial: {lat: :latitude, lng: :longitude, return_array: true }
-  #field :location, :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
-  #geo_index :location
-  field :gmaps, :type => Boolean
-  attr_accessible :name, :portions, :duration, :ingredients_with_quantities_attributes, :steps_attributes, :latitude, :longitude, :city, :country, :images_attributes
+
+  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user, :user_id
+  attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user, :state, :as => :admin
 
   index "ingredient_with_quantities.name"
 
@@ -58,22 +55,41 @@ class Recipe
   end
 
   def self.search_by_ingredient(name)
-    ActiveSupport::Notifications.instrument("ingredients.search", :search => name) do
-      Recipe.where({"ingredients_with_quantities.name" => name}).cache
-    end
+    Recipe.where({"ingredients_with_quantities.name" => /#{Regexp.escape(name)}/i, :state => "published"}).includes(:user)
   end
 
-  def formatted_portions
-    if portions.present?
-      portions > 6 ? "more than six" : portions
-    else
-      "your portion count"
-    end
-  end
-
-  #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
   def gmaps4rails_address
    "#{self.city}, #{self.country}" 
+  end
+
+  def gmaps4rails_infowindow
+    output = ""
+    output += "<div class='recipe_marker_result'>"
+    if self.images.first.present?
+      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'><img src='#{self.images.first.attachment.url(:small)}' /></a></div>"
+    else
+      output += "<div class='infobox_image'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'><img src='/assets/infobox_image_placeholder.jpg' /></a></div>"
+    end
+    output += "<div class='infobox_recipe_text'>"
+    output += "<p class='infobox_recipe'><a href='/recipes/#{self.slug}' class='recipe_link' onclick='return ankerPathClickHandler($.Event(\"click\", {currentTarget: this}))'>#{self.name}</a></p>"
+    unless self.user.nil?
+      output += "<p class='infobox_author'> cooked by <em>#{self.user.firstname} #{self.user.shorten_lastname}</em> from</p>"
+    end
+    output += "<p class='infobox_location'>#{self.city}#{ ',' if self.city } #{self.country}</p>"
+    output += "<p class='infobox_duration'> Estimated cooking time: #{self.duration} minutes</p>"
+    output += "</div></div>"
+  end
+
+  def gmaps4rails_marker_picture
+  {
+    "picture" => "/assets/google_marker_small.png",
+    "width" =>  30,
+    "height" => 50
+  }
+  end
+
+  def self.last_entries(count = 3)
+    Recipe.where(:user.ne => "nil", :state => "published").order_by(:created_at => :desc).limit(count)
   end
 
   private

@@ -8,14 +8,13 @@
 	position:fixed;
 	*position:absolute;
 	text-indent:-100000px;
-	top:270px;
+	top:295px;
 	*margin-top:10px;
 	z-index:100000;
 	width: 40px;
   height: 80px;
   background-image: url("feedback.jpg");
   background-repeat: repeat;
-  background-position: 0 0;
 }
 
 #contactable #contactForm {
@@ -31,10 +30,10 @@
 	overflow:hidden;
 	padding-left:30px;
 	position:fixed;
-	top:250px;
+	top:269px;
 	width:360px;
 	*width:394px;
-	z-index:99;
+	z-index:100;
 }
 
 #contactable form#contactForm input, textarea {

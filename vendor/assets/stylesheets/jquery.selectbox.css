@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+
+.jquery-selectbox {
+	position: relative;
+	height: 30px;
+	width: 222px !important;
+	z-index: 0;
+	float: left;
+	display: inline;
+	margin: 4px 15px 30px 0;
+	font-size: 12px !important; 
+	font-family: "PlutoCondensed" !important;
+	color: #531E09;
+	padding: 0;
+	background-image: url("/assets/select_bg.jpg");
+}
+.jquery-selectbox.selecthover {
+	background-image: url("/assets/select_bg.jpg");
+	z-index: 19999;
+}	
+
+.jquery-selectbox .jquery-custom-selectboxes-replaced .selecthover {
+	font-size: 12px;
+	font-family: "Pluto-CondensedItalic" !important;
+	color: #531E09 !important;
+}
+.jquery-selectbox .jquery-selectbox-currentItem {
+	padding: 0px 0px 0px 3px;
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
+	font-size: 14px;
+	font-family: "PlutoCondensed" !important;
+	color: #531E09 !important;
+	line-height: 30px;
+	margin: 0;
+}
+
+
+.jquery-selectbox-list .jquery-custom-selectboxes-replaced-list {
+	font-size: 14px; 
+	font-family: "Pluto-CondensedItalic" !important;
+	color: #531E09 !important;
+	width:219px !important;
+	height: 180px;
+	margin: 0;
+	padding: 3px;
+
+}
+
+.jquery-selectbox .jquery-selectbox-list {
+	display: none;
+	position: absolute;
+	background-color: rgba(255,255,255,0.8);
+	top: 30px;
+	left: 0px;
+	width: 219px !important;
+	height: 180px !important;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 1000;
+	border: 2px solid #531E09;
+	font-size: 14px;
+	font-family: "Pluto-CondensedItalic" !important;
+	color: #531E09 !important;
+}
+
+.jquery-selectbox .jquery-selectbox-moreButton {
+	/*
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	*/
+	float: right;
+	background: url("/assets/select.png");
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.jquery-selectbox .jquery-selectbox-moreButton.morebuttonhover {
+	background: url("/assets/select.png");
+	background-position: 0 -30px;
+}
+
+.jquery-selectbox .jquery-selectbox-item.listelementhover {
+	background: #FFF4E0;
+	color: #531E09;
+	width: 215px !important;
+}
+.jquery-selectbox .jquery-selectbox-item {
+	display: block;
+	cursor: default;
+	font-size: 14px;
+	font-family: "PlutoCondensed" !important;
+	color: #531E09 !important;
+	width: 200px;
+}
+
+.jquery-selectbox-list .jquery-custom-selectboxes-replaced-list.jquery-selectbox-item .value-select .item-0 {
+	font-size: 14px;
+	font-family: "Pluto-CondensedItalic" !important;
+	color: #bda79b !important;
+}
+
+/** ERROR classes **/
+form .error .jquery-selectbox {
+	color: #d00;
+	border-color: #d00;
+	background-image: url("/assets/selectbox/bg-TextFieldError.gif");
+}

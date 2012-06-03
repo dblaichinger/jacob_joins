@@ -5,17 +5,29 @@
   display: block
 
 #user_heard_from
-  font-family: "Pluto"
-  background-color: #DDD2C6
+  background-color: rgba(255,255,255,0.8)
   color: #531E09
-  width: 150px
+  font-family: "Pluto"
+  font-size: 12px
+  border-width: 0 2px 2px 2px
+  border-style: solid 
+  border-color: #531E09
+  width: 222px
   height: 26px
-  border: 2px solid #fff
   outline: 0px
+
+#user_heard_from
+  select:hover
+    background-color: yellow
+
+  option:hover
+    color: $braun
+
 
 #heard_from_other
   display: none
-  margin-top: 5px
+  margin-top: -10px
+  margin-bottom: 20px
 
 #vorname
   display: block
@@ -61,7 +73,6 @@
   float: left
   padding-left: 30px
 
-.links 
   p
     textarea
       width: 70% !important
@@ -95,14 +106,32 @@
 .genderage1
   width: 100px
   float: left 
+  margin-top: 10px
 
 .genderage2
   width: 200px
   float: right
+  margin-top: 10px
 
 #gendericons
   width: 60px
   padding: 3px 3px 0
+
+  #male_link
+    background: url(image_path("male.png")) no-repeat
+
+  #female_link
+    background: url(image_path("female.png")) no-repeat
+    margin-top: -63px
+    margin-left: 29px
+
+  #male_link, #female_link
+    width: 27px
+    height: 63px
+    display: block
+
+  #male_link:hover, #female_link:hover
+    background-position: 0px -63px
 
 
 //AUTOSUGGEST Zutaten + google map ================================================================
@@ -126,6 +155,7 @@
 
 .ui-autocomplete
   width: 200px
+  position: absolute
   .ui-menu-item
     overflow: hidden
 

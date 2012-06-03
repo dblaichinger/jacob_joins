@@ -15,5 +15,6 @@
  *= require jquery.mCustomScrollbar
  *= require contactable
  *= require jquery.lightbox-0.5
+ *= require jquery.selectbox
  *= require_directory .
 */

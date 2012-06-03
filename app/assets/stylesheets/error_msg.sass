@@ -1,6 +1,8 @@
+@import "mixins"
+
 #error_explanation 
   width: 400px
-  border: 1px solid red
+  border: 1px solid $rot
   padding: 7px
   padding-bottom: 10px
   margin-bottom: 20px
@@ -59,7 +61,7 @@ label.error
 .tip-brown
   width: 90px
   height: 40px
-  background-image: url("error_bubble_brown.png")
+  background-image: url(image_path("error_bubble_brown.png"))
   background-repeat: no-repeat
   background-position: 0 0
   padding: 6px 5px 4px 5px
@@ -72,14 +74,100 @@ label.error
   padding: 1px 5px 4px 5px
 
 .form_valid
-  background-image: url("finished_form_tmp.png")
+  background-image: url(image_path("finished_form_tmp.png"))
   background-repeat: no-repeat
   background-position: 98% 100%
 
 .form_not_valid
-  background-image: url("edit_form_tmp.png")
+  background-image: url(image_path("edit_form_tmp.png"))
   background-repeat: no-repeat
   background-position: 95% 50%
 
 .ui-state-default, .ui-corner-top
   min-height: 30px
+
+.ui-dialog
+  position: absolute
+  background-color: #fff
+  border: $braun solid 2px
+
+  div
+    .ui-dialog-buttonset
+      text-align: center
+      background-image: url(image_path("error_btn_reload.png"))
+      background-position: 0 0
+      background-repeat: no-repeat
+      cursor: pointer
+      height: 30px
+      overflow: hidden
+      width: 82px
+      margin: auto
+      margin-bottom: 10px
+
+      button
+        cursor: pointer
+        width: 82px
+        height: 30px
+        opacity: 0
+
+
+    .ui-dialog-buttonset:hover
+      background-position: 0 -30px
+
+      button
+        cursor: pointer
+        width: 82px
+        height: 30px
+        opacity: 0
+
+  .ui-dialog-content
+    font-family: "PlutoCondensed"
+    text-align: center
+    margin-top: 80px
+
+  #ui-dialog-title-1
+    color: $braun
+    font-family: "Sanches-SemiBold"
+    font-size: 24px
+    text-align: center
+    padding: 10px
+    text-transform: uppercase
+    position: absolute
+    line-height: 1.2em
+  a
+    background-image: url(image_path("infobox_close.png"))
+    background-repeat: no-repeat
+    right: 0
+    position: absolute
+    width: 19px
+    height: 19px
+    span
+      opacity: 0
+
+.ui-widget-overlay, .noscript_overlay
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: #FFF
+  opacity: .6
+  filter: Alpha(Opacity=60)
+
+.noscript_overlay
+  z-index: 1000
+  opacity: 1
+  background-color: rgba(255, 255, 255, 0.6)
+
+.noscript_message
+  position: absolute
+  background-color: rgba(255, 255, 255, 1)
+  border: $braun solid 2px
+  padding: 20px
+  margin: auto
+  width: 440px
+  position: relative
+  top: 200px
+  opacity: 1
+  filter: Alpha(Opacity=100)
+  z-index: 1001

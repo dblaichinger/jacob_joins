@@ -4,74 +4,83 @@ body
   position: relative
   z-index: 1
 
+#map
+  padding: 0
+  margin: 0
+
 .wrapper-haupt
-  position: absolute
-  top: 0
-  right: 0
-  left: 0
-  bottom: 0
-  z-index: 2
   width: 100%
-  height: 100%
-
-  .seitenleiste
-    padding: 80px 0
-
-  .left-haupt
-    width: 67%
-    height: 100%
-    padding-top: 50px
-
+  position: relative
+  padding-top: 45px
+  overflow-x: hidden
 
   .right-haupt
-    width: 400px
-    height: 100%
-    z-index: 20
-    position: absolute
-    top: 0
-    right: 0
-    padding-right: 10px
+    position: relative
+    float: right
+    right: 0px
 
-    .uebergang-seitenleiste
-      background-image: url(image_path('seitenleiste_uebergang.png'))
-      background-repeat: repeat-y
+    @media screen and (min-width: 1400px)
+      width: auto !important
+
+    #toggle_sidebar
+      display: none
+      position: fixed
+      z-index: 100
+      right: 382px
+      width: 40px
+      height: 40px
+      background-image: url(image_path('map_btn_.jpg'))
       background-position: 0 0
-      min-height: 100%
+      cursor: pointer
+
+      &.closed
+        background-position: 0 -40px
 
     .seitenleiste
-      max-width: 92%
-      margin-left: 30px
-      background-image: url(image_path('bg4.jpg'))
+      z-index: 100
+      float: right
+      background-image: url(image_path('seitenleiste_bg.png'))
+      background-repeat: repeat-y
+      width: 405px
+      //overflow-y: hidden
+      position: relative
+      margin-right: -5px
 
-      p
-        padding: 0 5px
-        word-wrap: break-word
 
-      em
-        font-family: "Pluto-Semibold"
+      .seitenleistecontent
+        padding: 45px 30px
 
-      img
-        display: block
-        margin: 20px auto
+        p.infobox_author
+          word-wrap: break-word
 
-      #jacob-who
-        text-align: center
-        margin: 20px auto 25px auto
+        p.infobox_location
+          word-wrap: break-word
 
-        #Bildzeichen_Screen-haupt
-          witdh: 100px
-          height: 74px
+        em
+          font-family: "Pluto-Semibold"
+
+        img
+          display: block
+          margin: 0px auto 20px auto
+
+        #jacob-who
           text-align: center
+          margin: 20px auto 25px auto
 
-        h3
-          a.who
-            text-transform: uppercase
-            overflow: visible
-            font-family: Sanches-SemiBold
-            color: #531E09
-            text-shadow: 0 -2px 0 #000000, 0 1px 0px #fff 
-            font-size: 24px
-            text-decoration: none
+          #Bildzeichen_Screen-haupt
+            witdh: 100px
+            height: 74px
+            text-align: center
+
+          h3
+            a.who
+              text-transform: uppercase
+              overflow: visible
+              font-family: Sanches-SemiBold
+              color: #531E09
+              text-shadow: 0 -2px 0 #000000, 0 1px 0px #fff 
+              font-size: 24px
+              text-decoration: none
 
       a
         display: block
@@ -82,12 +91,22 @@ body
 
       .postedrecipe, .postedcsi
         overflow: hidden
-        margin-top: 30px
+        margin-top: 15px
 
-        .marker-info
-          display: inline
+        .infoleft
+          width: 60px
           float: left
           margin: 0 10px 0 0
+          #recipemarker_bsp, #sammelmarker_bsp
+            width: 60px
+
+        .inforight
+          float: right
+          width: 260px
+          margin: -5px 15px 0 0
+          p
+            margin-bottom: 15px
+            padding-left: 0
 
         h4
           font-family: Sanches-SemiBold
@@ -99,4 +118,4 @@ body
 
       p.gotoform
         text-align: center
-        margin-top: 50px 
+        margin-top: 30px 

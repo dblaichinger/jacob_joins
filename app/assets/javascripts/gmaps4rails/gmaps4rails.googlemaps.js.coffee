@@ -11,11 +11,13 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       disableDefaultUI:       false
       disableDoubleClickZoom: false
       type:                   "ROADMAP" # HYBRID, ROADMAP, SATELLITE, TERRAIN
+      minZoom:                2
+      maxZoom:                16
 
     #markers + info styling
     @markers_conf =
-      clusterer_gridSize:      50
-      clusterer_maxZoom:       5
+      clusterer_gridSize:      100
+      clusterer_maxZoom:       10
       custom_cluster_pictures: null
       custom_infowindow_class: null
 
@@ -89,13 +91,28 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       center:                 @createLatLng(@map_options.center_latitude, @map_options.center_longitude)
       mapTypeId:              google.maps.MapTypeId[@map_options.type]
       mapTypeControl:         @map_options.mapTypeControl
+      mapTypeControlOptions:
+        position: google.maps.ControlPosition.RIGHT_TOP
       disableDefaultUI:       @map_options.disableDefaultUI
       disableDoubleClickZoom: @map_options.disableDoubleClickZoom
       draggable:              @map_options.draggable
 
     mergedOptions = @mergeObjectWithDefault @map_options.raw, defaultOptions
 
-    return new google.maps.Map document.getElementById(@map_options.id), mergedOptions
+    map = new google.maps.Map document.getElementById(@map_options.id), mergedOptions
+
+    customMapStyles = initCustomMapStyles()
+    map.setOptions
+      styles: customMapStyles
+      streetViewControl: false
+      zoomControlOptions:
+        style: google.maps.ZoomControlStyle.SMALL
+  
+    pushDiv = document.createElement "div"
+    pushDiv.style.height = "15px"
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push pushDiv
+
+    return map
 
 
   createMarkerImage : (markerPicture, markerSize, origin, anchor, scaledSize) ->

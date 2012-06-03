@@ -1,24 +1,27 @@
 class RecipesController < ApplicationController
 
   respond_to :json, :except => :index
+  layout "map", :only => [:index, :search]
   append_before_filter :check_recipe_id_presence, :already_published?, :check_for_user_and_location, :only => :update
-  before_filter :check_recipe_id_presence, :only => :show
+  before_filter :get_requested_recipe, :only => :show
   before_filter :get_or_create_recipe, :only => [:sync_wizard, :upload_step_image, :upload_image]
 
   def show
-    @recipe = Recipe.find session[:recipe_id]
-    render :layout => false
+    @location = @recipe.to_gmaps4rails
+    render :layout => request.xhr? ? false : 'map_overlay'
   end
 
   def index
-    @recipes = Recipe.all
-    @location = Recipe.all.to_gmaps4rails
+    @recipes = Recipe.where(:state => "published").asc(:country, :name).entries
+    @location = @recipes.to_gmaps4rails
+    render :layout => request.xhr? ? false : 'map'
   end
 
   def update
     user = User.find params[:user_id]
+    @recipe.user = user
 
-    if @recipe.update_attributes({ :user => user, :longitude => params[:location][:longitude], :latitude => params[:location][:latitude], :city => params[:location][:city], :country => params[:location][:country] }) && @recipe.publish
+    if @recipe.update_attributes(params[:location]) && @recipe.publish
       @recipe = Recipe.new
       render :new, :layout => false
     else
@@ -45,6 +48,7 @@ class RecipesController < ApplicationController
 
     if @recipe.update_attributes params[:recipe]
       @recipe.steps.sort! { |a,b| a.number <=> b.number }
+      @recipe.save
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
@@ -86,63 +90,58 @@ class RecipesController < ApplicationController
   end
 
   def last
-    respond_with Recipe.where(:user_id => {"$ne"=>nil}, :state => "published").order_by(:created_at => :desc).limit(5)
+    respond_with Recipe.last_entries
   end
 
-def search
-  respond_to do |format|
-    format.json {
-      @ingredients = params[:ingredients]
-      @recipes = []
+  def getSidebar
+    @recipe = Recipe.where(:slug => params[:id], :state => "published").first if params[:id].present?
+    respond_to do |format|
+      format.json {render :file => 'recipes/search.html.haml'}
+    end
+  end
 
-      @ingredients.each do |key, value|
-        if Rails.cache.read(value.to_s)
-          cache = JSON.parse(Rails.cache.read(value.to_s))
-          @objects = cache
-        else
-          @query = Recipe.search_by_ingredient(value)
-          @objects = @query.entries
-          Rails.cache.write(value.to_s, @query.entries.to_json)   
-        end
-        if @recipes.empty?
-          @recipes = cache || @query.entries
-        else
-          @objects.each do |entry|
-            if @recipes.include?(entry)
-              index = @recipes.index(entry)
-              if @recipes[index]["count"].nil?
-                @recipes[index]["count"] = 2
+  def search
+    respond_to do |format|
+      format.html do
+        @location = Recipe.all.to_gmaps4rails
+        render :layout => 'map'
+      end
+      format.json do
+        @ingredients = params[:ingredients].select {|i| i != ""}
+        @recipes = []
+        @recipe_match = []
+        unless @ingredients.empty?
+          @ingredients.each do |value|
+            @query = Recipe.search_by_ingredient(value)
+            @objects = @query.entries
+            @objects.each do |entry|
+              if @recipes.include?(entry)
+                index = @recipes.index(entry)
+                if @recipes[index]["count"].nil?
+                  @recipes[index]["count"] = 1
+                else
+                  @recipes[index]["count"] += 1
+                end
               else
-                @recipes[index]["count"] += 1
+                entry[:count] = 1
+                @recipes << entry
               end
-            else
-              @recipes << entry
             end
-          end              
+          end
+          @recipes.sort! {|a,b| b["count"] <=> a["count"]}
+          @recipes = @recipes.uniq
+          @recipes.slice!(10..-1) #replace with pagination
         end
       end
-
-      @recipe_match = []
-      @recipes.each do |recipe|
-        @recipe_match << recipe if recipe["count"] != nil
-      end
-
-      @recipe_match.sort! {|a,b| b["count"] <=> a["count"]}
-
-      counter = 0
-      while @recipe_match.count < 10
-        @recipe_match << @recipes[counter]
-        counter+=1
-      end
-      render :json => {:ingredients => @ingredients, :recipes => @recipe_match.take(10)}
-    }
-    format.html
+    end
   end
-end
-
 
 
   private
+  def check_recipe_id_presence
+    render :status => 410, :text => "Gone" and return unless session[:recipe_id].present?
+  end
+
   def get_or_create_recipe
     if session[:recipe_id].present?
       @recipe = Recipe.find session[:recipe_id]
@@ -152,8 +151,16 @@ end
     end
   end
 
-  def check_recipe_id_presence
-    render :status => 410, :text => "Gone" and return unless session[:recipe_id].present?
+  def get_requested_recipe
+    if params[:id].present?
+      @recipe = Recipe.where(:slug => params[:id], :state => "published").first
+      @preview = false
+    elsif session[:recipe_id].present?
+      @recipe = Recipe.where(:id => session[:recipe_id]).first
+      @preview = true
+    end
+
+    render :status => 404, :text => "Not Found" and return unless @recipe.present?
   end
 
   def already_published?

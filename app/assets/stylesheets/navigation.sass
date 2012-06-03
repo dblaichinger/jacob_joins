@@ -12,8 +12,8 @@
   top: -215px
   cursor: pointer
 
-  #newsbar_content_
-    background-image: url(image_path('newsbar_offen2.png'))
+  #newsbar_content
+    background-image: url(image_path('newsbar_offen2_.png'))
     background-position: top center
     width: 1000px
     height: 280px
@@ -31,31 +31,66 @@
         li
           a
             +navi
-            float: left
           a:hover
-            color: red
+            color: $rot
 
-        #home, #story, #about  
-          a
-            padding-right: 40px
-        
-        #contact
+          a.selected
+            color: $rot  
+            background-image: url(image_path('underline_haupt.png'))
+            background-repeat: no-repeat
+            background-position: bottom center
+
+        li#form, #story
+          a.selected
+            background-image: url(image_path('underline_haupt_lang.png'))
+            background-repeat: no-repeat
+            background-position: bottom center          
+
+        li#home
+          a.selected
+            background-image: url(image_path('underline_haupt_kurz.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #about, #contact
+          a.selected   
+            background-image: url(image_path('underline_haupt_mittel.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        li#search 
+          a.selected   
+            background-image: url(image_path('underline_haupt_search.png'))
+            background-repeat: no-repeat
+            background-position: bottom center 
+
+        #home, #form, #search, #contact, #about, #story
+          top: 0px
           position: absolute
-          right: 0
-          padding-right: 0
+
+          a.selected
+            padding-bottom: 5px
+
+        #home
+          left: 0
 
         #search
-          position: absolute
-          right: 120px
+          left: 78px
 
         #form
-          position: absolute
-          right: 235px
+          left: 188px
+
+        #contact
+          right: 0
+
+        #about
+          right: 120px
+
+        #story
+          right: 245px
 
 
-
-
-
+    #bildzeichen_newsbar
 
     h1
       display: none
@@ -66,44 +101,52 @@
       font-size: 20px
       overflow: visible
 
-    #fb_, #entries_
+    #fb, #entries, #bildzeichen_newsbar
       float: left
-      width: 300px
       margin-top: 20px
 
-    #fb_
+    #fb
       height: 230px
+      width: 365px
+      margin-right: 83px
       position: relative
       cursor: default
+
+      #fb_stream
+        padding-bottom: 5px
 
       h2
         margin-top: 1px
         overflow: visible
 
-      .mcs_container_
+      .mcs_container
         display: none
-      #fb_error_
+
+      #fb_error
         margin-top: 10px
         font-size: 12px
 
-      .fblike_
+      .fblike
         text-decoration: none
         color: #fff
         display: block
         width: 280px
         height: 20px
 
-      .fblike_:hover
+      .fblike:visited
+        color: #fff
+
+      .fblike:hover
         color: $rot
 
-      .fb-like_
+      .fb-like
         width: 150px
         height: 25px
         position: absolute
-        bottom: 0px
-        right: 30px
+        top: 0px
+        left: 235px
 
-      .post_
+      .post
         overflow: hidden
         margin: 10px 0px
         padding-top: 5px
@@ -119,23 +162,30 @@
           margin-bottom: 5px
           font-size: 14px
 
-        .message_
+        .message
           font-size: 12px
           margin: 0 10px 0 60px
-
-        .time_
+          a
+            color: #fff
+          a:hover
+            color: $rot 
+        .time
           font-size: 10px
           font-family: "Pluto-LightCondensed"
           margin: 5px 0 0 60px
 
-    #entries_
-      margin-left: 30px
+    #bildzeichen_newsbar
+      width: 100px
+      margin: 70px 86px 0 0
+
+    #entries
       height: 190px
+      width: 365px
       overflow: hidden
       cursor: default
 
-      #last_entry_
-        padding-top: 10px
+      #last_entry
+        padding-top: 20px
         
         p
           font-size: 12px
@@ -146,9 +196,9 @@
         p.time
           font-size: 10px
           font-family: "Pluto-LightCondensed"
-          margin-bottom: 10px
+          margin-bottom: 15px
 
-    #fancy_counter_
+    #fancy_counter
       float: right
       margin: 20px 0
       height: 190px
@@ -161,28 +211,14 @@
         width: 70px
         text-align: center
 
-      .display_
+      .display
         font-family: "Sanches-Bold"
 
-    #countdown_
-      position: absolute
-      bottom: 35px
-      right: 15px
-      font-family: "Sanches-Semibold"
-
-      .countdown_kl_, #days_, #hours_, #minutes_, #seconds_
-        float: left
-        margin-right: 5px
-
-      .countdown_kl_
-        margin-right: 10px
-        font-family: "Sanches-Italic"
-
-  #logo_
+  #logo
     clear: both
 
     img
       display: block
       position: relative
-      top: -39px
+      top: -25px
       margin: 0 auto 0 auto

@@ -1,60 +1,120 @@
-- @recipe.steps.sort! { |a,b| a.number <=> b.number }
+:javascript
+  $(function() {
+    $('a.lightbox').lightBox(
+      window.lightboxSettingsSteps
+    );
+  });
 
-= link_to "", "#!/recipe_tab", class:"edit_recipe"
+  $(document).ready(function(){
+    pagerNeeded = $('.recipe_images li').length > 1;
+    var imageSlider = $('.recipe_images').bxSlider({
+      pager: pagerNeeded,
+      infiniteLoop: true,
+      controls: false,
+      mode: 'fade'
+    });
+    
+    var images = $('.recipe_images img');
+    var count = 0;
+    images.load(function(){
+      if(++count == images.length){
+        if($('.bx-wrapper .bx-window').height() < 100){
+          fixBxSliderHeight($('.bx-wrapper'));
+          $(window).resize();
+        }
+        images.unbind('load');
+      }
 
-%div#img_preview
-  -if @recipe.images.present?
-    - @recipe.images.each do |image|
-      = image_tag image.attachment(:medium)
-  -else
-    = link_to image_tag(asset_path("no_image_prev.png"), class:"missing", alt:"missing_image"), "#!/recipe_tab"
+    images.bind('click', function(){
+      imageSlider.goToNextSlide();
+      return false;
+    });
 
-%div#prev_recipe_info
-  %h1
-    = @recipe.name.blank? ? "Unknown title of your recipe" : @recipe.name
+    });
 
-  %div#p_prev
-    %p
-      Portions:
-      %em 
-        = @recipe.portions.present? ? @recipe.formatted_portions : "unknown"
+    newsbar.selectNavigationPoint($('#navi_neu #search'));
 
-    %p
-      Preparation time: 
-      %em
-        = @recipe.duration.present? ? "#{@recipe.duration} min" : "unknown"
+    $('.close-recipe').click(closeRecipeHandler);
+    $('.right-haupt').css('width', '100%')
+  });
 
-    %p
-      Cooked by: 
-      %em
-        = @recipe.user.present? ? @recipe.user.formatted_user_info : "Your name is required."
+  var recipesShowWindowLoadHandler = function(){
+    positionVerticalCentered($('.close-recipe.left'), true);
+  }
 
-%div#prev_ingredients
-  %h2 
-    = "your ingredients"
-  - @recipe.ingredients_with_quantities.each do |ingredient|
-    %ul
-      %li
-        %span
-          = ingredient.quantity
-        %em
-          = ingredient.name
+  var recipesShowWindowResizeHandler = function(){
+    positionVerticalCentered($('.close-recipe.left'));
+  }
 
-%div#prev_preparation
-  %h2
-    = "how to prepare your meal"
+  $(window).load(recipesShowWindowLoadHandler);
+  $(window).resize(recipesShowWindowResizeHandler);
 
-  - @recipe.steps.each_with_index do |step, index|
-    %div.prev_preparatoin_step
-      %div.image_preparation_show
-        - if step.image.present?
-          = image_tag step.image(:small)
-        - else
-          = image_tag asset_path("no_image_prev_steps.png"), class:"missing", alt:"missing_image", :size => "66x66"
-      %p
-        %em
-          = "Step #{index + 1}"
-        %br
-        = sanitize step.description.gsub(/\n/, '<br/>'), :tags => %w(br)
+.map-overlay.parent-or-window-sensitive
+  = link_to "close", recipes_search_path(), class:"close-recipe right"
+  = link_to "close", recipes_search_path(), class:"close-recipe left"
+  .content
+    %h1
+      = @recipe.name
+    %hr
+    - if @recipe.images.count > 0
+      %ul.recipe_images
+        - @recipe.images.each do |image|
+          %li
+            - if @recipe.images.count > 1
+              = image_tag image.attachment.url(:large), :class => "clickable"
+            - else  
+              = image_tag image.attachment.url(:large)
+    #recipe_information_content
+      
+      #recipe_information
+        = image_tag 'horizontalenaht_container.png'
+        %p
+          Cooked by 
+          %em
+            = "#{@recipe.user.firstname.capitalize} #{@recipe.user.lastname[0].capitalize + '. ' if @recipe.user.lastname.present?}(#{@recipe.user.age})"
+            %span
+              from
+              = @recipe.city + ","
+              = @recipe.country  
+        %p
+          Portions:
+          %em
+            = formatted_portions(@recipe.portions)
+            = @recipe.portions > 1 ? "persons" : "person"
+        %p
+          Cooking time:
+          %em
+            = "#{@recipe.duration} minutes"
+        = image_tag 'horizontalenaht_container.png'
 
-  
+      #recipe_ingredients_content
+        %h2
+          Ingredients  
+        %table
+          - @recipe.ingredients_with_quantities.each do |iwq|
+            %tr
+              %td
+                = iwq.quantity
+              %td.declaration
+                = iwq.name
+
+    #recipe_steps_klein_wrapper
+      %h2
+        Preparation
+      - @recipe.steps.sort{ |a,b| a.number <=> b.number }.each do |step|
+        %div{class: "recipe_steps_klein #{'no-image' unless step.image.present?}"}
+          .numbers
+            %strong
+              = step.number + 1
+          .recipe_steps_container
+            .bild
+              - if step.image.present?
+                = link_to image_tag(step.image(:small)), step.image.url(:large), :class=>"lightbox", :title=>step.description 
+              - else
+                = link_to "", image_path("show_noimage.jpg"), :class => "lightbox", :title => step.description 
+
+            .recipe_steps_klein_beschreibung
+              %p
+                = step.description
+      
+

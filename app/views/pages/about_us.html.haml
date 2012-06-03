@@ -1,30 +1,25 @@
 :javascript
   $(function() {
-    $('a.lightbox.brief').lightBox({
-      overlayBgColor: '#FFF',
-      overlayOpacity: 0.6,
-      imageLoading: '#{image_path("ajax-loader.gif")}',
-      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
-      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
-      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
-      imageBlank: '#{image_path("lightbox/blank.gif")}',
-      containerResizeSpeed: 350
-    });
+    $('a.lightbox.brief').lightBox(
+      window.lightboxSettingsImages
+    );
   });
   $(function() {
-    $('a.lightbox.bierdeckel').lightBox({
-      overlayBgColor: '#FFF',
-      overlayOpacity: 0.6,
-      imageLoading: '#{image_path("ajax-loader.gif")}',
-      imageBtnClose: '#{image_path("lightbox/btn-close.gif")}',
-      imageBtnPrev: '#{image_path("lightbox/btn-prev.gif")}',
-      imageBtnNext: '#{image_path("lightbox/btn-next.gif")}',
-      imageBlank: '#{image_path("lightbox/blank.gif")}',
-      containerResizeSpeed: 350
-    });
+    $('a.lightbox.bierdeckel').lightBox(
+      window.lightboxSettingsImages
+    );
+  });
+  $(function() {
+    $('a.lightbox.food-lettering').lightBox(
+      window.lightboxSettingsImages
+    );
+  });
+  $(function() {
+    $('a.lightbox.sponsoring').lightBox(
+      window.lightboxSettingsImages
+    );
   });
 
-= render "newsbar_new"
 
 .aboutcontent
   #teamvorstellung
@@ -41,27 +36,27 @@
             %h5
               = link_to 'Ismail Hanli', "http://ismailhanli.multimediatechnology.at/"
             %p
-              Webdeveloper
+              Webdevelopment
         %li#marta
           .member
             %h5
               = link_to 'Marta Janosz', "http://www.martajanosz.com/"
             %p
-              Webdesigner
+              Webdesign
               %br
-              Project leader
+              Project leadership
         %li#alex
           .member
             %h5
               Alexander Flatscher
             %p
-              Webdeveloper
+              Webdevelopment
         %li#martina
           .member
             %h5
               = link_to 'Martina Edelhofer', "http://edelhofer.multimediaart.at/"
             %p
-              Webdesigner
+              Webdesign
         %li#doris
           .member
             %h5
@@ -73,13 +68,13 @@
             %h5
               = link_to 'Kristina Fallenegger', "http://www.kristina-fallenegger.at/"
             %p
-              Sponsoring
+              Sponsoring & Infographic
         %li#daniel
           .member
             %h5
               = link_to 'Daniel Blaichinger', "http://dblaichinger.multimediatechnology.at/"
             %p
-              Webdeveloper
+              Webdevelopment
         %li#daniela
           .member
             %h5
@@ -87,20 +82,40 @@
             %p
               Corporate Design
               %br
-              Project leader
+              Project leadership
 
-    %p.aboutteam
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+    .aboutteam
+      %p
+        We are 
+        %em eight students 
+        attending the University of Applied Sciences in Salzburg. Our majors are MultiMediaArt and MultiMediaTechnolgy. 
+        %br
+        %br
+        The 
+        %em aim of our final project 
+        is to
+        %em bring people 
+        from all over the world 
+        %em together in an unconventional way. 
+        %br
+        %br
+        Food is part of our lifestyle and our culture, it implies traditions and offers many ways of preparation. We would love to gain pure impressions of the different eating habits and cultures. 
+        %br
+        %br
+        %em That’s how the idea of Jacob Joins - Global Cooking came to life.
+
+      %p.aboutteamhint
+        Hover the cursor over the picture to learn more about our team.
 
 
 #projektteile
   %h1
-    Here you see project bla bla bla 
+    Have a look at our amazing  
     %span
-        
+      project work! 
   %hr
 
-  = image_tag 'Slider_JacobJoins.jpg', class:"jj-lettering"
+  = image_tag 'Slider_JacobJoins.jpg', class:"jj-all"
 
   %ul#projektarbeiten
     %li.brief
@@ -108,74 +123,88 @@
         %h4
           100 Letters
         %p
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          In order to invite people to participate in Jacob Joins we created 
+          %em 100 letters 
+          and sent them to randomly chosen people from all over the world. The 
+          %em handmade letters 
+          contain some little surprises for their recipients, like a set 
+          %em pop-up table, invitation cards 
+          to hand over to friends and a 
+          %em small bag filled with salt 
+          from Hallein in Austria.
 
       #lightbox_container
-        = link_to image_tag('briefe/02-tisch.jpg', class:"lightbox_first"), image_path('briefe/02-tisch.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1029.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1035.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1045.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1050.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1066.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1071.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1078.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1269.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/01-briefe.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to image_tag('100_letters/01_invitation_letter.png', class:"lightbox_first"), image_path('100_letters/01_invitation_letter.png'), class:"lightbox brief", title:"Invitation letter"
+        = link_to "", image_path('100_letters/02_invitation_letter.png'), class:"lightbox brief", title:"Invitation letter"
+        = link_to "", image_path('100_letters/03_how_to_participate.png'), class:"lightbox brief", title:"How to participate"
+        = link_to "", image_path('100_letters/04_pop-up_table_and_bag_filled_with_salt.png'), class:"lightbox brief", title:"Pop-up table and bag filled with salt"
+        = link_to "", image_path('100_letters/05_invitation_cards_to_hand_over_to_friends.png'), class:"lightbox brief", title:"Invitation cards to hand over to friends"
+        = link_to "", image_path('100_letters/06_invitation_cards_to_hand_over_to_friends.png'), class:"lightbox brief", title:"Invitation cards to hand over to friends"
+        = link_to "", image_path('100_letters/07_invitation_cards_to_hand_over_to_friends.png'), class:"lightbox brief", title:"Invitation cards to hand over to friends"
+        = link_to "", image_path('100_letters/08_100_red_letters_leaving_Austria.png'), class:"lightbox brief", title:"Red letters leaving Austria"
+        = link_to "", image_path('100_letters/DSC_1045.jpg'), class:"lightbox brief", title:"Making-of"
+        = link_to "", image_path('100_letters/DSC_1050.jpg'), class:"lightbox brief", title:"Making-of"
+        = link_to "", image_path('100_letters/DSC_1078.jpg'), class:"lightbox brief", title:"Making-of"
 
     %li.brief
       .projektinfo
         %h4
           Letterpress coasters
         %p
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          Food and drink are going together - and if you are drinking you might need a coaster. So in addition to our letters 
+          %em about 800 coasters were printed 
+          to function as further advertising efforts. Each coaster was letterpress printed by hand in brown on 1.4 mm thick cardboard.
 
       #lightbox_container
-        = link_to image_tag('bierdeckel/IMG_5039.jpg', class:"lightbox_first"), image_path('bierdeckel/IMG_5039.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_4989.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_4993.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_5023.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_5035.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_4994.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_5028.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_5037.jpg'), class:"lightbox bierdeckel", title:"table bla"
-        = link_to "", image_path('bierdeckel/IMG_5067.jpg'), class:"lightbox bierdeckel", title:"table bla"
+        = link_to image_tag('bierdeckel/DSC_3315.png', class:"lightbox_first"), image_path('bierdeckel/DSC_3315.png'), class:"lightbox bierdeckel", title:"800 handprinted letterpress coasters"
+        = link_to "", image_path('bierdeckel/DSC_1278.png'), class:"lightbox bierdeckel", title:"Aluminium printing plate"
+        = link_to "", image_path('bierdeckel/IMG_4989.jpg'), class:"lightbox bierdeckel", title:"Printing on a small letterpress printing machine"
+        = link_to "", image_path('bierdeckel/IMG_4993.jpg'), class:"lightbox bierdeckel", title:"Fixed printing plate"
+        = link_to "", image_path('bierdeckel/IMG_5023.jpg'), class:"lightbox bierdeckel", title:"Mixing the right colour"
+        = link_to "", image_path('bierdeckel/IMG_5035.jpg'), class:"lightbox bierdeckel", title:"Printing in action ..."
+        = link_to "", image_path('bierdeckel/IMG_4994.jpg'), class:"lightbox bierdeckel", title:"... with lots of physical effort"
+        = link_to "", image_path('bierdeckel/IMG_5028.jpg'), class:"lightbox bierdeckel", title:"Letterpress printing machine"
+        = link_to "", image_path('bierdeckel/IMG_5037.jpg'), class:"lightbox bierdeckel", title:"Colouring of the printing plate"
+        = link_to "", image_path('bierdeckel/IMG_5067.jpg'), class:"lightbox bierdeckel", title:"The final result: 800 letterpress coasters"
+        = link_to "", image_path('bierdeckel/IMG_5039.jpg'), class:"lightbox bierdeckel", title:"Detailed view of the coasters"
+
     %li.brief
       .projektinfo
         %h4
           Food Lettering
         %p
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          During our creative process we 
+          %em experimented with 
+          different ways to integrate Jacob Joins topic 
+          %em food 
+          into our creative work 
+          %em as a visual design element. 
+          So we used various groceries, like ketchup, mustard, tomato paste, honey, mayonnaise and spray cream to write our corporate lettering. A series of 
+          %em unique posters 
+          resulted.
 
       #lightbox_container
-        = link_to image_tag('briefe/02-tisch.jpg', class:"lightbox_first"), image_path('briefe/02-tisch.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1029.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1035.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1045.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1050.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1066.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1071.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1078.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1269.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/01-briefe.jpg'), class:"lightbox brief", title:"table bla"
-
+        = link_to image_tag('food_lettering/tomato.png', class:"lightbox_first"), image_path('food_lettering/tomato.png'), class:"lightbox food-lettering", title:"Food lettering with tomato paste"
+        = link_to "", image_path('food_lettering/120602_01_poster_ketchup.jpg'), class:"lightbox food-lettering", title:"Poster ketchup"
+        = link_to "", image_path('food_lettering/120602_02_poster_honey.jpg'), class:"lightbox food-lettering", title:"Poster honey"
+        = link_to "", image_path('food_lettering/120602_03_poster_tomato_paste.jpg'), class:"lightbox food-lettering", title:"Poster tomato paste"
+        = link_to "", image_path('food_lettering/120602_04_poster_mustard.jpg'), class:"lightbox food-lettering", title:"Poster mustard"
 
     %li.brief
       .projektinfo
         %h4
           Sponsoring
         %p
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          For our sponsors we designed a 
+          %em special booklet 
+          including a 
+          %em delicious home made recipe 
+          by the Jacob Joins family and of course all the important information around the project.
 
       #lightbox_container
-        = link_to image_tag('briefe/02-tisch.jpg', class:"lightbox_first"), image_path('briefe/02-tisch.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1029.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1035.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1045.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1050.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1066.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1071.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1078.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/DSC_1269.jpg'), class:"lightbox brief", title:"table bla"
-        = link_to "", image_path('briefe/01-briefe.jpg'), class:"lightbox brief", title:"table bla"
+        = link_to image_tag('sponsoring/DSC_3186.png', class:"lightbox_first"), image_path('sponsoring/DSC_3186.png'), class:"lightbox sponsoring", title:"Sponsoring booklet"
+        = link_to "", image_path('sponsoring/DSC_3183.png'), class:"lightbox sponsoring", title:""
+        = link_to "", image_path('sponsoring/DSC_3180.png'), class:"lightbox sponsoring", title:"Booklet with home made recipe"
+        = link_to "", image_path('sponsoring/DSC_3188.png'), class:"lightbox sponsoring", title:"Sticker"
 
 = render "footer"

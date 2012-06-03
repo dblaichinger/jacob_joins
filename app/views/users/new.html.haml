@@ -3,10 +3,14 @@
     prepare_user_map();
 
     $("form", "#user_tab").dirtyValidation();
+    $(".select_box_jj_style").selectbox();
 
-    if($("[selected]", "#user_gender").size() == 1 && $("[selected]", "#user_gender").first().val().length > 1){
-      gender_icon($("#user_gender").val());
-    }
+    selectGender($("#user_gender").val());
+
+    $('#gendericons a').click(function(e){
+      selectGender($(e.target).attr('class'));
+      return false;
+    });
   });
 
 = form_for @user, :html => { class:"user_form" } do |f|
@@ -58,18 +62,18 @@
                    
       %p
         = f.label :heard_from, "How did you hear from Jacob Joins?"             
-        = f.select :heard_from, options_for_select([['Letter', 'letter'], ['Friends', 'friends'], ['Email', 'email'], ['Facebook', 'facebook'], ['Pling.de', 'pling.de'], ['Poster', 'poster'], ['Flyer', 'flyer'], ['Other', 'other']]), {}, :onchange => "heard_from($(this).val());"
-        = text_field_tag :heard_from_other
+        = f.select :heard_from, options_for_select([['Select', 'select'],['Letter', 'letter'], ['Friends', 'friends'], ['Email', 'email'], ['Facebook', 'facebook'], ['Poster', 'poster'], ['Coaster', 'coaster'], ['Sticker', 'sticker'], ['Other', 'other']], @heard_from), {}, { :onchange => "heard_from($(this).val());", class:"select_box_jj_style" }
+        = text_field_tag :heard_from_other, (@heard_from == "other") ? @user.heard_from : "", :style => (@heard_from == "other") ? "display:block;" : ""
       
       .genderage1
         = f.label :gender, "Gender"
         #gendericons
-          = link_to image_tag("male_inactive.png", class:"male"), "#", id:"male_link", :onclick => "return gender_icon('male');"
-          = link_to image_tag("female_inactive.png", class:"female"), "#", id:"female_link", :onclick => "return gender_icon('female');"
+          = link_to "", "#", id:"male_link", class:"male"
+          = link_to "", "#", id:"female_link", class:"female"
         = f.select :gender, [['',''], ['Female', 'female'], ['Male', 'male']], {}, { "data-required" => true, "data-error-target" => "#gendericons" }
     
       .genderage2
         = f.label :age, "Age"
         = f.text_field :age, "data-required" => true, "data-type" => "numerical", tabindex:"9"
       
-    = link_to "", '#!/preview_tab', class:"next_tab"
+    = link_to "", '#preview_tab', class:"next_tab"

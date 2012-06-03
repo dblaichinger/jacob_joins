@@ -6,7 +6,7 @@ class Step
   field :number, :type => Integer
 
   embedded_in :recipe, :inverse_of => :steps
-  
+
   has_mongoid_attached_file :image,
     :url => "/system/steps_images/:id/:style/:filename",
     :path => ":rails_root/public/system/steps_images/:id/:style/:filename",
@@ -17,6 +17,9 @@ class Step
       :large    => ['500x500>',   :jpg]
     }
     
+  attr_accessible :description, :number, :recipe, :image
+  attr_accessible :description, :number, :recipe, :image, :state, :as => :admin
+
   validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
   validates_attachment_size :image, :less_than => 5.megabytes
 

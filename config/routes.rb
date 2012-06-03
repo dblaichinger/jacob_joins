@@ -3,15 +3,17 @@ JacobJoins::Application.routes.draw do
 
   devise_for :admin_users
 
-  root :to => 'pages#show', :id => 'form'
+  root :to => 'recipes#index'
 
   post "/feedback" => "feedback#create"
 
   get "/pages/about_us" => 'pages#show', :as => :page, :format => false, :id => "about_us"
+  get "/pages/form" => 'pages#show', :as => :page, :format => false, :id => "form"
   get "/pages/contact" => 'pages#show', :as => :page, :format => false, :id => "contact"
-  get "/pages/preview" => 'pages#show', :as => :page, :format => false, :id => "preview"
-  get "/pages/drafts_saved" => 'pages#show', :as => :page, :format => false, :id => "drafts_saved"
-  match "/pages/fb_channel" => 'pages#show', :as => :page, :format => false, :id => "fb_channel"
+  
+  get "/pages/preview" => 'pages#preview', :as => :page, :format => false, :id => "preview"
+  get "/pages/drafts_saved" => 'pages#drafts_saved', :as => :page, :format => false, :id => "drafts_saved"
+  match "/pages/fb_channel" => 'pages#fb_channel', :as => :page, :format => false, :id => "fb_channel"
   
   get '/recipes/last', :to => 'recipes#last'
   post '/users/find_user', :to => 'users#find_user'
@@ -21,7 +23,8 @@ JacobJoins::Application.routes.draw do
   match 'recipes/delete_step_image/:step_id' => 'recipes#delete_step_image', :via => :delete, :as => 'recipes_delete_step_image'
   match 'recipes/upload_image' => 'recipes#upload_image', :via => :post
   match 'recipes/delete_image/:image_id' => 'recipes#delete_image', :via => :delete, :as => 'recipes_delete_image'
-  match '/recipes/search' => 'recipes#search', :via => [:get, :post]
+  match 'recipes/search' => 'recipes#search', :via => [:get, :post]
+  match 'recipes/getSidebar' => 'recipes#getSidebar', :via => [:get, :post]
 
   match 'country_specific_informations/sync_wizard' => 'country_specific_informations#sync_wizard', :via => [:post, :put]
   match 'users/sync_wizard' => 'users#sync_wizard', :via => [:post, :put]

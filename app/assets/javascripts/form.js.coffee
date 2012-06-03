@@ -1,3 +1,19 @@
+window.formHashChangeHandler = ->
+  Path.routes.current = null
+  if window.location.hash and window.location.hash != '#skipstory'
+    $("li#story").removeClass("selected simple-navigation-active-leaf");
+    $('li#story a').removeClass('selected')
+    $("li#form").addClass("selected simple-navigation-active-leaf");
+    $("li#form a").addClass("selected");
+
+    $('#wizard').tabs 'select', window.location.hash + "_tab"
+    $.scrollTo '#skipstory', 800
+
+window.wizardNavClickHandler = (e) ->
+  window.location.hash = $(e.target).attr('href').replace('_tab', '')
+  false
+
+
 deactivatePlaceholders = (parent) ->
   parent.find('.placeholder').each ->
     $(this).val("") if $(this).val() is $(this).attr("placeholder")
@@ -30,19 +46,10 @@ loaderMsg = '<img alt="Ajax-loader" src="/assets/ajax-loader.gif"><h1>Loading...
 
 $ ->
   $(".scroll").click ->
-    newsbar = $("#newsbar")
+    newsbar = $("#newsbar_new")
     newsbar.executeAt "destroy"
-    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800,
-      onAfter: ->
-        newsbar.executeAt $("#start"), ->
-          newsbar.fadeOut 500
-        , ->
-          newsbar.fadein 500
-        newsbar.fadeIn 500
+    $('.stories').fancyStoryEffect 'scrollTo', $('#story_1'), 800
     false
-
-  $(".next_tab").live "click", ->
-    $.scrollTo $('#skipstory'), 800
 
   $("#gotoform").click ->
     $.scrollTo $('#skipstory'), 800
@@ -105,7 +112,7 @@ $ ->
           alert "Unable to save user information (maybe not provided)."
 
         $("#preview_tab").stop(true, true).fadeIn 200, hideWizardLoader
-        get_latest_recipe()
+        newsbar.get_latest_recipe()
 
     false
 
@@ -155,9 +162,6 @@ $ ->
     .parent().qtip "show"
 
   $('#wizard').bind 'tabsselect', (event, ui) ->
-    newHash = "#!/#{ui.tab.hash.slice 1}"
-    window.location.hash = newHash if window.location.hash isnt newHash
-
     oldTabIndex = $('#wizard').tabs 'option', 'selected'
     oldTab = $('.ui-tabs-panel:not(.ui-tabs-hide)')
 
@@ -166,7 +170,7 @@ $ ->
     $("[aria-describedby]", oldTab).qtip "hide"
 
     if oldTabIndex < $('#wizard').tabs('length') and oldTab.find(":input").hasClass("changed")
-      url = oldTab.attr('id').replace '_tab', 's/sync_wizard'
+      url = "/#{oldTab.attr('id').replace('_tab', 's/sync_wizard')}"
       deactivatePlaceholders(oldTab)
       params = oldTab.children('form').serializeArray()
       activatePlaceholders(oldTab)
@@ -206,7 +210,7 @@ $ ->
 
       loadPreview = ->
         if $('#wizard').data('activeRequests') is 0
-          $('#preview_tab').css('opacity', '0').load "pages/preview", (data, textStatus) ->
+          $('#preview_tab').css('opacity', '0').load "preview", (data, textStatus) ->
             $(this).animate
               opacity: 1
             , 200

@@ -188,6 +188,22 @@ textarea
 
 .is_marta_egal_hauptsache_man_kann_die_buttons_gemeinsam_ansprechen
   margin-left: 232px
+
+  .add
+    background-image: url(image_path("add_icon.png"))
+
+  .remove
+    background-image: url(image_path("delete_icon.png"))
+    margin-left: 38px
+    margin-top: -29px
+
+  .add, .remove
+    width: 30px
+    height: 30px
+    display: block
+
+  .add:hover, .remove:hover
+    background-position: 0px 30px
     
 #buttons
   clear: both
@@ -229,10 +245,10 @@ textarea
     .ui-rating-star, .ui-rating-cancel
       width: 18px
       height: 33px
-      background-image: url(/assets/portions.png)
+      background-image: url(image_path("portions.png"))
 
       &:last-child
-        background-image: url(/assets/portions_plus.png)
+        background-image: url(image_path("portions_plus.png"))
 
   .ui-rating-full
     background-position: left bottom

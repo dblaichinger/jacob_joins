@@ -1,15 +1,31 @@
+= javascript_include_tag "http://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBAt7YagkuVkG-eXQXemvn18f4yjiPMHCc&sensor=true&libraries=places"
 :javascript
   $(function(){
+    if(window.location.hash)
+      $("li#story, li#story .selected").removeClass("selected simple-navigation-active-leaf");
+    else
+      $("li#form, li#form .selected").removeClass("selected simple-navigation-active-leaf");
+
+    $("li#form a").click(function(){
+      $(this).addClass("selected");
+      $("li#form").addClass("selected simple-navigation-active-leaf");
+      $("li#story, li#story .selected").removeClass("selected simple-navigation-active-leaf");
+    });
+
     if(!$('html').hasClass('ie7'))
       $('.stories').fancyStoryEffect();
 
-     $('#contactable').contactable({
-      subject: 'A Feeback Message',
-      url: '/feedback'
-     });
+    $('#formnav ul li a').click(wizardNavClickHandler);
+    $('#wizard').on('click', 'a.next_tab', wizardNavClickHandler);
+
+    $(window).load(function(){
+      formHashChangeHandler();
+    });
+
+    Path.dispatch = function(){};
+    $(window).bind('hashchange', formHashChangeHandler);
   });
 
-= render "newsbar_old"
 
 #jacobsstory
   %ol.stories
@@ -24,7 +40,7 @@
 
           = link_to 'Scroll down', "#story_1", class:"scroll"
 
-          = link_to 'You already know the story? Just go on to the form!', "#!/recipe_tab", id:"gotoform"
+          = link_to 'You already know the story? Just go on to the form!', "#recipe", id:"gotoform"
       .uebergang1
     %li
       #story_1
@@ -75,12 +91,7 @@
         with Jacob and the world!
       %p.share2
         There you go, fill in our lovely form!  
-      %p.share3
-        %span Note: 
-        This is only a temporary website - its purpose is to collect lots of recipes. All recipes will be shown online on the 
-        %span 4th of June, 
-        when the final Jacob Joins website will be released.    
-
+      
   #story_6
 
 #skipstory
@@ -123,11 +134,4 @@
       = image_tag 'ajax-loader.gif'
       %h1 loading ...
 
-#contactable
-  %div{ style:"margin:0;padding:0;display:inline"}
-    = hidden_field_tag "utf8", "✓"
-    = hidden_field_tag "authenticity_token", form_authenticity_token
-
 = render "footer"
-
-#fb-root

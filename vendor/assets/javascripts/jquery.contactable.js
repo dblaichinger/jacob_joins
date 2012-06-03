@@ -39,14 +39,16 @@
 			//show / hide function
 			$(this_id_prefix+'div#contactable_inner').toggle(function() {
 				$(this_id_prefix+'#overlay').css({display: 'block'});
-				$(this).animate({"marginLeft": "-=5px"}, "fast"); 
+				$(this).animate({"marginLeft": "-=5px"}, "fast");
 				$(this_id_prefix+'#contactForm').animate({"marginLeft": "-=0px"}, "fast");
 				$(this).animate({"marginLeft": "+=387px"}, "slow"); 
 				$(this_id_prefix+'#contactForm').animate({"marginLeft": "+=390px"}, "slow"); 
 			}, 
 			function() {
-				$(this_id_prefix+'#contactForm').animate({"marginLeft": "-=390px"}, "slow");
-				$(this).animate({"marginLeft": "-=387px"}, "slow").animate({"marginLeft": "+=5px"}, "fast"); 
+				$(this).animate({"marginLeft": "+=5px"}, "fast");
+				$(this_id_prefix+'#contactForm').animate({"marginLeft": "+=5px"}, "fast");
+				$(this_id_prefix+'#contactForm').animate({"marginLeft": "-=395px"}, "slow");
+				$(this).animate({"marginLeft": "-=392px"}, "slow").animate({"marginLeft": "+=5px"}, "fast"); 
 				$(this_id_prefix+'#overlay').css({display: 'none'});
 			});
 			

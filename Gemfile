@@ -17,11 +17,12 @@ gem 'capistrano'
 gem "capistrano-ext"
 gem 'simple-navigation'
 gem 'rails_admin'
-gem 'gmaps4rails', '~> 1.5.2'
+gem 'gmaps4rails', '~> 1.5.2', :git => "git://github.com/ihanli/Google-Maps-for-Rails.git"
 gem "airbrake"
 gem "devise"
 gem 'mongo'
 gem 'mongo_store'
+gem 'errship', '~> 2.2.0', :git => "git://github.com/ihanli/errship.git"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

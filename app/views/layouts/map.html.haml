@@ -1,0 +1,54 @@
+- content_for :content do
+  :javascript
+    $(document).ready(function(){
+      initInfobox();
+      initClusterer();
+      initSidebar(true);
+      
+      Gmaps.map.callback = function() {
+        initMarkerEventListener();
+        initClusterEventListener();
+
+        //Eventlistener for zoom changed
+        google.maps.event.addListener(Gmaps.map.serviceObject, 'zoom_changed', function() {
+          if(Gmaps.map.serviceObject.zoom < 5 && Gmaps.map.visibleInfoWindow != null){
+            Gmaps.map.visibleInfoWindow.close();
+          }
+        });
+      }
+
+      $(window).load(function(){
+        $('.window-sensitive').css("min-height", $(window).height() - 45);
+        adjustParentOrWindowSensitiveElements();
+        positionVerticalCentered($('#toggle_sidebar'), true);
+        $("#contactable").css("top", $("#contactForm").height() / 2);
+        positionVerticalCentered($("#contactable_inner"));
+      });
+
+      $(window).resize(function(){
+        $('.window-sensitive').css("min-height", $(window).height() - 45);
+        adjustParentOrWindowSensitiveElements();
+        positionVerticalCentered($('#toggle_sidebar'));
+        $("#contactable").css("top", $("#contactForm").height() / 2);
+        positionVerticalCentered($("#contactable_inner"));
+      });
+
+      $('body').data('initMapLayoutDone', true);
+    });
+
+
+  .wrapper-haupt.window-sensitive
+
+    = gmaps("markers" => { "data" => @location, "options" => { "do_clustering"=>true, "randomize"=>true, "max_random_distance"=>1000, "custom_infowindow_class" => "yellow" }}, "map_options" =>  { "language" => "en", "auto_zoom" => true, "zoom" => 2, "minZoom" => 2, "auto_adjust" => false, "center_longitude" => 50.45, "center_latitude" => 0.0 })
+
+    .right-haupt.window-sensitive
+      .seitenleiste.parent-or-window-sensitive
+        .seitenleistecontent
+          = content_for?(:sidebar_content) ? yield(:sidebar_content) : yield
+      - if content_for?(:map_overlay_content)
+        = yield(:map_overlay_content)
+      - elsif content_for?(:sidebar_content)
+        = yield
+      #toggle_sidebar
+
+= render :template => 'layouts/application'

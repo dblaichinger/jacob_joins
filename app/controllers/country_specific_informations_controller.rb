@@ -16,15 +16,11 @@ class CountrySpecificInformationsController < ApplicationController
   def update
     @csi_set = CsiSet.find session[:csi_set_id]
     user = User.find params[:user_id]
-
-    @csi_set.latitude = params[:location][:latitude]
-    @csi_set.longitude = params[:location][:longitude]
-    @csi_set.city = params[:location][:city]
-    @csi_set.country = params[:location][:country]
-    @csi_set.user = user
+    
+    @csi_set.country_specific_informations.map { |csi| csi.update_attributes(params[:location]) && (csi.user = user) && csi.save }
 
     if @csi_set.publish
-      @csi_set = CsiSet.new(:country_specific_informations => CsiSet.empty_set)
+      @csi_set = CsiSet.new :country_specific_informations => CsiSet.empty_set
       render :new, :layout => false
     else
       render :status => 400, :text => "Bad Request"
@@ -40,8 +36,9 @@ class CountrySpecificInformationsController < ApplicationController
     end
 
     params[:csi_set][:country_specific_informations_attributes].each{ |key,csi| csi[:answer] = "" if csi[:answer] == " " }
-    
+
     if @csi_set.update_attributes params[:csi_set]
+      @csi_set.country_specific_informations.each { |csi| csi.question_reference.update_country_specific_informations }
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'
