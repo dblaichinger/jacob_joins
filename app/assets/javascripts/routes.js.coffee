@@ -159,6 +159,9 @@ Path.map("/recipes/:recipe_slug").to () ->
 
   route = this
 
+  if $(".right-haupt").data("status") == "closed"
+    switchSidebar()
+
   getSearchSidebar(route.params.recipe_slug)
 
   getRecipe = ->
