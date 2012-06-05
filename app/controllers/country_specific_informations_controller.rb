@@ -38,7 +38,7 @@ class CountrySpecificInformationsController < ApplicationController
     params[:csi_set][:country_specific_informations_attributes].each{ |key,csi| csi[:answer] = "" if csi[:answer] == " " }
 
     if @csi_set.update_attributes params[:csi_set]
-      @csi_set.country_specific_informations.first.question_reference.update_country_specific_informations
+      @csi_set.country_specific_informations.each { |csi| csi.question_reference.update_country_specific_informations }
       render :new, :layout => false
     else
       render :status => 400, :text => 'Bad Request'

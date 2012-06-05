@@ -10,7 +10,11 @@
     $('.search #ingredients_search').autocomplete({
       source: '/ingredients/names',
       minLength: 2,
-      select: recipesSearch.ingredientsSearchSelectHandler
+      select: recipesSearch.ingredientsSearchSelectHandler,
+      open: function(event, ui){
+        if($('#ingredients_search').val() == "")
+          $('.search #ingredients_search').autocomplete('close');
+      }
     });
 
     $('#search_selection').on("click", "a.search_remove_ingredient", recipesSearch.removeIngredientClickHandler);
@@ -69,8 +73,10 @@
               = link_to @recipe.name, @recipe
             %p.infobox_author
               = "cooked by"
-              = formatted_user_name(@recipe.user) 
-              = @recipe.country
+              = formatted_user_name @recipe.user
+              = "from"
+            %p.infobox_location
+              = formatted_location @recipe.city, @recipe.country
             %p.infobox_duration
               Estimated cooking time:
               = @recipe.duration

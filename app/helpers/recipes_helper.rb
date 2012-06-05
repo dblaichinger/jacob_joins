@@ -7,6 +7,10 @@ module RecipesHelper
     end
   end
 
+  def formatted_location(city, country)
+    "#{city}#{ ',' if city } #{country}"
+  end
+
   def render_default_ingredient_fields(form, object)
     html = ""
 
