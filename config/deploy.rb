@@ -1,6 +1,12 @@
 set :rvm_ruby_string, "1.9.3"
 set :rvm_type, :system
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
+
+# Deployment failed with RVM and this line. Try install gem "rvm-capistrano".
+# If deployment with normal ruby installation fails, try uncomment. 
+
+# $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
 require "rvm/capistrano"
 
 set :stages, %w(staging production)

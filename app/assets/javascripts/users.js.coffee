@@ -156,8 +156,6 @@ window.prepare_user_map = ->
       setMarker place.geometry.location
       address = place.address_components
 
-      console.log address
-
       if /[0-9]/.test(address[address.length-1].long_name)
         country = address[address.length-2].long_name
       else

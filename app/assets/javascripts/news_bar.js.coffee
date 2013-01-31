@@ -113,7 +113,6 @@ window.prettyDate = (time) ->
   day_diff = Math.floor(diff / 86400)
 
   if day_diff > 30
-    console.log date.getDate()
     full_date = date.getDate().toString() + ". "+ getMonthName(date.getMonth()) + " " + date.getFullYear().toString()
     return full_date  
   else
@@ -135,8 +134,6 @@ window.getMonthName = (number) ->
     when  9 then return "October"
     when 10 then return "November"
     when 11 then return "December"
-
-
 
 replaceAt = (string, index, char) ->
   string.substr(0, index) + char + string.substr(index + char.length)
@@ -193,19 +190,18 @@ unless typeof jQuery is "undefined"
       jQuery(this).text date if date
 
 unless $("html").hasClass("ie7")
-  window.fbAsyncInit = ->
-    FB.init
-      channelUrl: "\/pages\/fb-channel"
-      status: true
-      cookie: true
-      xfbml: true
-
-  ((d, s, id) ->
+  # Load the SDK's source Asynchronously
+  # Note that the debug version is being actively developed and might 
+  # contain some type checks that are overly strict. 
+  # Please report such bugs using the bugs tool.
+  ((d, debug) ->
     js = undefined
-    fjs = d.getElementsByTagName(s)[0]
+    id = "facebook-jssdk"
+    ref = d.getElementsByTagName("script")[0]
     return  if d.getElementById(id)
-    js = d.createElement(s)
+    js = d.createElement("script")
     js.id = id
-    js.src = "//connect.facebook.net/en_US/all.js"
-    fjs.parentNode.insertBefore js, fjs
-  ) document, "script", "facebook-jssdk"
+    js.async = true
+    js.src = "//connect.facebook.net/en_US/all" + ((if debug then "/debug" else "")) + ".js#xfbml=1"
+    ref.parentNode.insertBefore js, ref
+  ) document, false #debug
