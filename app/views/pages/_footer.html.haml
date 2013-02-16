@@ -1,5 +1,15 @@
 #footer
   #footercontent
+    %div.kastlcontent
+      .kastl
+        = image_tag 'sharing.png', class:"schleife" 
+        
+        %p#text_fb
+          Stay up to date and check the latest news on Facebook!
+
+        %p.fb_like
+          = link_to "Join us on Facebook!", "https://www.facebook.com/jacobjoins", class:"fb", :target => "_blank"
+
     #footer_information
       #main_information
         %p.likeproject
@@ -10,8 +20,6 @@
         = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
         
 
-      #subinformation
-        %p.fb_like
-          = link_to "Join us on Facebook!", "https://www.facebook.com/jacobjoins", class:"fb"
+        
 
-        = link_to "", "http://www.fh-salzburg.ac.at/", class:"fh_logo"
+        

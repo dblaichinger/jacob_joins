@@ -226,7 +226,7 @@ body
 #footer
   background-image: url(image_path("footer_bg.png"))
   background-repeat: repeat
-  height: 400px
+  height: 325px
   position: relative
   bottom: 0
   clear: both
@@ -245,11 +245,42 @@ body
   float: left
   background-color: #FFF4E0
   width: 200px
-  padding: 0px 0 20px 0
+  padding-bottom: 20px
   top: 60px
   position: relative
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5)
   z-index: 1
+  #text_fb
+    margin: 30px auto 20px auto
+    width: 130px
+    position: relative
+  .fb_like
+    margin: 0 auto 
+    line-height: 1.2
+    font-size: 12px
+    font-family: "Pluto-CondensedItalic"
+    width: 160px
+    height: 27px
+    background-image: url("fb_btn.png")
+    background-repeat: no-repeat
+    background-position: 0 0
+
+    img
+      cursor: pointer
+
+    .fb
+      display: block
+      height: 27px
+      line-height: 27px
+      padding-left: 35px
+      color: #531E09
+      text-decoration: none
+      font-size: 13px
+    .fb:hover
+      color: #E2001A
+
+  .fb_like:hover
+    background-position: 0 -27px
 
 .year
   text-transform: uppercase
@@ -264,20 +295,12 @@ body
   font-family: PlutoCondensed
   font-size: 18px
 
-#text_donation
-  margin: 30px 10px 10px 10px
-  position: relative
-
-  span
-    font-family: "PlutoCondensed"
-    font-size: 14px
-
 #footer_information
+  float: left
+  margin-top: 40px
   position: relative
-  top: 40px
-  left: -75px
-  text-align: center
-  padding: 40px 0 0 0
+  top: 50px
+  width: 800px
 
   #main_information
     width: 650px
@@ -294,55 +317,6 @@ body
 
   .mailto:hover
     color: #E2001A 
-
-  #subinformation
-    overflow: hidden
-    text-align: left
-    margin: 115px auto 0 auto
-    width: 513px
-
-    .fb_like, .adresse
-      float: left
-      margin-right: 30px
-      line-height: 1.2
-      font-size: 12px
-      font-family: "Pluto-CondensedItalic"
-
-    .fb_like
-      width: 200px
-      height: 27px
-      background-image: url("fb_btn.png")
-      background-repeat: no-repeat
-      background-position: 0 0
-
-      img
-        cursor: pointer
-
-      .fb
-        display: block
-        height: 27px
-        vertical-align: top
-        padding-left: 35px
-        color: #531E09
-        text-decoration: none
-
-      .fb:hover
-        color: #E2001A
-        
-    .fb_like:hover
-      background-position: 0 -27px
-
-    .adresse
-      width: 200px
-
-    .fh_logo
-      background-image: url(image_path("fh.png"))
-      background-repeat: no-repeat
-      background-position: top left
-      display: block
-      width: 183px
-      height: 50px
-      float: right
 
 .bildzeichen_footer
   display: block
@@ -363,6 +337,6 @@ body
   text-shadow: -0.5px -1px 0px #531E09
   color: #FFF4E0 
   font-family: Sanches-Bold
-  font-size: 24px
+  font-size: 28px
   text-transform: uppercase
 
