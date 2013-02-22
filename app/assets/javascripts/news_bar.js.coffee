@@ -26,10 +26,10 @@ window.newsbar.get_latest_recipe = ->
       else
         user_name = "an anonymous user"
       if user_name and recipe.country
-        $("#last_entry").append "<p>Jacob joins <span><a href='" + recipe.slug + "'>" + user_name + "</a></span> from <span>" + recipe.country + "</span></p>"
+        $("#last_entry").append "<p>Jacob joins <span><a href='/recipes/" + recipe.slug + "'>" + user_name + "</a></span> from <span>" + recipe.country + "</span></p>"
         $("#last_entry").append "<p class='time'>" + prettyDate(recipe.created_at) + "</p>"
-      else
-        $("#last_entry").append "<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>"
+      else if recipe.slug
+        $("#last_entry").append "<p>Jacob joins <span><a href='/recipes/" + recipe.slug + "'>an anonymous user</a></span>from an <span>unknown country</span></p>"
       $("#jj_stream").mCustomScrollbar "vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10
   ), "json"
 
