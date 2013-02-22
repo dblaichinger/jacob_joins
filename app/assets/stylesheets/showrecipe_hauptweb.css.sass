@@ -1,5 +1,17 @@
 @import mixins
 
+@media (max-width: 1023px)
+  .map-overlay 
+    .content
+      #recipe_information
+        position: relative !important
+
+      #recipe_steps_klein_wrapper
+        .recipe_steps_klein 
+          .recipe_steps_container
+            .recipe_steps_klein_beschreibung 
+              width: auto !important
+
 .map-overlay
   width: auto
   background: url(image_path('bg4.jpg'))
@@ -116,7 +128,8 @@
 
     .bx-wrapper
       margin-top: 20px
-      
+      .bx-window
+        overflow: visible !important
       .bx-pager
         text-align: center
         margin-top: 10px

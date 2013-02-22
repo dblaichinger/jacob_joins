@@ -23,6 +23,7 @@
         positionVerticalCentered($('#toggle_sidebar'), true);
         $("#contactable").css("top", $("#contactForm").height() / 2);
         positionVerticalCentered($("#contactable_inner"));
+        $('.seitenleiste').css('min-height', $('.right-haupt').height());
       });
 
       $(window).resize(function(){
@@ -31,6 +32,7 @@
         positionVerticalCentered($('#toggle_sidebar'));
         $("#contactable").css("top", $("#contactForm").height() / 2);
         positionVerticalCentered($("#contactable_inner"));
+        $('.seitenleiste').css('min-height', $('.right-haupt').height());
       });
 
       $('body').data('initMapLayoutDone', true);
