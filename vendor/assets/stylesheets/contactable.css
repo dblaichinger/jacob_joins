@@ -3,13 +3,10 @@
 	cursor:pointer;
 	left:0;
 	margin-left:-5px; 
-	*margin-left:-5px; 
 	overflow:hidden;
 	position:fixed;
-	*position:absolute;
 	text-indent:-100000px;
 	top:295px;
-	*margin-top:10px;
 	z-index:100000;
 	width: 40px;
   height: 80px;
@@ -25,14 +22,12 @@
 	height:450px;
 	left:0;
 	margin-left:-400px;
-	*margin-left:-434px;
 	margin-top:-160px;
 	overflow:hidden;
 	padding-left:30px;
 	position:fixed;
 	top:269px;
 	width:360px;
-	*width:394px;
 	z-index:100;
 }
 
@@ -86,10 +81,6 @@ textarea#message{
 	color: #531E09;
 }
 
-#contactable form#contactForm .disclaimer {
-	*margin-left:20px;
-}
-
 #contactable #contactForm .red {
 	color:	#E2001A;
 	font-size: 16px;
@@ -115,7 +106,6 @@ textarea#message{
 #contactable #comment.error { border-color: #E2001A; }
 
 #contactable form#contactForm label{
-	*margin-left:20px;
   color: #531E09;
   font-size: 14px;
   padding-bottom: 5px;
