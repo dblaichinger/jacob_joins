@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
-gem 'mongoid'
+gem 'mongoid', '2.4.7'
 gem 'bson_ext'
 gem 'mongoid_slug'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
