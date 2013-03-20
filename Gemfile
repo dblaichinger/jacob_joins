@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+ource 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 gem 'mongoid'
