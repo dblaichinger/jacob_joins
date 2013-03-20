@@ -22,7 +22,7 @@ class Recipe
   attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user, :user_id
   attr_accessible :name, :portions, :duration, :ingredients, :ingredients_with_quantities, :ingredients_with_quantities_attributes, :steps, :steps_attributes, :images, :images_attributes, :latitude, :longitude, :city, :country, :images_attributes, :user, :state, :as => :admin
 
-  index "ingredient_with_quantities.name"
+  index "ingredient_with_quantities.name" => 1
 
   belongs_to :user
 
