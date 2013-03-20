@@ -1,19 +1,17 @@
 !!! html5
-%html
+%html{ :lang => "en" }
   %head
     %title Jacob Joins - Global Cooking
     %link{ :href => "/favicon.png", :rel => "icon", :type => "image/png" }
-    %meta{ "http-equiv" => "language", :content => "en" }
-    %meta{ :name => "description", :content => "Jacob Joins - Global Cooking is the final project created by eight students at the FH Salzburg (University of Applied Sciences) and deals with the issue of international cuisine." }
-    %meta{ :name => "keywords", :content => "potato, onion, egg, jacob joins, jacobs join, potluck" }
-    %meta{ :name => "page-topic", :content => "a pure impression of the different eating habits and cultures all over the world" }
+    %meta{ :name => "description", :content => "Jacob Joins - Global Cooking deals with the issue of international cuisine." }
+    %meta{ :name => "keywords", :content => "Ǵlobal cooking, jacob joins, jacobs join, potluck" }
     %meta{ :name => "robots", :content => "index,follow" }
-    %meta{ :name => "copyright", :content => "(c) Jacob Joins 2012" }
+    %meta{ :name => "dcterms.rightsHolder", :content => "(c) Jacob Joins 2012" }
     %meta{ :property => "og:title", :content => "Jacob Joins - Global Cooking" }
     %meta{ :property => "og:image", :content => "http://profile.ak.fbcdn.net/hprofile-ak-snc4/41608_111627842294635_781875873_n.jpg" }
     %meta{ :property => "og:url", :content => "http://jacobjoins.com" }
     %meta{ :property => "og:type", :content => "website" }
-    %meta{ :property => "og:description", :content => "Jacob Joins - Global Cooking is the final project created by eight students at the FH Salzburg (University of Applied Sciences) and deals with the issue of international cuisine." }
+    %meta{ :property => "og:description", :content => "Jacob Joins - Global Cooking deals with the issue of international cuisine." }
     %meta{ :property => "og:site_name", :content => "Jacob Joins" }
     %meta{ :property => "og:locale", :content => "en_GB" }
 
@@ -58,7 +56,7 @@
       });
 
     = csrf_meta_tags
-    %meta{ charset:"utf-8" }
+
 
   %body
     #fb-root
@@ -73,9 +71,6 @@
             PLEASE ACTIVATE JAVASCRIPT !!!
           %p
             Ohterwise this website can not be used properly!
-          %p
-            Jacob says "Brigitte, no, no, no"
-
 
     = yield :scripts
     = content_for?(:content) ? yield(:content) : yield

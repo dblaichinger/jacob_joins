@@ -33,7 +33,6 @@ printResults = (data) ->
                       </div></div>")
 
       $(".paginationContent").append output
-      console.debug(data.recipes.length)
       if data.recipes.length > 10
         $('#search_result').pajinate(paginationSettings)
       else

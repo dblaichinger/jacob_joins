@@ -26,10 +26,10 @@ window.newsbar.get_latest_recipe = ->
       else
         user_name = "an anonymous user"
       if user_name and recipe.country
-        $("#last_entry").append "<p>Jacob joins <span>" + user_name + "</span>from <span>" + recipe.country + "</span></p>"
+        $("#last_entry").append "<p>Jacob joins <span><a href='/recipes/" + recipe.slug + "'>" + user_name + "</a></span> from <span>" + recipe.country + "</span></p>"
         $("#last_entry").append "<p class='time'>" + prettyDate(recipe.created_at) + "</p>"
-      else
-        $("#last_entry").append "<p>Jacob joins <span>an anonymous user</span>from an <span>unknown country</span></p>"
+      else if recipe.slug
+        $("#last_entry").append "<p>Jacob joins <span><a href='/recipes/" + recipe.slug + "'>an anonymous user</a></span>from an <span>unknown country</span></p>"
       $("#jj_stream").mCustomScrollbar "vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10
   ), "json"
 
@@ -37,7 +37,7 @@ window.newsbar.get_facebook_stream = ->
   token = "379307568767425|h4-QpwOXsOJgj36C6ynugq6hQTs"
   $.ajax
     url: "https://graph.facebook.com/111627842294635/feed?access_token=" + token
-    dataType: 'jsonp'
+    dataType: 'json'
     success: (data, textstatus, jqxhr) -> 
       if data
         $("#fb_error").css "display", "none"
@@ -65,17 +65,18 @@ window.newsbar.get_facebook_stream = ->
 get_facebook_picture = (post, current_post) ->
   $.ajax
     url: "https://graph.facebook.com/" + post.from.id + "?fields=picture&type=square"
-    dataType: 'jsonp'
+    dataType: 'json'
     success: (data, textstatus, jqxhr) ->
       show_facebook_posts post, current_post, data
 
 show_facebook_posts = (post, current_post, pic) ->
+
   tmp_message = ""
   links_in_message = post.message.match(/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?(\?[;&a-z\d%_.~+=-]*)?/g)
   $("#fb_stream .content").load ->
     $("#fb_stream").mCustomScrollbar "vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10
 
-  current_post.append "<img src='" + pic.picture + "' alt='profile_picture' />"
+  current_post.append "<img src='" + pic.picture.data.url + "' alt='profile_picture' />"
   current_post.append "<h5>" + post.from.name + "</h5>"
   i = 0
 
@@ -87,8 +88,10 @@ show_facebook_posts = (post, current_post, pic) ->
     post.message = tmp_message
     i++
   current_post.append "<p class='message'>" + post.message + "</p>"
+
   current_post.append "<p class='time'>" + prettyDate(post.created_time) + "</p>"
   $("#fb_stream").mCustomScrollbar "vertical", 0, "easeOutCirc", 1.05, "auto", "yes", "yes", 10
+  
 
 # JavaScript Pretty Date
 # Copyright (c) 2011 John Resig (ejohn.org)
@@ -105,10 +108,32 @@ window.prettyDate = (time) ->
     second = date.substr(index + 1, date.length)
     date = first + second
   date = new Date(date)
+
   diff = (((new Date()).getTime() - date.getTime()) / 1000)
   day_diff = Math.floor(diff / 86400)
-  return  if isNaN(day_diff) or day_diff < 0 or day_diff >= 31
-  day_diff is 0 and (diff < 60 and "just now" or diff < 120 and "1 minute ago" or diff < 3600 and Math.floor(diff / 60) + " minutes ago" or diff < 7200 and "1 hour ago" or diff < 86400 and Math.floor(diff / 3600) + " hours ago") or day_diff is 1 and "Yesterday" or day_diff < 7 and day_diff + " days ago" or day_diff < 31 and Math.ceil(day_diff / 7) + " weeks ago"
+
+  if day_diff > 30
+    full_date = date.getDate().toString() + ". "+ getMonthName(date.getMonth()) + " " + date.getFullYear().toString()
+    return full_date  
+  else
+    return  if isNaN(day_diff) or day_diff < 0 or day_diff >= 31
+    day_diff is 0 and (diff < 60 and "just now" or diff < 120 and "1 minute ago" or diff < 3600 and Math.floor(diff / 60) + " minutes ago" or diff < 7200 and "1 hour ago" or diff < 86400 and Math.floor(diff / 3600) + " hours ago") or day_diff is 1 and "Yesterday" or day_diff < 7 and day_diff + " days ago" or day_diff < 31 and Math.ceil(day_diff / 7) + " weeks ago"
+
+#toString().substr(0, 15)
+window.getMonthName = (number) ->
+  switch number
+    when  0 then return "January"
+    when  1 then return "February"
+    when  2 then return "March"
+    when  3 then return "April"
+    when  4 then return "May"
+    when  5 then return "June"
+    when  6 then return "July" 
+    when  7 then return "August"
+    when  8 then return "September"
+    when  9 then return "October"
+    when 10 then return "November"
+    when 11 then return "December"
 
 replaceAt = (string, index, char) ->
   string.substr(0, index) + char + string.substr(index + char.length)
@@ -165,19 +190,18 @@ unless typeof jQuery is "undefined"
       jQuery(this).text date if date
 
 unless $("html").hasClass("ie7")
-  window.fbAsyncInit = ->
-    FB.init
-      channelUrl: "\/pages\/fb-channel"
-      status: true
-      cookie: true
-      xfbml: true
-
-  ((d, s, id) ->
+  # Load the SDK's source Asynchronously
+  # Note that the debug version is being actively developed and might 
+  # contain some type checks that are overly strict. 
+  # Please report such bugs using the bugs tool.
+  ((d, debug) ->
     js = undefined
-    fjs = d.getElementsByTagName(s)[0]
+    id = "facebook-jssdk"
+    ref = d.getElementsByTagName("script")[0]
     return  if d.getElementById(id)
-    js = d.createElement(s)
+    js = d.createElement("script")
     js.id = id
-    js.src = "//connect.facebook.net/en_US/all.js"
-    fjs.parentNode.insertBefore js, fjs
-  ) document, "script", "facebook-jssdk"
+    js.async = true
+    js.src = "//connect.facebook.net/en_US/all" + ((if debug then "/debug" else "")) + ".js#xfbml=1"
+    ref.parentNode.insertBefore js, ref
+  ) document, false #debug

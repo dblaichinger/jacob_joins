@@ -85,7 +85,6 @@ publicMethods =
       scrollPosition = 0
 
       element.children('li').each (i, e) ->
-        console.log jqObject.has($(e)).length
         if $(e).has(jqObject).length
           return false
         else

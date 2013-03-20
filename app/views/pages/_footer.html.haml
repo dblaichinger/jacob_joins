@@ -1,34 +1,27 @@
 #footer
+  .csswinner
+    = link_to "Jacob Joins", "http://www.csswinner.com/details/jacob-joins-global-cooking/4565", :target => "_blank"
   #footercontent
-    %div.kastlcontent
+    .kastlcontent
       .kastl
         = image_tag 'sharing.png', class:"schleife" 
+        
+        %p#text_fb
+          Stay up to date and check the latest news on Facebook!
 
-        %p#text_donation
-          If the project keeps running until June and it has a chance to be successful, Jacob is going to start a 
-          %span donation campaign.
-          %br
-          %br
-          For each uploaded recipe  a predefined amount of money will be transferred from sponsores  to a selected institution.
-      
-    #footer_information
-      %p.likeproject
-        You like this project?
-        Or have any questions? Feel free to contact us!
-     
-      
-      = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
-      
-
-      #subinformation
         %p.fb_like
-          = link_to "Join us on Facebook!", "https://www.facebook.com/jacobjoins", class:"fb"
+          = link_to "Join us on Facebook!", "https://www.facebook.com/jacobjoins", class:"fb", :target => "_blank"
 
-        %p.adresse
-          Urstein Süd 1
-          %br
-          5412 Puch bei Hallein
-          %br
-          Austria
+    #footer_information
+      #main_information
+        %p.likeproject
+          You like this project?
+          Or have any questions? Feel free to contact us!
+       
+        
+        = link_to "hello@jacobjoins.com", "mailto:hello@jacobjoins.com", class:"mailto"
+        
 
-        = link_to "", "http://www.fh-salzburg.ac.at/", class:"fh_logo"
+        
+
+        
